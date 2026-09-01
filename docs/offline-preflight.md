@@ -22,6 +22,12 @@ java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar preflight `
 supported files are scanned in stable relative-path order. The default profile
 is `ck3-1.19.0.6-zg361` and the default fixture is `synthetic-361-014`.
 `--fixture appeal-014` selects the checked-in offline appeal replay vectors.
+`--fixture ck3-calculated-value-014` selects the CK3 1.19.0.6
+schema-only loader regression fixture. It contains two supported calculated
+range comparisons (`>=` and `<=`) and one observed direct `=` comparison whose
+RHS contains `value`/`add`/`subtract`. The fixture is intentionally `RED` with
+diagnostic code `CK3_TRIGGER_CALCULATED_VALUE_UNSUPPORTED`; this is expected
+evidence for the loader boundary, not a runtime or semantic certification.
 `--fixture none` is a diagnostic parser/validator-only run and intentionally
 leaves IR/runtime skipped.
 
@@ -51,6 +57,24 @@ Therefore a full mod tree can correctly return `RED` for unsupported syntax or
 semantics. Pass the smallest intended source slice when using preflight, and
 do not interpret a fixture-only `GREEN` as `fixture-live`, differential
 certification, or product readiness.
+
+## Canonical checkout binding
+
+Parent runners should bind the checkout or shaded CLI explicitly instead of
+silently resolving whichever local jar happens to be first on `PATH`:
+
+```powershell
+$env:XAR_OPEN_KAISHEK_ROOT = 'Z:\workspace\open_kaishek'
+$env:XAR_OPEN_KAISHEK_JAR = 'Z:\workspace\open_kaishek\kaishek-cli\target\kaishek-cli-0.1.0-SNAPSHOT.jar'
+```
+
+`XAR_OPEN_KAISHEK_ROOT` must identify a checkout that contains the preflight
+contract (at least commit `b306a95` or its descendant), and
+`XAR_OPEN_KAISHEK_JAR` must be built from that checkout. A stale checkout or
+jar that does not expose `preflight` is `UNSUPPORTED`, never `GREEN`; archive
+the resolved repository commit and jar SHA-256 with the parent acceptance
+artifact. The variables are optional to the CLI itself, but explicit binding
+is required for reproducible parent integration.
 
 ## Parent-runner boundary
 

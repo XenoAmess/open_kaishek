@@ -188,6 +188,27 @@ public final class KaishekCliSmokeTest {
           && appealJson.contains("\"fixture_scope\":\"runtime-fixture\"")
           && appealJson.contains("\"runtime\":{\"status\":\"GREEN\""), appealJson);
 
+      // The CK3 1.19.0.6 calculated-value regression fixture is intentionally
+      // RED: range blocks (>=/<=) remain accepted, while the observed direct
+      // equality emits a stable schema-only diagnostic.  It must never be
+      // mistaken for executable/runtime certification.
+      b.reset();
+      int calculatedValuePreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "ck3-calculated-value-014"},
+          new PrintStream(b), System.err);
+      String calculatedValueJson = b.toString(StandardCharsets.UTF_8);
+      check(calculatedValuePreflight == 1
+          && calculatedValueJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && calculatedValueJson.contains("\"status\":\"RED\"")
+          && calculatedValueJson.contains("\"profile_id\":\"ck3-1.19.0.6-zg361\"")
+          && calculatedValueJson.contains("\"fixture_id\":\"ck3-calculated-value-014\"")
+          && calculatedValueJson.contains("\"parser\":{\"status\":\"GREEN\"")
+          && calculatedValueJson.contains("\"validator\":{\"status\":\"RED\"")
+          && calculatedValueJson.contains("CK3_TRIGGER_CALCULATED_VALUE_UNSUPPORTED")
+          && calculatedValueJson.contains("\"fixture_scope\":\"schema-only-negative\"")
+          && calculatedValueJson.contains("\"runtime\":{\"status\":\"SKIPPED\""),
+          calculatedValueJson);
+
       // Unsupported profile selections still use the preflight schema so a
       // parent runner never has to special-case the generic CLI error shape.
       b.reset();

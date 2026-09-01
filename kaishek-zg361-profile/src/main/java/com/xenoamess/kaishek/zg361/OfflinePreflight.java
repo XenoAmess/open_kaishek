@@ -289,6 +289,38 @@ public final class OfflinePreflight {
                             List.of("execution=" + result.execution().status())),
                     "synthetic-only");
         }
+        if (id.equals(Ck3CalculatedValueFixture.FIXTURE_ID)
+                || id.equals("ck3-calculated-value")) {
+            byte[] source = Ck3CalculatedValueFixture.render();
+            ParseResult parsed = Parser.parse(source);
+            Ck3Profile11906 profile = new Ck3Profile11906();
+            List<Diagnostic> validation = Validator.validate(
+                    parsed, Ck3CalculatedValueFixture.SOURCE_PATH, profile);
+            int parserDiagnostics = parsed.diagnostics().size();
+            int validationDiagnostics = validation.size();
+            boolean expectedDiagnostic = validation.stream().anyMatch(d ->
+                    Ck3CalculatedValueFixture.EXPECTED_DIAGNOSTIC.equals(d.code()));
+            String hash = hex(sha256().digest(source));
+            String parserReason = parserDiagnostics == 0 ? "schema-only-fixture" : "parser-diagnostics";
+            String validatorReason = expectedDiagnostic
+                    ? "expected-trigger-calculated-value-diagnostic"
+                    : "fixture-regression-missed-diagnostic";
+            Stage parserStage = stage(parserDiagnostics == 0 ? "GREEN" : "RED",
+                    1, source.length, parserDiagnostics, parserReason, hash,
+                    diagnosticSamples(Ck3CalculatedValueFixture.SOURCE_PATH,
+                            parsed.diagnostics()));
+            // This is a deliberate negative fixture.  Keep the stage RED even
+            // if a future validator accidentally stops reporting the expected
+            // code; the reason then makes that regression visible instead of
+            // turning an unsupported semantic into GREEN.
+            Stage validatorStage = stage("RED", 1, source.length,
+                    validationDiagnostics, validatorReason, hash,
+                    diagnosticSamples(Ck3CalculatedValueFixture.SOURCE_PATH, validation));
+            Stage skipped = stage("SKIPPED", 0, 0, 0,
+                    "schema-only-negative-fixture", "", List.of());
+            return new FixtureResult(parserStage, validatorStage, skipped, skipped,
+                    "schema-only-negative");
+        }
         if (id.equals(Appeal014DifferentialFixture.FIXTURE_ID) || id.equals("appeal-014")) {
             List<String> mismatches = new ArrayList<>();
             for (Appeal014DifferentialFixture.CaseFixture fixture :
@@ -315,13 +347,25 @@ public final class OfflinePreflight {
         // A skipped optional root must not leak its explanatory reason into a
         // GREEN fixture-only aggregate.  Preserve a reason only when the
         // aggregate is not GREEN, and prefer a real root hash when present.
-        String reason = status.equals("GREEN") ? ""
-                : (!left.reason().isBlank() ? left.reason() : right.reason());
+        String reason = status.equals("GREEN") ? "" : aggregateReason(left, right);
         String hash = !left.sha256().isBlank() ? left.sha256() : right.sha256();
         List<String> samples = new ArrayList<>(left.samples());
         for (String sample : right.samples()) if (samples.size() < SAMPLE_LIMIT) samples.add(sample);
         return stage(status, left.files() + right.files(), left.bytes() + right.bytes(),
                 left.diagnostics() + right.diagnostics(), reason, hash, samples);
+    }
+
+    private static String aggregateReason(Stage left, Stage right) {
+        // Prefer the actual failing side over an explanatory SKIPPED reason
+        // from an optional root.  This keeps a fixture RED report actionable
+        // when no external root was supplied.
+        if (left.status().equals("RED") || left.status().equals("UNSUPPORTED")) {
+            if (!left.reason().isBlank()) return left.reason();
+        }
+        if (right.status().equals("RED") || right.status().equals("UNSUPPORTED")) {
+            if (!right.reason().isBlank()) return right.reason();
+        }
+        return !left.reason().isBlank() ? left.reason() : right.reason();
     }
 
     private static String combineStatus(String left, String right) {
@@ -355,8 +399,12 @@ public final class OfflinePreflight {
     }
 
     private static List<String> diagnosticSamples(List<?> diagnostics) {
+        return diagnosticSamples("fixture", diagnostics);
+    }
+
+    private static List<String> diagnosticSamples(String path, List<?> diagnostics) {
         List<String> result = new ArrayList<>();
-        addSamples(result, "fixture", diagnostics);
+        addSamples(result, path, diagnostics);
         return result;
     }
 

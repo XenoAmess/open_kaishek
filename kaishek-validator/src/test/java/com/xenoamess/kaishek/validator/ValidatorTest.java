@@ -101,4 +101,61 @@ class ValidatorTest {
         assertTrue(diagnostics.stream().noneMatch(d -> d.code().equals("DUPLICATE_KEY")),
                 diagnostics::toString);
     }
+
+    @Test void calculatedValueDiagnosticIsTriggerEqualityOnly() {
+        String source = "fixture = {\n"
+                + "  limit = {\n"
+                + "    var:x >= { value = var:base add = 1 }\n"
+                + "    var:x <= { value = var:base subtract = 1 }\n"
+                + "    var:x = { value = var:base add = 1 subtract = 2 }\n"
+                + "  }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_triggers/zg361_calculated_value_fixture.txt", PROFILE);
+        var targeted = diagnostics.stream()
+                .filter(d -> d.code().equals(Validator.CK3_TRIGGER_CALCULATED_VALUE_UNSUPPORTED))
+                .toList();
+        assertEquals(1, targeted.size(), diagnostics::toString);
+        assertTrue(targeted.get(0).path().contains("var:x"), targeted::toString);
+        assertTrue(diagnostics.stream().noneMatch(d -> d.code().equals("UNKNOWN_OPCODE")),
+                diagnostics::toString);
+    }
+
+    @Test void calculatedValueDiagnosticDoesNotLeakIntoEffectSideBlocks() {
+        String source = "fixture = {\n"
+                + "  set_variable = { name = x value = { value = 1 add = 1 } }\n"
+                + "  change_variable = { name = x add = { value = 1 subtract = 1 } }\n"
+                + "  save_scope_as = { name = { value = 1 add = 1 } }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_effects/zg361_calculated_value_effects.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals(Validator.CK3_TRIGGER_CALCULATED_VALUE_UNSUPPORTED)),
+                diagnostics::toString);
+    }
+
+    @Test void calculatedValueDiagnosticFindsTriggerBlockInsideEffectFile() {
+        String source = "fixture = {\n"
+                + "  limit = {\n"
+                + "    var:x >= { value = var:base add = 1 }\n"
+                + "    var:x <= { value = var:base subtract = 1 }\n"
+                + "    var:x = { value = var:base add = 1 subtract = 2 }\n"
+                + "  }\n"
+                + "  set_variable = { name = x value = 1 }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_effects/zg361_calculated_value_effects.txt", PROFILE);
+        assertEquals(1, diagnostics.stream()
+                .filter(d -> d.code().equals(Validator.CK3_TRIGGER_CALCULATED_VALUE_UNSUPPORTED))
+                .count(), diagnostics::toString);
+        assertTrue(diagnostics.stream().noneMatch(d -> d.code().equals("UNKNOWN_OPCODE")),
+                diagnostics::toString);
+    }
+
 }
