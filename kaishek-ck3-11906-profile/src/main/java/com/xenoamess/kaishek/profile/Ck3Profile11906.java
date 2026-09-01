@@ -59,6 +59,12 @@ public final class Ck3Profile11906 implements KaishekProfile {
             // execution artifact is available.
             descriptor("has_character_modifier", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.CHARACTER,
                     List.of(), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 evidence identifies this as scalar
+            // character-perk membership by stable perk key.  Keep the
+            // descriptor syntax/profile-only; recognizing the shape does not
+            // certify execution semantics.
+            descriptor("has_perk", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.CHARACTER,
+                    List.of(), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_trait", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
                     List.of("trait"), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_title", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
@@ -208,6 +214,7 @@ public final class Ck3Profile11906 implements KaishekProfile {
         add(m, "has_game_rule", OpcodeSpec.Kind.TRIGGER);
         add(m, "government_has_flag", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_character_modifier", OpcodeSpec.Kind.TRIGGER);
+        add(m, "has_perk", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_trait", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_title", OpcodeSpec.Kind.TRIGGER);
         add(m, "is_alive", OpcodeSpec.Kind.TRIGGER);

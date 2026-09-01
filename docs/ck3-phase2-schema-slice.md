@@ -138,3 +138,45 @@ recorded by the parent acceptance preflight; the schema reduction is expected
 to leave the overall root scan RED because the profile remains intentionally
 bounded.  `Ck3Profile11906Test` pins the descriptor and `ValidatorTest` covers
 the observed scalar form.  No CK3 process, save, MCP, or network is used.
+
+## Follow-up bounded increment: character perk membership predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The exact-build CK3 1.19.0.6 ledger contains the static-confirmed form
+`has_perk = stalwart_leader_perk` in the combat-phase event path.  The recorded
+chain is the character `CharacterPerkSpan` membership lookup (literal RVA
+`0x438FE18`, factory `0x28681C0`, evaluator `0x2867940`, and loaded database
+`0x88EC20`), with the stable perk key carried at `CharacterPerk+0x18`.
+The parent evidence is `docs/ck3-native-ai/combat-phase-events.md:885-923`;
+the frozen executable fingerprint is CK3 1.19.0.6 SHA-256
+`2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`.
+
+This slice registers only the observed scalar profile shape:
+`TRIGGER`/`CHARACTER`/`STRING`, zero named parameters, deterministic and
+read-only, with `certified=false`.  It deliberately adds no runtime evaluator
+or `certifiedSemantics` claim: static syntax evidence is not runtime
+certification, and predicates without a closed exact-build descriptor remain
+out of scope.
+
+### Bounded measurement
+
+The stock combat-phase event corpus contains 15 `has_perk` occurrences (the
+observed key includes `stalwart_leader_perk`).  The frozen phase-two mod root
+contains zero occurrences, so this G2/combat-schema preparation does not claim
+to reduce the phase-two loader RED or change its file/diagnostic counts.
+
+Offline verification used the same 1.19.0.6 profile and synthetic fixture:
+
+* focused Maven tests passed: 10 profile tests and 20 validator tests;
+* offline package produced byte-identical CLI JARs, 316,131 bytes each,
+  SHA-256 `392B130B7F6DCB516627EAE284CF673C7F109D6857A5C6388AE56F02EC0BF1AD`;
+* preflight artifact
+  `Z:\\ck3_mod_rewrite_process_assets\\zg361\\phase2-bounded-gate-20260902\\kaishek-has-perk-preflight-20260902.json`
+  has SHA-256
+  `F37560B6C0B3113C3B6F0EDE04368E9C5B57BE55F473938DCE7A2D355787E8E9`.
+  The parser/IR-runtime fixture stayed GREEN (76 files, 23,831,410 bytes),
+  while the bounded validator remained RED with 233,014 diagnostics, as
+  expected for the unchanged phase-two root.
+
+No CK3 process, save mutation, MCP call, or network access was used.
