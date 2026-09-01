@@ -125,6 +125,9 @@ class ValidatorTest {
 
     @Test void calculatedValueDiagnosticDoesNotLeakIntoEffectSideBlocks() {
         String source = "fixture = {\n"
+                + "  limit = {\n"
+                + "    save_scope_value_as = { name = saved value = { value = 1 add = 1 } }\n"
+                + "  }\n"
                 + "  set_variable = { name = x value = { value = 1 add = 1 } }\n"
                 + "  change_variable = { name = x add = { value = 1 subtract = 1 } }\n"
                 + "  save_scope_as = { name = { value = 1 add = 1 } }\n"
