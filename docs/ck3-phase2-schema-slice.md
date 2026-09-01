@@ -69,3 +69,52 @@ byte-identical for this build (SHA-256
 `ValidatorTest` proves the observed scalar trigger no longer produces an
 `UNKNOWN_OPCODE`. Full semantic execution and any domain-side relaxation need
 their own exact-build evidence and must not be inferred from this slice.
+
+## Follow-up bounded increment: selected-rule and modifier predicates
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The profile now also recognizes two scalar trigger forms already supported by
+the exact-build research ledger.  This is still a syntax/profile increment;
+both descriptors remain `certified=false` and `certifiedSemantics` is empty.
+
+* `has_game_rule = <setting-key>` is backed by the `[static-confirmed]`
+  CK3 1.19.0.6 factory/leaf and scalar setting-key layout in the parent
+  ledger, `docs/ck3-native-ai/combat-phase-events.md:1256-1290` and the
+  cross-check in `campaign-root-context.md:301-330`.  The evidence uses
+  `easy_difficulty`/`very_easy_difficulty` and proves selected-setting
+  membership, not a general runtime evaluator contract.
+* `has_character_modifier = <modifier-key>` is backed by the
+  `[static-confirmed]` character modifier membership chain in the parent
+  ledger, `docs/ck3-native-ai/combat-phase-events.md:1632-1668`.  The key is
+  resolved by stable modifier bytes and active-row pointer membership; no
+  arbitrary modifier execution is inferred.
+
+Both references are for CK3 1.19.0.6 executable SHA-256
+`2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`.
+
+### Bounded measurement
+
+The same 75-file phase-two root and parser corpus were used as the previous
+measurement (`23,831,185` bytes, corpus SHA-256
+`540333b6d145626805da964ac5fbfbff65afcec547bf7a84b76ec265fa8b2b82`).
+Compared with the preceding `has_variable` slice, the two new descriptors
+remove 430 `has_game_rule` and 171 `has_character_modifier` unknown-opcode
+diagnostics:
+
+| root | validator UNKNOWN_OPCODE | validator WRONG_DOMAIN | UNKNOWN_DIRECTORY |
+|---|---:|---:|---:|
+| preceding slice | 233,558 | 143 | 7 |
+| this increment | 232,957 | 151 | 7 |
+
+The eight additional `WRONG_DOMAIN` diagnostics are the existing deliberate
+script-value boundary: those files use the newly recognized trigger inside a
+script-value condition, while this validator still rejects trigger opcodes in
+the `SCRIPTED_VALUES` domain.  No condition-domain relaxation was bundled into
+this increment, so the boundary remains visible rather than being silently
+suppressed.  The overall root scan is still RED and is not a CK3 launch gate.
+
+`Ck3Profile11906Test` pins both scalar shapes and `ValidatorTest` covers one
+representative scalar use for each.  Maven's focused reactor run completed
+with 8 profile tests and 18 validator tests passing; no CK3 process, save, MCP,
+or network was used.

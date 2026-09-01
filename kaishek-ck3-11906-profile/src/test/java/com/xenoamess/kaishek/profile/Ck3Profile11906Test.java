@@ -27,6 +27,8 @@ class Ck3Profile11906Test {
         assertEquals(profile.opcodes().size(), profile.opcodeRegistry().size());
         assertTrue(profile.opcode("set_variable") != null);
         assertTrue(profile.opcode("has_variable") != null);
+        assertTrue(profile.opcode("has_game_rule") != null);
+        assertTrue(profile.opcode("has_character_modifier") != null);
         assertTrue(profile.opcodeRegistry().contains("set_variable"));
         assertEquals(Ck3Profile11906.GAME_VERSION,
                 profile.opcodeRegistry().require("set_variable").profileVersion());
@@ -43,6 +45,30 @@ class Ck3Profile11906Test {
         assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
         assertEquals(InputType.STRING, descriptor.inputType());
         assertEquals(ScopeType.THIS, descriptor.requiredScope());
+        assertTrue(descriptor.parameterNames().isEmpty());
+        assertEquals(0, descriptor.minParameters());
+        assertEquals(0, descriptor.maxParameters());
+        assertFalse(descriptor.certified(), "static evidence must not claim runtime certification");
+    }
+
+    @Test
+    void hasGameRuleIsPinnedAsScalarSettingTriggerShape() {
+        OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_game_rule");
+        assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
+        assertEquals(InputType.STRING, descriptor.inputType());
+        assertEquals(ScopeType.THIS, descriptor.requiredScope());
+        assertTrue(descriptor.parameterNames().isEmpty());
+        assertEquals(0, descriptor.minParameters());
+        assertEquals(0, descriptor.maxParameters());
+        assertFalse(descriptor.certified(), "static evidence must not claim runtime certification");
+    }
+
+    @Test
+    void hasCharacterModifierIsPinnedAsScalarMembershipTriggerShape() {
+        OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_character_modifier");
+        assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
+        assertEquals(InputType.STRING, descriptor.inputType());
+        assertEquals(ScopeType.CHARACTER, descriptor.requiredScope());
         assertTrue(descriptor.parameterNames().isEmpty());
         assertEquals(0, descriptor.minParameters());
         assertEquals(0, descriptor.maxParameters());

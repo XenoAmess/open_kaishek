@@ -42,6 +42,17 @@ public final class Ck3Profile11906 implements KaishekProfile {
             // artifact covers its execution semantics.
             descriptor("has_variable", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.THIS,
                     List.of(), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 evidence identifies this as a scalar
+            // selected-game-rule setting key trigger.  Keep the descriptor
+            // syntax/profile-only; no runtime certification is implied.
+            descriptor("has_game_rule", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.THIS,
+                    List.of(), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 evidence identifies this as scalar
+            // character-modifier membership by stable modifier key.  The
+            // descriptor remains syntax/profile-only until a differential
+            // execution artifact is available.
+            descriptor("has_character_modifier", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.CHARACTER,
+                    List.of(), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_trait", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
                     List.of("trait"), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_title", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
@@ -188,6 +199,8 @@ public final class Ck3Profile11906 implements KaishekProfile {
         add(m, "is_ai", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_character_flag", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_variable", OpcodeSpec.Kind.TRIGGER);
+        add(m, "has_game_rule", OpcodeSpec.Kind.TRIGGER);
+        add(m, "has_character_modifier", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_trait", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_title", OpcodeSpec.Kind.TRIGGER);
         add(m, "is_alive", OpcodeSpec.Kind.TRIGGER);
