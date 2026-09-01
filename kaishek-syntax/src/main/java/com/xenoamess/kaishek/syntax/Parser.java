@@ -64,6 +64,19 @@ public final class Parser {
     }
     private record Token(T type, int start, int end, String op, boolean malformed) { }
     private static final Pattern NUMBER = Pattern.compile("[+-]?(?:\\d+(?:\\.\\d*)?|\\.\\d+)(?:[eE][+-]?\\d+)?");
+    // These predicates run once per atom/bracket while scanning a large
+    // generated corpus.  Keep the regular expressions compiled, rather than
+    // using String.matches (which recompiles a Pattern on every invocation).
+    private static final Pattern PARAMETER = Pattern.compile("\\$[^$\\r\\n]+\\$");
+    private static final Pattern SCOPE_REFERENCE = Pattern.compile(
+            "(?i)(?:scope|var|global_var|local_var|flag|event_target|saved_scope|saved_value):[A-Za-z0-9_$.-]+");
+    private static final Pattern DOT_SCOPE_REFERENCE = Pattern.compile(
+            "[A-Za-z_][A-Za-z0-9_]*\\.[A-Za-z_][A-Za-z0-9_.]*");
+    private static final Pattern GUI_CONDITIONAL_CALL = Pattern.compile(
+            "(?is).*\\b(?:And|Or|Not|EqualTo|NotEqualTo|GreaterThan|LessThan)[A-Za-z0-9_]*\\s*\\(.*");
+    private static final Pattern GUI_IF_ELSE = Pattern.compile("(?is).*\\b(?:if|else)\\b.*");
+    private static final Pattern GUI_TYPED_CALL = Pattern.compile(
+            "(?s).*\\b(?:Is|Has|Can)[A-Z][A-Za-z0-9_]*\\s*\\(.*");
 
     private static final class State {
         final byte[] b; final List<Diagnostic> diagnostics = new ArrayList<>();
@@ -592,14 +605,14 @@ public final class Parser {
             boolean conditional = children.stream().anyMatch(n -> n.kind() == SyntaxKind.CONDITIONAL_OPERATOR)
                     || inner.contains("!=") || inner.contains("<=") || inner.contains(">=")
                     || inner.indexOf('?') >= 0
-                    || inner.matches("(?is).*\\b(?:And|Or|Not|EqualTo|NotEqualTo|GreaterThan|LessThan)[A-Za-z0-9_]*\\s*\\(.*")
-                    || inner.matches("(?is).*\\b(?:if|else)\\b.*")
+                    || GUI_CONDITIONAL_CALL.matcher(inner).matches()
+                    || GUI_IF_ELSE.matcher(inner).matches()
                     // GUI data-function predicates commonly carry a type
                     // suffix (`IsValid`, `HasFoo`, `CanClose`).  Treat a
                     // call-shaped occurrence as an inline conditional while
                     // leaving property chains such as `[Widget.GetValue]`
                     // in the generic expression role.
-                    || inner.matches("(?s).*\\b(?:Is|Has|Can)[A-Z][A-Za-z0-9_]*\\s*\\(.*");
+                    || GUI_TYPED_CALL.matcher(inner).matches();
             if (math) return BracketRole.INLINE_MATH;
             if (conditional) return BracketRole.INLINE_CONDITIONAL;
             long terms = children.stream().filter(this::isBracketTerm).count();
@@ -720,7 +733,7 @@ public final class Parser {
                     || kind == SyntaxKind.PARAMETER
                     || kind == SyntaxKind.SCOPE_CHAIN;
             if (!referenceLike) return AtomRole.PLAIN;
-            if (text.matches("\\$[^$\\r\\n]+\\$") || (text.startsWith("$") && text.endsWith("$"))) return AtomRole.PARAMETER;
+            if (PARAMETER.matcher(text).matches() || (text.startsWith("$") && text.endsWith("$"))) return AtomRole.PARAMETER;
             if (text.indexOf('$') >= 0 && text.indexOf('$') != text.lastIndexOf('$')) return AtomRole.INTERPOLATED_PARAMETER;
             if (text.startsWith("@")) return AtomRole.SCRIPTED_VARIABLE;
             if (isScopeChainText(text)) return AtomRole.SCOPE_CHAIN;
@@ -730,8 +743,8 @@ public final class Parser {
 
         private static boolean isScopeChainText(String text) {
             if (text.equalsIgnoreCase("root") || text.equalsIgnoreCase("this") || text.equalsIgnoreCase("prev")) return true;
-            return text.matches("(?i)(?:scope|var|global_var|local_var|flag|event_target|saved_scope|saved_value):[A-Za-z0-9_$.-]+")
-                    || text.matches("[A-Za-z_][A-Za-z0-9_]*\\.[A-Za-z_][A-Za-z0-9_.]*");
+            return SCOPE_REFERENCE.matcher(text).matches()
+                    || DOT_SCOPE_REFERENCE.matcher(text).matches();
         }
 
         private static boolean isConditionalKeyText(String text) {
