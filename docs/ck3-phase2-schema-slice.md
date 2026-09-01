@@ -118,3 +118,23 @@ suppressed.  The overall root scan is still RED and is not a CK3 launch gate.
 representative scalar use for each.  Maven's focused reactor run completed
 with 8 profile tests and 18 validator tests passing; no CK3 process, save, MCP,
 or network was used.
+
+## Follow-up bounded increment: government flag membership predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The exact-build 1.19.0.6 ledger describes `government_has_flag =
+<government-flag-key>` as a scalar membership trigger on the current
+character's government.  The static chain resolves the government type and
+searches its sorted flag-ID span; the supporting parent evidence is
+`docs/ck3-native-ai/campaign-root-context.md:259-269` and
+`docs/ck3-native-ai/combat-phase-events.md:1893-1904`.  This increment only
+registers the scalar profile shape as `TRIGGER`/`CHARACTER` with no parameters;
+it does not add a runtime evaluator or a `certifiedSemantics` entry.
+
+The phase-two corpus uses this predicate in character interaction, activity,
+event, and scripted-value conditions.  Before/after counts and corpus hash are
+recorded by the parent acceptance preflight; the schema reduction is expected
+to leave the overall root scan RED because the profile remains intentionally
+bounded.  `Ck3Profile11906Test` pins the descriptor and `ValidatorTest` covers
+the observed scalar form.  No CK3 process, save, MCP, or network is used.

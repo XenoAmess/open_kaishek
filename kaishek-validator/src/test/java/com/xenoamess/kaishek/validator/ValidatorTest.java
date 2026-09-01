@@ -76,6 +76,20 @@ class ValidatorTest {
                 diagnostics::toString);
     }
 
+    @Test void observedGovernmentHasFlagScalarTriggerIsSchemaKnown() {
+        String source = "fixture = {\n"
+                + "  limit = { government_has_flag = government_has_merit }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_triggers/zg361_phase2.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("government_has_flag")),
+                diagnostics::toString);
+    }
+
     @Test void observedHasCharacterModifierScalarTriggerIsSchemaKnown() {
         String source = "fixture = {\n"
                 + "  limit = { has_character_modifier = ai_extreme_conqueror_modifier }\n"
