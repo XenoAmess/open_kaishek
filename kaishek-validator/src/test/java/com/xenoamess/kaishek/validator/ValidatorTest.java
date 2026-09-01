@@ -48,6 +48,37 @@ class ValidatorTest {
                 diagnostics::toString);
     }
 
+    @Test void observedHasVariableScalarTriggerIsSchemaKnown() {
+        String source = "fixture = {\n"
+                + "  limit = { has_variable = zg361_case_state }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_triggers/zg361_phase2.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("has_variable")),
+                diagnostics::toString);
+    }
+
+    @Test void effectConditionContainerAllowsRegisteredTriggersOnlyThere() {
+        String source = "fixture = {\n"
+                + "  limit = { is_ai = no has_variable = zg361_case_state }\n"
+                + "  has_variable = direct_effect_side\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_effects/zg361_phase2.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals("WRONG_DOMAIN") && d.path().contains("limit")),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("WRONG_DOMAIN") && d.path().endsWith("has_variable")),
+                diagnostics::toString);
+    }
+
     @Test void gameProfileAdapterKeepsOptionalParameterArity() {
         String source = "set_variable = { name = sample }\n";
         var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));

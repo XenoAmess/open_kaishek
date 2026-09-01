@@ -26,6 +26,7 @@ class Ck3Profile11906Test {
     void genericProjectionAndSchemaShareTheSameOpcodeIds() {
         assertEquals(profile.opcodes().size(), profile.opcodeRegistry().size());
         assertTrue(profile.opcode("set_variable") != null);
+        assertTrue(profile.opcode("has_variable") != null);
         assertTrue(profile.opcodeRegistry().contains("set_variable"));
         assertEquals(Ck3Profile11906.GAME_VERSION,
                 profile.opcodeRegistry().require("set_variable").profileVersion());
@@ -34,6 +35,18 @@ class Ck3Profile11906Test {
                 "Phase 0 must not claim exact-build runtime certification");
         assertEquals(1, profile.opcodeRegistry().require("trigger_event").minParameters());
         assertEquals(2, profile.opcodeRegistry().require("trigger_event").maxParameters());
+    }
+
+    @Test
+    void hasVariableIsPinnedAsScalarPresenceTriggerShape() {
+        OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_variable");
+        assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
+        assertEquals(InputType.STRING, descriptor.inputType());
+        assertEquals(ScopeType.THIS, descriptor.requiredScope());
+        assertTrue(descriptor.parameterNames().isEmpty());
+        assertEquals(0, descriptor.minParameters());
+        assertEquals(0, descriptor.maxParameters());
+        assertFalse(descriptor.certified(), "static evidence must not claim runtime certification");
     }
 
     @Test

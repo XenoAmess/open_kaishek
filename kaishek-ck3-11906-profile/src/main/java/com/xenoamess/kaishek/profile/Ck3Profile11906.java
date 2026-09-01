@@ -36,6 +36,12 @@ public final class Ck3Profile11906 implements KaishekProfile {
                     List.of("value"), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_character_flag", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
                     List.of("flag"), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 static evidence identifies this as a
+            // scalar variable-key presence trigger.  Keep it syntax/profile
+            // level only (not runtime-certified) until a differential
+            // artifact covers its execution semantics.
+            descriptor("has_variable", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.THIS,
+                    List.of(), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_trait", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
                     List.of("trait"), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_title", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
@@ -181,6 +187,7 @@ public final class Ck3Profile11906 implements KaishekProfile {
         add(m, "always", OpcodeSpec.Kind.TRIGGER);
         add(m, "is_ai", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_character_flag", OpcodeSpec.Kind.TRIGGER);
+        add(m, "has_variable", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_trait", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_title", OpcodeSpec.Kind.TRIGGER);
         add(m, "is_alive", OpcodeSpec.Kind.TRIGGER);

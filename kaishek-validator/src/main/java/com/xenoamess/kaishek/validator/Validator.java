@@ -96,7 +96,7 @@ public final class Validator {
             // A registered opcode is unambiguous even at file root; declarations
             // (event/scripted-effect IDs) are simply absent from the registry.
             if (spec != null) {
-                validateDomain(spec, domain, e, out, at);
+                validateDomain(spec, domain, e, out, at, side);
                 validateParameters(spec, e, out, at);
                 validateScope(spec, e, out, at);
             }
@@ -172,11 +172,21 @@ public final class Validator {
                 && isCalculatedValueExpression(entry);
     }
     private enum ScriptSide { OTHER, TRIGGER, EFFECT }
-    private static void validateDomain(OpcodeSpec spec, ScriptDomain domain, EntryNode e, List<Diagnostic> out, String path) {
+    private static void validateDomain(OpcodeSpec spec, ScriptDomain domain, EntryNode e,
+                                       List<Diagnostic> out, String path, ScriptSide side) {
         boolean trigger = domain == ScriptDomain.SCRIPTED_TRIGGERS;
         boolean effect = domain == ScriptDomain.SCRIPTED_EFFECTS || domain == ScriptDomain.ON_ACTION;
         boolean value = domain == ScriptDomain.SCRIPTED_VALUES;
-        if ((trigger && spec.kind() == OpcodeSpec.Kind.EFFECT) || (effect && spec.kind() == OpcodeSpec.Kind.TRIGGER) ||
+        // Effect/on_action files legitimately embed registered trigger
+        // predicates inside condition containers (`limit`, `trigger`,
+        // `potential`, `allow`, or `check`).  `childSide` marks only those
+        // containers as TRIGGER; direct effect-side predicates stay RED and
+        // all other domains retain their existing checks.
+        boolean triggerInEffectCondition = effect
+                && side == ScriptSide.TRIGGER
+                && spec.kind() == OpcodeSpec.Kind.TRIGGER;
+        if ((trigger && spec.kind() == OpcodeSpec.Kind.EFFECT)
+                || (effect && spec.kind() == OpcodeSpec.Kind.TRIGGER && !triggerInEffectCondition) ||
             (value && spec.kind() != OpcodeSpec.Kind.VALUE && spec.kind() != OpcodeSpec.Kind.STRUCTURAL))
             out.add(diag("WRONG_DOMAIN", Diagnostic.Severity.ERROR, "opcode " + spec.name() + " is " + spec.kind() + " but file domain is " + domain, e.key().span(), path));
     }
