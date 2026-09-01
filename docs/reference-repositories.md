@@ -74,7 +74,7 @@ java -ea -cp 'kaishek-syntax/target/classes;kaishek-syntax/target/test-classes' 
   com.xenoamess.kaishek.syntax.ParserCorpusRoundTripSelfTest `
   --root (Join-Path $companionRoot 'mod_zhongguo_style') --require-corpus
 java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar corpus `
-  (Join-Path $companionRoot 'mod_zhongguo_style')
+  --require-corpus (Join-Path $companionRoot 'mod_zhongguo_style')
 ```
 
 上述路径只适用于本地验证；CI、发布包和 GitHub 仓库不应假定该盘符存在。若 corpus 不可

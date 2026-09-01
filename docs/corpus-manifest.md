@@ -32,3 +32,14 @@ Regenerate and review path/hash diffs whenever the external corpus bytes change,
 and record the resulting manifest hash in later Phase 0/1 test artifacts. If the
 corpus is unavailable, record the check as `SKIP` rather than treating an empty
 or absent directory as a passing inventory.
+
+The packaged CLI has the same fail-closed check for acceptance automation:
+
+```powershell
+java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar corpus `
+  --require-corpus $corpus
+```
+
+With `--require-corpus`, an absent root or a directory containing no `.txt` or
+`.gui` files emits `status: "SKIP"` and exits with code `1`. The default command
+without the flag keeps its historical optional-inventory behaviour.

@@ -93,7 +93,16 @@ public final class KaishekCli {
     out.println("{\"status\":\"OK\",\"algorithm\":\"SHA-256\",\"sha256\":"+q(sha(bytes))+",\"bytes\":"+bytes.length+"}"); return 0;
   }
   private static int corpus(String[] a, PrintStream out) throws IOException {
-    Path root = pathOption(a,1); if (root==null) throw new IllegalArgumentException("corpus requires a directory");
+    boolean requireCorpus = hasFlag(a, "--require-corpus");
+    // Preserve the historical positional-path behaviour for the optional
+    // form.  Required mode resolves the token even before it exists so an
+    // acceptance caller gets an explicit, machine-readable SKIP.
+    Path root = requireCorpus ? corpusPathOption(a, 1) : pathOption(a,1);
+    if (root==null) throw new IllegalArgumentException("corpus requires a directory");
+    if (!Files.exists(root)) {
+      if (requireCorpus) return unavailableCorpus(root, "corpus-root-absent", out);
+      throw new IllegalArgumentException("not a directory: "+root);
+    }
     if (!Files.isDirectory(root)) throw new IllegalArgumentException("not a directory: "+root);
      List<Path> files = new ArrayList<>();
      try(Stream<Path> s=Files.walk(root)){
@@ -101,6 +110,8 @@ public final class KaishekCli {
         .sorted(Comparator.comparing(p -> root.relativize(p).toString().replace('\\','/')))
         .forEach(files::add);
      }
+     if (files.isEmpty() && requireCorpus)
+       return unavailableCorpus(root, "corpus-empty", out);
      MessageDigest md = digest(); long bytes=0; int parsed=0, errors=0; List<String> errorFiles = new ArrayList<>();
      for(Path f:files){
        byte[] x=Files.readAllBytes(f); bytes+=x.length;
@@ -298,6 +309,22 @@ public final class KaishekCli {
       }
     }
   }
+  /** Resolve a corpus path without requiring it to exist yet. */
+  private static Path corpusPathOption(String[] a, int start) {
+    String p=option(a,"--file",null);
+    if(p!=null)return Paths.get(p);
+    String candidate=positional(a,start);
+    return candidate==null?null:Paths.get(candidate);
+  }
+
+  /** Emit an explicit non-passing result for a required unavailable corpus. */
+  private static int unavailableCorpus(Path root, String reason, PrintStream out) {
+    out.println("{\"status\":\"SKIP\",\"reason\":"+q(reason)+",\"required\":true,\"root\":"
+      +q(root.toString())+",\"files\":0,\"parsed\":0,\"errors\":0,\"errorFiles\":[],\"bytes\":0,\"corpusSha256\":null}");
+    // Required-mode SKIP is deliberately non-zero so CI cannot treat an
+    // unavailable external corpus as passing evidence.
+    return 1;
+  }
   private static int profile(String[] a, PrintStream out) {
     String positionalId = positional(a, 1);
     String id=option(a,"--id", positionalId == null ? "" : positionalId);
@@ -363,6 +390,7 @@ public final class KaishekCli {
         }
         continue;
       }
+      if(isFlagOption(a, token)) continue;
       throw new IllegalArgumentException("unknown option: "+token);
     }
     return first;
@@ -395,6 +423,18 @@ public final class KaishekCli {
       if(token.equals(key)||token.startsWith(key+"="))return key;
     return null;
   }
+  /** Identify a supported boolean option for the corpus command only. */
+  private static boolean isFlagOption(String[] a, String token){
+    return a.length > 0 && "corpus".equalsIgnoreCase(a[0]) && "--require-corpus".equals(token);
+  }
+  /** Return whether a boolean option was supplied in the argument vector. */
+  private static boolean hasFlag(String[] a, String key){
+    for (int i=1; i<a.length; i++) {
+      if ("--".equals(a[i])) break;
+      if (key.equals(a[i])) return true;
+    }
+    return false;
+  }
   // The Phase 0 corpus contract is deliberately limited to Paradox script
   // sources.  Localization YAML has a different grammar and is reported by
   // a future localization adapter rather than being misclassified here.
@@ -403,7 +443,7 @@ public final class KaishekCli {
   private static String sha(byte[] b){return hex(digest().digest(b));} private static String hex(byte[] b){StringBuilder s=new StringBuilder();for(byte x:b)s.append(String.format(Locale.ROOT,"%02x",x));return s.toString();}
   private static String q(String s){return "\""+s.replace("\\","\\\\").replace("\"","\\\"").replace("\r","\\r").replace("\n","\\n")+"\"";}
   private static String json(String... kv){StringBuilder b=new StringBuilder("{");for(int i=0;i<kv.length;i+=2){if(i>0)b.append(',');b.append(q(kv[i])).append(':').append(q(kv[i+1]));}return b.append('}').toString();}
-  private static void usage(PrintStream o){o.println("kaishek-cli "+VERSION+" (pure Java; Quarkus is not started)\nUsage: parse|validate|hash|corpus|profile [--file PATH|PATH]\n       synthetic-361|runtime-fixture\n       batch|replay [--file MANIFEST.jsonl] [--stop-on-error]\nBatch lines: {\"id\":\"case\",\"command\":\"parse\",\"text\":\"x = 1\\n\"}\nUnknown semantics return status UNSUPPORTED.");}
+  private static void usage(PrintStream o){o.println("kaishek-cli "+VERSION+" (pure Java; Quarkus is not started)\nUsage: parse|validate|hash|corpus|profile [--file PATH|PATH] [corpus: --require-corpus]\n       synthetic-361|runtime-fixture\n       batch|replay [--file MANIFEST.jsonl] [--stop-on-error]\nBatch lines: {\"id\":\"case\",\"command\":\"parse\",\"text\":\"x = 1\\n\"}\nUnknown semantics return status UNSUPPORTED.");}
 
   private static int countNodes(CstNode n){int c=1; for(CstNode x:n.children()) c+=countNodes(x); return c;}
   private static int countKind(CstNode n,SyntaxKind k){int c=n.kind()==k?1:0; for(CstNode x:n.children()) c+=countKind(x,k); return c;}

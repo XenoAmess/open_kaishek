@@ -85,6 +85,61 @@ public final class KaishekCliSmokeTest {
       b.reset();
       int malformedExit = KaishekCli.run(new String[]{"batch", malformed.toString()}, new PrintStream(b), System.err);
       check(malformedExit == 2 && b.toString(StandardCharsets.UTF_8).contains("\"status\":\"ERROR\""), b);
+      // The corpus-only flag must not silently broaden the other commands'
+      // option grammar.
+      b.reset();
+      int misplacedCorpusFlag = KaishekCli.run(new String[]{"parse", "--require-corpus", "x = 1"},
+          new PrintStream(b), System.err);
+      check(misplacedCorpusFlag == 2 && b.toString(StandardCharsets.UTF_8).contains("\"status\":\"ERROR\""), b);
+
+      // A required external corpus must never turn an empty checkout into a
+      // passing inventory. The optional form remains backward compatible.
+      Path empty = Files.createDirectories(root.resolve("empty-corpus"));
+      b.reset();
+      int optionalEmpty = KaishekCli.run(new String[]{"corpus", empty.toString()},
+          new PrintStream(b), System.err);
+      String optionalEmptyJson = b.toString(StandardCharsets.UTF_8);
+      check(optionalEmpty == 0 && optionalEmptyJson.contains("\"status\":\"OK\"")
+          && optionalEmptyJson.contains("\"files\":0"), optionalEmptyJson);
+
+      b.reset();
+      int requiredEmpty = KaishekCli.run(new String[]{"corpus", "--require-corpus", empty.toString()},
+          new PrintStream(b), System.err);
+      String requiredEmptyJson = b.toString(StandardCharsets.UTF_8);
+      check(requiredEmpty == 1 && requiredEmptyJson.contains("\"status\":\"SKIP\"")
+          && requiredEmptyJson.contains("\"reason\":\"corpus-empty\"")
+          && requiredEmptyJson.contains("\"required\":true"), requiredEmptyJson);
+
+      // The same gate catches a directory containing no supported script
+      // extensions, regardless of option order.
+      Path nonScript = Files.createDirectories(root.resolve("non-script-corpus"));
+      Files.writeString(nonScript.resolve("README.md"), "not a Paradox script\n", StandardCharsets.UTF_8);
+      b.reset();
+      int requiredNonScript = KaishekCli.run(new String[]{"corpus", nonScript.toString(), "--require-corpus"},
+          new PrintStream(b), System.err);
+      String requiredNonScriptJson = b.toString(StandardCharsets.UTF_8);
+      check(requiredNonScript == 1 && requiredNonScriptJson.contains("\"status\":\"SKIP\"")
+          && requiredNonScriptJson.contains("\"reason\":\"corpus-empty\""), requiredNonScriptJson);
+
+      // A missing required root is distinguishable from a malformed file and
+      // remains a non-zero SKIP for acceptance orchestration.
+      Path missingCorpus = root.resolve("missing-corpus");
+      b.reset();
+      int requiredMissing = KaishekCli.run(new String[]{"corpus", "--require-corpus", missingCorpus.toString()},
+          new PrintStream(b), System.err);
+      String requiredMissingJson = b.toString(StandardCharsets.UTF_8);
+      check(requiredMissing == 1 && requiredMissingJson.contains("\"status\":\"SKIP\"")
+          && requiredMissingJson.contains("\"reason\":\"corpus-root-absent\""), requiredMissingJson);
+
+      // A real script still follows the ordinary OK path under the gate.
+      Path validCorpus = Files.createDirectories(root.resolve("valid-corpus"));
+      Files.writeString(validCorpus.resolve("valid.txt"), "foo = 1\n", StandardCharsets.UTF_8);
+      b.reset();
+      int requiredValid = KaishekCli.run(new String[]{"corpus", "--require-corpus", validCorpus.toString()},
+          new PrintStream(b), System.err);
+      String requiredValidJson = b.toString(StandardCharsets.UTF_8);
+      check(requiredValid == 0 && requiredValidJson.contains("\"status\":\"OK\"")
+          && requiredValidJson.contains("\"files\":1"), requiredValidJson);
     } catch (IOException ex) {
       throw new AssertionError("CLI smoke fixture setup failed", ex);
     } finally {

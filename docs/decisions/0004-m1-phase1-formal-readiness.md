@@ -62,7 +62,7 @@ The CLI corpus command is an additional packaged check:
 
 ```powershell
 mvn -o -ntp "-Dmaven.repo.local=$m2" -DskipTests package
-java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar corpus $corpus
+java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar corpus --require-corpus $corpus
 ```
 
 If the external corpus is absent, the parser self-test may report `SKIP`; that

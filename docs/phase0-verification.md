@@ -39,7 +39,7 @@ java -ea -cp 'kaishek-syntax/target/classes;kaishek-syntax/target/test-classes' 
 java -ea -cp 'kaishek-syntax/target/classes;kaishek-syntax/target/test-classes' com.xenoamess.kaishek.syntax.ParserCorpusRoundTripSelfTest --root "$corpus" --require-corpus
 java -ea -cp 'kaishek-cli/target/classes;kaishek-cli/target/test-classes;kaishek-validator/target/classes;kaishek-ck3-11906-profile/target/classes;kaishek-profile-api/target/classes;kaishek-syntax/target/classes' com.xenoamess.kaishek.cli.KaishekCliSmokeTest
 mvn -o "-Dmaven.repo.local=$m2" -DskipTests package
-java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar corpus "$corpus"
+java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar corpus --require-corpus "$corpus"
 py -3 -m unittest discover -s kaishek-zg361-profile/tests -v
 py -3 kaishek-zg361-profile/tools/validate_domains.py
 ```
