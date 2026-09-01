@@ -46,7 +46,9 @@ public final class RuntimeKernel {
             return ExecutionResult.success(value, context.trace());
         } catch (DrawTapeExhaustedException e) { context.trace().add(opcode, "unsupported", Map.of("reason", e.getMessage())); return ExecutionResult.unsupported(e.getMessage(), context.trace()); }
           catch (UnsupportedOperationException e) { context.trace().add(opcode, "unsupported", Map.of("reason", e.getMessage())); return ExecutionResult.unsupported(e.getMessage(), context.trace()); }
-          catch (IllegalArgumentException e) { return new ExecutionResult<>(ExecutionStatus.INVALID, null, e.getMessage(), context.trace()); }
+          catch (IllegalArgumentException | IllegalStateException e) {
+              return new ExecutionResult<>(ExecutionStatus.INVALID, null, e.getMessage(), context.trace());
+          }
     }
     private static boolean scopeMatches(com.xenoamess.kaishek.profile.ScopeType required, com.xenoamess.kaishek.profile.ScopeType actual) { return required == actual || (required == com.xenoamess.kaishek.profile.ScopeType.THIS && actual != null); }
     public List<ExecutionResult<?>> dispatchDueEvents(ExecutionContext context) {

@@ -36,7 +36,7 @@ public final class HookDispatcher {
             out.add(name, "unsupported", Map.of("reason", reason(e, "unsupported hook operation")));
             return ExecutionResult.unsupported(reason(e, "unsupported hook operation"), out);
         }
-        catch (IllegalArgumentException e) {
+        catch (IllegalArgumentException | IllegalStateException e) {
             return new ExecutionResult<>(ExecutionStatus.INVALID, null,
                     reason(e, "invalid hook input"), out);
         }
