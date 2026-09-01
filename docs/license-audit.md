@@ -42,6 +42,16 @@ parent branch:
   header. The standalone export contains no nested repository, gitlink, or CK3
   game/workshop files.
 
+The parent workspace also contains 23 untracked scratch/worktree copies of the
+early charter. Their one remaining Apache mention is historical wording
+(`preferred candidate`), not a license file or build metadata; every project
+`LICENSE` file found in those copies is GPLv3. They are not tracked or exported
+to this repository and should not be used as authoritative release trees. The
+active detached parent checkout likewise predates the root `LICENSE`; the
+canonical parent `master` at `ce010947805829ae24a7a4be4179758442389d42` is the
+authoritative GPLv3 source. The standalone repository now carries its own
+canonical copy and no longer depends on that checkout state.
+
 ## Policy from this point
 
 New authored code and project documentation are covered by GPL-3.0-only.
