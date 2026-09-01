@@ -83,6 +83,7 @@ java -ea -cp "kaishek-cli/target/classes;kaishek-cli/target/test-classes;kaishek
 - [M0 正式 readiness 记录](docs/decisions/0003-m0-formal-readiness.md)
 - [M1 / Phase 1 parser readiness 记录](docs/decisions/0004-m1-phase1-formal-readiness.md)
 - [许可证审计与迁移记录](docs/license-audit.md)
+- [开发流程与主线优先约定](docs/development-workflow.md)
 
 ## Readiness 边界
 
