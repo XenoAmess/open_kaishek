@@ -12,6 +12,10 @@ public final class KaishekCliSmokeTest {
     int ok = KaishekCli.run(new String[]{"parse"}, new PrintStream(b), System.err);
     check(ok == 0 && b.toString(StandardCharsets.UTF_8).contains("\"status\":\"PARSED\""), b);
     b.reset();
+    int fixture = KaishekCli.run(new String[]{"synthetic-361"}, new PrintStream(b), System.err);
+    check(fixture == 0 && b.toString(StandardCharsets.UTF_8).contains("\"synthetic\":true")
+        && b.toString(StandardCharsets.UTF_8).contains("\"execution\":\"SUCCESS\""), b);
+    b.reset();
     int unsupported = KaishekCli.run(new String[]{"profile", "--id", "future"}, new PrintStream(b), System.err);
     check(unsupported == 4 && b.toString(StandardCharsets.UTF_8).contains("UNSUPPORTED"), b);
 
@@ -55,6 +59,32 @@ public final class KaishekCliSmokeTest {
       int trailingUnknown = KaishekCli.run(new String[]{"parse", "x = 1", "--unknown"},
           new PrintStream(b), System.err);
       check(trailingUnknown == 2 && b.toString(StandardCharsets.UTF_8).contains("\"status\":\"ERROR\""), b);
+
+      Path manifest = root.resolve("cases.jsonl");
+      Files.writeString(manifest,
+          "{\"id\":\"ok\",\"command\":\"parse\",\"text\":\"x = 1\\n\"}\n"
+              + "{\"id\":\"bad\",\"command\":\"parse\",\"text\":\"x\"}\n",
+          StandardCharsets.UTF_8);
+      b.reset();
+      int batch = KaishekCli.run(new String[]{"batch", "--file", manifest.toString()},
+          new PrintStream(b), System.err);
+      String[] batchLines = b.toString(StandardCharsets.UTF_8).trim().split("\\R");
+      check(batch == 1 && batchLines.length == 2 && batchLines[0].contains("\"id\":\"ok\"")
+          && batchLines[0].contains("\"exitCode\":0")
+          && batchLines[0].contains("\"result\":{\"status\":\"PARSED\"")
+          && batchLines[1].contains("\"id\":\"bad\"")
+          && batchLines[1].contains("\"exitCode\":1"), b);
+
+      b.reset();
+      int replay = KaishekCli.run(new String[]{"replay", "--file", manifest.toString(), "--stop-on-error"},
+          new PrintStream(b), System.err);
+      check(replay == 1 && b.toString(StandardCharsets.UTF_8).trim().split("\\R").length == 2, b);
+
+      Path malformed = root.resolve("malformed.jsonl");
+      Files.writeString(malformed, "{\"id\":\"oops\",\"command\":\"parse\",\"args\":1}\n", StandardCharsets.UTF_8);
+      b.reset();
+      int malformedExit = KaishekCli.run(new String[]{"batch", malformed.toString()}, new PrintStream(b), System.err);
+      check(malformedExit == 2 && b.toString(StandardCharsets.UTF_8).contains("\"status\":\"ERROR\""), b);
     } catch (IOException ex) {
       throw new AssertionError("CLI smoke fixture setup failed", ex);
     } finally {
