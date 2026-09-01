@@ -42,8 +42,8 @@ parent branch:
   header. The standalone export contains no nested repository, gitlink, or CK3
   game/workshop files.
 
-The parent workspace also contains 23 untracked scratch/worktree copies of the
-early charter. Their one remaining Apache mention is historical wording
+The parent workspace also contains multiple untracked scratch/worktree copies
+of the early charter. Their one remaining Apache mention is historical wording
 (`preferred candidate`), not a license file or build metadata; every project
 `LICENSE` file found in those copies is GPLv3. They are not tracked or exported
 to this repository and should not be used as authoritative release trees. The
