@@ -1,0 +1,124 @@
+{
+  "fixture": "zg361-014-appeal-replay-v1",
+  "readiness": "runtime-fixture",
+  "semantic_boundary": "offline finite replay; no CK3 scheduler claim",
+  "provenance": {
+    "acceptance_source": "mod_zhongguo_style/tools/mechanism_acceptance/acceptance_001_036.json#014",
+    "acceptance_sha256": "66987c323fcfac3ecd2bd8dda2671744c8ba142ff3d8ae7b9969b128ec9b4f98",
+    "effect_source": "mod_zhongguo_style/common/scripted_effects/zg361_effects.txt#676-804",
+    "effect_sha256": "c08f450dbe3f3deafac35e337c8cb2001a9fdc1830b68d0ca8825e604c795f4c",
+    "comparison_input": "hand-authored expected vectors below; companion files are not copied"
+  },
+  "contract": {
+    "deadline_days": 90,
+    "receipt_keys": ["treasury_penalty", "gold_penalty", "merit_penalty"],
+    "stale_guard": ["owner", "subject", "case_serial", "revision", "expected_state"],
+    "resolution_rule": "all three receipts refund once while appeal is open and before due day"
+  },
+  "cases": [
+    {
+      "id": "resolved-before-deadline",
+      "actions": ["open", "submit", "resolve", "resolve", "advance:190"],
+      "outcomes": ["APPLIED", "APPLIED", "APPLIED", "IDEMPOTENT_NOOP", "IDEMPOTENT_NOOP"],
+      "terminal": {
+        "state": "RESOLVED",
+        "current_epoch_day": 190,
+        "bound_serial": 0,
+        "bound_revision": 0,
+        "registry_serial": 0,
+        "registry_revision": 0,
+        "deadline_epoch_day": 190,
+        "queued_events": 0,
+        "stale_deadline_count": 0,
+        "balances": {
+          "subject_treasury/gold": 1000,
+          "subject_personal_gold/gold": 1000,
+          "subject_merit/merit": 1000
+        },
+        "refunded": {
+          "treasury_penalty": 50,
+          "gold_penalty": 25,
+          "merit_penalty": 60
+        }
+      }
+    },
+    {
+      "id": "expires-at-deadline",
+      "actions": ["open", "submit", "advance:190", "resolve"],
+      "outcomes": ["APPLIED", "APPLIED", "APPLIED", "STALE_NOOP"],
+      "terminal": {
+        "state": "EXPIRED",
+        "current_epoch_day": 190,
+        "bound_serial": 0,
+        "bound_revision": 0,
+        "registry_serial": 0,
+        "registry_revision": 0,
+        "deadline_epoch_day": 190,
+        "queued_events": 0,
+        "stale_deadline_count": 0,
+        "balances": {
+          "subject_treasury/gold": 950,
+          "subject_personal_gold/gold": 975,
+          "subject_merit/merit": 940
+        },
+        "refunded": {
+          "treasury_penalty": 0,
+          "gold_penalty": 0,
+          "merit_penalty": 0
+        }
+      }
+    },
+    {
+      "id": "stale-after-reopen",
+      "actions": ["open", "submit", "reopen", "advance:190", "resolve"],
+      "outcomes": ["APPLIED", "APPLIED", "STALE_NOOP", "STALE_DEADLINE_NOOP", "STALE_NOOP"],
+      "terminal": {
+        "state": "APPEAL_OPEN",
+        "current_epoch_day": 190,
+        "bound_serial": 0,
+        "bound_revision": 0,
+        "registry_serial": 1,
+        "registry_revision": 0,
+        "deadline_epoch_day": 190,
+        "queued_events": 0,
+        "stale_deadline_count": 1,
+        "balances": {
+          "subject_treasury/gold": 950,
+          "subject_personal_gold/gold": 975,
+          "subject_merit/merit": 940
+        },
+        "refunded": {
+          "treasury_penalty": 0,
+          "gold_penalty": 0,
+          "merit_penalty": 0
+        }
+      }
+    },
+    {
+      "id": "stale-after-revision",
+      "actions": ["open", "submit", "revise", "advance:190", "resolve"],
+      "outcomes": ["APPLIED", "APPLIED", "STALE_NOOP", "STALE_DEADLINE_NOOP", "STALE_NOOP"],
+      "terminal": {
+        "state": "APPEAL_OPEN",
+        "current_epoch_day": 190,
+        "bound_serial": 0,
+        "bound_revision": 0,
+        "registry_serial": 0,
+        "registry_revision": 1,
+        "deadline_epoch_day": 190,
+        "queued_events": 0,
+        "stale_deadline_count": 1,
+        "balances": {
+          "subject_treasury/gold": 950,
+          "subject_personal_gold/gold": 975,
+          "subject_merit/merit": 940
+        },
+        "refunded": {
+          "treasury_penalty": 0,
+          "gold_penalty": 0,
+          "merit_penalty": 0
+        }
+      }
+    }
+  ]
+}

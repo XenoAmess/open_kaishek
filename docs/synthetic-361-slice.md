@@ -36,6 +36,31 @@ The synthetic profile is `zg361-synthetic-014`, uses an all-zero executable
 fingerprint by design, and certifies only the three fixture handlers.  The
 profile must never be substituted for `ck3-1.19.0.6`.
 
+## Offline appeal replay extension
+
+`Appeal014Replay` adds one deliberately narrow, runtime-fixture slice around
+the companion 014 contract: an already-posted treasury/gold/merit receipt set,
+an owner+subject binding, and one finite D+90 deadline.  A matching reviewer
+can resolve before the due day and refund each receipt once.  Reopened or
+revised bindings make the queued deadline a marked stale no-op; repeated
+resolution and a deadline after a successful resolution are idempotent
+no-ops.  The queue is the repository's finite `ExecutionContext` fixture and
+is not an inference about CK3's scheduler.
+
+`Appeal014DifferentialFixture` keeps four hand-authored expected vectors
+(`resolved-before-deadline`, `expires-at-deadline`, `stale-after-reopen`, and
+`stale-after-revision`).  The JSON sidecar records the source paths and
+SHA-256 values used for the read-only comparison:
+
+```text
+kaishek-zg361-profile/src/test/resources/zg361-014-appeal-differential.json
+```
+
+The source files are not copied into this repository.  The vectors provide
+offline differential evidence for binding, deadline, queue, and receipt
+accounting only; they do not promote the profile beyond `runtime-fixture` or
+certify the existing CK3 implementation.
+
 ## Fail-closed rules exercised
 
 - A parser error yields an empty, non-executable IR program.
@@ -64,3 +89,6 @@ assertions plus the unknown-opcode and CK3-not-certified negative paths.  A
 successful run is evidence for the `runtime-fixture` level only.  It does not
 prove CK3 equivalence, MCP differential certification, scheduler behavior, or
 product-live readiness.
+
+`Appeal014ReplayTest` runs the four expected-vector comparisons and the
+insufficient-balance/stale-scope negative paths in the same offline command.
