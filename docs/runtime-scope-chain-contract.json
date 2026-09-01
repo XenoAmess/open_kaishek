@@ -1,0 +1,25 @@
+{
+  "contract": "kaishek.runtime.scope-chain",
+  "version": 1,
+  "starts": ["ROOT", "THIS", "PREV", "saved-alias"],
+  "prefixes": ["scope:"],
+  "separator": ".",
+  "links": "explicit-only",
+  "max_segments": 65,
+  "unresolved": {
+    "fail_closed": true,
+    "reasons": [
+      "EMPTY_REFERENCE",
+      "MALFORMED_CHAIN",
+      "EMPTY_BASE",
+      "UNRESOLVED_BASE",
+      "UNRESOLVED_LINK",
+      "CYCLIC_CHAIN"
+    ]
+  },
+  "fixture": {
+    "reference": "scope:actor.liege.realm",
+    "expected_type": "ORGANIZATION",
+    "expected_id": "realm"
+  }
+}
