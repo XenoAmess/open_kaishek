@@ -1,0 +1,62 @@
+name: core-ci
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    name: Java/Python static and contract checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Temurin 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Set up Python 3
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Verify project metadata and license
+        run: python tools/check_metadata.py
+
+      - name: Run Maven tests
+        run: mvn -B -ntp test
+
+      - name: Run Python schema checks
+        run: |
+          python -m unittest discover -s kaishek-zg361-profile/tests -v
+          python kaishek-zg361-profile/tools/validate_domains.py
+
+      - name: Run dependency-free parser and CLI smoke
+        shell: bash
+        run: |
+          java -ea -cp 'kaishek-syntax/target/classes:kaishek-syntax/target/test-classes' com.xenoamess.kaishek.syntax.ParserSelfTest
+          java -ea -cp 'kaishek-syntax/target/classes:kaishek-syntax/target/test-classes' com.xenoamess.kaishek.syntax.DuplicateKeyRoundTripSelfTest
+          java -ea -cp 'kaishek-syntax/target/classes:kaishek-syntax/target/test-classes' com.xenoamess.kaishek.syntax.Phase1SyntaxSelfTest
+          java -ea -cp 'kaishek-syntax/target/classes:kaishek-syntax/target/test-classes' com.xenoamess.kaishek.syntax.ParserPropertyFuzzSelfTest
+          java -ea -cp 'kaishek-cli/target/classes:kaishek-cli/target/test-classes:kaishek-validator/target/classes:kaishek-ck3-11906-profile/target/classes:kaishek-profile-api/target/classes:kaishek-syntax/target/classes' com.xenoamess.kaishek.cli.KaishekCliSmokeTest
+
+      - name: Check deterministic package
+        shell: bash
+        run: |
+          set -euo pipefail
+          mvn -B -ntp -DskipTests clean package
+          find . -type f -path '*/target/*.jar' -print0 | sort -z | xargs -0 sha256sum > "$RUNNER_TEMP/jars-1.sha256"
+          mvn -B -ntp -DskipTests clean package
+          find . -type f -path '*/target/*.jar' -print0 | sort -z | xargs -0 sha256sum > "$RUNNER_TEMP/jars-2.sha256"
+          cmp "$RUNNER_TEMP/jars-1.sha256" "$RUNNER_TEMP/jars-2.sha256"
+
+      - name: Check whitespace
+        run: git diff --check

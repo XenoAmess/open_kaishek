@@ -1,0 +1,16 @@
+# Maven outputs
+**/target/
+
+# Local parser/compiler probes
+.tmp-*/
+*.tmp
+*.log
+
+# Python test/cache outputs
+__pycache__/
+*.py[cod]
+
+# Local reports and IDE metadata
+.pytest_cache/
+.idea/
+.vscode/
