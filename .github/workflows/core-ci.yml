@@ -46,7 +46,8 @@ jobs:
           java -ea -cp 'kaishek-syntax/target/classes:kaishek-syntax/target/test-classes' com.xenoamess.kaishek.syntax.DuplicateKeyRoundTripSelfTest
           java -ea -cp 'kaishek-syntax/target/classes:kaishek-syntax/target/test-classes' com.xenoamess.kaishek.syntax.Phase1SyntaxSelfTest
           java -ea -cp 'kaishek-syntax/target/classes:kaishek-syntax/target/test-classes' com.xenoamess.kaishek.syntax.ParserPropertyFuzzSelfTest
-          java -ea -cp 'kaishek-cli/target/classes:kaishek-cli/target/test-classes:kaishek-validator/target/classes:kaishek-ck3-11906-profile/target/classes:kaishek-profile-api/target/classes:kaishek-syntax/target/classes' com.xenoamess.kaishek.cli.KaishekCliSmokeTest
+          java -ea -cp 'kaishek-cli/target/classes:kaishek-cli/target/test-classes:kaishek-validator/target/classes:kaishek-ck3-11906-profile/target/classes:kaishek-zg361-profile/target/classes:kaishek-ir/target/classes:kaishek-runtime/target/classes:kaishek-diff-contract/target/classes:kaishek-profile-api/target/classes:kaishek-syntax/target/classes' com.xenoamess.kaishek.cli.KaishekCliSmokeTest
+          java -ea -cp 'kaishek-cli/target/classes:kaishek-validator/target/classes:kaishek-ck3-11906-profile/target/classes:kaishek-zg361-profile/target/classes:kaishek-ir/target/classes:kaishek-runtime/target/classes:kaishek-diff-contract/target/classes:kaishek-profile-api/target/classes:kaishek-syntax/target/classes' com.xenoamess.kaishek.cli.KaishekCli preflight --fixture synthetic-361-014
 
       - name: Check deterministic package
         shell: bash

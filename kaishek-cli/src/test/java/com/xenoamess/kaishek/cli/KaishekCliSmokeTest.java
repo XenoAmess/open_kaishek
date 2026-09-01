@@ -140,6 +140,66 @@ public final class KaishekCliSmokeTest {
       String requiredValidJson = b.toString(StandardCharsets.UTF_8);
       check(requiredValid == 0 && requiredValidJson.contains("\"status\":\"OK\"")
           && requiredValidJson.contains("\"files\":1"), requiredValidJson);
+
+      // The parent CK3 acceptance runner can use one stable, offline command
+      // before it launches the game.  It combines a source-root parser /
+      // validator scan with the checked-in synthetic parser -> IR -> runtime
+      // fixture and emits one machine-readable report.
+      Path preflightRoot = Files.createDirectories(root.resolve("preflight-root"));
+      Path preflightEffects = Files.createDirectories(preflightRoot.resolve("common/scripted_effects"));
+      Path preflightSource = preflightEffects.resolve("valid.txt");
+      Files.writeString(preflightSource,
+          "valid_effect = {\n"
+              + "  set_variable = { name = preflight_value value = 1 }\n"
+              + "}\n", StandardCharsets.UTF_8);
+      b.reset();
+      int preflight = KaishekCli.run(new String[]{"preflight", "--root", preflightRoot.toString(),
+          "--profile", "ck3-1.19.0.6-zg361", "--fixture", "synthetic-361-014"},
+          new PrintStream(b), System.err);
+      String preflightJson = b.toString(StandardCharsets.UTF_8);
+      check(preflight == 0 && preflightJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && preflightJson.contains("\"status\":\"GREEN\"")
+          && preflightJson.contains("\"profile_id\":\"ck3-1.19.0.6-zg361\"")
+          && preflightJson.contains("\"fixture_id\":\"synthetic-361-014\"")
+          && preflightJson.contains("\"ck3_started\":\"false\"")
+          && preflightJson.contains("\"save_mutated\":\"false\"")
+          && preflightJson.contains("\"root_scan\":{\"parser\":{\"status\":\"GREEN\"")
+          && preflightJson.contains("\"runtime\":{\"status\":\"GREEN\""), preflightJson);
+
+      // A malformed external source is a hard RED and must not be hidden by
+      // a passing fixture.  This is the gate that prevents CK3 launch.
+      Files.writeString(preflightEffects.resolve("invalid.txt"), "broken = {\n",
+          StandardCharsets.UTF_8);
+      b.reset();
+      int preflightRed = KaishekCli.run(new String[]{"preflight", "--root", preflightRoot.toString()},
+          new PrintStream(b), System.err);
+      String preflightRedJson = b.toString(StandardCharsets.UTF_8);
+      check(preflightRed == 1 && preflightRedJson.contains("\"status\":\"RED\"")
+          && preflightRedJson.contains("\"root_scan\"")
+          && preflightRedJson.contains("\"parser\":{\"status\":\"RED\""), preflightRedJson);
+
+      // The appeal replay is a separate runtime-fixture option; it remains
+      // offline and does not silently claim CK3 semantic certification.
+      b.reset();
+      int appealPreflight = KaishekCli.run(new String[]{"preflight", "--fixture", "appeal-014"},
+          new PrintStream(b), System.err);
+      String appealJson = b.toString(StandardCharsets.UTF_8);
+      check(appealPreflight == 0 && appealJson.contains("\"fixture_id\":\"appeal-014\"")
+          && appealJson.contains("\"fixture_scope\":\"runtime-fixture\"")
+          && appealJson.contains("\"runtime\":{\"status\":\"GREEN\""), appealJson);
+
+      // Unsupported profile selections still use the preflight schema so a
+      // parent runner never has to special-case the generic CLI error shape.
+      b.reset();
+      int unsupportedPreflight = KaishekCli.run(new String[]{"preflight", "--profile", "future-build"},
+          new PrintStream(b), System.err);
+      String unsupportedPreflightJson = b.toString(StandardCharsets.UTF_8);
+      check(unsupportedPreflight == 4
+          && unsupportedPreflightJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && unsupportedPreflightJson.contains("\"status\":\"UNSUPPORTED\"")
+          && unsupportedPreflightJson.contains("\"profile_id\":\"future-build\"")
+          && unsupportedPreflightJson.contains("\"ck3_started\":\"false\""),
+          unsupportedPreflightJson);
     } catch (IOException ex) {
       throw new AssertionError("CLI smoke fixture setup failed", ex);
     } finally {

@@ -12,7 +12,11 @@
     <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-syntax</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-validator</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-runtime</artifactId><version>${project.version}</version></dependency>
-    <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-ck3-11906-profile</artifactId><version>${project.version}</version><scope>test</scope></dependency>
+    <!-- OfflinePreflight combines the CK3 schema profile with the 361
+         fixture, so the exact-build profile is part of the small runtime
+         API rather than a test-only dependency.  This remains a static
+         dependency; it never starts CK3. -->
+    <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-ck3-11906-profile</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter-api</artifactId><scope>test</scope></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter-engine</artifactId><scope>test</scope></dependency>
   </dependencies>

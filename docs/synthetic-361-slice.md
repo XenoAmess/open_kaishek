@@ -92,3 +92,19 @@ product-live readiness.
 
 `Appeal014ReplayTest` runs the four expected-vector comparisons and the
 insufficient-balance/stale-scope negative paths in the same offline command.
+
+## Preflight entry point
+
+Parent CK3 acceptance can run the repository-level offline gate before
+launching the game:
+
+```powershell
+java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar preflight `
+  --profile ck3-1.19.0.6-zg361 --fixture synthetic-361-014
+```
+
+The command emits the stable `open_kaishek.preflight.v1` JSON contract and
+returns non-zero for a failed parser, validator, IR, or fixture stage. See
+[`offline-preflight.md`](offline-preflight.md) for root scanning, exit codes,
+and the explicit no-CK3/no-save boundary. A passing fixture remains
+`runtime-fixture` evidence only.

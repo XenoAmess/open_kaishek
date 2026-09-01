@@ -62,7 +62,7 @@ synthetic 014 夹具会由 Maven 测试覆盖；CLI smoke 是无框架的显式�
 执行上面的构建，再运行：
 
 ```powershell
-java -ea -cp "kaishek-cli/target/classes;kaishek-cli/target/test-classes;kaishek-validator/target/classes;kaishek-ck3-11906-profile/target/classes;kaishek-profile-api/target/classes;kaishek-syntax/target/classes" com.xenoamess.kaishek.cli.KaishekCliSmokeTest
+java -ea -cp "kaishek-cli/target/classes;kaishek-cli/target/test-classes;kaishek-validator/target/classes;kaishek-ck3-11906-profile/target/classes;kaishek-zg361-profile/target/classes;kaishek-ir/target/classes;kaishek-runtime/target/classes;kaishek-diff-contract/target/classes;kaishek-profile-api/target/classes;kaishek-syntax/target/classes" com.xenoamess.kaishek.cli.KaishekCliSmokeTest
 ```
 
 目标 corpus 是外部输入。例如在 Windows 上可将 `Z:\ck3_mod_rewrite\mod_zhongguo_style`

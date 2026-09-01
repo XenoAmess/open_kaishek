@@ -6,6 +6,7 @@ import com.xenoamess.kaishek.syntax.ParseResult;
 import com.xenoamess.kaishek.syntax.SyntaxKind;
 import com.xenoamess.kaishek.validator.Validator;
 import com.xenoamess.kaishek.profile.Ck3Profile11906;
+import com.xenoamess.kaishek.zg361.OfflinePreflight;
 import com.xenoamess.kaishek.zg361.Synthetic361Pipeline;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -32,6 +33,7 @@ public final class KaishekCli {
         case "corpus" -> corpus(args, out);
         case "batch", "replay" -> batch(args, out);
         case "synthetic-361", "runtime-fixture" -> synthetic361(args, out);
+        case "preflight" -> preflight(args, out);
         case "profile", "profiles" -> profile(args, out);
         default -> unsupported("command:" + command, out);
       };
@@ -219,6 +221,59 @@ public final class KaishekCli {
         + ",\"traceEntries\":" + result.execution().trace().entries().size()
         + (result.execution().reason().isBlank() ? "" : ",\"reason\":" + q(result.execution().reason())) + "}");
     return result.execution().isSuccess() ? 0 : 1;
+  }
+
+  /**
+   * Run the deterministic parser/validator/fixture preflight.  This command
+   * is intentionally side-effect free: it never starts CK3, loads a bridge,
+   * opens MCP, or writes a save.  The single JSON object is suitable for a
+   * parent CK3 acceptance runner to archive and gate before crossing its
+   * launch boundary.
+   */
+  private static int preflight(String[] a, PrintStream out) throws IOException {
+    Path root = null;
+    String profile = OfflinePreflight.DEFAULT_PROFILE;
+    String fixture = OfflinePreflight.DEFAULT_FIXTURE;
+    String positionalRoot = null;
+    for (int i = 1; i < a.length; i++) {
+      String token = a[i];
+      if (token == null) throw new IllegalArgumentException("null argument at index " + i);
+      if ("--root".equals(token) || "--profile".equals(token) || "--fixture".equals(token)) {
+        if (++i >= a.length || a[i] == null || a[i].isBlank() || a[i].startsWith("--"))
+          throw new IllegalArgumentException(token + " requires a value");
+        if ("--root".equals(token)) root = Paths.get(a[i]);
+        else if ("--profile".equals(token)) profile = a[i];
+        else fixture = a[i];
+        continue;
+      }
+      if (token.startsWith("--root=")) {
+        String value = token.substring("--root=".length());
+        if (value.isBlank()) throw new IllegalArgumentException("--root requires a value");
+        root = Paths.get(value); continue;
+      }
+      if (token.startsWith("--profile=")) {
+        String value = token.substring("--profile=".length());
+        if (value.isBlank()) throw new IllegalArgumentException("--profile requires a value");
+        profile = value; continue;
+      }
+      if (token.startsWith("--fixture=")) {
+        String value = token.substring("--fixture=".length());
+        if (value.isBlank()) throw new IllegalArgumentException("--fixture requires a value");
+        fixture = value; continue;
+      }
+      if (token.startsWith("-")) throw new IllegalArgumentException("unknown option: " + token);
+      if (positionalRoot != null) throw new IllegalArgumentException("unexpected argument: " + token);
+      positionalRoot = token;
+    }
+    if (root == null && positionalRoot != null) root = Paths.get(positionalRoot);
+    OfflinePreflight.Report report = OfflinePreflight.run(
+        new OfflinePreflight.Request(root, profile, fixture));
+    out.println(report.toJson());
+    return switch (report.status()) {
+      case "GREEN" -> 0;
+      case "UNSUPPORTED" -> 4;
+      default -> 1;
+    };
   }
 
   private record BatchRequest(String id, String[] commandArgs) {
@@ -443,7 +498,7 @@ public final class KaishekCli {
   private static String sha(byte[] b){return hex(digest().digest(b));} private static String hex(byte[] b){StringBuilder s=new StringBuilder();for(byte x:b)s.append(String.format(Locale.ROOT,"%02x",x));return s.toString();}
   private static String q(String s){return "\""+s.replace("\\","\\\\").replace("\"","\\\"").replace("\r","\\r").replace("\n","\\n")+"\"";}
   private static String json(String... kv){StringBuilder b=new StringBuilder("{");for(int i=0;i<kv.length;i+=2){if(i>0)b.append(',');b.append(q(kv[i])).append(':').append(q(kv[i+1]));}return b.append('}').toString();}
-  private static void usage(PrintStream o){o.println("kaishek-cli "+VERSION+" (pure Java; Quarkus is not started)\nUsage: parse|validate|hash|corpus|profile [--file PATH|PATH] [corpus: --require-corpus]\n       synthetic-361|runtime-fixture\n       batch|replay [--file MANIFEST.jsonl] [--stop-on-error]\nBatch lines: {\"id\":\"case\",\"command\":\"parse\",\"text\":\"x = 1\\n\"}\nUnknown semantics return status UNSUPPORTED.");}
+  private static void usage(PrintStream o){o.println("kaishek-cli "+VERSION+" (pure Java; Quarkus is not started)\nUsage: parse|validate|hash|corpus|profile [--file PATH|PATH] [corpus: --require-corpus]\n       synthetic-361|runtime-fixture\n       preflight [--root PATH] [--profile ID] [--fixture ID]\n       batch|replay [--file MANIFEST.jsonl] [--stop-on-error]\nBatch lines: {\"id\":\"case\",\"command\":\"parse\",\"text\":\"x = 1\\n\"}\nPreflight is offline-only and never starts CK3; it returns one JSON report.\nUnknown semantics return status UNSUPPORTED.");}
 
   private static int countNodes(CstNode n){int c=1; for(CstNode x:n.children()) c+=countNodes(x); return c;}
   private static int countKind(CstNode n,SyntaxKind k){int c=n.kind()==k?1:0; for(CstNode x:n.children()) c+=countKind(x,k); return c;}
