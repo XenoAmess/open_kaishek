@@ -6,6 +6,7 @@ import com.xenoamess.kaishek.syntax.ParseResult;
 import com.xenoamess.kaishek.syntax.SyntaxKind;
 import com.xenoamess.kaishek.validator.Validator;
 import com.xenoamess.kaishek.profile.Ck3Profile11906;
+import com.xenoamess.kaishek.zg361.Synthetic361Pipeline;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
@@ -29,6 +30,8 @@ public final class KaishekCli {
         case "validate" -> validate(args, out);
         case "hash" -> hash(args, out);
         case "corpus" -> corpus(args, out);
+        case "batch", "replay" -> batch(args, out);
+        case "synthetic-361", "runtime-fixture" -> synthetic361(args, out);
         case "profile", "profiles" -> profile(args, out);
         default -> unsupported("command:" + command, out);
       };
@@ -110,6 +113,191 @@ public final class KaishekCli {
      for (int i=0; i<errorFiles.size(); i++) { if (i > 0) details.append(','); details.append(q(errorFiles.get(i))); }
      out.println("{\"status\":\"OK\",\"root\":"+q(root.toString())+",\"files\":"+files.size()+",\"parsed\":"+parsed+",\"errors\":"+errors+",\"errorFiles\":"+details.append(']').toString()+",\"bytes\":"+bytes+",\"corpusSha256\":"+q(hex(md.digest()))+"}"); return errors==0?0:1;
   }
+
+  /**
+   * Execute a deterministic JSONL manifest through the same public CLI
+   * commands.  This is intentionally a thin batch/replay layer: parsing,
+   * validation and runtime semantics remain owned by their existing modules.
+   * Each input line is an object with {@code id}, {@code command}, and either
+   * an {@code args} string array or one of {@code text}/{@code file} plus an
+   * optional {@code profile}.  One envelope is emitted per line so a failed
+   * case never hides later results.
+   */
+  private static int batch(String[] a, PrintStream out) throws IOException {
+    Path manifest = null;
+    boolean stopOnError = false;
+    for (int i = 1; i < a.length; i++) {
+      String token = a[i];
+      if ("--continue-on-error".equals(token)) { stopOnError = false; continue; }
+      if ("--stop-on-error".equals(token)) { stopOnError = true; continue; }
+      if ("--file".equals(token)) {
+        if (++i >= a.length || a[i].isBlank()) throw new IllegalArgumentException("--file requires a value");
+        manifest = Paths.get(a[i]); continue;
+      }
+      if (token.startsWith("--file=")) {
+        String value = token.substring("--file=".length());
+        if (value.isBlank()) throw new IllegalArgumentException("--file requires a value");
+        manifest = Paths.get(value); continue;
+      }
+      if (token.startsWith("-")) throw new IllegalArgumentException("unknown option: " + token);
+      if (manifest != null) throw new IllegalArgumentException("unexpected argument: " + token);
+      manifest = Paths.get(token);
+    }
+    List<String> lines = manifest == null
+        ? new String(System.in.readAllBytes(), StandardCharsets.UTF_8).lines().toList()
+        : Files.readAllLines(manifest, StandardCharsets.UTF_8);
+    int failures = 0;
+    int malformed = 0;
+    for (int index = 0; index < lines.size(); index++) {
+      String line = lines.get(index);
+      if (index == 0 && !line.isEmpty() && line.charAt(0) == '\ufeff') line = line.substring(1);
+      line = line.trim();
+      if (line.isEmpty() || line.startsWith("#")) continue;
+      BatchRequest request;
+      try {
+        request = BatchRequest.parse(line);
+      } catch (IllegalArgumentException e) {
+        malformed++;
+        out.println("{\"line\":" + (index + 1) + ",\"status\":\"ERROR\",\"error\":" + q(e.getMessage()) + "}");
+        if (stopOnError) break;
+        continue;
+      }
+      ByteArrayOutputStream captured = new ByteArrayOutputStream();
+      int exit = run(request.commandArgs(), new PrintStream(captured), System.err);
+      String result = captured.toString(StandardCharsets.UTF_8).trim();
+      out.println("{\"id\":" + q(request.id()) + ",\"line\":" + (index + 1)
+          + ",\"exitCode\":" + exit + ",\"result\":" + resultJson(result) + "}");
+      if (exit != 0) {
+        failures++;
+        if (stopOnError) break;
+      }
+    }
+    return malformed > 0 ? 2 : (failures > 0 ? 1 : 0);
+  }
+
+  /** Preserve the command's JSON object as a nested value in the envelope. */
+  private static String resultJson(String result) {
+    if (result != null && result.startsWith("{") && result.endsWith("}")) return result;
+    return q(result == null ? "" : result);
+  }
+
+  /** Run the checked-in 014 parser → IR → finite-runtime fixture offline. */
+  private static int synthetic361(String[] a, PrintStream out) throws IOException {
+    Synthetic361Pipeline.Result result;
+    if (a.length == 1) {
+      result = Synthetic361Pipeline.runGenerated();
+    } else {
+      Path source = pathOption(a, 1);
+      if (source == null || !Files.isRegularFile(source))
+        throw new IllegalArgumentException("synthetic-361 requires --file PATH");
+      result = Synthetic361Pipeline.run(Files.readAllBytes(source));
+    }
+    String status = result.execution().status().name();
+    StringBuilder values = new StringBuilder("[");
+    if (result.execution().value() != null) {
+      List<?> list = result.execution().value();
+      for (int i = 0; i < list.size(); i++) { if (i > 0) values.append(','); values.append(q(String.valueOf(list.get(i)))); }
+    }
+    values.append(']');
+    out.println("{\"status\":" + q(status) + ",\"fixture\":\"zg361-synthetic-014\",\"synthetic\":true"
+        + ",\"parsedDiagnostics\":" + result.parsed().diagnostics().size()
+        + ",\"validationDiagnostics\":" + result.validation().size()
+        + ",\"instructions\":" + result.program().instructions().size()
+        + ",\"execution\":" + q(status)
+        + ",\"values\":" + values
+        + ",\"traceEntries\":" + result.execution().trace().entries().size()
+        + (result.execution().reason().isBlank() ? "" : ",\"reason\":" + q(result.execution().reason())) + "}");
+    return result.execution().isSuccess() ? 0 : 1;
+  }
+
+  private record BatchRequest(String id, String[] commandArgs) {
+    static BatchRequest parse(String line) {
+      JsonObject object = JsonObject.parse(line);
+      String id = object.string("id", null);
+      if (id == null || id.isBlank()) throw new IllegalArgumentException("id is required");
+      String command = object.string("command", null);
+      if (command == null || command.isBlank()) throw new IllegalArgumentException("command is required");
+      if (command.equalsIgnoreCase("batch") || command.equalsIgnoreCase("replay"))
+        throw new IllegalArgumentException("nested batch/replay is not supported");
+      List<String> args = object.array("args");
+      boolean hasInput = object.has("text") || object.has("file") || object.has("profile");
+      if (!args.isEmpty() && hasInput) throw new IllegalArgumentException("args cannot be combined with text/file/profile");
+      if (args.isEmpty()) {
+        String file = object.string("file", null);
+        String text = object.string("text", null);
+        if (file != null) { args = new ArrayList<>(List.of("--file", file)); }
+        else if (text != null) { args = new ArrayList<>(List.of(text)); }
+        else args = new ArrayList<>();
+        String profile = object.string("profile", null);
+        if (profile != null) { args.add("--profile"); args.add(profile); }
+      }
+      List<String> full = new ArrayList<>(); full.add(command); full.addAll(args);
+      return new BatchRequest(id, full.toArray(String[]::new));
+    }
+  }
+
+  /** Minimal dependency-free JSON object reader for the flat JSONL contract. */
+  private static final class JsonObject {
+    private final Map<String, Object> values;
+    private JsonObject(Map<String, Object> values) { this.values = values; }
+    boolean has(String key) { return values.containsKey(key); }
+    String string(String key, String fallback) {
+      Object value = values.get(key);
+      if (value == null) return fallback;
+      if (!(value instanceof String s)) throw new IllegalArgumentException(key + " must be a string");
+      return s;
+    }
+    @SuppressWarnings("unchecked") List<String> array(String key) {
+      Object value = values.get(key);
+      if (value == null) return List.of();
+      if (!(value instanceof List<?> list) || list.stream().anyMatch(x -> !(x instanceof String)))
+        throw new IllegalArgumentException(key + " must be a string array");
+      return List.copyOf((List<String>) list);
+    }
+    static JsonObject parse(String source) {
+      if (source == null) throw new IllegalArgumentException("null JSON line");
+      Cursor c = new Cursor(source); c.ws(); c.expect('{');
+      Map<String, Object> map = new LinkedHashMap<>(); c.ws();
+      if (c.peek('}')) { c.next(); c.ws(); c.end(); return new JsonObject(map); }
+      while (true) {
+        c.ws(); String key = c.string(); c.ws(); c.expect(':'); c.ws();
+        if (map.put(key, c.value()) != null) throw new IllegalArgumentException("duplicate key: " + key);
+        c.ws(); if (c.peek('}')) { c.next(); break; } c.expect(',');
+      }
+      c.ws(); c.end(); return new JsonObject(map);
+    }
+    private static final class Cursor {
+      final String s; int i; Cursor(String s) { this.s = s; }
+      void ws() { while (i < s.length() && Character.isWhitespace(s.charAt(i))) i++; }
+      boolean peek(char x) { return i < s.length() && s.charAt(i) == x; }
+      char next() { if (i >= s.length()) throw new IllegalArgumentException("unexpected end of JSON"); return s.charAt(i++); }
+      void expect(char x) { if (next() != x) throw new IllegalArgumentException("expected '" + x + "'"); }
+      void end() { if (i != s.length()) throw new IllegalArgumentException("trailing JSON data"); }
+      String string() {
+        expect('"'); StringBuilder b = new StringBuilder();
+        while (i < s.length()) { char ch = next(); if (ch == '"') return b.toString();
+          if (ch != '\\') { if (ch < 0x20) throw new IllegalArgumentException("control character in string"); b.append(ch); continue; }
+          char esc = next(); switch (esc) {
+            case '"' -> b.append('"'); case '\\' -> b.append('\\'); case '/' -> b.append('/');
+            case 'b' -> b.append('\b'); case 'f' -> b.append('\f'); case 'n' -> b.append('\n');
+            case 'r' -> b.append('\r'); case 't' -> b.append('\t');
+            case 'u' -> { if (i + 4 > s.length()) throw new IllegalArgumentException("invalid unicode escape");
+              String hex = s.substring(i, i + 4); try { b.append((char) Integer.parseInt(hex, 16)); }
+              catch (NumberFormatException e) { throw new IllegalArgumentException("invalid unicode escape"); } i += 4; }
+            default -> throw new IllegalArgumentException("invalid escape: " + esc);
+          }
+        }
+        throw new IllegalArgumentException("unterminated string");
+      }
+      Object value() {
+        if (peek('"')) return string();
+        if (peek('[')) { next(); List<String> list = new ArrayList<>(); ws(); if (peek(']')) { next(); return list; }
+          while (true) { ws(); list.add(string()); ws(); if (peek(']')) { next(); return list; } expect(','); }
+        }
+        throw new IllegalArgumentException("value must be string or string array");
+      }
+    }
+  }
   private static int profile(String[] a, PrintStream out) {
     String positionalId = positional(a, 1);
     String id=option(a,"--id", positionalId == null ? "" : positionalId);
@@ -139,7 +327,10 @@ public final class KaishekCli {
     String p=option(a,"--file",null);
     if(p!=null)return Paths.get(p);
     String candidate=positional(a,start);
-    if(candidate!=null){Path x=Paths.get(candidate);if(Files.exists(x))return x;}
+    if(candidate!=null){
+      try { Path x=Paths.get(candidate); if(Files.exists(x))return x; }
+      catch (InvalidPathException ignored) { /* inline source text */ }
+    }
     return null;
   }
 
@@ -212,7 +403,7 @@ public final class KaishekCli {
   private static String sha(byte[] b){return hex(digest().digest(b));} private static String hex(byte[] b){StringBuilder s=new StringBuilder();for(byte x:b)s.append(String.format(Locale.ROOT,"%02x",x));return s.toString();}
   private static String q(String s){return "\""+s.replace("\\","\\\\").replace("\"","\\\"").replace("\r","\\r").replace("\n","\\n")+"\"";}
   private static String json(String... kv){StringBuilder b=new StringBuilder("{");for(int i=0;i<kv.length;i+=2){if(i>0)b.append(',');b.append(q(kv[i])).append(':').append(q(kv[i+1]));}return b.append('}').toString();}
-  private static void usage(PrintStream o){o.println("kaishek-cli "+VERSION+" (pure Java; Quarkus is not started)\nUsage: parse|validate|hash|corpus|profile [--file PATH|PATH]\nUnknown semantics return status UNSUPPORTED.");}
+  private static void usage(PrintStream o){o.println("kaishek-cli "+VERSION+" (pure Java; Quarkus is not started)\nUsage: parse|validate|hash|corpus|profile [--file PATH|PATH]\n       synthetic-361|runtime-fixture\n       batch|replay [--file MANIFEST.jsonl] [--stop-on-error]\nBatch lines: {\"id\":\"case\",\"command\":\"parse\",\"text\":\"x = 1\\n\"}\nUnknown semantics return status UNSUPPORTED.");}
 
   private static int countNodes(CstNode n){int c=1; for(CstNode x:n.children()) c+=countNodes(x); return c;}
   private static int countKind(CstNode n,SyntaxKind k){int c=n.kind()==k?1:0; for(CstNode x:n.children()) c+=countKind(x,k); return c;}
