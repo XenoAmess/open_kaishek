@@ -9,6 +9,14 @@ public final class Document implements CstNode {
     }
     @Override public SyntaxKind kind() { return SyntaxKind.DOCUMENT; }
     @Override public SourceSpan span() { return span; }
+    /** Keep raw/text access span-local; source() remains a defensive full copy. */
+    @Override public byte[] raw() {
+        return java.util.Arrays.copyOfRange(source, span.start(), span.end());
+    }
+    @Override public String text() {
+        return new String(source, span.start(), span.length(),
+                java.nio.charset.StandardCharsets.UTF_8);
+    }
     @Override public byte[] source() { return source.clone(); }
     @Override public List<CstNode> children() { return children; }
     public List<EntryNode> entries() { return children.stream().filter(EntryNode.class::isInstance).map(EntryNode.class::cast).toList(); }

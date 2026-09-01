@@ -29,6 +29,34 @@ public final class ParserSelfTest {
         ParseResult mixedNewlines = Parser.parse("a = 1\r\nb = 2\r\nc = 3\n".getBytes(StandardCharsets.UTF_8));
         check("\r\n".equals(mixedNewlines.newlineStyle()),
                 "newline style did not select the dominant sequence");
+
+        // Node raw/text access is span-local, while source() remains a
+        // defensive full-source snapshot.  Keep these assertions alongside
+        // the byte-preservation contract so a future optimization cannot
+        // accidentally expose mutable parser storage.
+        byte[] accessInput = "foo = { bar = \"值\" }\n".getBytes(StandardCharsets.UTF_8);
+        ParseResult accessResult = Parser.parse(accessInput);
+        CstNode accessDocument = accessResult.document();
+        check(Arrays.equals(accessInput, accessDocument.raw()), "document raw span changed bytes");
+        check(new String(accessInput, StandardCharsets.UTF_8).equals(accessDocument.text()),
+                "document text span changed text");
+        EntryNode accessEntry = accessResult.document().entries().get(0);
+        CstNode accessKey = accessEntry.key();
+        check("foo".equals(accessKey.text()), "node text did not decode its span");
+        check(Arrays.equals("foo".getBytes(StandardCharsets.UTF_8), accessKey.raw()),
+                "node raw did not select its span");
+        byte[] nodeRaw = accessKey.raw();
+        nodeRaw[0] ^= 0x55;
+        check("foo".equals(accessKey.text()), "mutating node raw changed CST storage");
+        byte[] nodeSource = accessKey.source();
+        check(Arrays.equals(accessInput, nodeSource), "node source is not the full source snapshot");
+        nodeSource[0] ^= 0x55;
+        check("foo".equals(accessKey.text()), "mutating node source changed CST storage");
+
+        Lexeme accessLexeme = Parser.lex(accessInput).stream()
+                .filter(item -> item.kind() == LexemeKind.BARE_VALUE)
+                .findFirst().orElseThrow();
+        check("foo".equals(accessLexeme.text()), "lexeme text did not decode its span");
         System.out.println("ParserSelfTest: OK");
     }
     private static void check(boolean ok, String message) { if (!ok) throw new AssertionError(message); }

@@ -5,8 +5,12 @@ public record Lexeme(LexemeKind kind, SourceSpan span, byte[] source, boolean ma
     public Lexeme { source = source.clone(); }
     /** Do not expose the mutable backing array retained by this record. */
     @Override public byte[] source() { return source.clone(); }
+    /** Copy/decode only this lexeme span; source() remains a defensive copy. */
     public byte[] raw() { return java.util.Arrays.copyOfRange(source, span.start(), span.end()); }
-    public String text() { return new String(raw(), java.nio.charset.StandardCharsets.UTF_8); }
+    public String text() {
+        return new String(source, span.start(), span.length(),
+                java.nio.charset.StandardCharsets.UTF_8);
+    }
 
     /**
      * Return the conservative Phase 1 role inferred from this lexical item.
