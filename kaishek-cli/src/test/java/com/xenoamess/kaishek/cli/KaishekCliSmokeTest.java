@@ -209,6 +209,25 @@ public final class KaishekCliSmokeTest {
           && calculatedValueJson.contains("\"runtime\":{\"status\":\"SKIPPED\""),
           calculatedValueJson);
 
+      // The war-days schema slice is a positive, static-only fixture.  Its
+      // parser/validator stages are GREEN while IR/runtime remain explicitly
+      // skipped because the native evaluator is not runtime-certified.
+      b.reset();
+      int warDaysPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "ck3-war-days-trigger-11906"},
+          new PrintStream(b), System.err);
+      String warDaysJson = b.toString(StandardCharsets.UTF_8);
+      check(warDaysPreflight == 0
+          && warDaysJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && warDaysJson.contains("\"status\":\"GREEN\"")
+          && warDaysJson.contains("\"fixture_id\":\"ck3-war-days-trigger-11906\"")
+          && warDaysJson.contains("\"fixture_scope\":\"schema-only\"")
+          && warDaysJson.contains("\"parser\":{\"status\":\"GREEN\"")
+          && warDaysJson.contains("\"validator\":{\"status\":\"GREEN\"")
+          && warDaysJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
+          && warDaysJson.contains("\"ck3_started\":\"false\""),
+          warDaysJson);
+
       // Unsupported profile selections still use the preflight schema so a
       // parent runner never has to special-case the generic CLI error shape.
       b.reset();

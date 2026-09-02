@@ -30,6 +30,10 @@ diagnostic code `CK3_TRIGGER_CALCULATED_VALUE_UNSUPPORTED`; this is expected
 evidence for the loader boundary, not a runtime or semantic certification.
 `--fixture none` is a diagnostic parser/validator-only run and intentionally
 leaves IR/runtime skipped.
+`--fixture ck3-war-days-trigger-11906` selects the CK3 1.19.0.6
+schema-only duration-trigger fixture. It exercises `war_days >= 365` and
+`war_days < 9125`; parser and validator are GREEN while IR/runtime remain
+explicitly SKIPPED because the native evaluator is not runtime-certified.
 
 The command writes exactly one JSON object to stdout. The stable top-level
 fields are:

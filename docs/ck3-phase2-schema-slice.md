@@ -273,3 +273,36 @@ root contains no occurrence, so this preparation increment does not claim a
 reduction of its existing bounded validator RED.  Focused profile and
 validator tests pin the shape and representative use.  No CK3 process, save,
 MCP call, or network was used.
+
+## Follow-up bounded increment: war-days duration predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The next narrow semantic slice is the stock `war_days` trigger used by CK3
+war AI and interaction gates.  Exact-build static evidence is pinned to the
+CK3 1.19.0.6 executable SHA-256
+`2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`:
+
+* the anchor ledger records the high-static-confidence evaluator at RVA
+  `0x2848230` (`ck3_1_19_0_6_anchors.json`, `war_days_trigger_evaluator`);
+* `CWar+0xE0` is the signed `start_date_raw` field, and the documented native
+  calculation is `(current CGameState date_raw - start_date_raw) / 24`;
+* vanilla `common/trigger_localization/00_war_triggers.txt` maps
+  `war_days` to `WAR_DAYS_TRIGGER` (file SHA-256
+  `A582506DA28E6917D0D00160A79C1ED6E1F46BEACAC90AD9CD877E1569FD76DD`), while
+  `common/character_interactions/00_war.txt` contains representative
+  `>=365`, `>=182`, and value-copy forms (file SHA-256
+  `5C99B8F14893929A9BC2DBB5B258CDD2D4233D5805091952209413DE876EE09F`);
+* the frozen installation has 28 `war_days` occurrences across 13 script
+  files.  These counts are provenance only and do not imply runtime
+  certification.
+
+The profile now registers the minimal scalar shape
+`TRIGGER`/`WAR`/`INTEGER`, zero named parameters, deterministic and read-only,
+with `certified=false`.  `Ck3WarDaysFixture` renders a UTF-8-BOM source slice
+with both range operators (`war_days >= 365` and `war_days < 9125`).  The
+offline preflight accepts fixture ID `ck3-war-days-trigger-11906`; parser and
+validator are expected GREEN while IR/runtime are explicitly SKIPPED.  This
+is a schema/shape increment only: no native reader, date resolver, action,
+or `certifiedSemantics` entry was added, and no CK3 process, save mutation,
+MCP call, or network access is involved.

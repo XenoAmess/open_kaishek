@@ -1,0 +1,7 @@
+# CK3 1.19.0.6 schema-only war-days trigger fixture
+war_days_fixture = {
+    limit = {
+        war_days >= 365
+        war_days < 9125
+    }
+}
