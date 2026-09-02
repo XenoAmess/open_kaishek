@@ -118,6 +118,20 @@ class ValidatorTest {
                 diagnostics::toString);
     }
 
+    @Test void observedHasDynastyPerkScalarTriggerIsSchemaKnown() {
+        String source = "fixture = {\n"
+                + "  limit = { has_dynasty_perk = warfare_legacy_3 }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_triggers/zg361_phase2.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("has_dynasty_perk")),
+                diagnostics::toString);
+    }
+
     @Test void effectConditionContainerAllowsRegisteredTriggersOnlyThere() {
         String source = "fixture = {\n"
                 + "  limit = { is_ai = no has_variable = zg361_case_state }\n"

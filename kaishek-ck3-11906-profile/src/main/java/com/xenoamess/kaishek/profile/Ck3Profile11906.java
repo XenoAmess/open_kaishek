@@ -65,6 +65,13 @@ public final class Ck3Profile11906 implements KaishekProfile {
             // certify execution semantics.
             descriptor("has_perk", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.CHARACTER,
                     List.of(), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 evidence identifies this as scalar
+            // dynasty-perk membership by stable perk key.  The profile does
+            // not yet expose a dedicated DYNASTY scope, so THIS preserves the
+            // native current-scope requirement without inventing a scope
+            // transition or runtime certification.
+            descriptor("has_dynasty_perk", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.THIS,
+                    List.of(), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_trait", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
                     List.of("trait"), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_title", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
@@ -215,6 +222,7 @@ public final class Ck3Profile11906 implements KaishekProfile {
         add(m, "government_has_flag", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_character_modifier", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_perk", OpcodeSpec.Kind.TRIGGER);
+        add(m, "has_dynasty_perk", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_trait", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_title", OpcodeSpec.Kind.TRIGGER);
         add(m, "is_alive", OpcodeSpec.Kind.TRIGGER);

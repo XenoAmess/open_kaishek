@@ -180,3 +180,42 @@ Offline verification used the same 1.19.0.6 profile and synthetic fixture:
   expected for the unchanged phase-two root.
 
 No CK3 process, save mutation, MCP call, or network access was used.
+
+## Follow-up bounded increment: dynasty perk membership predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The exact-build CK3 1.19.0.6 ledger contains the static-confirmed scalar form
+`dynasty ?= { has_dynasty_perk = warfare_legacy_3 }`.  Its native chain
+resolves Character -> House -> Dynasty with full-generation identity checks,
+resolves the stable perk key from the loaded DynastyPerk database, and tests
+pointer membership in the dynasty's owned-perk span.  The parent evidence is
+`docs/ck3-native-ai/combat-phase-events.md:804-850`; the frozen executable
+SHA-256 is
+`2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`.
+
+This increment registers only `has_dynasty_perk = <stable-key>` as a scalar,
+deterministic, read-only `TRIGGER` with `STRING` input and
+`certified=false`.  The current profile does not expose a dedicated
+`DYNASTY` scope type, so the descriptor uses `THIS` to preserve the native
+current-scope requirement without inventing a scope-transition contract.  It
+does not add a runtime evaluator, a `certifiedSemantics` entry, or a claim that
+the enclosing `dynasty` relation is executable offline.
+
+### Bounded measurement
+
+The frozen phase-two root contains zero `has_dynasty_perk` occurrences, so
+this G2/combat-schema preparation does not claim to reduce the loader RED.
+The exact-build stock accolade-type file contains 22 scalar occurrences,
+including `warfare_legacy_3`, which confirms the observed syntax remains in
+the frozen data rather than only in the research prose.
+
+Focused Maven verification passed 11 profile tests and 21 validator tests.
+The offline package produced a 316,162-byte CLI JAR with SHA-256
+`D4BA0FF5E6A9C85ED0853FD78D44940E98445F2867E9D6CA5902AF0E19B29476`.
+Direct CLI preflight against the frozen phase-two root kept parser GREEN
+(`75` files, `23,831,185` bytes, zero diagnostics; corpus SHA-256
+`540333b6d145626805da964ac5fbfbff65afcec547bf7a84b76ec265fa8b2b82`)
+and retained the expected bounded validator RED (`233,014` diagnostics).
+The synthetic fixture IR/runtime stages stayed GREEN.  No CK3 process, save
+mutation, MCP call, or network access was used.
