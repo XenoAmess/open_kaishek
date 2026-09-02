@@ -443,6 +443,30 @@ public final class OfflinePreflight {
             return new FixtureResult(parserStage, validatorStage, skipped, skipped,
                     "schema-only");
         }
+        if (id.equals(Ck3IsAcclaimedFixture.FIXTURE_ID)
+                || id.equals("ck3-is-acclaimed")) {
+            byte[] source = Ck3IsAcclaimedFixture.render();
+            ParseResult parsed = Parser.parse(source);
+            Ck3Profile11906 profile = new Ck3Profile11906();
+            List<Diagnostic> validation = Validator.validate(
+                    parsed, Ck3IsAcclaimedFixture.SOURCE_PATH, profile);
+            int parserDiagnostics = parsed.diagnostics().size();
+            int validationDiagnostics = validation.size();
+            String hash = hex(sha256().digest(source));
+            Stage parserStage = stage(parserDiagnostics == 0 ? "GREEN" : "RED",
+                    1, source.length, parserDiagnostics,
+                    parserDiagnostics == 0 ? "schema-only-fixture" : "parser-diagnostics",
+                    hash, diagnosticSamples(Ck3IsAcclaimedFixture.SOURCE_PATH,
+                            parsed.diagnostics()));
+            Stage validatorStage = stage(validationDiagnostics == 0 ? "GREEN" : "RED",
+                    1, source.length, validationDiagnostics,
+                    validationDiagnostics == 0 ? "schema-only-fixture" : "schema-diagnostics",
+                    hash, diagnosticSamples(Ck3IsAcclaimedFixture.SOURCE_PATH, validation));
+            Stage skipped = stage("SKIPPED", 0, 0, 0,
+                    "schema-only-fixture-no-runtime", "", List.of());
+            return new FixtureResult(parserStage, validatorStage, skipped, skipped,
+                    "schema-only");
+        }
         if (id.equals(Appeal014DifferentialFixture.FIXTURE_ID) || id.equals("appeal-014")) {
             List<String> mismatches = new ArrayList<>();
             for (Appeal014DifferentialFixture.CaseFixture fixture :
