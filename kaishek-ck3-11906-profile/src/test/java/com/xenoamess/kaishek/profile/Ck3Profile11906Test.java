@@ -37,6 +37,7 @@ class Ck3Profile11906Test {
         assertTrue(profile.opcode("war_days") != null);
         assertTrue(profile.opcode("has_innovation") != null);
         assertTrue(profile.opcode("has_cultural_tradition") != null);
+        assertTrue(profile.opcode("has_cultural_pillar") != null);
         assertTrue(profile.opcodeRegistry().contains("set_variable"));
         assertEquals(Ck3Profile11906.GAME_VERSION,
                 profile.opcodeRegistry().require("set_variable").profileVersion());
@@ -173,6 +174,18 @@ class Ck3Profile11906Test {
     @Test
     void hasCulturalTraditionIsPinnedAsScalarCultureMembershipTriggerShape() {
         OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_cultural_tradition");
+        assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
+        assertEquals(InputType.STRING, descriptor.inputType());
+        assertEquals(ScopeType.CULTURE, descriptor.requiredScope());
+        assertTrue(descriptor.parameterNames().isEmpty());
+        assertEquals(0, descriptor.minParameters());
+        assertEquals(0, descriptor.maxParameters());
+        assertFalse(descriptor.certified(), "static evidence must not claim runtime certification");
+    }
+
+    @Test
+    void hasCulturalPillarIsPinnedAsScalarCultureMembershipTriggerShape() {
+        OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_cultural_pillar");
         assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
         assertEquals(InputType.STRING, descriptor.inputType());
         assertEquals(ScopeType.CULTURE, descriptor.requiredScope());

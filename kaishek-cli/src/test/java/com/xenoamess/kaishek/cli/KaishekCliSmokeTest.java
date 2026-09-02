@@ -246,6 +246,24 @@ public final class KaishekCliSmokeTest {
           && hasInnovationJson.contains("\"ck3_started\":\"false\""),
           hasInnovationJson);
 
+      // The cultural-pillar schema slice is static-only as well: parser and
+      // validator are GREEN while IR/runtime remain explicitly skipped.
+      b.reset();
+      int culturalPillarPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "ck3-has-cultural-pillar-trigger-11906"},
+          new PrintStream(b), System.err);
+      String culturalPillarJson = b.toString(StandardCharsets.UTF_8);
+      check(culturalPillarPreflight == 0
+          && culturalPillarJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && culturalPillarJson.contains("\"status\":\"GREEN\"")
+          && culturalPillarJson.contains("\"fixture_id\":\"ck3-has-cultural-pillar-trigger-11906\"")
+          && culturalPillarJson.contains("\"fixture_scope\":\"schema-only\"")
+          && culturalPillarJson.contains("\"parser\":{\"status\":\"GREEN\"")
+          && culturalPillarJson.contains("\"validator\":{\"status\":\"GREEN\"")
+          && culturalPillarJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
+          && culturalPillarJson.contains("\"ck3_started\":\"false\""),
+          culturalPillarJson);
+
       // The cultural-tradition schema slice is likewise static-only:
       // parser/validator are GREEN while IR/runtime remain explicitly skipped.
       b.reset();

@@ -45,6 +45,11 @@ scalar `has_cultural_tradition` keys for `tradition_fp1_coastal_warriors` and
 `tradition_ep3_imperial_tagmata`; parser and validator are GREEN while
 IR/runtime remain explicitly SKIPPED because the native evaluator is not
 runtime-certified.
+`--fixture ck3-has-cultural-pillar-trigger-11906` selects the CK3 1.19.0.6
+schema-only Culture selected-pillar-membership fixture. It exercises scalar
+`has_cultural_pillar` keys for `heritage_north_germanic` and `ethos_bellicose`;
+parser and validator are GREEN while IR/runtime remain explicitly SKIPPED
+because the native evaluator is not runtime-certified.
 
 The command writes exactly one JSON object to stdout. The stable top-level
 fields are:

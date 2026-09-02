@@ -378,3 +378,42 @@ are expected GREEN while IR/runtime remain explicitly SKIPPED.  No tradition
 database reader, hash resolver, runtime evaluator, or `certifiedSemantics`
 entry was added.  This is a schema/profile/validator fixture increment only;
 no CK3 process, save mutation, MCP call, or network access is involved.
+
+## Follow-up bounded increment: selected cultural-pillar predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The next exact-build slice records the stock `has_cultural_pillar` trigger
+used by CK3 accolade and combat culture gates.  Focused static evidence was
+re-read from the frozen CK3 1.19.0.6 installation and the native-AI ledger at
+`docs/ck3-native-ai/combat-phase-events.md:964-1030`:
+
+* the compiled Culture-scope evaluator starts at RVA `0x282D900` and returns
+  at `0x282D97B`; the 124-byte function slice has SHA-256
+  `7B8B0972F9A0324E408E4B9DE88C209BF9CE52409091BA934303BF8596D28054`;
+* the evaluator resolves a `CCulturePillar*` target, reads its category at
+  `+0x1610`, and selects the corresponding pointer from the Culture's
+  `+0x190` data span; the signed count is at `+0x19C` and this build requires
+  five selected categories (`0..4`);
+* each `CCulturePillar` stable-key `std::string` is at `+0x18`.  The native
+  mirror compares the selected pointer/key, not merely any loaded pillar;
+  the source definition in `common/culture/_cultural_traits.info` confirms
+  the scalar form `has_cultural_pillar = key`;
+* the frozen installation has 3,779 scalar `has_cultural_pillar`
+  occurrences across 314 script files and 159 distinct keys (excluding the
+  trigger-localization declaration and metadata row).  Representative stock
+  source `common/accolade_types/04_ep2_maa_attributes.txt` contains 83
+  occurrences and has SHA-256
+  `9E5A6E42D45AA0568B08A86FB786F65B27C7EE93881E5A5C5E075A15592CFF91`.
+
+The profile registers only the minimal scalar shape
+`TRIGGER`/`CULTURE`/`STRING`, zero named parameters, deterministic and
+read-only, with `certified=false`.  `Ck3HasCulturalPillarFixture` renders two
+representative keys (`heritage_north_germanic` and `ethos_bellicose`) and
+records the selected-span offsets and category count.  The offline preflight
+accepts fixture ID `ck3-has-cultural-pillar-trigger-11906`; parser and
+validator are expected GREEN while IR/runtime remain explicitly SKIPPED.
+The earlier live attempt that treated `+0x190` as inline pointers is retained
+as a runtime boundary in the parent ledger; this slice adds no native reader,
+category resolver, runtime evaluator, or `certifiedSemantics` entry.  No CK3
+process, save mutation, MCP call, or network access is involved.
