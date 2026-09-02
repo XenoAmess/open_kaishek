@@ -219,3 +219,29 @@ Direct CLI preflight against the frozen phase-two root kept parser GREEN
 and retained the expected bounded validator RED (`233,014` diagnostics).
 The synthetic fixture IR/runtime stages stayed GREEN.  No CK3 process, save
 mutation, MCP call, or network access was used.
+
+## Follow-up bounded increment: effective DLC feature membership predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The exact-build CK3 1.19.0.6 ledger describes
+`has_dlc_feature = <feature-key>` as a scalar trigger over the current
+process's effective gameplay feature bitset.  The static chain is the
+`CHasDLCFeatureTrigger` registration and leaf (`0x289B350` parser,
+`0x289B430` evaluator) reading the 44-entry bitset rooted at
+`module+0x576CC68`; the parent evidence is
+`docs/ck3-native-ai/loaded-feature-manifest.md:8-16,56-84` and the frozen
+executable SHA-256 is
+`2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`.
+
+This increment registers only the observed scalar profile shape:
+`TRIGGER`/`THIS`/`STRING`, zero named parameters, deterministic and read-only,
+with `certified=false`.  It deliberately adds no runtime evaluator,
+feature-manager query, or `certifiedSemantics` entry: static exact-build
+evidence is not runtime certification, and installed DLC metadata is not a
+substitute for the current process bitset.
+
+The focused profile and validator tests cover the scalar form and a
+representative `royal_court` key.  Offline package/preflight verification is
+required before merge; no CK3 process, save mutation, MCP call, or network is
+used for this schema-only slice.

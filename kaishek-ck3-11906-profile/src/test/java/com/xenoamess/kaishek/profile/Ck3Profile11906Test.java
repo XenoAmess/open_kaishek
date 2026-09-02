@@ -28,6 +28,7 @@ class Ck3Profile11906Test {
         assertTrue(profile.opcode("set_variable") != null);
         assertTrue(profile.opcode("has_variable") != null);
         assertTrue(profile.opcode("has_game_rule") != null);
+        assertTrue(profile.opcode("has_dlc_feature") != null);
         assertTrue(profile.opcode("government_has_flag") != null);
         assertTrue(profile.opcode("has_character_modifier") != null);
         assertTrue(profile.opcode("has_perk") != null);
@@ -57,6 +58,18 @@ class Ck3Profile11906Test {
     @Test
     void hasGameRuleIsPinnedAsScalarSettingTriggerShape() {
         OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_game_rule");
+        assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
+        assertEquals(InputType.STRING, descriptor.inputType());
+        assertEquals(ScopeType.THIS, descriptor.requiredScope());
+        assertTrue(descriptor.parameterNames().isEmpty());
+        assertEquals(0, descriptor.minParameters());
+        assertEquals(0, descriptor.maxParameters());
+        assertFalse(descriptor.certified(), "static evidence must not claim runtime certification");
+    }
+
+    @Test
+    void hasDlcFeatureIsPinnedAsScalarFeatureTriggerShape() {
+        OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_dlc_feature");
         assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
         assertEquals(InputType.STRING, descriptor.inputType());
         assertEquals(ScopeType.THIS, descriptor.requiredScope());

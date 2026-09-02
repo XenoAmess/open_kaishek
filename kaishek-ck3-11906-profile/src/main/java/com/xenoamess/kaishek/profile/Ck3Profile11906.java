@@ -48,6 +48,13 @@ public final class Ck3Profile11906 implements KaishekProfile {
             descriptor("has_game_rule", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.THIS,
                     List.of(), RandomnessClass.DETERMINISTIC, false, true),
             // Exact-build 1.19.0.6 evidence identifies this as a scalar
+            // effective-feature membership trigger.  The key is resolved
+            // against the current process feature bitset; keep this
+            // syntax/profile-only until a differential runtime artifact is
+            // available.
+            descriptor("has_dlc_feature", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.THIS,
+                    List.of(), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 evidence identifies this as a scalar
             // government-flag membership trigger on the current character's
             // government.  Keep it syntax/profile-only; no runtime
             // certification is implied by recognizing the shape.
@@ -219,6 +226,7 @@ public final class Ck3Profile11906 implements KaishekProfile {
         add(m, "has_character_flag", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_variable", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_game_rule", OpcodeSpec.Kind.TRIGGER);
+        add(m, "has_dlc_feature", OpcodeSpec.Kind.TRIGGER);
         add(m, "government_has_flag", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_character_modifier", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_perk", OpcodeSpec.Kind.TRIGGER);
