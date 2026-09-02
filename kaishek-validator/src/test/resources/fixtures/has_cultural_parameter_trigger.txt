@@ -1,0 +1,7 @@
+# CK3 1.19.0.6 schema-only cultural-parameter trigger fixture
+has_cultural_parameter_fixture = {
+    limit = {
+        has_cultural_parameter = knights_slightly_more_prone_to_injury
+        has_cultural_parameter = unlock_zhanmadao
+    }
+}

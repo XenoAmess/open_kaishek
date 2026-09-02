@@ -344,6 +344,43 @@ hash resolver, runtime evaluator, or `certifiedSemantics` entry was added.
 This is a schema/profile/validator fixture increment only; no CK3 process, save
 mutation, MCP call, or network access is involved.
 
+## Follow-up bounded increment: Culture parameter predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The next exact-build slice records the stock `has_cultural_parameter`
+trigger used by the combat phase culture gates.  The frozen CK3 1.19.0.6
+native-AI ledger at `docs/ck3-native-ai/combat-phase-events.md:961-1039`
+provides the following closed static contract:
+
+* the compiled Culture-scope evaluator is at RVA `0x282DBD0`;
+* the read-only culture helper is
+  `bool 0x22C5800(const CCulture*, int32 parameter_identifier_id)`;
+* the identifier must use lookup-only `0x3B588E0`, reject missing sentinel
+  `12`, and pass exact name round-trip through `0x3B58970` before the helper
+  is called; no interning path is involved;
+* the representative manifest key is
+  `knights_slightly_more_prone_to_injury`; the same closed reader is also
+  used for the documented unlock keys (`unlock_zhanmadao`,
+  `unlock_burenjia`, `unlock_maa_cataphract_archers`,
+  `unlock_maa_black_armor_cavalry`, `unlock_maa_horse_archers`,
+  `unlock_maa_mangudai`, `unlock_emishi_horse_archers_units`, and
+  `unlock_mounted_samurai_units`).
+
+The ledger does not publish a byte-slice length/hash for this evaluator, so
+the fixture pins the RVAs and identifier sentinel above without inventing a
+function-byte digest.  The profile registers only the minimal scalar shape
+`TRIGGER`/`CULTURE`/`STRING`, zero named parameters, deterministic and
+read-only, with `certified=false`.  `Ck3HasCulturalParameterFixture` renders
+two representative keys (`knights_slightly_more_prone_to_injury` and
+`unlock_zhanmadao`) with a UTF-8 BOM and records the complete key set above.
+The offline preflight accepts fixture ID
+`ck3-has-cultural-parameter-trigger-11906`; parser and validator are GREEN
+while IR/runtime remain explicitly SKIPPED.  No identifier reader, native
+evaluator, runtime bridge, or `certifiedSemantics` entry was added.  This is a
+schema/profile/validator fixture increment only; no CK3 process, save
+mutation, MCP call, or network access is involved.
+
 ## Follow-up bounded increment: Culture cultural-tradition predicate
 
 Date: 2026-09-02 (Asia/Shanghai)

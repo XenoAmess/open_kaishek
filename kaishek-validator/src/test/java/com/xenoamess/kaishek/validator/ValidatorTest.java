@@ -224,6 +224,22 @@ class ValidatorTest {
                 diagnostics::toString);
     }
 
+    @Test void observedHasCulturalParameterScalarTriggerIsSchemaKnown() throws Exception {
+        Path fixture = Path.of("src/test/resources/fixtures/has_cultural_parameter_trigger.txt");
+        var parsed = Parser.parse(Files.readString(fixture));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_triggers/has_cultural_parameter_trigger.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("has_cultural_parameter")),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals("WRONG_DOMAIN")
+                                && d.message().contains("has_cultural_parameter")),
+                diagnostics::toString);
+    }
+
     @Test void effectConditionContainerAllowsRegisteredTriggersOnlyThere() {
         String source = "fixture = {\n"
                 + "  limit = { is_ai = no has_variable = zg361_case_state }\n"

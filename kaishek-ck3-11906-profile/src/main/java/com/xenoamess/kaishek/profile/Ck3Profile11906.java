@@ -110,6 +110,12 @@ public final class Ck3Profile11906 implements KaishekProfile {
             // does not certify native category resolution or runtime semantics.
             descriptor("has_cultural_pillar", OpcodeKind.TRIGGER, InputType.STRING,
                     ScopeType.CULTURE, List.of(), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 evidence identifies this as a scalar
+            // culture-parameter identifier trigger. Keep the descriptor
+            // syntax/profile-only; recognizing the shape does not certify
+            // identifier lookup or native helper execution.
+            descriptor("has_cultural_parameter", OpcodeKind.TRIGGER, InputType.STRING,
+                    ScopeType.CULTURE, List.of(), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_trait", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
                     List.of("trait"), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_title", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
@@ -267,6 +273,7 @@ public final class Ck3Profile11906 implements KaishekProfile {
         add(m, "has_innovation", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_cultural_tradition", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_cultural_pillar", OpcodeSpec.Kind.TRIGGER);
+        add(m, "has_cultural_parameter", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_trait", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_title", OpcodeSpec.Kind.TRIGGER);
         add(m, "is_alive", OpcodeSpec.Kind.TRIGGER);

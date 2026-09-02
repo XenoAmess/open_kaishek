@@ -50,6 +50,12 @@ schema-only Culture selected-pillar-membership fixture. It exercises scalar
 `has_cultural_pillar` keys for `heritage_north_germanic` and `ethos_bellicose`;
 parser and validator are GREEN while IR/runtime remain explicitly SKIPPED
 because the native evaluator is not runtime-certified.
+`--fixture ck3-has-cultural-parameter-trigger-11906` selects the CK3
+1.19.0.6 schema-only Culture parameter fixture. It exercises scalar
+`has_cultural_parameter` keys for
+`knights_slightly_more_prone_to_injury` and `unlock_zhanmadao`; parser and
+validator are GREEN while IR/runtime remain explicitly SKIPPED because the
+native evaluator is not runtime-certified.
 
 The command writes exactly one JSON object to stdout. The stable top-level
 fields are:

@@ -283,6 +283,25 @@ public final class KaishekCliSmokeTest {
           && hasCulturalTraditionJson.contains("\"ck3_started\":\"false\""),
           hasCulturalTraditionJson);
 
+      // The cultural-parameter schema slice is static-only as well: parser
+      // and validator are GREEN while IR/runtime remain explicitly skipped.
+      b.reset();
+      int hasCulturalParameterPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "ck3-has-cultural-parameter-trigger-11906"},
+          new PrintStream(b), System.err);
+      String hasCulturalParameterJson = b.toString(StandardCharsets.UTF_8);
+      check(hasCulturalParameterPreflight == 0
+          && hasCulturalParameterJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && hasCulturalParameterJson.contains("\"status\":\"GREEN\"")
+          && hasCulturalParameterJson.contains(
+              "\"fixture_id\":\"ck3-has-cultural-parameter-trigger-11906\"")
+          && hasCulturalParameterJson.contains("\"fixture_scope\":\"schema-only\"")
+          && hasCulturalParameterJson.contains("\"parser\":{\"status\":\"GREEN\"")
+          && hasCulturalParameterJson.contains("\"validator\":{\"status\":\"GREEN\"")
+          && hasCulturalParameterJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
+          && hasCulturalParameterJson.contains("\"ck3_started\":\"false\""),
+          hasCulturalParameterJson);
+
       // Unsupported profile selections still use the preflight schema so a
       // parent runner never has to special-case the generic CLI error shape.
       b.reset();
