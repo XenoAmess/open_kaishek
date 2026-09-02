@@ -240,6 +240,22 @@ class ValidatorTest {
                 diagnostics::toString);
     }
 
+    @Test void observedIsAcclaimedBooleanTriggerIsSchemaKnown() throws Exception {
+        Path fixture = Path.of("src/test/resources/fixtures/is_acclaimed_trigger.txt");
+        var parsed = Parser.parse(Files.readString(fixture));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_triggers/is_acclaimed_trigger.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("is_acclaimed")),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.code().equals("WRONG_DOMAIN")
+                                && d.message().contains("is_acclaimed")),
+                diagnostics::toString);
+    }
+
     @Test void effectConditionContainerAllowsRegisteredTriggersOnlyThere() {
         String source = "fixture = {\n"
                 + "  limit = { is_ai = no has_variable = zg361_case_state }\n"

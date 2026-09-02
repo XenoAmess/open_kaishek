@@ -454,3 +454,42 @@ The earlier live attempt that treated `+0x190` as inline pointers is retained
 as a runtime boundary in the parent ledger; this slice adds no native reader,
 category resolver, runtime evaluator, or `certifiedSemantics` entry.  No CK3
 process, save mutation, MCP call, or network access is involved.
+
+## Follow-up bounded increment: Character acclaimed predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The next exact-build slice records the stock `is_acclaimed` boolean trigger
+used by CK3 accolade and combat character gates.  The frozen CK3 1.19.0.6
+native-AI ledger at `docs/ck3-native-ai/combat-phase-events.md:1351-1455`
+closes the static reader chain:
+
+* the trigger literal is at RVA `0x434FAB8`; registration covers
+  `0x52C0E0..0x52C169`, with factory vtable `0x43506D0`, creator
+  `0x281A610`, compiled vtable `0x4350BE0`, and actual-state leaf
+  `0x28190C0`;
+* the Character reader resolves the full CharacterID, follows the optional
+  link at `CCharacter+0x1A8`, reads the full CAccoladeID at link `+0x568`,
+  then resolves the CAccolade identity at `+0x08` through the exact stores
+  (`module+0x570C130` / fallback `+0x570C138` and
+  `module+0x57BF1E0` / fallback `+0x57BF198`); the normal CAccolade vtable is
+  `0x4314698` and its `+0x08` call target is `0x10495A0`;
+* a null link or ID `-1` is a legitimate false result.  Non-sentinel stale or
+  unresolved identities remain native-runtime availability boundaries and are
+  not modeled by this schema fixture.  Vanilla source uses the scalar forms
+  `is_acclaimed = yes` and `is_acclaimed = no`; the frozen source scan found
+  163 occurrences across 44 files (representative
+  `game/common/scripted_triggers/04_ep2_accolade_triggers.txt`, SHA-256
+  `0C91C57E6A296257D20E7A8E835FDF4471C6BBA2848F481233D4DA5435D62B3C`).
+
+The profile registers only `TRIGGER`/`CHARACTER`/`BOOLEAN`, zero named
+parameters, deterministic and read-only, with `certified=false`.  The
+descriptor intentionally does not add an `ACCOLADE` scope: the native chain
+is a Character reader whose accolade link is an implementation detail.
+`Ck3IsAcclaimedFixture` renders both boolean spellings with a UTF-8 BOM and
+records the static RVA/offset provenance.  The offline preflight accepts
+fixture ID `ck3-is-acclaimed-trigger-11906`; parser and validator are GREEN
+while IR/runtime remain explicitly SKIPPED.  No native evaluator, store
+resolver, runtime bridge, or `certifiedSemantics` entry was added.  This is a
+schema/profile/validator fixture increment only; no CK3 process, save
+mutation, MCP call, or network access is involved.

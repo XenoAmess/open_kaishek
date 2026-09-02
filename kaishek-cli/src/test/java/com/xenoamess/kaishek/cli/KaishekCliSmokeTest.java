@@ -302,6 +302,26 @@ public final class KaishekCliSmokeTest {
           && hasCulturalParameterJson.contains("\"ck3_started\":\"false\""),
           hasCulturalParameterJson);
 
+      // The is-acclaimed schema slice is Character-scoped and static-only:
+      // parser/validator are GREEN while IR/runtime remain explicitly
+      // skipped because the native CAccolade reader is not runtime-certified.
+      b.reset();
+      int isAcclaimedPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "ck3-is-acclaimed-trigger-11906"},
+          new PrintStream(b), System.err);
+      String isAcclaimedJson = b.toString(StandardCharsets.UTF_8);
+      check(isAcclaimedPreflight == 0
+          && isAcclaimedJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && isAcclaimedJson.contains("\"status\":\"GREEN\"")
+          && isAcclaimedJson.contains(
+              "\"fixture_id\":\"ck3-is-acclaimed-trigger-11906\"")
+          && isAcclaimedJson.contains("\"fixture_scope\":\"schema-only\"")
+          && isAcclaimedJson.contains("\"parser\":{\"status\":\"GREEN\"")
+          && isAcclaimedJson.contains("\"validator\":{\"status\":\"GREEN\"")
+          && isAcclaimedJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
+          && isAcclaimedJson.contains("\"ck3_started\":\"false\""),
+          isAcclaimedJson);
+
       // Unsupported profile selections still use the preflight schema so a
       // parent runner never has to special-case the generic CLI error shape.
       b.reset();

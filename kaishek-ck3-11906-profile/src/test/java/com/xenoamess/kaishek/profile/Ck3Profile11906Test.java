@@ -31,6 +31,7 @@ class Ck3Profile11906Test {
         assertTrue(profile.opcode("has_dlc_feature") != null);
         assertTrue(profile.opcode("government_has_flag") != null);
         assertTrue(profile.opcode("has_character_modifier") != null);
+        assertTrue(profile.opcode("is_acclaimed") != null);
         assertTrue(profile.opcode("has_perk") != null);
         assertTrue(profile.opcode("has_dynasty_perk") != null);
         assertTrue(profile.opcode("has_court_position") != null);
@@ -102,6 +103,18 @@ class Ck3Profile11906Test {
         OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_character_modifier");
         assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
         assertEquals(InputType.STRING, descriptor.inputType());
+        assertEquals(ScopeType.CHARACTER, descriptor.requiredScope());
+        assertTrue(descriptor.parameterNames().isEmpty());
+        assertEquals(0, descriptor.minParameters());
+        assertEquals(0, descriptor.maxParameters());
+        assertFalse(descriptor.certified(), "static evidence must not claim runtime certification");
+    }
+
+    @Test
+    void isAcclaimedIsPinnedAsCharacterBooleanTriggerShape() {
+        OpcodeDescriptor descriptor = profile.opcodeRegistry().require("is_acclaimed");
+        assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
+        assertEquals(InputType.BOOLEAN, descriptor.inputType());
         assertEquals(ScopeType.CHARACTER, descriptor.requiredScope());
         assertTrue(descriptor.parameterNames().isEmpty());
         assertEquals(0, descriptor.minParameters());

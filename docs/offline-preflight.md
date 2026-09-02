@@ -56,6 +56,12 @@ because the native evaluator is not runtime-certified.
 `knights_slightly_more_prone_to_injury` and `unlock_zhanmadao`; parser and
 validator are GREEN while IR/runtime remain explicitly SKIPPED because the
 native evaluator is not runtime-certified.
+`--fixture ck3-is-acclaimed-trigger-11906` selects the CK3 1.19.0.6
+schema-only Character acclaimed predicate fixture. It exercises both scalar
+boolean forms `is_acclaimed = yes` and `is_acclaimed = no`; parser and
+validator are GREEN while IR/runtime remain explicitly SKIPPED because the
+native Character-to-CAccolade reader is not runtime-certified. The fixture
+does not introduce an ACCOLADE scope.
 
 The command writes exactly one JSON object to stdout. The stable top-level
 fields are:
