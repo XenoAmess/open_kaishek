@@ -39,6 +39,12 @@ schema-only Culture innovation-membership fixture. It exercises scalar
 `has_innovation` keys for `innovation_quilted_armor` and
 `innovation_war_camels`; parser and validator are GREEN while IR/runtime
 remain explicitly SKIPPED because the native evaluator is not runtime-certified.
+`--fixture ck3-has-cultural-tradition-trigger-11906` selects the CK3 1.19.0.6
+schema-only Culture cultural-tradition-membership fixture. It exercises
+scalar `has_cultural_tradition` keys for `tradition_fp1_coastal_warriors` and
+`tradition_ep3_imperial_tagmata`; parser and validator are GREEN while
+IR/runtime remain explicitly SKIPPED because the native evaluator is not
+runtime-certified.
 
 The command writes exactly one JSON object to stdout. The stable top-level
 fields are:

@@ -343,3 +343,38 @@ while IR/runtime remain explicitly SKIPPED.  No innovation database reader,
 hash resolver, runtime evaluator, or `certifiedSemantics` entry was added.
 This is a schema/profile/validator fixture increment only; no CK3 process, save
 mutation, MCP call, or network access is involved.
+
+## Follow-up bounded increment: Culture cultural-tradition predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The next exact-build slice records the stock `has_cultural_tradition`
+trigger used by accolade and combat culture gates.  Focused static evidence
+was re-read from the frozen CK3 1.19.0.6 installation before implementation:
+
+* the compiled Culture-scope evaluator starts at RVA `0x282D990` and reaches
+  its `ret` at `0x282DB07`; the 376-byte function slice has SHA-256
+  `2073F14B5611955D899F21A35DD945239EE325C2EAD6652EBA1DBCBE5CAC78A9`;
+* the tradition database resolver is RVA `0x9A66F0` / module global
+  `+0x570C7A0`, with stable-key lookup `0xC8FC40`; the exact hash/object
+  lookup path is `0x3B8B000` and stable-key storage is `+0x18`;
+* a Culture owns a tradition pointer span at `+0x178` with signed count at
+  `+0x184`; membership uses the pointer-equality helper at `0x9A3E60`;
+  fallback global `+0x57BF050` is explicitly rejected;
+* the frozen installation has 1,543 `has_cultural_tradition` occurrences
+  across 148 script files.  Representative stock source
+  `common/accolade_types/04_ep2_common_attributes.txt` has 102 occurrences
+  and SHA-256
+  `6D4AFF92EC3A52E3BDF6E0DAC9DF87C258DFCD6224D39C440E99A63BF1A03EC8`.
+
+The profile registers only the minimal scalar shape
+`TRIGGER`/`CULTURE`/`STRING`, zero named parameters, deterministic and
+read-only, with `certified=false`.  `Ck3HasCulturalTraditionFixture` renders
+two representative keys (`tradition_fp1_coastal_warriors` and
+`tradition_ep3_imperial_tagmata`) and records the fourteen required culture
+tradition keys from the native-AI ledger.  The offline preflight accepts
+fixture ID `ck3-has-cultural-tradition-trigger-11906`; parser and validator
+are expected GREEN while IR/runtime remain explicitly SKIPPED.  No tradition
+database reader, hash resolver, runtime evaluator, or `certifiedSemantics`
+entry was added.  This is a schema/profile/validator fixture increment only;
+no CK3 process, save mutation, MCP call, or network access is involved.

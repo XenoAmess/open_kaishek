@@ -1,0 +1,7 @@
+# CK3 1.19.0.6 schema-only cultural-tradition trigger fixture
+has_cultural_tradition_fixture = {
+    limit = {
+        has_cultural_tradition = tradition_fp1_coastal_warriors
+        has_cultural_tradition = tradition_ep3_imperial_tagmata
+    }
+}
