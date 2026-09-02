@@ -52,3 +52,9 @@ the exact source shapes (`NOT` and trigger-side scalar `var:*` comparisons)
 parse and validate against CK3 1.19.0.6. IR/runtime remain `SKIPPED`, and both
 native/runtime certification bits remain `false`; see
 [`../docs/zg361-business-postconditions.md`](../docs/zg361-business-postconditions.md).
+
+`G2TruceEvaluatorCapabilityProfile` records the read-only G2
+`evaluated_days` observation contract, including same-frame double-read and
+non-inferred expiry invariants. It is intentionally uncertified until a
+paused exact-build CK3 artifact proves the evaluator result; the descriptor
+does not add an opcode or an action path.
