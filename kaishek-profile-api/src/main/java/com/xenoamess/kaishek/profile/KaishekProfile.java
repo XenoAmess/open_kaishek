@@ -15,7 +15,7 @@ import java.util.*;
 public interface KaishekProfile {
     /** Conservative structural words shared by the generic adapter. */
     Set<String> DEFAULT_STRUCTURAL_KEYS = Set.of(
-            "limit", "trigger", "effect", "value", "if", "else", "else_if", "while",
+            "limit", "trigger", "effect", "value", "if", "else", "else_if", "while", "NOT",
             "ordered", "random", "weight", "modifier", "scope", "save_scope_as",
             "save_temporary_scope_as", "use_saved_scope_as", "from", "to", "title", "name",
             "id", "type", "text", "icon", "desc", "potential", "allow", "ai_will_do",

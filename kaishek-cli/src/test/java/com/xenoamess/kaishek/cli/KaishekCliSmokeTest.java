@@ -343,6 +343,45 @@ public final class KaishekCliSmokeTest {
           && canBeAcclaimedJson.contains("\"ck3_started\":\"false\""),
           canBeAcclaimedJson);
 
+      // The two ZhongGuo business postconditions are static parser/profile
+      // fixtures.  They expose the capability identity in provenance while
+      // keeping both native and runtime certification explicitly false.
+      b.reset();
+      int projectsMetricsPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "zg361-projects-metrics-postcondition-v1"},
+          new PrintStream(b), System.err);
+      String projectsMetricsJson = b.toString(StandardCharsets.UTF_8);
+      check(projectsMetricsPreflight == 0
+          && projectsMetricsJson.contains("\"status\":\"GREEN\"")
+          && projectsMetricsJson.contains(
+              "\"fixture_id\":\"zg361-projects-metrics-postcondition-v1\"")
+          && projectsMetricsJson.contains(
+              "\"fixture_scope\":\"schema-only-business-postcondition\"")
+          && projectsMetricsJson.contains(
+              "\"capability_id\":\"game.command.query-zhongguo-projects-metrics-postcondition-v1\"")
+          && projectsMetricsJson.contains("\"native_certified\":\"false\"")
+          && projectsMetricsJson.contains("\"runtime_certified\":\"false\"")
+          && projectsMetricsJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
+          && projectsMetricsJson.contains("\"ck3_started\":\"false\""),
+          projectsMetricsJson);
+
+      b.reset();
+      int promotionCompensationPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "zg361-promotion-compensation-postcondition-v1"},
+          new PrintStream(b), System.err);
+      String promotionCompensationJson = b.toString(StandardCharsets.UTF_8);
+      check(promotionCompensationPreflight == 0
+          && promotionCompensationJson.contains("\"status\":\"GREEN\"")
+          && promotionCompensationJson.contains(
+              "\"fixture_id\":\"zg361-promotion-compensation-postcondition-v1\"")
+          && promotionCompensationJson.contains(
+              "\"capability_id\":\"game.command.query-zhongguo-promotion-compensation-postcondition-v1\"")
+          && promotionCompensationJson.contains("\"native_certified\":\"false\"")
+          && promotionCompensationJson.contains("\"runtime_certified\":\"false\"")
+          && promotionCompensationJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
+          && promotionCompensationJson.contains("\"ck3_started\":\"false\""),
+          promotionCompensationJson);
+
       // Unsupported profile selections still use the preflight schema so a
       // parent runner never has to special-case the generic CLI error shape.
       b.reset();

@@ -402,4 +402,40 @@ class ValidatorTest {
                 diagnostics::toString);
     }
 
+    @Test void ck3UppercaseNotIsAStructuralTriggerContainer() {
+        String source = "fixture = { limit = { NOT = { has_variable = sample } } }\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_effects/zg361_not_fixture.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d -> d.code().equals("UNKNOWN_OPCODE")),
+                diagnostics::toString);
+    }
+
+    @Test void ck3TriggerSideScalarVariableComparisonsAreSourceShapesNotOpcodes() {
+        String source = "fixture = {\n"
+                + "  limit = {\n"
+                + "    var:left > 0\n"
+                + "    var:left = var:right\n"
+                + "    var:left != 3\n"
+                + "  }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_effects/zg361_variable_comparison_fixture.txt", PROFILE);
+        assertTrue(diagnostics.stream().noneMatch(d -> d.code().equals("UNKNOWN_OPCODE")),
+                diagnostics::toString);
+    }
+
+    @Test void scalarVariableComparisonRemainsFailClosedOnEffectSide() {
+        String source = "fixture = { var:left = var:right }\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        assertTrue(parsed.diagnostics().isEmpty(), () -> parsed.diagnostics().toString());
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_effects/zg361_effect_side_variable_comparison.txt", PROFILE);
+        assertTrue(diagnostics.stream().anyMatch(d -> d.code().equals("UNKNOWN_OPCODE")),
+                diagnostics::toString);
+    }
+
 }

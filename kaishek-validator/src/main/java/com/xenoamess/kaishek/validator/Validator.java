@@ -73,6 +73,9 @@ public final class Validator {
             boolean calculatedValueExpression = triggerSide
                     && isCk3Profile11906(profile)
                     && isCalculatedValueExpression(e);
+            boolean variableComparison = triggerSide
+                    && isCk3Profile11906(profile)
+                    && isScalarVariableComparison(e);
             ScriptSide childSide = childSide(side, key, e);
             // A file-root block is a declaration map, where duplicate names
             // can hide an earlier definition.  Nested CK3 blocks are ordered
@@ -91,7 +94,13 @@ public final class Validator {
                     // value here so its `value`/`add` terms are not reported
                     // as generic opcodes; direct `=` still emits the
                     // dedicated schema-only diagnostic above.
-                    && !calculatedValueExpression)
+                    && !calculatedValueExpression
+                    // CK3 trigger predicates also allow a scoped variable
+                    // reference on the left of a scalar comparison.  This is
+                    // a source shape, not an opcode or executable runtime
+                    // capability, so keep it out of the registry while still
+                    // accepting the exact profile-bound syntax.
+                    && !variableComparison)
                 out.add(diag("UNKNOWN_OPCODE", Diagnostic.Severity.ERROR, "unregistered opcode: " + key, e.key().span(), at));
             // A registered opcode is unambiguous even at file root; declarations
             // (event/scripted-effect IDs) are simply absent from the registry.
@@ -170,6 +179,17 @@ public final class Validator {
         return entry.operator() != null
                 && "=".equals(entry.operator().text().trim())
                 && isCalculatedValueExpression(entry);
+    }
+
+    /** Match a trigger-side scalar comparison whose left operand is a CK3 variable reference. */
+    private static boolean isScalarVariableComparison(EntryNode entry) {
+        if (entry.operator() == null || entry.value() instanceof BlockNode) return false;
+        String key = entry.key().text().trim().toLowerCase(Locale.ROOT);
+        if (!key.startsWith("var:") || key.length() == "var:".length()) return false;
+        return switch (entry.operator().text().trim()) {
+            case "=", "!=", ">", "<", ">=", "<=" -> true;
+            default -> false;
+        };
     }
     private enum ScriptSide { OTHER, TRIGGER, EFFECT }
     private static void validateDomain(OpcodeSpec spec, ScriptDomain domain, EntryNode e,

@@ -157,6 +157,12 @@ public final class OfflinePreflight {
         provenance.put("root", request.root() == null ? "" : request.root().toString());
         provenance.put("root_sha256", root.parser().sha256());
         provenance.put("fixture_scope", fixture.scope());
+        String capabilityId = fixtureCapabilityId(request.fixtureId());
+        if (!capabilityId.isBlank()) {
+            provenance.put("capability_id", capabilityId);
+            provenance.put("native_certified", "false");
+            provenance.put("runtime_certified", "false");
+        }
         provenance.put("ck3_started", "false");
         provenance.put("save_mutated", "false");
         provenance.put("network_used", "false");
@@ -491,6 +497,18 @@ public final class OfflinePreflight {
             return new FixtureResult(parserStage, validatorStage, skipped, skipped,
                     "schema-only");
         }
+        if (id.equals(ZhongguoProjectsMetricsPostconditionFixture.FIXTURE_ID)
+                || id.equals(ZhongguoProjectsMetricsPostconditionFixture.ALIAS)) {
+            return businessPostconditionFixture(
+                    ZhongguoProjectsMetricsPostconditionFixture.render(),
+                    ZhongguoProjectsMetricsPostconditionFixture.SOURCE_PATH);
+        }
+        if (id.equals(ZhongguoPromotionCompensationPostconditionFixture.FIXTURE_ID)
+                || id.equals(ZhongguoPromotionCompensationPostconditionFixture.ALIAS)) {
+            return businessPostconditionFixture(
+                    ZhongguoPromotionCompensationPostconditionFixture.render(),
+                    ZhongguoPromotionCompensationPostconditionFixture.SOURCE_PATH);
+        }
         if (id.equals(Appeal014DifferentialFixture.FIXTURE_ID) || id.equals("appeal-014")) {
             List<String> mismatches = new ArrayList<>();
             for (Appeal014DifferentialFixture.CaseFixture fixture :
@@ -510,6 +528,45 @@ public final class OfflinePreflight {
         }
         Stage error = stage("RED", 0, 0, 1, "unknown-fixture", "", List.of(id));
         return new FixtureResult(error, error, error, error, "unsupported");
+    }
+
+    private static FixtureResult businessPostconditionFixture(
+            byte[] source, String sourcePath) {
+        ParseResult parsed = Parser.parse(source);
+        Ck3Profile11906 profile = new Ck3Profile11906();
+        List<Diagnostic> validation = Validator.validate(parsed, sourcePath, profile);
+        int parserDiagnostics = parsed.diagnostics().size();
+        int validationDiagnostics = validation.size();
+        String hash = hex(sha256().digest(source));
+        Stage parserStage = stage(parserDiagnostics == 0 ? "GREEN" : "RED",
+                1, source.length, parserDiagnostics,
+                parserDiagnostics == 0
+                        ? "business-postcondition-fixture"
+                        : "parser-diagnostics",
+                hash, diagnosticSamples(sourcePath, parsed.diagnostics()));
+        Stage validatorStage = stage(validationDiagnostics == 0 ? "GREEN" : "RED",
+                1, source.length, validationDiagnostics,
+                validationDiagnostics == 0
+                        ? "business-postcondition-fixture"
+                        : "schema-diagnostics",
+                hash, diagnosticSamples(sourcePath, validation));
+        Stage skipped = stage("SKIPPED", 0, 0, 0,
+                "business-postcondition-fixture-no-certified-runtime", "", List.of());
+        return new FixtureResult(parserStage, validatorStage, skipped, skipped,
+                "schema-only-business-postcondition");
+    }
+
+    private static String fixtureCapabilityId(String requested) {
+        String id = requested == null ? "" : requested;
+        if (id.equals(ZhongguoProjectsMetricsPostconditionFixture.FIXTURE_ID)
+                || id.equals(ZhongguoProjectsMetricsPostconditionFixture.ALIAS)) {
+            return ZhongguoProjectsMetricsPostconditionFixture.CAPABILITY_ID;
+        }
+        if (id.equals(ZhongguoPromotionCompensationPostconditionFixture.FIXTURE_ID)
+                || id.equals(ZhongguoPromotionCompensationPostconditionFixture.ALIAS)) {
+            return ZhongguoPromotionCompensationPostconditionFixture.CAPABILITY_ID;
+        }
+        return "";
     }
 
     private static Stage combine(Stage left, Stage right) {

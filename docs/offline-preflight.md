@@ -69,6 +69,20 @@ both scalar boolean forms `can_be_acclaimed = yes` and
 remain explicitly SKIPPED because the full qualification evaluator is not
 runtime-certified. The fixture does not introduce an ACCOLADE scope or call
 the application-main helper.
+`--fixture zg361-projects-metrics-postcondition-v1` (alias
+`zg361-projects-metrics`) selects the schema-only CP #026 to Phase-3 #229
+lineage fixture. It exercises receipt cursor/id/revision writes and the
+project/metrics source projection, including uppercase `NOT` and trigger-side
+scalar `var:*` comparisons. Parser and validator are GREEN while IR/runtime
+remain explicitly `SKIPPED`; provenance includes the product capability ID and
+`native_certified=false` / `runtime_certified=false`.
+`--fixture zg361-promotion-compensation-postcondition-v1` (alias
+`zg361-promotion-compensation`) selects the schema-only #147 promotion to
+compensation receipt fixture. It exercises the positive/equal serial and
+choice/posted revision source shapes while keeping the T and L/AE/AF kernel
+case identities outside the cross-product receipt. Parser and validator are
+GREEN while IR/runtime remain explicitly `SKIPPED`, with the same explicit
+uncertified provenance boundary.
 
 The command writes exactly one JSON object to stdout. The stable top-level
 fields are:

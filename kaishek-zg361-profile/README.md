@@ -44,3 +44,11 @@ for the boundary and reproduction command. The full 361 target corpus remains
 an external input (normally
 `<companion-root>/mod_zhongguo_style`); a successful synthetic fixture does not
 imply that the external mod has been parsed or that CK3 semantics are certified.
+
+`ZhongguoBusinessPostconditionProfile` also projects two read-only product
+query contracts: the CP-to-Phase-3 project metrics lineage and the #147
+promotion-to-compensation lineage. Their dedicated preflight fixtures prove
+the exact source shapes (`NOT` and trigger-side scalar `var:*` comparisons)
+parse and validate against CK3 1.19.0.6. IR/runtime remain `SKIPPED`, and both
+native/runtime certification bits remain `false`; see
+[`../docs/zg361-business-postconditions.md`](../docs/zg361-business-postconditions.md).
