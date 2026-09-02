@@ -73,6 +73,13 @@ public final class Ck3Profile11906 implements KaishekProfile {
             // semantics, and does not introduce an ACCOLADE scope.
             descriptor("is_acclaimed", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
                     List.of(), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 evidence identifies this as a scalar
+            // Character boolean trigger backed by the full acclaim-eligibility
+            // evaluator. Keep the descriptor syntax/profile-only; recognizing
+            // the shape does not certify the native qualification tree or
+            // runtime semantics, and does not introduce an ACCOLADE scope.
+            descriptor("can_be_acclaimed", OpcodeKind.TRIGGER, InputType.BOOLEAN,
+                    ScopeType.CHARACTER, List.of(), RandomnessClass.DETERMINISTIC, false, true),
             // Exact-build 1.19.0.6 evidence identifies this as scalar
             // character-perk membership by stable perk key.  Keep the
             // descriptor syntax/profile-only; recognizing the shape does not
@@ -274,6 +281,7 @@ public final class Ck3Profile11906 implements KaishekProfile {
         add(m, "government_has_flag", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_character_modifier", OpcodeSpec.Kind.TRIGGER);
         add(m, "is_acclaimed", OpcodeSpec.Kind.TRIGGER);
+        add(m, "can_be_acclaimed", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_perk", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_dynasty_perk", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_court_position", OpcodeSpec.Kind.TRIGGER);

@@ -62,6 +62,13 @@ boolean forms `is_acclaimed = yes` and `is_acclaimed = no`; parser and
 validator are GREEN while IR/runtime remain explicitly SKIPPED because the
 native Character-to-CAccolade reader is not runtime-certified. The fixture
 does not introduce an ACCOLADE scope.
+`--fixture ck3-can-be-acclaimed-trigger-11906` selects the CK3 1.19.0.6
+schema-only Character acclaim-eligibility predicate fixture. It exercises
+both scalar boolean forms `can_be_acclaimed = yes` and
+`can_be_acclaimed = no`; parser and validator are GREEN while IR/runtime
+remain explicitly SKIPPED because the full qualification evaluator is not
+runtime-certified. The fixture does not introduce an ACCOLADE scope or call
+the application-main helper.
 
 The command writes exactly one JSON object to stdout. The stable top-level
 fields are:

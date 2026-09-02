@@ -322,6 +322,27 @@ public final class KaishekCliSmokeTest {
           && isAcclaimedJson.contains("\"ck3_started\":\"false\""),
           isAcclaimedJson);
 
+      // The can-be-acclaimed schema slice is Character-scoped and
+      // static-only: parser/validator are GREEN while IR/runtime remain
+      // explicitly skipped because the full qualification evaluator is not
+      // runtime-certified.
+      b.reset();
+      int canBeAcclaimedPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "ck3-can-be-acclaimed-trigger-11906"},
+          new PrintStream(b), System.err);
+      String canBeAcclaimedJson = b.toString(StandardCharsets.UTF_8);
+      check(canBeAcclaimedPreflight == 0
+          && canBeAcclaimedJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && canBeAcclaimedJson.contains("\"status\":\"GREEN\"")
+          && canBeAcclaimedJson.contains(
+              "\"fixture_id\":\"ck3-can-be-acclaimed-trigger-11906\"")
+          && canBeAcclaimedJson.contains("\"fixture_scope\":\"schema-only\"")
+          && canBeAcclaimedJson.contains("\"parser\":{\"status\":\"GREEN\"")
+          && canBeAcclaimedJson.contains("\"validator\":{\"status\":\"GREEN\"")
+          && canBeAcclaimedJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
+          && canBeAcclaimedJson.contains("\"ck3_started\":\"false\""),
+          canBeAcclaimedJson);
+
       // Unsupported profile selections still use the preflight schema so a
       // parent runner never has to special-case the generic CLI error shape.
       b.reset();

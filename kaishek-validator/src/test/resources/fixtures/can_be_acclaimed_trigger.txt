@@ -1,0 +1,7 @@
+# CK3 1.19.0.6 schema-only can-be-acclaimed trigger fixture
+can_be_acclaimed_fixture = {
+    limit = {
+        can_be_acclaimed = yes
+        can_be_acclaimed = no
+    }
+}

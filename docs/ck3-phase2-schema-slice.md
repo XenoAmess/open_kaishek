@@ -381,6 +381,45 @@ evaluator, runtime bridge, or `certifiedSemantics` entry was added.  This is a
 schema/profile/validator fixture increment only; no CK3 process, save
 mutation, MCP call, or network access is involved.
 
+## Follow-up bounded increment: Character acclaim-eligibility predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The next exact-build slice records the stock `can_be_acclaimed` boolean
+trigger used by CK3 accolade qualification gates.  The frozen CK3 1.19.0.6
+native-AI ledger at `docs/ck3-native-ai/combat-phase-events.md:1351-1455`
+closes the static Character-side entry point:
+
+* the trigger literal is at RVA `0x434FB90`; registration covers
+  `0x52C220..0x52C2B3`, with factory vtable `0x4350750`, creator
+  `0x281A6F0`, compiled vtable `0x4350DB0`, and Character leaf
+  `0x2819200`;
+* the leaf resolves a full-generation Character through the existing store
+  (`module+0x570C130`, fallback `+0x570C138`, identity `+0x18`) and enters the
+  complete qualification evaluator at `0x28A4870` with the two optional
+  outputs passed as null; and
+* the evaluator's raw prerequisites include the already-initialized rules
+  singleton at absolute `0x1457C2060`, AccoladeType DB backing at
+  `module+0x570C030`, and the registered `owner` scope key at
+  `module+0x57EB620`.  These are runtime-side boundaries only: the schema
+  fixture does not call the evaluator, construct a scope, or invoke lazy
+  initialization.
+
+Vanilla source uses the scalar forms `can_be_acclaimed = yes` and
+`can_be_acclaimed = no`.  The profile registers only
+`TRIGGER`/`CHARACTER`/`BOOLEAN`, zero named parameters, deterministic and
+read-only, with `certified=false`.  It intentionally adds no `ACCOLADE`
+scope and no `certifiedSemantics` entry: recognizing the Character trigger
+shape is not a claim that the qualification tree is executable or live.
+
+`Ck3CanBeAcclaimedFixture` renders both boolean spellings with a UTF-8 BOM
+and pins the static reader provenance.  The offline preflight accepts fixture
+ID `ck3-can-be-acclaimed-trigger-11906`; parser and validator are GREEN while
+IR/runtime remain explicitly SKIPPED.  The helper is known to require a
+paused application-main mailbox in production, so no worker-thread or CK3
+call is made here.  This is a schema/profile/validator fixture increment only;
+no CK3 process, save mutation, MCP call, or network access is involved.
+
 ## Follow-up bounded increment: Culture cultural-tradition predicate
 
 Date: 2026-09-02 (Asia/Shanghai)
