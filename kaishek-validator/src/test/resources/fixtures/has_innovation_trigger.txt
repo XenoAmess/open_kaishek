@@ -1,0 +1,7 @@
+# CK3 1.19.0.6 schema-only has-innovation trigger fixture
+has_innovation_fixture = {
+    limit = {
+        has_innovation = innovation_quilted_armor
+        has_innovation = innovation_war_camels
+    }
+}

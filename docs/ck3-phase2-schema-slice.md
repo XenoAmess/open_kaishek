@@ -306,3 +306,40 @@ validator are expected GREEN while IR/runtime are explicitly SKIPPED.  This
 is a schema/shape increment only: no native reader, date resolver, action,
 or `certifiedSemantics` entry was added, and no CK3 process, save mutation,
 MCP call, or network access is involved.
+
+## Follow-up bounded increment: Culture innovation predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The next exact-build slice records the stock `has_innovation` trigger used by
+the accolade and combat culture gates.  Static evidence is pinned to CK3
+1.19.0.6 executable SHA-256
+`2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86` and the
+native-AI ledger at `docs/ck3-native-ai/combat-phase-events.md:1838-1864`:
+
+* the compiled Culture-scope evaluator is at RVA `0x282CE90`; the extracted
+  134-byte function slice has SHA-256
+  `6EBC1F53ED9E1F045A88B5EA1628297A9029BA01A076085ABDFC6013980C0F79`;
+* the innovation database is resolved through RVA `0x9A6690` and the loaded
+  module global `+0x570C7A8`; stable-key lookup is `0xE71070` and the
+  ownership membership helper is `0x9A3C20`;
+* a Culture owns a pointer span at `+0x758` with signed count at `+0x764`;
+  each innovation's stable-key `std::string` is at `+0x18`; the documented
+  reader rejects fallback global `+0x57C04E0` and requires exact key
+  round-trip after hash lookup;
+* the frozen installation has 1,674 `has_innovation` occurrences across 132
+  script files and 95 distinct scalar keys.  A representative stock source,
+  `common/accolade_types/04_ep2_maa_attributes.txt`, is pinned by SHA-256
+  `9E5A6E42D45AA0568B08A86FB786F65B27C7EE93881E5A5C5E075A15592CFF91`.
+
+The profile registers only the minimal scalar shape
+`TRIGGER`/`CULTURE`/`STRING`, zero named parameters, deterministic and
+read-only, with `certified=false`.  `Ck3HasInnovationFixture` renders two
+representative keys (`innovation_quilted_armor` and
+`innovation_war_camels`) and records the twelve required culture keys from
+the native-AI ledger.  The offline preflight accepts fixture ID
+`ck3-has-innovation-trigger-11906`; parser and validator are expected GREEN
+while IR/runtime remain explicitly SKIPPED.  No innovation database reader,
+hash resolver, runtime evaluator, or `certifiedSemantics` entry was added.
+This is a schema/profile/validator fixture increment only; no CK3 process, save
+mutation, MCP call, or network access is involved.

@@ -228,6 +228,24 @@ public final class KaishekCliSmokeTest {
           && warDaysJson.contains("\"ck3_started\":\"false\""),
           warDaysJson);
 
+      // The has-innovation schema slice is likewise static-only: parser and
+      // validator are GREEN while IR/runtime remain explicitly skipped.
+      b.reset();
+      int hasInnovationPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "ck3-has-innovation-trigger-11906"},
+          new PrintStream(b), System.err);
+      String hasInnovationJson = b.toString(StandardCharsets.UTF_8);
+      check(hasInnovationPreflight == 0
+          && hasInnovationJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && hasInnovationJson.contains("\"status\":\"GREEN\"")
+          && hasInnovationJson.contains("\"fixture_id\":\"ck3-has-innovation-trigger-11906\"")
+          && hasInnovationJson.contains("\"fixture_scope\":\"schema-only\"")
+          && hasInnovationJson.contains("\"parser\":{\"status\":\"GREEN\"")
+          && hasInnovationJson.contains("\"validator\":{\"status\":\"GREEN\"")
+          && hasInnovationJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
+          && hasInnovationJson.contains("\"ck3_started\":\"false\""),
+          hasInnovationJson);
+
       // Unsupported profile selections still use the preflight schema so a
       // parent runner never has to special-case the generic CLI error shape.
       b.reset();
