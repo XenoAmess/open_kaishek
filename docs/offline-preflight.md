@@ -135,16 +135,21 @@ different offline coverage. Keep their results separate:
   identity, vtable, thread, lifetime, or completion. Those are native
   observations. Return-address capture and selection among native outer callers
   are the same native-only boundary; they do not justify a script opcode or a
-  new fixture. A parser GREEN or the synthetic runtime GREEN must not promote
-  loader readiness; a bounded full-root validator RED remains a schema-coverage
-  boundary.
+  new fixture. This also applies when an observed outer continuation is an
+  exact executable RVA such as `0x3B9CFD2`: PDATA ownership, local CFG, and its
+  native call context are not script-profile inputs. A parser GREEN or the
+  synthetic runtime GREEN must not promote loader readiness; a bounded
+  full-root validator RED remains a schema-coverage boundary.
 * For G2, run the intended frozen source root with
   `ck3-war-days-trigger-11906`. The dedicated fixture checks the observed
   scalar integer comparisons and leaves IR/runtime `SKIPPED`. It cannot produce
   the live `evaluated_days` input/result, expiry, war binding, policy, action,
   or postcondition. Traversal of the loaded native effect tree, including a
   Context node's scope count and child vtable shape, is likewise outside the
-  offline script-profile contract.
+  offline script-profile contract. A next-layer corpus expressed as native
+  vtable identities and vector counts (for example one `1/1` subtree and one
+  `6/6` subtree) remains native capture input; it is not a new Paradox opcode,
+  scope, or schema fixture.
 
 Neither entry justifies a new opcode from the current evidence. The registered
 descriptors remain `certified=false`, and offline preflight remains prior to,
