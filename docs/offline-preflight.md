@@ -133,14 +133,18 @@ different offline coverage. Keep their results separate:
   with `synthetic-361-014`. The root parser is useful for detecting malformed
   input before launch, but there is no offline fixture for callback/node
   identity, vtable, thread, lifetime, or completion. Those are native
-  observations. A parser GREEN or the synthetic runtime GREEN must not promote
+  observations. Return-address capture and selection among native outer callers
+  are the same native-only boundary; they do not justify a script opcode or a
+  new fixture. A parser GREEN or the synthetic runtime GREEN must not promote
   loader readiness; a bounded full-root validator RED remains a schema-coverage
   boundary.
 * For G2, run the intended frozen source root with
   `ck3-war-days-trigger-11906`. The dedicated fixture checks the observed
   scalar integer comparisons and leaves IR/runtime `SKIPPED`. It cannot produce
   the live `evaluated_days` input/result, expiry, war binding, policy, action,
-  or postcondition.
+  or postcondition. Traversal of the loaded native effect tree, including a
+  Context node's scope count and child vtable shape, is likewise outside the
+  offline script-profile contract.
 
 Neither entry justifies a new opcode from the current evidence. The registered
 descriptors remain `certified=false`, and offline preflight remains prior to,
