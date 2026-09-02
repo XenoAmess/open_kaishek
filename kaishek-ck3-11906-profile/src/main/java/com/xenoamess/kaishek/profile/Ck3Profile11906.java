@@ -79,6 +79,12 @@ public final class Ck3Profile11906 implements KaishekProfile {
             // transition or runtime certification.
             descriptor("has_dynasty_perk", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.THIS,
                     List.of(), RandomnessClass.DETERMINISTIC, false, true),
+            // Exact-build 1.19.0.6 evidence identifies this as scalar
+            // Character court-position membership by stable position key.
+            // Keep the descriptor syntax/profile-only; recognizing the
+            // shape does not certify execution semantics.
+            descriptor("has_court_position", OpcodeKind.TRIGGER, InputType.STRING, ScopeType.CHARACTER,
+                    List.of(), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_trait", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
                     List.of("trait"), RandomnessClass.DETERMINISTIC, false, true),
             descriptor("has_title", OpcodeKind.TRIGGER, InputType.BOOLEAN, ScopeType.CHARACTER,
@@ -231,6 +237,7 @@ public final class Ck3Profile11906 implements KaishekProfile {
         add(m, "has_character_modifier", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_perk", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_dynasty_perk", OpcodeSpec.Kind.TRIGGER);
+        add(m, "has_court_position", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_trait", OpcodeSpec.Kind.TRIGGER);
         add(m, "has_title", OpcodeSpec.Kind.TRIGGER);
         add(m, "is_alive", OpcodeSpec.Kind.TRIGGER);

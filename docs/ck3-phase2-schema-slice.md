@@ -245,3 +245,31 @@ The focused profile and validator tests cover the scalar form and a
 representative `royal_court` key.  Offline package/preflight verification is
 required before merge; no CK3 process, save mutation, MCP call, or network is
 used for this schema-only slice.
+
+## Follow-up bounded increment: court-position membership predicate
+
+Date: 2026-09-02 (Asia/Shanghai)
+
+The exact-build CK3 1.19.0.6 ledger closes the scalar form
+`has_court_position = <court-position-key>` on a current Character.  The
+observed Garuda path binds the trigger literal at `0x435AE20`, registration
+chain `0x530620..0x5306B3`, factory `0x435C7F8`/creator `0x2826AD0`, and the
+compiled evaluator at `0x2825600`.  Its native reader resolves the loaded
+court-position type by stable key, then tests the current Character's
+generation-safe held-position ID span; the parent evidence is
+`docs/ck3-native-ai/combat-phase-events.md:1723-1777`.  The frozen executable
+SHA-256 is
+`2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`.
+
+This slice registers only the observed scalar profile shape:
+`TRIGGER`/`CHARACTER`/`STRING`, zero named parameters, deterministic and
+read-only, with `certified=false`.  It adds no court-position database
+reader, scope transition, runtime evaluator, or `certifiedSemantics` entry;
+static exact-build evidence is not runtime certification.
+
+The frozen game tree contains 1,222 scalar `has_court_position` occurrences,
+including the exact `garuda_court_position` key.  The current phase-two mod
+root contains no occurrence, so this preparation increment does not claim a
+reduction of its existing bounded validator RED.  Focused profile and
+validator tests pin the shape and representative use.  No CK3 process, save,
+MCP call, or network was used.

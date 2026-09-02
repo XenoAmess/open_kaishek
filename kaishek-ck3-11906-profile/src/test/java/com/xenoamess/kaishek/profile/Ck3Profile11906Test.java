@@ -33,6 +33,7 @@ class Ck3Profile11906Test {
         assertTrue(profile.opcode("has_character_modifier") != null);
         assertTrue(profile.opcode("has_perk") != null);
         assertTrue(profile.opcode("has_dynasty_perk") != null);
+        assertTrue(profile.opcode("has_court_position") != null);
         assertTrue(profile.opcodeRegistry().contains("set_variable"));
         assertEquals(Ck3Profile11906.GAME_VERSION,
                 profile.opcodeRegistry().require("set_variable").profileVersion());
@@ -124,6 +125,18 @@ class Ck3Profile11906Test {
         // keeps the native current-scope requirement open for the future
         // scope-transition slice.
         assertEquals(ScopeType.THIS, descriptor.requiredScope());
+        assertTrue(descriptor.parameterNames().isEmpty());
+        assertEquals(0, descriptor.minParameters());
+        assertEquals(0, descriptor.maxParameters());
+        assertFalse(descriptor.certified(), "static evidence must not claim runtime certification");
+    }
+
+    @Test
+    void hasCourtPositionIsPinnedAsScalarMembershipTriggerShape() {
+        OpcodeDescriptor descriptor = profile.opcodeRegistry().require("has_court_position");
+        assertEquals(OpcodeKind.TRIGGER, descriptor.kind());
+        assertEquals(InputType.STRING, descriptor.inputType());
+        assertEquals(ScopeType.CHARACTER, descriptor.requiredScope());
         assertTrue(descriptor.parameterNames().isEmpty());
         assertEquals(0, descriptor.minParameters());
         assertEquals(0, descriptor.maxParameters());
