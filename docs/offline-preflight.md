@@ -123,3 +123,25 @@ an acceptance artifact, then continue to the native runner only when the
 preflight exit is zero. This repository owns the offline parser/validator and
 fixture contract; wiring a particular parent repository or CK3 save path is a
 separate integration change.
+
+## Current parent entry bindings
+
+The phase-two loader callback gate and the G2 truce-duration capture have
+different offline coverage. Keep their results separate:
+
+* For the phase-two loader callback gate, run the intended frozen source root
+  with `synthetic-361-014`. The root parser is useful for detecting malformed
+  input before launch, but there is no offline fixture for callback/node
+  identity, vtable, thread, lifetime, or completion. Those are native
+  observations. A parser GREEN or the synthetic runtime GREEN must not promote
+  loader readiness; a bounded full-root validator RED remains a schema-coverage
+  boundary.
+* For G2, run the intended frozen source root with
+  `ck3-war-days-trigger-11906`. The dedicated fixture checks the observed
+  scalar integer comparisons and leaves IR/runtime `SKIPPED`. It cannot produce
+  the live `evaluated_days` input/result, expiry, war binding, policy, action,
+  or postcondition.
+
+Neither entry justifies a new opcode from the current evidence. The registered
+descriptors remain `certified=false`, and offline preflight remains prior to,
+not a replacement for, one bounded exact-build native observation.
