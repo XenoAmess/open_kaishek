@@ -69,6 +69,14 @@ both scalar boolean forms `can_be_acclaimed = yes` and
 remain explicitly SKIPPED because the full qualification evaluator is not
 runtime-certified. The fixture does not introduce an ACCOLADE scope or call
 the application-main helper.
+`--fixture ck3-g2-activity-type-schema-red-11906` selects the G2 activity-type
+schema boundary fixture (alias `g2-activity-type-schema-red`). It parses a
+small `activity_zg361_jingcha` source slice, then intentionally returns
+validator `RED` with `UNKNOWN_OPCODE` for activity-owned keys such as
+`province_filter`, `phases`, `on_start`, `on_complete`, and
+`guest_invite_rules`. This mirrors the current companion-corpus preflight
+observation without guessing a CK3 activity schema. IR/runtime stay
+`SKIPPED`, and no CK3 process, save, or native capability is involved.
 `--fixture zg361-projects-metrics-postcondition-v1` (alias
 `zg361-projects-metrics`) selects the schema-only CP #026 to Phase-3 #229
 lineage fixture. It exercises receipt cursor/id/revision writes and the

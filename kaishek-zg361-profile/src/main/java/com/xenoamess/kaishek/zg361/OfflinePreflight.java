@@ -497,6 +497,40 @@ public final class OfflinePreflight {
             return new FixtureResult(parserStage, validatorStage, skipped, skipped,
                     "schema-only");
         }
+        if (id.equals(G2ActivityTypeSchemaRedFixture.FIXTURE_ID)
+                || id.equals(G2ActivityTypeSchemaRedFixture.ALIAS)) {
+            byte[] source = G2ActivityTypeSchemaRedFixture.render();
+            ParseResult parsed = Parser.parse(source);
+            Ck3Profile11906 profile = new Ck3Profile11906();
+            List<Diagnostic> validation = Validator.validate(
+                    parsed, G2ActivityTypeSchemaRedFixture.SOURCE_PATH, profile);
+            int parserDiagnostics = parsed.diagnostics().size();
+            int validationDiagnostics = validation.size();
+            boolean expectedDiagnostic = validation.stream().anyMatch(d ->
+                    G2ActivityTypeSchemaRedFixture.EXPECTED_DIAGNOSTIC.equals(d.code()));
+            String hash = hex(sha256().digest(source));
+            String parserReason = parserDiagnostics == 0
+                    ? "schema-only-activity-fixture"
+                    : "parser-diagnostics";
+            String validatorReason = expectedDiagnostic
+                    ? "expected-activity-type-schema-diagnostic"
+                    : "fixture-regression-missed-diagnostic";
+            Stage parserStage = stage(parserDiagnostics == 0 ? "GREEN" : "RED",
+                    1, source.length, parserDiagnostics, parserReason, hash,
+                    diagnosticSamples(G2ActivityTypeSchemaRedFixture.SOURCE_PATH,
+                            parsed.diagnostics()));
+            // Keep this fixture RED even if a future profile change stops
+            // reporting UNKNOWN_OPCODE. Such a change must be reviewed as a
+            // deliberate schema update, never silently promoted by the test.
+            Stage validatorStage = stage("RED", 1, source.length,
+                    validationDiagnostics, validatorReason, hash,
+                    diagnosticSamples(G2ActivityTypeSchemaRedFixture.SOURCE_PATH,
+                            validation));
+            Stage skipped = stage("SKIPPED", 0, 0, 0,
+                    "schema-only-negative-fixture-no-runtime", "", List.of());
+            return new FixtureResult(parserStage, validatorStage, skipped, skipped,
+                    "schema-only-activity-negative");
+        }
         if (id.equals(ZhongguoProjectsMetricsPostconditionFixture.FIXTURE_ID)
                 || id.equals(ZhongguoProjectsMetricsPostconditionFixture.ALIAS)) {
             return businessPostconditionFixture(

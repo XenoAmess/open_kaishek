@@ -1,0 +1,34 @@
+{
+  "schema": "open_kaishek.g2_activity_type_schema_red.v1",
+  "status": "static-schema-red",
+  "fixture_id": "ck3-g2-activity-type-schema-red-11906",
+  "profile_id": "ck3-1.19.0.6",
+  "game_version": "1.19.0.6",
+  "source_path": "common/activities/activity_types/zg361_jingcha.txt",
+  "expected": {
+    "parser": "GREEN",
+    "validator": "RED",
+    "diagnostic": "UNKNOWN_OPCODE",
+    "unsupported_activity_keys": [
+      "province_filter",
+      "phases",
+      "on_start",
+      "on_complete",
+      "guest_invite_rules"
+    ]
+  },
+  "companion_observation": {
+    "corpus_sha256": "28e681358558f5e975fae911bf5ddf54eacb3c95dac3133852eaaeca6425c284",
+    "validator_diagnostics": 172255,
+    "evidence_stage": "static-preflight"
+  },
+  "boundaries": {
+    "ck3_started": false,
+    "process_attached": false,
+    "save_mutated": false,
+    "mutation_sent": false,
+    "native_certified": false,
+    "runtime_certified": false,
+    "profile_vocabulary_changed": false
+  }
+}

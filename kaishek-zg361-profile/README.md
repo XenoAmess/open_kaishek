@@ -58,3 +58,9 @@ native/runtime certification bits remain `false`; see
 non-inferred expiry invariants. It is intentionally uncertified until a
 paused exact-build CK3 artifact proves the evaluator result; the descriptor
 does not add an opcode or an action path.
+
+`G2ActivityTypeSchemaRedFixture` records the next G2 compatibility boundary:
+the `zg361_jingcha` activity source parses, while activity-type-owned keys are
+still reported as `UNKNOWN_OPCODE` by the conservative Phase 0 validator. The
+fixture is intentionally RED and does not add guessed activity vocabulary,
+native/runtime certification, or a CK3 launch path.

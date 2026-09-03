@@ -209,6 +209,27 @@ public final class KaishekCliSmokeTest {
           && calculatedValueJson.contains("\"runtime\":{\"status\":\"SKIPPED\""),
           calculatedValueJson);
 
+      // The G2 activity-type fixture is another deliberate schema RED. It
+      // proves that the source shape parses, while activity-owned keys remain
+      // outside the Phase 0 profile until exact-build evidence is available.
+      b.reset();
+      int activitySchemaPreflight = KaishekCli.run(new String[]{"preflight",
+          "--fixture", "ck3-g2-activity-type-schema-red-11906"},
+          new PrintStream(b), System.err);
+      String activitySchemaJson = b.toString(StandardCharsets.UTF_8);
+      check(activitySchemaPreflight == 1
+          && activitySchemaJson.contains("\"schema\":\"open_kaishek.preflight.v1\"")
+          && activitySchemaJson.contains("\"status\":\"RED\"")
+          && activitySchemaJson.contains(
+              "\"fixture_id\":\"ck3-g2-activity-type-schema-red-11906\"")
+          && activitySchemaJson.contains("\"parser\":{\"status\":\"GREEN\"")
+          && activitySchemaJson.contains("\"validator\":{\"status\":\"RED\"")
+          && activitySchemaJson.contains("UNKNOWN_OPCODE")
+          && activitySchemaJson.contains(
+              "\"fixture_scope\":\"schema-only-activity-negative\"")
+          && activitySchemaJson.contains("\"runtime\":{\"status\":\"SKIPPED\""),
+          activitySchemaJson);
+
       // The war-days schema slice is a positive, static-only fixture.  Its
       // parser/validator stages are GREEN while IR/runtime remain explicitly
       // skipped because the native evaluator is not runtime-certified.
