@@ -59,6 +59,13 @@ non-inferred expiry invariants. It is intentionally uncertified until a
 paused exact-build CK3 artifact proves the evaluator result; the descriptor
 does not add an opcode or an action path.
 
+`ZhongguoManagerGovernanceCapabilityProfile` records the Phase-2 B3
+manager-governance snapshot capability after its native mailbox, driver,
+service, and MCP transport were wired. It remains a read-only, hash-bound,
+uncertified descriptor; the MCP command is not registered as a Paradox opcode
+or an open_kaishek runtime handler. See
+[`../docs/zg361-manager-governance-capability.md`](../docs/zg361-manager-governance-capability.md).
+
 `G2ActivityTypeSchemaRedFixture` records the next G2 compatibility boundary:
 the `zg361_jingcha` activity source parses, while activity-type-owned keys are
 still reported as `UNKNOWN_OPCODE` by the conservative Phase 0 validator. The
