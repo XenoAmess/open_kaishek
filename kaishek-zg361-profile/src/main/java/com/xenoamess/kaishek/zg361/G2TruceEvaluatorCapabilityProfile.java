@@ -15,8 +15,6 @@ import java.util.List;
  */
 public final class G2TruceEvaluatorCapabilityProfile {
     public static final String ID = "ck3-1.19.0.6-g2-truce-evaluator-v1";
-    public static final String CAPABILITY_ID =
-            "game.command.query-g2-truce-evaluated-days-v1";
     public static final String ROOT_PROVIDER_COMMIT =
             "a3c13246ef32b35e117b08dbb86f61986c1dabe3";
     public static final String ROOT_PRODUCTION_CANDIDATE_COMMIT =
@@ -37,7 +35,7 @@ public final class G2TruceEvaluatorCapabilityProfile {
 
     public static final CapabilityDescriptor EVALUATED_DAYS =
             new CapabilityDescriptor(
-                    CAPABILITY_ID,
+                    "game.command.query-g2-truce-evaluated-days-v1",
                     ID,
                     List.of(
                             "owner_character_id",
