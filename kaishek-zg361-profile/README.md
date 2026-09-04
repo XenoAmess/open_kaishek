@@ -66,6 +66,13 @@ uncertified descriptor; the MCP command is not registered as a Paradox opcode
 or an open_kaishek runtime handler. See
 [`../docs/zg361-manager-governance-capability.md`](../docs/zg361-manager-governance-capability.md).
 
+`ZhongguoManagerSubordinateSelectorCapabilityProfile` records the exact-build
+read-only selector used to observe one bounded AI manager and one direct
+subordinate. The profile validates the public query identity, response fields,
+selection invariants, and companion hashes while deliberately advertising no
+downstream action capability. See
+[`../docs/zg361-manager-subordinate-selector-capability.md`](../docs/zg361-manager-subordinate-selector-capability.md).
+
 `G2ActivityTypeSchemaRedFixture` records the next G2 compatibility boundary:
 the `zg361_jingcha` activity source parses, while activity-type-owned keys are
 still reported as `UNKNOWN_OPCODE` by the conservative Phase 0 validator. The

@@ -41,10 +41,16 @@ class ZhongguoManagerGovernanceCapabilityProfileTest {
                 ZhongguoManagerGovernanceCapabilityProfile.ROOT_CONTRACT_SHA256.length());
         assertEquals(64,
                 ZhongguoManagerGovernanceCapabilityProfile.ROOT_ABI_SHA256.length());
+        assertEquals(
+                "6205dcab4947f67f296b9147a9ef4cdd292aa863283c49cea74a0370fa5a4684",
+                ZhongguoManagerGovernanceCapabilityProfile.ROOT_ABI_SHA256);
         assertEquals(40,
                 ZhongguoManagerGovernanceCapabilityProfile.ROOT_TRANSPORT_COMMIT.length());
         assertEquals(40,
                 ZhongguoManagerGovernanceCapabilityProfile.ROOT_EFFECT_SPLIT_COMMIT.length());
+        assertEquals(
+                "fefb408e13c4ea2aa4c512d3e3900991f9c13f7b",
+                ZhongguoManagerGovernanceCapabilityProfile.ROOT_SELECTOR_INTEGRATION_COMMIT);
     }
 
     @Test

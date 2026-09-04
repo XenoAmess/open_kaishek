@@ -24,9 +24,10 @@ paused artifact proves the B3 provider and result choreography.
 | --- | --- |
 | transport integration commit | `fc8be4aa4a06c5234747b01fcc188f2f7239961e` |
 | purpose-split/ABI commit | `4890b17998df1c5586beb36011d283c1a111f388` |
+| exact-build selector integration commit | `fefb408e13c4ea2aa4c512d3e3900991f9c13f7b` |
 | public JSON schema SHA-256 | `1487d9dc129baa31a9f2990466fbbb6e935caafdcf1fb2f16358a6b85c68f072` |
 | Python contract SHA-256 | `c7f07a53c4752cc11e859e47176124e092a791b8d87880ee3882ac88f31e767a` |
-| native ABI ledger SHA-256 | `697994d3c3d798aaeebabd63e891cf7007e67f5cef0c4b0f14405ac7ec646328` |
+| native ABI ledger SHA-256 | `6205dcab4947f67f296b9147a9ef4cdd292aa863283c49cea74a0370fa5a4684` |
 | exact game build | CK3 `1.19.0.6` / EXE `2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86` |
 
 The descriptor preserves the product's bounded-subject policy: an AI subject
@@ -34,6 +35,11 @@ requires the typed direct-manager dependency, the caller cannot assert its
 own eligibility, and the interface is not an arbitrary character-variable
 reader.  It also records the same-frame double-read, F035 distribution, and
 F032 component-8 receipt invariants.
+
+The manager authorization dependency is now bound to the same exact-build
+native selector used by the public read-only selector query. This updates the
+static ABI provenance only: the manager-governance snapshot and its downstream
+action/postcondition cell remain live-unverified and uncertified here.
 
 ## Parser, validator, IR, runtime, and CLI decision
 

@@ -28,11 +28,13 @@ public final class ZhongguoManagerGovernanceCapabilityProfile {
     public static final String ROOT_CONTRACT_SHA256 =
             "c7f07a53c4752cc11e859e47176124e092a791b8d87880ee3882ac88f31e767a";
     public static final String ROOT_ABI_SHA256 =
-            "697994d3c3d798aaeebabd63e891cf7007e67f5cef0c4b0f14405ac7ec646328";
+            "6205dcab4947f67f296b9147a9ef4cdd292aa863283c49cea74a0370fa5a4684";
     public static final String ROOT_TRANSPORT_COMMIT =
             "fc8be4aa4a06c5234747b01fcc188f2f7239961e";
     public static final String ROOT_EFFECT_SPLIT_COMMIT =
             "4890b17998df1c5586beb36011d283c1a111f388";
+    public static final String ROOT_SELECTOR_INTEGRATION_COMMIT =
+            "fefb408e13c4ea2aa4c512d3e3900991f9c13f7b";
 
     public static final CapabilityDescriptor SNAPSHOT =
             new CapabilityDescriptor(
