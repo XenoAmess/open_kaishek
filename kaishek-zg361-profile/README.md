@@ -73,6 +73,13 @@ selection invariants, and companion hashes while deliberately advertising no
 downstream action capability. See
 [`../docs/zg361-manager-subordinate-selector-capability.md`](../docs/zg361-manager-subordinate-selector-capability.md).
 
+`ZhongguoCareerHcWorkforceCapabilityProfile` records the exact-build read-only
+M360 route-B career-HC/workforce postcondition query. It freezes the receipt,
+headcount-conservation, zero-manager-cost, same-frame, and typed-unavailable
+invariants while both the native provider and downstream action remain
+uncertified and unadvertised by default. See
+[`../docs/zg361-career-hc-workforce-capability.md`](../docs/zg361-career-hc-workforce-capability.md).
+
 `G2ActivityTypeSchemaRedFixture` records the next G2 compatibility boundary:
 the `zg361_jingcha` activity source parses, while activity-type-owned keys are
 still reported as `UNKNOWN_OPCODE` by the conservative Phase 0 validator. The
