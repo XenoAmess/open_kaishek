@@ -55,10 +55,11 @@ native/runtime certification bits remain `false`; see
 
 `G2TruceEvaluatorCapabilityProfile` records the read-only G2
 `evaluated_days` observation contract, including same-frame double-read and
-non-inferred expiry invariants. The leaf-context provider is installed by
-default after a private-live proof, but the profile remains uncertified until
-the default production binary passes a paused public-wire acceptance; the
-descriptor does not add an opcode or an action path. See
+non-inferred expiry invariants. The default production leaf-context reader has
+passed a paused, read-only, dual-query public-wire acceptance, so that narrow
+observation primitive is native/runtime certified. Expiry, decision, automatic
+surrender, and action readiness remain closed; the descriptor does not add an
+opcode or an action path. See
 [`../docs/g2-truce-evaluated-days-capability.md`](../docs/g2-truce-evaluated-days-capability.md).
 
 `ZhongguoManagerGovernanceCapabilityProfile` records the Phase-2 B3

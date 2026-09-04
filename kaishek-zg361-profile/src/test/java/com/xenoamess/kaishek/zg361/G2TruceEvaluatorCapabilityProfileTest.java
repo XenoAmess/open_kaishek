@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class G2TruceEvaluatorCapabilityProfileTest {
     @Test
-    void evaluatedDaysContractIsReadOnlyAndExplicitlyUncertified() {
+    void evaluatedDaysContractIsReadOnlyAndProductionLiveCertified() {
         var capability = G2TruceEvaluatorCapabilityProfile.EVALUATED_DAYS;
 
         assertEquals(
@@ -17,9 +17,9 @@ class G2TruceEvaluatorCapabilityProfileTest {
                 capability.profileVersion());
         assertTrue(capability.readOnly());
         assertTrue(capability.deterministic());
-        assertFalse(capability.nativeCertified());
-        assertFalse(capability.runtimeCertified());
-        assertFalse(capability.certified());
+        assertTrue(capability.nativeCertified());
+        assertTrue(capability.runtimeCertified());
+        assertTrue(capability.certified());
         assertTrue(capability.requiredFields().contains("evaluated_days"));
         assertTrue(capability.invariants().contains(
                 "two_evaluator_reads_match_on_one_paused_frame"));
@@ -47,11 +47,34 @@ class G2TruceEvaluatorCapabilityProfileTest {
         assertEquals(
                 "e49d31f35fbb3f5bc713ea94cb9ff3e83ec9fa713772968a0dcffefd20200b2a",
                 G2TruceEvaluatorCapabilityProfile.ROOT_PROVIDER_HEADER_SHA256);
+        assertEquals(
+                "ad6eef83dcca07c3ae280f01cade6bbd0c1912ff0e086d797604d5f06c99f7c2",
+                G2TruceEvaluatorCapabilityProfile.PRODUCTION_LIVE_REPORT_SHA256);
+        assertEquals(
+                "f4e63fffa6cf9332ba41eb5985d1cb72f280f4bf375a15473f4638f43cf944be",
+                G2TruceEvaluatorCapabilityProfile.PRODUCTION_TREE_SHA256);
+        assertEquals(
+                "1acc24db476a7b1ecb4f0a98ef2e9a74d0e932cb74f5884622530d77246e3244",
+                G2TruceEvaluatorCapabilityProfile.PRODUCTION_BRIDGE_DLL_SHA256);
+        assertEquals(
+                "03ed1ee07ac58e1e6f7adde31518c732c1d60cdbffc3b50938d7e1cf84c877c5",
+                G2TruceEvaluatorCapabilityProfile.PRODUCTION_BRIDGE_INJECTOR_SHA256);
+        assertEquals(
+                151.766,
+                G2TruceEvaluatorCapabilityProfile.PRODUCTION_LIVE_ELAPSED_SECONDS);
+        assertEquals(
+                1825,
+                G2TruceEvaluatorCapabilityProfile.PRODUCTION_OBSERVED_EVALUATED_DAYS);
         assertFalse(G2TruceEvaluatorCapabilityProfile.PUBLIC_SCHEMA_CHANGED);
         assertTrue(G2TruceEvaluatorCapabilityProfile.PRIVATE_LEAF_READER_LIVE_OBSERVED);
         assertTrue(G2TruceEvaluatorCapabilityProfile.DEFAULT_PRODUCTION_LEAF_READER_INSTALLED);
-        assertFalse(G2TruceEvaluatorCapabilityProfile.DEFAULT_PRODUCTION_BINARY_LIVE_VALIDATED);
+        assertTrue(G2TruceEvaluatorCapabilityProfile.DEFAULT_PRODUCTION_BINARY_LIVE_VALIDATED);
+        assertTrue(G2TruceEvaluatorCapabilityProfile.PRODUCTION_LIVE_READ_ONLY_PRIMITIVE);
         assertFalse(G2TruceEvaluatorCapabilityProfile.EXPIRY_OBSERVABLE);
-        assertFalse(G2TruceEvaluatorCapabilityProfile.EVALUATED_DAYS.certified());
+        assertFalse(G2TruceEvaluatorCapabilityProfile.TERMINATION_ACTION_ENABLED);
+        assertFalse(G2TruceEvaluatorCapabilityProfile.FULL_DECISION_READY);
+        assertFalse(G2TruceEvaluatorCapabilityProfile.AUTOMATIC_SURRENDER_READY);
+        assertFalse(G2TruceEvaluatorCapabilityProfile.GEN_034_CLOSED);
+        assertTrue(G2TruceEvaluatorCapabilityProfile.EVALUATED_DAYS.certified());
     }
 }
