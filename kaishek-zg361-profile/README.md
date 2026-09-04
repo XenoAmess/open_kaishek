@@ -73,10 +73,12 @@ truce-row query and its retention ticket without registering a capability;
 see
 [`../docs/g2-actual-truce-expiry-candidate.md`](../docs/g2-actual-truce-expiry-candidate.md).
 
-`G2PostwarCleanupExpiryAdapterMetadata` pins the fixture-only receipt adapter
-that joins the retention ticket, native cleanup observation, and persisted
-expiry reads. It remains live-blocked on the missing cleanup query dispatch
-and registers no capability; see
+`G2PostwarCleanupExpiryAdapterMetadata` pins the private default-OFF cleanup
+query and receipt adapter. The query now dispatches, but remains static-only
+and has not run against CK3. WarID absence is admission only; `destroyed`
+comes from double-sampling the exact retained regiment/army generations. The
+adapter issues this query itself and rejects external cleanup injection. It
+still registers no public capability; see
 [`../docs/g2-postwar-cleanup-expiry-adapter.md`](../docs/g2-postwar-cleanup-expiry-adapter.md).
 
 `ZhongguoPromotionSourceTransportCapabilityProfile` records the B7 promotion
