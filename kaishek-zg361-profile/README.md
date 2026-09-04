@@ -68,6 +68,11 @@ public wire. Source attribution, termination/surrender causality, public
 readiness, production live, and GEN-034 remain false; see
 [`../docs/g2-war-bound-loss-candidate.md`](../docs/g2-war-bound-loss-candidate.md).
 
+`ZhongguoPromotionSourceTransportCapabilityProfile` records the B7 promotion
+source query and review-now action fail-closed transports. The product-level
+query/action flags remain false and live-pending; see
+[`../docs/zg361-promotion-source-transport-capability.md`](../docs/zg361-promotion-source-transport-capability.md).
+
 `ZhongguoManagerGovernanceCapabilityProfile` records the Phase-2 B3
 manager-governance snapshot capability after its native mailbox, driver,
 service, and MCP transport were wired. It remains a read-only, hash-bound,
