@@ -55,9 +55,11 @@ native/runtime certification bits remain `false`; see
 
 `G2TruceEvaluatorCapabilityProfile` records the read-only G2
 `evaluated_days` observation contract, including same-frame double-read and
-non-inferred expiry invariants. It is intentionally uncertified until a
-paused exact-build CK3 artifact proves the evaluator result; the descriptor
-does not add an opcode or an action path.
+non-inferred expiry invariants. The leaf-context provider is installed by
+default after a private-live proof, but the profile remains uncertified until
+the default production binary passes a paused public-wire acceptance; the
+descriptor does not add an opcode or an action path. See
+[`../docs/g2-truce-evaluated-days-capability.md`](../docs/g2-truce-evaluated-days-capability.md).
 
 `ZhongguoManagerGovernanceCapabilityProfile` records the Phase-2 B3
 manager-governance snapshot capability after its native mailbox, driver,
