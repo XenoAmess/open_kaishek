@@ -8,13 +8,23 @@ start CK3, or claim a live native provider.
 
 `game.command.query-zhongguo-projects-metrics-postcondition-v1` requires the
 CP #026 contribution receipt id/revision and the Phase-3 #229 source-lineage
-fields. The projected invariants are:
+fields. Companion commit `953634265ebf298cec3f2cf3065060e577dc8d17`
+also makes top-level `checkpoint_state` mandatory, with the bounded states
+`cp26_ready_p3_absent`, `p3_initialized_source_not_ready`,
+`p3_source_ready_result_pending`, and `p3_result_committed`. The projected
+invariants are:
 
 * the contribution receipt id and revision are positive;
 * Phase-3 project source id/revision equal the CP receipt id/revision;
 * the #229 source id/revision equal the Phase-3 project source id/revision;
 * the #229 metrics revision is positive; and
 * the #229 dictionary key code is positive.
+
+The provider-internal allowlist grew from 24 to 40 fields under
+`zg361-cp26-direct-p3m229-lineage-v2` so the reader can bind direct CP26 state.
+That allowlist and the central stage 7/8 source ordering do not add parser
+vocabulary, an action, or a runtime handler. The candidate remains default
+OFF, uncertified, and non-live.
 
 `game.command.query-zhongguo-promotion-compensation-postcondition-v1` requires
 the `zg361_pp_m147_receipt_serial/revision` and

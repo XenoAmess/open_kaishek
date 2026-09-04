@@ -17,10 +17,26 @@ import java.util.TreeMap;
  */
 public final class ZhongguoBusinessPostconditionProfile {
     public static final String ID = "ck3-1.19.0.6-zg361-business-postconditions-v1";
+    public static final String PROJECTS_METRICS_ROOT_COMMIT =
+            "953634265ebf298cec3f2cf3065060e577dc8d17";
+    public static final String PROJECTS_METRICS_SOURCE_CONTRACT_SHA256 =
+            "362e9e88ff0a2ac8a7ec5cd396959a7200ed9f4f6d8519c953fe1798b903f0f2";
+    public static final String PROJECTS_METRICS_ABI_SHA256 =
+            "c0135b790089de3807ae2139431c3cd1df3867d61408e36cd64df17b5dc4fadd";
+    public static final String PROJECTS_METRICS_SCHEMA_SHA256 =
+            "3763b17f937d4c36c5643a41d54ccd449cd23a8f5f94cddb4a4edbed7bbdbfd4";
+    public static final String PROJECTS_METRICS_PYTHON_CONTRACT_SHA256 =
+            "468d4ce43a28606148290b00b715f04dc33ba7f5bf95299949afe37b66b37195";
+    public static final String PROJECTS_METRICS_ALLOWLIST_ID =
+            "zg361-cp26-direct-p3m229-lineage-v2";
+    public static final boolean PROJECTS_METRICS_CHECKPOINT_STATE_REQUIRED = true;
+    public static final boolean PROJECTS_METRICS_DEFAULT_CANDIDATE_ENABLED = false;
+    public static final boolean PROJECTS_METRICS_PRODUCTION_LIVE = false;
 
     public static final CapabilityDescriptor PROJECTS_METRICS = descriptor(
             "game.command.query-zhongguo-projects-metrics-postcondition-v1",
             List.of(
+                    "checkpoint_state",
                     "source_identity.owner_character_id",
                     "source_identity.subject_character_id",
                     "source_identity.cycle_serial",
@@ -42,6 +58,7 @@ public final class ZhongguoBusinessPostconditionProfile {
                     "phase3_initializer_requires_current_owner_subject_cycle",
                     "source_result_contribution_metrics_share_project_identity",
                     "metrics_receipt_id_and_revision_equal_contribution",
+                    "cp26_ready_p3_absent_exposes_no_p3_result",
                     "route_c_does_not_publish_business_lineage"));
 
     public static final CapabilityDescriptor PROMOTION_COMPENSATION = descriptor(

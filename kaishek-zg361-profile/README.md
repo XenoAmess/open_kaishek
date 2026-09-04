@@ -62,6 +62,12 @@ surrender, and action readiness remain closed; the descriptor does not add an
 opcode or an action path. See
 [`../docs/g2-truce-evaluated-days-capability.md`](../docs/g2-truce-evaluated-days-capability.md).
 
+`G2WarBoundLossCandidateMetadata` pins the separate default-OFF frozen-set
+`598 -> 0` cleanup candidate without registering a capability or changing the
+public wire. Source attribution, termination/surrender causality, public
+readiness, production live, and GEN-034 remain false; see
+[`../docs/g2-war-bound-loss-candidate.md`](../docs/g2-war-bound-loss-candidate.md).
+
 `ZhongguoManagerGovernanceCapabilityProfile` records the Phase-2 B3
 manager-governance snapshot capability after its native mailbox, driver,
 service, and MCP transport were wired. It remains a read-only, hash-bound,
