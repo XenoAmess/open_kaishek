@@ -60,6 +60,30 @@ class ZhongguoBusinessPostconditionProfileTest {
                 "portfolio.delivered_result_case"));
         assertTrue(promotion.invariants().contains(
                 "t_and_l_ae_af_kernel_case_identities_remain_independent"));
+        assertEquals(
+                "cac1e85b616827a9ae11d755dd71f119325e6f3f",
+                ZhongguoBusinessPostconditionProfile
+                        .PROMOTION_COMPENSATION_ROOT_COMMIT);
+        assertEquals(
+                "98ab5f09bb44d6d5cb1062fea64e6fdf9e41cf160f64ecd8d5a644b9086ef627",
+                ZhongguoBusinessPostconditionProfile
+                        .PROMOTION_COMPENSATION_SOURCE_CONTRACT_SHA256);
+        assertEquals(
+                "XAR_CK3_ENABLE_ZHONGGUO_PROMOTION_COMPENSATION_CANDIDATE_V1",
+                ZhongguoBusinessPostconditionProfile
+                        .PROMOTION_COMPENSATION_PRIVATE_CANDIDATE_SWITCH);
+        assertTrue(ZhongguoBusinessPostconditionProfile
+                .PROMOTION_COMPENSATION_PRIVATE_CANDIDATE_ADVERTISES);
+        assertFalse(ZhongguoBusinessPostconditionProfile
+                .PROMOTION_COMPENSATION_DEFAULT_SWITCH_ENABLED);
+        assertFalse(ZhongguoBusinessPostconditionProfile
+                .PROMOTION_COMPENSATION_DEFAULT_ADAPTER_ADVERTISED);
+        assertFalse(ZhongguoBusinessPostconditionProfile
+                .PROMOTION_COMPENSATION_CANDIDATE_LIVE_TESTED);
+        assertFalse(ZhongguoBusinessPostconditionProfile
+                .PROMOTION_COMPENSATION_PUBLIC_API_CHANGED);
+        assertFalse(ZhongguoBusinessPostconditionProfile
+                .PROMOTION_COMPENSATION_PRODUCTION_LIVE);
     }
 
     @Test

@@ -39,6 +39,20 @@ are:
 * the PP T case and compensation L/AE/AF internal kernel cases remain separate
   identities rather than being equated by the cross-product receipt.
 
+The companion native adapter now has an explicitly private candidate switch,
+`XAR_CK3_ENABLE_ZHONGGUO_PROMOTION_COMPENSATION_CANDIDATE_V1`. It defaults
+OFF, so the default adapter still does not advertise the provider. An
+explicit ON build advertises the already-wired read-only query only for the
+bounded private candidate. This changes neither the public request/projection
+schema nor this static descriptor, and no CK3 live result has been collected;
+`nativeCertified`, `runtimeCertified`, and production-live readiness remain
+false. The source pin is companion `cac1e85b616827a9ae11d755dd71f119325e6f3f`
+with source-contract SHA-256
+`98ab5f09bb44d6d5cb1062fea64e6fdf9e41cf160f64ecd8d5a644b9086ef627`.
+Fresh MSVC 19.51 Release registry builds at that companion commit passed the
+focused adapter-registry test once with the switch omitted/OFF and once with
+it explicitly ON. These are static native checks only and did not start CK3.
+
 The Java profile records these as immutable `CapabilityDescriptor` instances
 bound to `ck3-1.19.0.6-zg361-business-postconditions-v1`. Both capabilities
 are read-only and deterministic at the contract level, but

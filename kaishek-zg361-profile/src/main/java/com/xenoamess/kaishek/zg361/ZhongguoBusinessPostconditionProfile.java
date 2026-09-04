@@ -32,6 +32,23 @@ public final class ZhongguoBusinessPostconditionProfile {
     public static final boolean PROJECTS_METRICS_CHECKPOINT_STATE_REQUIRED = true;
     public static final boolean PROJECTS_METRICS_DEFAULT_CANDIDATE_ENABLED = false;
     public static final boolean PROJECTS_METRICS_PRODUCTION_LIVE = false;
+    public static final String PROMOTION_COMPENSATION_ROOT_COMMIT =
+            "cac1e85b616827a9ae11d755dd71f119325e6f3f";
+    public static final String PROMOTION_COMPENSATION_SOURCE_CONTRACT_SHA256 =
+            "98ab5f09bb44d6d5cb1062fea64e6fdf9e41cf160f64ecd8d5a644b9086ef627";
+    public static final String PROMOTION_COMPENSATION_PRIVATE_CANDIDATE_SWITCH =
+            "XAR_CK3_ENABLE_ZHONGGUO_PROMOTION_COMPENSATION_CANDIDATE_V1";
+    public static final boolean PROMOTION_COMPENSATION_DEFAULT_SWITCH_ENABLED =
+            false;
+    public static final boolean PROMOTION_COMPENSATION_DEFAULT_ADAPTER_ADVERTISED =
+            false;
+    public static final boolean PROMOTION_COMPENSATION_PRIVATE_CANDIDATE_ADVERTISES =
+            true;
+    public static final boolean PROMOTION_COMPENSATION_CANDIDATE_LIVE_TESTED =
+            false;
+    public static final boolean PROMOTION_COMPENSATION_PUBLIC_API_CHANGED =
+            false;
+    public static final boolean PROMOTION_COMPENSATION_PRODUCTION_LIVE = false;
 
     public static final CapabilityDescriptor PROJECTS_METRICS = descriptor(
             "game.command.query-zhongguo-projects-metrics-postcondition-v1",
