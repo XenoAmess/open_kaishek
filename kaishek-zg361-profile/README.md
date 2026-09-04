@@ -68,6 +68,11 @@ public wire. Source attribution, termination/surrender causality, public
 readiness, production live, and GEN-034 remain false; see
 [`../docs/g2-war-bound-loss-candidate.md`](../docs/g2-war-bound-loss-candidate.md).
 
+`G2ActualTruceExpiryCandidateMetadata` pins the separate default-OFF persisted
+truce-row query and its retention ticket without registering a capability;
+see
+[`../docs/g2-actual-truce-expiry-candidate.md`](../docs/g2-actual-truce-expiry-candidate.md).
+
 `ZhongguoPromotionSourceTransportCapabilityProfile` records the B7 promotion
 source query and review-now action fail-closed transports. The product-level
 query/action flags remain false and live-pending; see
