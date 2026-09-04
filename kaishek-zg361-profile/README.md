@@ -73,6 +73,12 @@ truce-row query and its retention ticket without registering a capability;
 see
 [`../docs/g2-actual-truce-expiry-candidate.md`](../docs/g2-actual-truce-expiry-candidate.md).
 
+`G2PostwarCleanupExpiryAdapterMetadata` pins the fixture-only receipt adapter
+that joins the retention ticket, native cleanup observation, and persisted
+expiry reads. It remains live-blocked on the missing cleanup query dispatch
+and registers no capability; see
+[`../docs/g2-postwar-cleanup-expiry-adapter.md`](../docs/g2-postwar-cleanup-expiry-adapter.md).
+
 `ZhongguoPromotionSourceTransportCapabilityProfile` records the B7 promotion
 source query and review-now action fail-closed transports. The product-level
 query/action flags remain false and live-pending; see
