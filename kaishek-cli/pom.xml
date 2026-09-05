@@ -14,6 +14,7 @@
     <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-runtime</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-diff-contract</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-ck3-11906-profile</artifactId><version>${project.version}</version></dependency>
+    <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-stellaris-446-profile</artifactId><version>${project.version}</version></dependency>
     <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-zg361-profile</artifactId><version>${project.version}</version></dependency>
   </dependencies>
   <build>

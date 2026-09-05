@@ -24,7 +24,7 @@
 ## 当前状态（2026-09-01）
 
 当前提交包含可离线构建的纯 Java 基线：lossless
-parser/CST（含 Phase 1 方括号列表、内联表达式角色、scope chain 与 reader directive）、profile API 与 CK3 1.19.0.6 profile、schema validator、strict IR
+parser/CST（含 Phase 1 方括号列表、内联表达式角色、scope chain 与 reader directive）、profile API、CK3 1.19.0.6 profile 与受限的 Stellaris 4.4.6 静态 profile、schema validator、strict IR
 合同、finite runtime 原语、差分 snapshot/trace 合同、361 domain schema，以及不启动
 Quarkus 的 CLI。另有一条明确标注为 synthetic 的 014 纵向夹具走通 Parser → Validator
 → IR → VM。Phase 0/M0 的离线评审证据记录在
@@ -62,7 +62,7 @@ synthetic 014 夹具会由 Maven 测试覆盖；CLI smoke 是无框架的显式�
 执行上面的构建，再运行：
 
 ```powershell
-java -ea -cp "kaishek-cli/target/classes;kaishek-cli/target/test-classes;kaishek-validator/target/classes;kaishek-ck3-11906-profile/target/classes;kaishek-zg361-profile/target/classes;kaishek-ir/target/classes;kaishek-runtime/target/classes;kaishek-diff-contract/target/classes;kaishek-profile-api/target/classes;kaishek-syntax/target/classes" com.xenoamess.kaishek.cli.KaishekCliSmokeTest
+java -ea -cp "kaishek-cli/target/classes;kaishek-cli/target/test-classes;kaishek-validator/target/classes;kaishek-ck3-11906-profile/target/classes;kaishek-stellaris-446-profile/target/classes;kaishek-zg361-profile/target/classes;kaishek-ir/target/classes;kaishek-runtime/target/classes;kaishek-diff-contract/target/classes;kaishek-profile-api/target/classes;kaishek-syntax/target/classes" com.xenoamess.kaishek.cli.KaishekCliSmokeTest
 ```
 
 目标 corpus 是外部输入。例如在 Windows 上可将 `Z:\ck3_mod_rewrite\mod_zhongguo_style`
@@ -84,6 +84,7 @@ java -ea -cp "kaishek-cli/target/classes;kaishek-cli/target/test-classes;kaishek
 - [M1 / Phase 1 parser readiness 记录](docs/decisions/0004-m1-phase1-formal-readiness.md)
 - [许可证审计与迁移记录](docs/license-audit.md)
 - [开发流程与主线优先约定](docs/development-workflow.md)
+- [Stellaris 4.4.6 静态 profile 边界](docs/stellaris-4.4.6-profile.md)
 
 ## Readiness 边界
 

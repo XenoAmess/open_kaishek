@@ -3,7 +3,7 @@ package com.xenoamess.kaishek.profile;
 /** Source-directory families understood by a schema profile. */
 public enum ScriptDomain {
     EVENTS, ON_ACTION, SCRIPTED_EFFECTS, SCRIPTED_TRIGGERS, SCRIPTED_VALUES,
-    DECISIONS, INTERACTIONS, ACTIVITIES, SCRIPTED_GUI, CUSTOMIZABLE_LOCALIZATION,
+    DECISIONS, DEPOSITS, INTERACTIONS, ACTIVITIES, SCRIPTED_GUI, CUSTOMIZABLE_LOCALIZATION,
     GUI_REGISTRATION, UNKNOWN;
 
     /** Classify a conventional Paradox source path without a game-specific dependency. */
@@ -22,6 +22,7 @@ public enum ScriptDomain {
         if (p.contains("/scripted_value") || p.contains("/script_values/")
                 || p.startsWith("scripted_value") || p.startsWith("script_values/")) return SCRIPTED_VALUES;
         if (p.contains("/decisions/") || p.startsWith("decisions/")) return DECISIONS;
+        if (p.contains("/deposits/") || p.startsWith("deposits/")) return DEPOSITS;
         if (p.contains("/interactions/") || p.contains("/character_interactions/")
                 || p.startsWith("interactions/") || p.startsWith("character_interactions/")) return INTERACTIONS;
         if (p.contains("/activities/") || p.startsWith("activities/")) return ACTIVITIES;

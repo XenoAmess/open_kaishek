@@ -25,6 +25,7 @@
     <module>kaishek-syntax</module>
     <module>kaishek-profile-api</module>
     <module>kaishek-ck3-11906-profile</module>
+    <module>kaishek-stellaris-446-profile</module>
     <module>kaishek-validator</module>
     <module>kaishek-ir</module>
     <module>kaishek-runtime</module>

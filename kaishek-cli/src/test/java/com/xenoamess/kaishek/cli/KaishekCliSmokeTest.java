@@ -51,6 +51,48 @@ public final class KaishekCliSmokeTest {
       check(semanticError == 1 && semanticJson.contains("\"status\":\"INVALID\"")
           && semanticJson.contains("\"semanticDiagnostics\":1"), semanticJson);
 
+      // The Stellaris profile validates the bounded decision/deposit shapes
+      // used by the first real mod acceptance corpus, while keeping unknown
+      // script operations fail-closed.
+      Path stellarisDecisions = Files.createDirectories(root.resolve("stellaris/common/decisions"));
+      Path validDecision = stellarisDecisions.resolve("workplace.txt");
+      Files.writeString(validDecision, "test_decision = {\n"
+          + "  owned_planets_only = yes\n  enactment_time = 180\n"
+          + "  resources = { category = decisions cost = { minerals = 1000 } }\n"
+          + "  ai_weight = { weight = 0 }\n"
+          + "  effect = { add_deposit = test_deposit }\n}\n", StandardCharsets.UTF_8);
+      b.reset();
+      int stellarisDecision = KaishekCli.run(new String[]{"validate", "--profile",
+          "stellaris-4.4.6", "--file", validDecision.toString()}, new PrintStream(b), System.err);
+      check(stellarisDecision == 0 && b.toString(StandardCharsets.UTF_8)
+          .contains("\"status\":\"VALIDATED\""), b);
+
+      Path stellarisDeposits = Files.createDirectories(root.resolve("stellaris/common/deposits"));
+      Path validDeposit = stellarisDeposits.resolve("extend_workplace.txt");
+      Files.writeString(validDeposit, "test_deposit = {\n"
+          + "  is_for_colonizable = yes\n"
+          + "  planet_modifier = { job_miner_add = 2 }\n"
+          + "  triggered_planet_modifier = {\n"
+          + "    potential = { exists = owner owner = { is_gestalt = no } }\n"
+          + "    modifier = { job_miner_add = 2 }\n"
+          + "  }\n"
+          + "  potential = { always = no }\n"
+          + "  drop_weight = { weight = 0 }\n"
+          + "  should_swap_deposit_on_terraforming = no\n}\n", StandardCharsets.UTF_8);
+      b.reset();
+      int stellarisDeposit = KaishekCli.run(new String[]{"validate", "--profile",
+          "stellaris-4.4.6", "--file", validDeposit.toString()}, new PrintStream(b), System.err);
+      check(stellarisDeposit == 0 && b.toString(StandardCharsets.UTF_8)
+          .contains("\"status\":\"VALIDATED\""), b);
+
+      Files.writeString(validDecision, "test_decision = { effect = { invented_effect = yes } }\n",
+          StandardCharsets.UTF_8);
+      b.reset();
+      int stellarisUnknown = KaishekCli.run(new String[]{"validate", "--profile",
+          "stellaris-4.4.6", "--file", validDecision.toString()}, new PrintStream(b), System.err);
+      check(stellarisUnknown == 1 && b.toString(StandardCharsets.UTF_8)
+          .contains("\"status\":\"INVALID\""), b);
+
       b.reset();
       int missing = KaishekCli.run(new String[]{"parse", "--file"}, new PrintStream(b), System.err);
       check(missing == 2 && b.toString(StandardCharsets.UTF_8).contains("\"status\":\"ERROR\""), b);

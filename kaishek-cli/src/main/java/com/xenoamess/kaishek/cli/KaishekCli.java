@@ -6,6 +6,8 @@ import com.xenoamess.kaishek.syntax.ParseResult;
 import com.xenoamess.kaishek.syntax.SyntaxKind;
 import com.xenoamess.kaishek.validator.Validator;
 import com.xenoamess.kaishek.profile.Ck3Profile11906;
+import com.xenoamess.kaishek.profile.KaishekProfile;
+import com.xenoamess.kaishek.profile.StellarisProfile446;
 import com.xenoamess.kaishek.zg361.OfflinePreflight;
 import com.xenoamess.kaishek.zg361.Synthetic361Pipeline;
 import java.io.*;
@@ -65,22 +67,33 @@ public final class KaishekCli {
     String profile = option(a, "--profile", "ck3-1.19.0.6");
     ParseResult p = Parser.parse(source);
     List<String> d = new ArrayList<>(); p.diagnostics().forEach(x -> d.add(x.code()));
-    // Only syntax checks are currently certified; schema/profile semantics remain explicit.
-    boolean known = profile.equals("ck3-1.19.0.6") || profile.equals("ck3-1.19.0.6-zg361");
+    // Only syntax/static-schema checks are supported here; runtime semantics remain explicit.
+    boolean known = profile.equals("ck3-1.19.0.6") || profile.equals("ck3-1.19.0.6-zg361")
+        || profile.equals(StellarisProfile446.ID);
     if (!known) { out.println(json("status","UNSUPPORTED","reason","profile-not-registered","profile",profile)); return 4; }
     List<String> semantic = new ArrayList<>();
-    boolean semanticSupported = profile.equals("ck3-1.19.0.6") && inputPath != null;
+    List<String> semanticPaths = new ArrayList<>();
+    KaishekProfile staticProfile = switch (profile) {
+      case "ck3-1.19.0.6" -> new Ck3Profile11906();
+      case StellarisProfile446.ID -> new StellarisProfile446();
+      default -> null;
+    };
+    boolean semanticSupported = staticProfile != null && inputPath != null;
     if (semanticSupported && !p.hasErrors()) {
       // The ParseResult overload intentionally includes syntax diagnostics for
       // library callers.  The CLI reports syntax and semantic counts
       // separately, so validate the already parsed document here.
-      Validator.validate(p.document(), inputPath.toString(), new Ck3Profile11906())
-          .forEach(x -> semantic.add(x.code()));
+      Validator.validate(p.document(), inputPath.toString(), staticProfile)
+          .forEach(x -> { semantic.add(x.code()); semanticPaths.add(x.path()); });
     }
     boolean invalid = p.hasErrors() || !semantic.isEmpty();
     String semStatus = semanticSupported ? "VALIDATED" : "UNSUPPORTED";
     String status = invalid ? "INVALID" : (semanticSupported ? "VALIDATED" : "UNSUPPORTED");
-    out.println("{\"status\":\""+status+"\",\"profile\":"+q(profile)+",\"syntaxDiagnostics\":"+d.size()+",\"semanticDiagnostics\":"+semantic.size()+",\"semantic\":\""+semStatus+"\"}");
+    out.println("{\"status\":\""+status+"\",\"profile\":"+q(profile)
+        +",\"syntaxDiagnostics\":"+d.size()+",\"syntaxCodes\":"+jsonArray(d)
+        +",\"semanticDiagnostics\":"+semantic.size()+",\"semanticCodes\":"+jsonArray(semantic)
+        +",\"semanticPaths\":"+jsonArray(semanticPaths)
+        +",\"semantic\":\""+semStatus+"\"}");
     // A supported semantic check must fail the process when it finds a
     // semantic diagnostic.  Previously only syntax diagnostics affected the
     // exit code, making an INVALID response appear successful to CI.
@@ -383,7 +396,11 @@ public final class KaishekCli {
   private static int profile(String[] a, PrintStream out) {
     String positionalId = positional(a, 1);
     String id=option(a,"--id", positionalId == null ? "" : positionalId);
-    if (id.isEmpty()) { out.println("{\"status\":\"OK\",\"profiles\":[{\"id\":\"ck3-1.19.0.6\",\"game\":\"Crusader Kings III\",\"build\":\"1.19.0.6\",\"semantic\":\"static\"},{\"id\":\"ck3-1.19.0.6-zg361\",\"game\":\"Crusader Kings III + mod_zhongguo_style\",\"build\":\"1.19.0.6\",\"semantic\":\"schema-only\"}]}"); return 0; }
+    if (id.isEmpty()) { out.println("{\"status\":\"OK\",\"profiles\":[{\"id\":\"ck3-1.19.0.6\",\"game\":\"Crusader Kings III\",\"build\":\"1.19.0.6\",\"semantic\":\"static\"},{\"id\":\"ck3-1.19.0.6-zg361\",\"game\":\"Crusader Kings III + mod_zhongguo_style\",\"build\":\"1.19.0.6\",\"semantic\":\"schema-only\"},{\"id\":\"stellaris-4.4.6\",\"game\":\"Stellaris\",\"build\":\"4.4.6\",\"semantic\":\"static\"}]}"); return 0; }
+    if (id.equals(StellarisProfile446.ID)) {
+      out.println("{\"status\":\"OK\",\"id\":"+q(id)+",\"game\":\"Stellaris\",\"build\":\"4.4.6\",\"exeSha256\":"+q(StellarisProfile446.EXE_SHA256)+",\"semantic\":\"static\",\"runtime\":\"UNSUPPORTED\"}");
+      return 0;
+    }
     if (!id.equals("ck3-1.19.0.6")&&!id.equals("ck3-1.19.0.6-zg361")) return unsupported("profile:"+id,out);
     String semantic = id.endsWith("-zg361") ? "schema-only" : "static";
     out.println("{\"status\":\"OK\",\"id\":"+q(id)+",\"game\":\"Crusader Kings III\",\"build\":\"1.19.0.6\",\"exeSha256\":"+q(EXE_SHA)+",\"semantic\":"+q(semantic)+",\"runtime\":\"UNSUPPORTED\"}"); return 0;
@@ -497,6 +514,7 @@ public final class KaishekCli {
   private static MessageDigest digest(){try{return MessageDigest.getInstance("SHA-256");}catch(Exception e){throw new AssertionError(e);}}
   private static String sha(byte[] b){return hex(digest().digest(b));} private static String hex(byte[] b){StringBuilder s=new StringBuilder();for(byte x:b)s.append(String.format(Locale.ROOT,"%02x",x));return s.toString();}
   private static String q(String s){return "\""+s.replace("\\","\\\\").replace("\"","\\\"").replace("\r","\\r").replace("\n","\\n")+"\"";}
+  private static String jsonArray(Collection<String> values){StringBuilder b=new StringBuilder("[");int i=0;for(String value:values){if(i++>0)b.append(',');b.append(q(value));}return b.append(']').toString();}
   private static String json(String... kv){StringBuilder b=new StringBuilder("{");for(int i=0;i<kv.length;i+=2){if(i>0)b.append(',');b.append(q(kv[i])).append(':').append(q(kv[i+1]));}return b.append('}').toString();}
   private static void usage(PrintStream o){o.println("kaishek-cli "+VERSION+" (pure Java; Quarkus is not started)\nUsage: parse|validate|hash|corpus|profile [--file PATH|PATH] [corpus: --require-corpus]\n       synthetic-361|runtime-fixture\n       preflight [--root PATH] [--profile ID] [--fixture ID]\n       batch|replay [--file MANIFEST.jsonl] [--stop-on-error]\nBatch lines: {\"id\":\"case\",\"command\":\"parse\",\"text\":\"x = 1\\n\"}\nPreflight is offline-only and never starts CK3; it returns one JSON report.\nFixtures include synthetic-361-014, appeal-014, ck3-calculated-value-014 (schema-only RED), ck3-g2-activity-type-schema-red-11906 (schema-only RED), ck3-war-days-trigger-11906, ck3-has-innovation-trigger-11906, ck3-has-cultural-tradition-trigger-11906, ck3-has-cultural-pillar-trigger-11906, ck3-has-cultural-parameter-trigger-11906, ck3-is-acclaimed-trigger-11906, ck3-can-be-acclaimed-trigger-11906, zg361-projects-metrics-postcondition-v1, and zg361-promotion-compensation-postcondition-v1.\nUnknown semantics return status UNSUPPORTED.");}
 
