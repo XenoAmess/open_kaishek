@@ -21,7 +21,7 @@ class G2PostwarCleanupExpiryAdapterMetadataTest {
                 "40696417f3bbd841e79116612697654c48868c90534bdfc0fdf43e161fdb47c8",
                 G2PostwarCleanupExpiryAdapterMetadata.ROOT_RUNNER_SHA256);
         assertEquals(
-                "STATIC_READY_PRIVATE_DISPATCH_LIVE_NOT_RUN",
+                "PRIVATE_DISPATCH_LIVE_PRIMITIVE_COMPARISON_PENDING",
                 G2PostwarCleanupExpiryAdapterMetadata.STATUS);
         assertEquals(
                 "game.command.query-raiktor-war-bound-loss-cleanup-v1-N",
@@ -55,7 +55,7 @@ class G2PostwarCleanupExpiryAdapterMetadataTest {
     }
 
     @Test
-    void keepsCleanupAndProductReadinessClosed() {
+    void recordsPrivateCleanupWithoutPromotingProductReadiness() {
         assertTrue(G2PostwarCleanupExpiryAdapterMetadata.METADATA_ONLY);
         assertTrue(
                 G2PostwarCleanupExpiryAdapterMetadata
@@ -84,7 +84,7 @@ class G2PostwarCleanupExpiryAdapterMetadataTest {
         assertFalse(
                 G2PostwarCleanupExpiryAdapterMetadata
                         .PUBLIC_CAPABILITY_ADDED);
-        assertFalse(
+        assertTrue(
                 G2PostwarCleanupExpiryAdapterMetadata
                         .CLEANUP_DISPATCH_LIVE_TESTED);
         assertFalse(
@@ -97,7 +97,7 @@ class G2PostwarCleanupExpiryAdapterMetadataTest {
                 G2PostwarCleanupExpiryAdapterMetadata
                         .EXTERNAL_CLEANUP_INJECTION_ALLOWED);
         assertFalse(G2PostwarCleanupExpiryAdapterMetadata.LIVE_AUTHORIZED);
-        assertFalse(
+        assertTrue(
                 G2PostwarCleanupExpiryAdapterMetadata.RUNTIME_CLEANUP_READY);
         assertFalse(
                 G2PostwarCleanupExpiryAdapterMetadata
@@ -113,5 +113,23 @@ class G2PostwarCleanupExpiryAdapterMetadataTest {
                 G2PostwarCleanupExpiryAdapterMetadata
                         .AUTOMATIC_SURRENDER_READY);
         assertFalse(G2PostwarCleanupExpiryAdapterMetadata.GEN_034_RESOLVED);
+    }
+
+    @Test
+    void bindsTheImmutableR3LiveAttemptSeparatelyFromSyntheticEvidence() {
+        assertEquals("e72f9fa302811a823479635648eb008a6f5d8418",
+                G2PostwarCleanupExpiryAdapterMetadata.LIVE_ROOT_SOURCE_COMMIT);
+        assertEquals("GREEN_ACTION_BOUND_POSTWAR_RETENTION_EXPIRY",
+                G2PostwarCleanupExpiryAdapterMetadata.LIVE_RESULT);
+        assertEquals("2113032784cc3acc5da14557c14315b0aec9af03cdc15654739a3c54704f96da",
+                G2PostwarCleanupExpiryAdapterMetadata.LIVE_MANIFEST_SHA256);
+        assertEquals("44e1f7c0b470b2cf7b6549192865402f21f88c7cf073e896de1b93632311d5d0",
+                G2PostwarCleanupExpiryAdapterMetadata.LIVE_REPORT_SHA256);
+        assertEquals("4d839524098891bd997009663e189929722746ab0404d88c1e91f7546efe238b",
+                G2PostwarCleanupExpiryAdapterMetadata.LIVE_CANDIDATE_DLL_SHA256);
+        assertEquals(53267736,
+                G2PostwarCleanupExpiryAdapterMetadata.LIVE_ACTUAL_EXPIRY_DATE_RAW);
+        assertTrue(G2PostwarCleanupExpiryAdapterMetadata.SYNTHETIC_FIXTURE);
+        assertFalse(G2PostwarCleanupExpiryAdapterMetadata.FIXTURE_IS_LIVE);
     }
 }

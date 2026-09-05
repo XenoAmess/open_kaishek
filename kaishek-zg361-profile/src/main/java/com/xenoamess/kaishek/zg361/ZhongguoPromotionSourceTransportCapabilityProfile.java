@@ -32,11 +32,11 @@ public final class ZhongguoPromotionSourceTransportCapabilityProfile {
     public static final String EXECUTABLE_SHA256 =
             "2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86";
     public static final String ROOT_INTEGRATION_COMMIT =
-            "d53befaa4872662562f5db5d31757ca731e799e0";
+            "d077bcf0114f227d319d8f23f64385ba6950238b";
     public static final String ROOT_SOURCE_CONTRACT_SHA256 =
             "a167bfe43cb1b0254e124abebef954a5fb8b2164afee31b16be8badc5e8fa786";
     public static final String ROOT_ABI_SHA256 =
-            "10fb508a960ee8819166d34dd2b303bfede43e3fff30ae64230913fdfe34fac6";
+            "eb22c5339a483614e75cd5135b896742ac9e0040166ac9689fb8af3070c94068";
     public static final String ROOT_PYTHON_CONTRACT_SHA256 =
             "5cfa9fdea255b180612cace27687e9b3c89fa884f2a9fa92ac2c268c19876aea";
     public static final boolean QUERY_PRODUCTION_CAPABILITY_ADVERTISED = false;

@@ -36,7 +36,7 @@ class ZhongguoPromotionSourceTransportCapabilityProfileTest {
     @Test
     void pinsExactSourcesAndKeepsProductReadinessClosed() {
         assertEquals(
-                "d53befaa4872662562f5db5d31757ca731e799e0",
+                "d077bcf0114f227d319d8f23f64385ba6950238b",
                 ZhongguoPromotionSourceTransportCapabilityProfile
                         .ROOT_INTEGRATION_COMMIT);
         assertEquals(
@@ -44,7 +44,7 @@ class ZhongguoPromotionSourceTransportCapabilityProfileTest {
                 ZhongguoPromotionSourceTransportCapabilityProfile
                         .ROOT_SOURCE_CONTRACT_SHA256);
         assertEquals(
-                "10fb508a960ee8819166d34dd2b303bfede43e3fff30ae64230913fdfe34fac6",
+                "eb22c5339a483614e75cd5135b896742ac9e0040166ac9689fb8af3070c94068",
                 ZhongguoPromotionSourceTransportCapabilityProfile
                         .ROOT_ABI_SHA256);
         assertEquals(

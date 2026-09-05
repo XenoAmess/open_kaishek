@@ -1,12 +1,13 @@
 package com.xenoamess.kaishek.zg361;
 
 /**
- * Source pins and negative readiness boundaries for the private default-OFF
+ * Source pins and bounded readiness for the private default-OFF
  * G2 postwar cleanup/actual-expiry receipt adapter.
  *
- * <p>This class is metadata only. The private cleanup query is now dispatched,
- * but has not run against CK3.  It therefore exposes no
- * {@code CapabilityDescriptor}.</p>
+ * <p>This class is metadata only. The companion R3 run observed private
+ * cleanup and persisted expiry in one native lifecycle. This is not an
+ * open_kaishek runtime evaluator or certification; the class exposes no
+ * {@code CapabilityDescriptor} and does not authorize another live run.</p>
  */
 public final class G2PostwarCleanupExpiryAdapterMetadata {
     public static final String ID =
@@ -16,7 +17,7 @@ public final class G2PostwarCleanupExpiryAdapterMetadata {
     public static final String FIXTURE_SCHEMA =
             "xar.ck3.g2_postwar_cleanup_expiry_adapter_fixture.v1";
     public static final String STATUS =
-            "STATIC_READY_PRIVATE_DISPATCH_LIVE_NOT_RUN";
+            "PRIVATE_DISPATCH_LIVE_PRIMITIVE_COMPARISON_PENDING";
     public static final String ROOT_INTEGRATION_COMMIT =
             "ff89dcdbefb9d8fc86ce4722df847946e96d0e81";
     public static final String ROOT_SOURCE_COMMIT =
@@ -47,6 +48,19 @@ public final class G2PostwarCleanupExpiryAdapterMetadata {
             "5d366fa321da436601819e52827210defe42d1fe14950380d3d2722d6b992ff5";
     public static final String CANDIDATE_NATIVE_TEST_SHA256 =
             "f7999cca5ae9ac70e64515afce391049d9e318a9f32b701482fcf1e4996ffe88";
+    // The preceding pins retain the original static/synthetic adapter slice.
+    // These separate pins identify the later immutable companion live attempt.
+    public static final String LIVE_ROOT_SOURCE_COMMIT =
+            "e72f9fa302811a823479635648eb008a6f5d8418";
+    public static final String LIVE_RESULT =
+            "GREEN_ACTION_BOUND_POSTWAR_RETENTION_EXPIRY";
+    public static final String LIVE_MANIFEST_SHA256 =
+            "2113032784cc3acc5da14557c14315b0aec9af03cdc15654739a3c54704f96da";
+    public static final String LIVE_REPORT_SHA256 =
+            "44e1f7c0b470b2cf7b6549192865402f21f88c7cf073e896de1b93632311d5d0";
+    public static final String LIVE_CANDIDATE_DLL_SHA256 =
+            "4d839524098891bd997009663e189929722746ab0404d88c1e91f7546efe238b";
+    public static final int LIVE_ACTUAL_EXPIRY_DATE_RAW = 53267736;
     public static final int WAR_ID = 50331699;
     public static final int PLAYER_CHARACTER_ID = 29829;
     public static final int PRIMARY_DEFENDER_CHARACTER_ID = 36769;
@@ -62,7 +76,7 @@ public final class G2PostwarCleanupExpiryAdapterMetadata {
     public static final boolean CLEANUP_CANDIDATE_LIBRARY_PRESENT = true;
     public static final boolean CLEANUP_QUERY_DISPATCH_PRESENT = true;
     public static final boolean CLEANUP_QUERY_PRIVATE = true;
-    public static final boolean CLEANUP_DISPATCH_LIVE_TESTED = false;
+    public static final boolean CLEANUP_DISPATCH_LIVE_TESTED = true;
     public static final boolean SAME_LIFECYCLE_NATIVE_CLEANUP_REQUIRED = true;
     public static final boolean WAR_ID_ABSENCE_ADMISSION_ONLY = true;
     public static final boolean OLD_WAR_ABSENCE_SUFFICIENT = false;
@@ -73,7 +87,8 @@ public final class G2PostwarCleanupExpiryAdapterMetadata {
     public static final boolean LIVE_AUTHORIZED = false;
     public static final boolean PUBLIC_READINESS_PROMOTED = false;
     public static final boolean ACTION_READINESS_PROMOTED = false;
-    public static final boolean RUNTIME_CLEANUP_READY = false;
+    // Companion private primitive only, not finite-runtime certification.
+    public static final boolean RUNTIME_CLEANUP_READY = true;
     public static final boolean SOURCE_SPECIFIC_ATTRIBUTION_READY = false;
     public static final boolean DECISION_READY = false;
     public static final boolean AUTOMATIC_SURRENDER_READY = false;

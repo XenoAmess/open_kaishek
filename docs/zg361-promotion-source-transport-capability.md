@@ -32,3 +32,21 @@ Companion commit `f730aeb677066e39aa7f19e53c66e2a84b842f88`
 changes only the B3 localization/freezer projection. It adds no public
 capability, schema, ABI, parser vocabulary, IR/runtime handler, or action, so
 no open_kaishek contract change is required for that commit.
+
+## 2026-09-05 companion ABI synchronization
+
+The source pin now advances to companion
+`d077bcf0114f227d319d8f23f64385ba6950238b`, ABI SHA-256
+`eb22c5339a483614e75cd5135b896742ac9e0040166ac9689fb8af3070c94068`.
+The source-contract and Python-contract hashes above remain unchanged. The
+new ledger distinguishes direct-child lookup from the fixed-name descendant
+fallback exercised by the private promotion candidate. It records control-flow
+evidence, not a completed promotion source/action loop. Transport IDs, fields,
+invariants and certification flags are unchanged; no runtime handler is added.
+
+The companion's separate current-event named Character identity can now be
+typed unavailable when its saved token no longer resolves. That event-window
+wire is not consumed by this profile, so its decoder synchronization is
+`not-applicable` here. The root Character remains strictly resolved in the
+companion; open_kaishek does not substitute a Character identity or infer a
+valid event action.

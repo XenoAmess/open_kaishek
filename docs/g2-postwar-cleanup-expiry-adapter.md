@@ -37,3 +37,38 @@ code change.
 The private dispatch is statically compiled, not production-live. Public and
 action readiness, live authorization, source-specific attribution, decision
 readiness, automatic surrender, and GEN-034 all remain false.
+
+## 2026-09-05 R3 evidence synchronization
+
+The preceding section is the original static/synthetic baseline. Its source
+pins and synthetic vector are retained, not relabeled as live evidence.
+`G2PostwarCleanupExpiryAdapterMetadata` now separately records the companion
+R3 run at source `e72f9fa302811a823479635648eb008a6f5d8418`:
+
+| immutable R3 input | SHA-256 |
+| --- | --- |
+| frozen candidate manifest | `2113032784cc3acc5da14557c14315b0aec9af03cdc15654739a3c54704f96da` |
+| live report | `44e1f7c0b470b2cf7b6549192865402f21f88c7cf073e896de1b93632311d5d0` |
+| live candidate DLL | `4d839524098891bd997009663e189929722746ab0404d88c1e91f7546efe238b` |
+
+Artifacts reside beneath
+`Z:\ck3_mod_rewrite_process_assets\zg361\g2-cleanup-formal-e72f9fa-r3-20260904`;
+the report is `live-r3/report.json`. The manifest and report hashes were read
+from those retained bytes during this synchronization. The companion topic
+`docs/ck3-native-ai/g2-postwar-cleanup-expiry-current-pin-no-launch-2026-09-04.md`
+records the native result and exact build.
+
+R3 returned `GREEN_ACTION_BOUND_POSTWAR_RETENTION_EXPIRY`. One private
+surrender was followed in the same lifecycle by exact-store destruction of
+the frozen generations (`598 -> 0` soldiers), then two equal persisted-expiry
+reads (`date_raw=53267736`, not formula-derived). Consequently the metadata's
+private cleanup dispatch is now live-tested and its companion runtime-cleanup
+primitive is ready. Overall status is
+`PRIVATE_DISPATCH_LIVE_PRIMITIVE_COMPARISON_PENDING`.
+
+This does not implement or certify an open_kaishek runtime evaluator, make the
+synthetic fixture live, add a public capability, authorize a new CK3 attempt,
+or complete the comparison policy. Public/action readiness, source-specific
+attribution, decision readiness, automatic surrender, and GEN-034 remain false.
+The frozen R3 result keeps its original source/accelerator pins; today's
+metadata synchronization does not rewrite or rerun that historical attempt.
