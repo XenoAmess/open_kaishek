@@ -32,7 +32,7 @@ public final class ZhongguoPromotionSourceTransportCapabilityProfile {
     public static final String EXECUTABLE_SHA256 =
             "2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86";
     public static final String ROOT_INTEGRATION_COMMIT =
-            "d077bcf0114f227d319d8f23f64385ba6950238b";
+            "a05b94e545fc6074fa2ffae2ffa76e34d9990d62";
     public static final String ROOT_SOURCE_CONTRACT_SHA256 =
             "a167bfe43cb1b0254e124abebef954a5fb8b2164afee31b16be8badc5e8fa786";
     public static final String ROOT_ABI_SHA256 =

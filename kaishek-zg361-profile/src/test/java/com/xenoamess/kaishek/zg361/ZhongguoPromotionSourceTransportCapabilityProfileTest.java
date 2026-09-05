@@ -36,7 +36,7 @@ class ZhongguoPromotionSourceTransportCapabilityProfileTest {
     @Test
     void pinsExactSourcesAndKeepsProductReadinessClosed() {
         assertEquals(
-                "d077bcf0114f227d319d8f23f64385ba6950238b",
+                "a05b94e545fc6074fa2ffae2ffa76e34d9990d62",
                 ZhongguoPromotionSourceTransportCapabilityProfile
                         .ROOT_INTEGRATION_COMMIT);
         assertEquals(

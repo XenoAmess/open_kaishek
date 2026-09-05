@@ -70,3 +70,33 @@ decision readiness or GEN-034. See the linked
 [promotion transport](zg361-promotion-source-transport-capability.md) and
 [R3 metadata](g2-postwar-cleanup-expiry-adapter.md) records for exact source and
 live evidence boundaries.
+
+## Follow-up: B1 old-save active witness
+
+Companion commit `a05b94e545fc6074fa2ffae2ffa76e34d9990d62`
+changes only the producer-side truth condition for the existing
+`zg361_promotion_source_b1_active` fixed widget. A directly loaded pre-split
+manager may now be recognized by the existing manager-only
+`zg361_b1_policy_next_review_serial` witness when the new manager cycle serial
+has not yet been migrated. The transport still returns the same fixed widget's
+`widgets.effective_visible` field; no request/output field, capability ID,
+allowlist entry, ABI, native decoder, parser vocabulary, IR or runtime handler
+changes.
+
+`ZhongguoPromotionSourceTransportCapabilityProfile.ROOT_INTEGRATION_COMMIT`
+therefore advances to `a05b94e545fc6074fa2ffae2ffa76e34d9990d62` as an exact
+source-provenance update. Profile ID, source-contract/ABI/Python-contract
+hashes, invariants and every readiness/certification flag remain unchanged.
+The focused Java profile test and one lossless parse of the changed scripted
+GUI are sufficient offline checks; parser success is not CK3 runtime evidence,
+and no live-readiness claim is promoted by this synchronization.
+
+The focused Maven package completed at `2026-09-05T12:26:56+08:00` with
+`3 tests`, zero failures/errors/skips and `BUILD SUCCESS`. The resulting CLI
+JAR is 358,077 bytes, SHA-256
+`b1db12aff8fd918547e64694f8b43cf0287de4c06021340677865fcfc2a9801a`.
+Parsing the companion GUI at `a05b94e` returned `PARSED`, 2,566 bytes, 641
+tokens, 20 blocks, `roundTrip=true` and zero diagnostics; its SHA-256 is
+`31ad1ee16f4f2ae4da99b40455330c20253b36e2c287e84c9cc688b1a23a5568`.
+`git diff --check` was GREEN. No CK3 process was started or attached and no
+save or product source was modified by this external-repository update.

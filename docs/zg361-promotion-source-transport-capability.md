@@ -50,3 +50,21 @@ wire is not consumed by this profile, so its decoder synchronization is
 `not-applicable` here. The root Character remains strictly resolved in the
 companion; open_kaishek does not substitute a Character identity or infer a
 valid event action.
+
+## 2026-09-05 old-save manager witnessing synchronization
+
+The source pin advances again to companion
+`a05b94e545fc6074fa2ffae2ffa76e34d9990d62`. Its B1 active scripted GUI keeps
+the existing fixed widget and wire field, but recognizes a pre-split manager
+loaded directly from an old save through a manager-only review witness when the
+new manager cycle serial is absent. This is a producer-side truth-condition
+change for `widgets.effective_visible`, so the exact source provenance is
+updated even though the public ABI is unchanged.
+
+The profile ID, fixed five-widget allowlist, source-contract hash, ABI hash,
+Python-contract hash, required fields, invariants and readiness/certification
+bits remain unchanged. The new GUI branch uses existing Paradox logical blocks,
+`has_variable`, and scalar `var:*` comparison shapes. It adds no parser
+vocabulary, opcode, IR lowering, runtime handler or native decoder. Parser
+round-trip evidence can establish syntax preservation only; the companion's
+next CK3 old-save run remains authoritative for the gameplay semantics.
