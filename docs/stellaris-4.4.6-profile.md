@@ -19,11 +19,13 @@ Pegasus 4.4.6 可执行文件 SHA-256
 - `planet_modifier`、`modifier` 和 `drop_weight` 的子项是动态 modifier/value 键映射，
   profile 把这些参数块视为不透明容器；它不据此声明每个岗位 modifier 的引擎语义。
 - 方舟兼容切片：决议 `potential` 中的 `vivhite_workplace_supported_colony` 调用，及其
-  scripted trigger 声明所需的 `OR`、planet-scope `is_planet_class`、country-scope
-  `is_nomadic`。该切片只接受已登记的目标 Mod trigger 名，不把任意未知自定义调用放行。
-- I1-002 菜单状态切片：planet-scope `has_planet_flag` trigger，以及 planet-scope
-  `set_planet_flag`、`remove_planet_flag` effect。它们只提供 4.4.6 静态形状检查；flag
-  是否随存档持久化及两个零工期决议是否即时互斥，仍由 Stellaris 实机夹具验证。
+  scripted trigger 声明所需的 `OR`、carrier-scope `is_planet_class`、country-scope
+  `is_nomadic`。实机已确认 `is_planet_class = pc_ark` 和 `add_deposit` 在方舟的 `ship`
+  决议 root 可用，因此 profile 元数据同时登记 PLANET/SHIP；该切片只接受已登记的目标
+  Mod trigger 名，不把任意未知自定义调用放行。
+- I1-002 菜单状态切片：同时适用于普通行星和方舟舰载体的 `has_carrier_flag`
+  trigger，以及 `set_carrier_flag`、`remove_carrier_flag` effect。首轮误登记的
+  planet-only flag 操作已从本受限 profile 撤销，避免方舟可达决议再次静态假绿。
 
 未登记的可执行键仍报告 `UNKNOWN_OPCODE`，未识别目录仍报告 `UNKNOWN_DIRECTORY`。
 
@@ -34,14 +36,22 @@ exact-build differential artifact 或认证语义；`profile --id stellaris-4.4.
 `"runtime":"UNSUPPORTED"`。Stellaris 实机加载、决议可见性、执行效果、存档持久性和
 特殊政体行为必须由外部隔离实机夹具另行验证。
 
-当前 validator 不沿 `owner` 等 scope link 做完整静态 scope 推导；这里登记的 PLANET/COUNTRY
-只固定 opcode 合同，不能替代方舟实机验证。未知 opcode 仍须 fail-closed，以防拼写错误被
-当成合法自定义 trigger。
+当前 validator 不沿 `owner` 等 scope link 做完整静态 scope 推导；这里登记的
+PLANET/SHIP/COUNTRY 只固定 opcode 合同，不能替代方舟实机验证。未知 opcode 仍须
+fail-closed，以防拼写错误被当成合法自定义 trigger。
 
-I1-002 对 flag 名采用标量值形状。当前通用 validator 能区分 trigger/effect kind、目录与
+I1-002 首轮实机运行 `20260906T041510Z` 证明，普通殖民地决议 root 是 `planet`，而
+“首都方舟”的同一决议入口 root 是 `ship`。旧方案在方舟上产生 `Wrong scope for trigger
+'has_planet_flag'` 和 `Wrong scope for effect 'set_planet_flag'`，静态通过属于 profile
+缺陷。由于本 profile 只覆盖当前 Mod 的受限 corpus，planet-only 三个 opcode 不再登记；
+若未来需要验收真正只在普通行星可达的决议，必须先增加可证明的路径敏感 scope 分析，不能
+直接恢复全局放行。
+
+carrier flag 名采用标量值形状。当前通用 validator 能区分 trigger/effect kind、目录与
 显式 block 参数，但尚未对每个 opcode 的标量 token 类型建立独立模型；因此本切片用正向
-profile 测试固定三种已观察操作，并用拼错的 flag opcode 负例固定 fail-closed 边界，不把
-“任意标量值均已得到语义认证”写入能力声明。
+profile 测试固定三种已观察操作，用旧 planet-only 方案和拼错 carrier opcode 的负例固定
+fail-closed 边界，不把“任意标量值均已得到语义认证”写入能力声明。最终持久化与 scope
+兼容仍由 Stellaris 实机夹具验证。
 
 ## 使用
 

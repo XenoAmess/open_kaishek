@@ -6,6 +6,7 @@ import com.xenoamess.kaishek.validator.Validator;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -70,6 +71,10 @@ class StellarisProfile446Test {
         assertTrue(decisionDiagnostics.stream().noneMatch(d ->
                         d.severity() == Diagnostic.Severity.ERROR),
                 decisionDiagnostics::toString);
+        assertTrue(profile.opcode("is_planet_class").allowedScopes().contains("SHIP"));
+        assertTrue(profile.opcode("add_deposit").allowedScopes().contains("SHIP"));
+        assertTrue(profile.opcode("vivhite_workplace_supported_colony")
+                .allowedScopes().contains("SHIP"));
     }
 
     @Test
@@ -86,20 +91,20 @@ class StellarisProfile446Test {
     }
 
     @Test
-    void planetFlagMenuToggleDecisionShapesValidate() {
+    void carrierFlagMenuToggleDecisionShapesValidateForPlanetAndShip() {
         String source = "decision_extend_workplace_expand = {\n"
                 + "  owned_planets_only = yes\n"
                 + "  enactment_time = 0\n"
                 + "  potential = {\n"
-                + "    NOT = { has_planet_flag = vivhite_workplace_menu_expanded }\n"
+                + "    NOT = { has_carrier_flag = vivhite_workplace_menu_expanded }\n"
                 + "  }\n"
-                + "  effect = { set_planet_flag = vivhite_workplace_menu_expanded }\n"
+                + "  effect = { set_carrier_flag = vivhite_workplace_menu_expanded }\n"
                 + "}\n"
                 + "decision_extend_workplace_collapse = {\n"
                 + "  owned_planets_only = yes\n"
                 + "  enactment_time = 0\n"
-                + "  potential = { has_planet_flag = vivhite_workplace_menu_expanded }\n"
-                + "  effect = { remove_planet_flag = vivhite_workplace_menu_expanded }\n"
+                + "  potential = { has_carrier_flag = vivhite_workplace_menu_expanded }\n"
+                + "  effect = { remove_carrier_flag = vivhite_workplace_menu_expanded }\n"
                 + "}\n";
         var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
         var diagnostics = Validator.validate(parsed, "common/decisions/workplace.txt", profile);
@@ -107,19 +112,31 @@ class StellarisProfile446Test {
         assertTrue(diagnostics.stream().noneMatch(d ->
                         d.severity() == Diagnostic.Severity.ERROR),
                 diagnostics::toString);
+        assertEquals(Set.of("PLANET", "planet", "SHIP", "ship"),
+                profile.opcode("has_carrier_flag").allowedScopes());
     }
 
     @Test
-    void misspelledPlanetFlagOperationFailsClosed() {
+    void planetOnlyFlagSchemeAndMisspelledCarrierOperationFailClosed() {
         String source = "test_decision = {\n"
-                + "  effect = { set_planet_flags = vivhite_workplace_menu_expanded }\n"
+                + "  potential = { has_planet_flag = vivhite_workplace_menu_expanded }\n"
+                + "  effect = { set_planet_flag = vivhite_workplace_menu_expanded\n"
+                + "    remove_carrier_flags = vivhite_workplace_menu_expanded }\n"
                 + "}\n";
         var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
         var diagnostics = Validator.validate(parsed, "common/decisions/workplace.txt", profile);
 
         assertTrue(diagnostics.stream().anyMatch(d ->
                         d.code().equals("UNKNOWN_OPCODE")
-                                && d.message().contains("set_planet_flags")),
+                                && d.message().contains("has_planet_flag")),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("set_planet_flag")),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("remove_carrier_flags")),
                 diagnostics::toString);
     }
 }

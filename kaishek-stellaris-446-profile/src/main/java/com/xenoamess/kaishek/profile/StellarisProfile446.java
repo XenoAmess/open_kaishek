@@ -46,20 +46,25 @@ public final class StellarisProfile446 implements KaishekProfile {
 
     private static Map<String, OpcodeSpec> opcodesByName() {
         LinkedHashMap<String, OpcodeSpec> result = new LinkedHashMap<>();
-        add(result, "add_deposit", OpcodeSpec.Kind.EFFECT, 0, 0, "PLANET");
+        add(result, "add_deposit", OpcodeSpec.Kind.EFFECT, 0, 0,
+                Set.of("PLANET", "planet", "SHIP", "ship"));
         add(result, "always", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "exists", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "is_gestalt", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
-        add(result, "has_planet_flag", OpcodeSpec.Kind.TRIGGER, 0, 0, "PLANET");
+        add(result, "has_carrier_flag", OpcodeSpec.Kind.TRIGGER, 0, 0,
+                Set.of("PLANET", "planet", "SHIP", "ship"));
         add(result, "is_nomadic", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
-        add(result, "is_planet_class", OpcodeSpec.Kind.TRIGGER, 0, 0, "PLANET");
-        add(result, "set_planet_flag", OpcodeSpec.Kind.EFFECT, 0, 0, "PLANET");
-        add(result, "remove_planet_flag", OpcodeSpec.Kind.EFFECT, 0, 0, "PLANET");
+        add(result, "is_planet_class", OpcodeSpec.Kind.TRIGGER, 0, 0,
+                Set.of("PLANET", "planet", "SHIP", "ship"));
+        add(result, "set_carrier_flag", OpcodeSpec.Kind.EFFECT, 0, 0,
+                Set.of("PLANET", "planet", "SHIP", "ship"));
+        add(result, "remove_carrier_flag", OpcodeSpec.Kind.EFFECT, 0, 0,
+                Set.of("PLANET", "planet", "SHIP", "ship"));
         // A scripted-trigger symbol is both a root declaration container and
         // a scalar call at use sites. Model the exact observed symbol as
         // structural so its declaration body is still checked fail-closed.
         add(result, "vivhite_workplace_supported_colony", OpcodeSpec.Kind.STRUCTURAL,
-                0, Integer.MAX_VALUE, "PLANET");
+                0, Integer.MAX_VALUE, Set.of("PLANET", "planet", "SHIP", "ship"));
 
         add(result, "OR", OpcodeSpec.Kind.STRUCTURAL, 0, Integer.MAX_VALUE, "THIS");
 
@@ -81,5 +86,11 @@ public final class StellarisProfile446 implements KaishekProfile {
                             int minimum, int maximum, String scope) {
         target.put(name, new OpcodeSpec(name, kind, minimum, maximum,
                 Set.of(scope, scope.toLowerCase(java.util.Locale.ROOT)), GAME_VERSION, Set.of()));
+    }
+
+    private static void add(Map<String, OpcodeSpec> target, String name, OpcodeSpec.Kind kind,
+                            int minimum, int maximum, Set<String> scopes) {
+        target.put(name, new OpcodeSpec(name, kind, minimum, maximum,
+                scopes, GAME_VERSION, Set.of()));
     }
 }

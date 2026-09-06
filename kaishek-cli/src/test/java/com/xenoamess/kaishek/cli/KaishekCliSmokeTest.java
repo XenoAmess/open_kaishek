@@ -70,14 +70,14 @@ public final class KaishekCliSmokeTest {
       Files.writeString(validDecision, "test_decision = {\n"
           + "  owned_planets_only = yes\n  enactment_time = 180\n"
           + "  potential = { vivhite_workplace_supported_colony = yes\n"
-          + "    NOT = { has_planet_flag = vivhite_workplace_menu_expanded } }\n"
+          + "    NOT = { has_carrier_flag = vivhite_workplace_menu_expanded } }\n"
           + "  resources = { category = decisions cost = { minerals = 1000 } }\n"
           + "  ai_weight = { weight = 0 }\n"
           + "  effect = { add_deposit = test_deposit\n"
-          + "    set_planet_flag = vivhite_workplace_menu_expanded }\n}\n"
+          + "    set_carrier_flag = vivhite_workplace_menu_expanded }\n}\n"
           + "test_collapse = {\n"
-          + "  potential = { has_planet_flag = vivhite_workplace_menu_expanded }\n"
-          + "  effect = { remove_planet_flag = vivhite_workplace_menu_expanded }\n}\n",
+          + "  potential = { has_carrier_flag = vivhite_workplace_menu_expanded }\n"
+          + "  effect = { remove_carrier_flag = vivhite_workplace_menu_expanded }\n}\n",
           StandardCharsets.UTF_8);
       b.reset();
       int stellarisDecision = KaishekCli.run(new String[]{"validate", "--profile",
