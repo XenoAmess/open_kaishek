@@ -51,6 +51,7 @@ public final class StellarisProfile446 implements KaishekProfile {
         add(result, "always", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "exists", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "is_gestalt", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
+        add(result, "has_valid_civic", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
         add(result, "has_carrier_flag", OpcodeSpec.Kind.TRIGGER, 0, 0,
                 Set.of("PLANET", "planet", "SHIP", "ship"));
         add(result, "is_nomadic", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");

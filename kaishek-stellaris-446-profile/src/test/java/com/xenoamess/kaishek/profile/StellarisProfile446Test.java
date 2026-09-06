@@ -139,4 +139,43 @@ class StellarisProfile446Test {
                                 && d.message().contains("remove_carrier_flags")),
                 diagnostics::toString);
     }
+
+    @Test
+    void rogueServitorCivicGuardValidatesAndMalformedFormsFailClosed() {
+        String valid = "test_decision = {\n"
+                + "  potential = { owner = { has_valid_civic = civic_machine_servitor } }\n"
+                + "  effect = { add_deposit = mod_extend_bio_trophy_workplace }\n"
+                + "}\n";
+        var parsedValid = Parser.parse(valid.getBytes(StandardCharsets.UTF_8));
+        var validDiagnostics = Validator.validate(parsedValid,
+                "common/decisions/workplace.txt", profile);
+
+        assertTrue(validDiagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                validDiagnostics::toString);
+        assertEquals(OpcodeSpec.Kind.TRIGGER, profile.opcode("has_valid_civic").kind());
+        assertEquals(Set.of("COUNTRY", "country"),
+                profile.opcode("has_valid_civic").allowedScopes());
+
+        String invalid = "test_decision = { potential = { owner = {\n"
+                + "  has_valid_civics = civic_machine_servitor\n"
+                + "  has_valid_civic = { scope = PLANET value = civic_machine_servitor }\n"
+                + "} } }\n";
+        var parsedInvalid = Parser.parse(invalid.getBytes(StandardCharsets.UTF_8));
+        var invalidDiagnostics = Validator.validate(parsedInvalid,
+                "common/decisions/workplace.txt", profile);
+
+        assertTrue(invalidDiagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("has_valid_civics")),
+                invalidDiagnostics::toString);
+        assertTrue(invalidDiagnostics.stream().anyMatch(d ->
+                        d.code().equals("INVALID_SCOPE")
+                                && d.message().contains("PLANET")),
+                invalidDiagnostics::toString);
+        assertTrue(invalidDiagnostics.stream().anyMatch(d ->
+                        d.code().equals("INVALID_PARAMETERS")
+                                && d.message().contains("has_valid_civic")),
+                invalidDiagnostics::toString);
+    }
 }

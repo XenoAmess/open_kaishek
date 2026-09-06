@@ -26,6 +26,9 @@ Pegasus 4.4.6 可执行文件 SHA-256
 - I1-002 菜单状态切片：同时适用于普通行星和方舟舰载体的 `has_carrier_flag`
   trigger，以及 `set_carrier_flag`、`remove_carrier_flag` effect。首轮误登记的
   planet-only flag 操作已从本受限 profile 撤销，避免方舟可达决议再次静态假绿。
+- I1-003 失控机仆切片：country-scope `has_valid_civic` trigger，用于殖民载体
+  `owner` 条件中的 `civic_machine_servitor` 标量判定。profile 只登记 opcode、trigger
+  kind 和 COUNTRY scope；具体 civic 是否有效、岗位能否就业仍由 Stellaris 实机证明。
 
 未登记的可执行键仍报告 `UNKNOWN_OPCODE`，未识别目录仍报告 `UNKNOWN_DIRECTORY`。
 
@@ -52,6 +55,9 @@ carrier flag 名采用标量值形状。当前通用 validator 能区分 trigger
 profile 测试固定三种已观察操作，用旧 planet-only 方案和拼错 carrier opcode 的负例固定
 fail-closed 边界，不把“任意标量值均已得到语义认证”写入能力声明。最终持久化与 scope
 兼容仍由 Stellaris 实机夹具验证。
+
+`has_valid_civic` 同样采用标量 civic key。正向 profile 测试不把参数内容解释成已认证的
+游戏对象；负例固定拼错 opcode、显式非 COUNTRY scope 和错误 block 参数均不能静默通过。
 
 ## 使用
 
