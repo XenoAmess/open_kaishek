@@ -54,10 +54,10 @@ class ZhongguoCareerHcWorkforceCapabilityProfileTest {
     @Test
     void companionPinsMatchCanonicalProvider() {
         assertEquals(
-                "8e91879901316bb165983f577887cdf7cb37c30ab7c98cf63d97f3fee77c0928",
+                "ad1cc96a8bb6f3736d5dd69e9b4525ed33a54abab72a5f6c6863a1a08f383496",
                 ZhongguoCareerHcWorkforceCapabilityProfile.ROOT_ABI_SHA256);
         assertEquals(
-                "26b1f859cb6194d1d9295443be370862926dc81dabaa57d1f447f62c09a4062e",
+                "35bfa513acf0d209bf32c26c563698722df8dce03733dac005e2e56e2df076e0",
                 ZhongguoCareerHcWorkforceCapabilityProfile.ROOT_SOURCE_CONTRACT_SHA256);
         assertEquals(
                 "453b9a93fde9d472aa82c687bb2fd3db4fbef06d315ab91dcc4e167fa2f5b6c5",
