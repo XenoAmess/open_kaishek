@@ -1,6 +1,11 @@
 package com.xenoamess.kaishek.profile;
 
+import com.xenoamess.kaishek.syntax.Parser;
+import com.xenoamess.kaishek.validator.Diagnostic;
+import com.xenoamess.kaishek.validator.Validator;
 import org.junit.jupiter.api.Test;
+
+import java.nio.charset.StandardCharsets;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,6 +27,8 @@ class StellarisProfile446Test {
                 profile.domainForPath("COMMON\\DECISIONS\\workplace.txt"));
         assertEquals(ScriptDomain.DEPOSITS,
                 profile.domainForPath("common/deposits/extend_workplace.txt"));
+        assertEquals(ScriptDomain.SCRIPTED_TRIGGERS,
+                profile.domainForPath("common/scripted_triggers/vivhite_workplace_triggers.txt"));
         assertEquals(ScriptDomain.UNKNOWN, profile.domainForPath("common/unknown/x.txt"));
     }
 
@@ -35,5 +42,46 @@ class StellarisProfile446Test {
                 () -> profile.allowedStructuralKeys().add("unsafe"));
         assertThrows(UnsupportedOperationException.class,
                 () -> profile.opcodes().clear());
+    }
+
+    @Test
+    void arkshipCompatibilityTriggerAndDecisionCallValidate() {
+        String trigger = "vivhite_workplace_supported_colony = {\n"
+                + "  OR = {\n"
+                + "    is_planet_class = pc_ark\n"
+                + "    owner = { is_nomadic = no }\n"
+                + "  }\n"
+                + "}\n";
+        var parsedTrigger = Parser.parse(trigger.getBytes(StandardCharsets.UTF_8));
+        var triggerDiagnostics = Validator.validate(parsedTrigger,
+                "common/scripted_triggers/vivhite_workplace_triggers.txt", profile);
+        assertTrue(triggerDiagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                triggerDiagnostics::toString);
+
+        String decision = "test_decision = {\n"
+                + "  owned_planets_only = yes\n"
+                + "  potential = { vivhite_workplace_supported_colony = yes }\n"
+                + "  effect = { add_deposit = test_deposit }\n"
+                + "}\n";
+        var parsedDecision = Parser.parse(decision.getBytes(StandardCharsets.UTF_8));
+        var decisionDiagnostics = Validator.validate(parsedDecision,
+                "common/decisions/workplace.txt", profile);
+        assertTrue(decisionDiagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                decisionDiagnostics::toString);
+    }
+
+    @Test
+    void unknownOperationInsideRegisteredTriggerDeclarationFailsClosed() {
+        String source = "vivhite_workplace_supported_colony = { invented_trigger = yes }\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        var diagnostics = Validator.validate(parsed,
+                "common/scripted_triggers/vivhite_workplace_triggers.txt", profile);
+
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("invented_trigger")),
+                diagnostics::toString);
     }
 }

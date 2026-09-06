@@ -9,7 +9,7 @@ import java.util.TreeSet;
 /**
  * Version-pinned static schema slice for Stellaris 4.4.6.
  *
- * <p>This profile deliberately recognizes only the decision/deposit source
+ * <p>This profile deliberately recognizes only the decision/deposit/scripted-trigger source
  * shapes needed by the initial Infinite Jobs acceptance corpus. Recognition
  * is not runtime certification: no opcode in this slice is executable by the
  * finite runtime and the real game remains the semantic authority.</p>
@@ -50,6 +50,15 @@ public final class StellarisProfile446 implements KaishekProfile {
         add(result, "always", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "exists", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "is_gestalt", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
+        add(result, "is_nomadic", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
+        add(result, "is_planet_class", OpcodeSpec.Kind.TRIGGER, 0, 0, "PLANET");
+        // A scripted-trigger symbol is both a root declaration container and
+        // a scalar call at use sites. Model the exact observed symbol as
+        // structural so its declaration body is still checked fail-closed.
+        add(result, "vivhite_workplace_supported_colony", OpcodeSpec.Kind.STRUCTURAL,
+                0, Integer.MAX_VALUE, "PLANET");
+
+        add(result, "OR", OpcodeSpec.Kind.STRUCTURAL, 0, Integer.MAX_VALUE, "THIS");
 
         // These container shapes are intentionally opaque. Their child keys
         // are dynamic modifier identifiers, not executable script opcodes.

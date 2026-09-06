@@ -55,9 +55,21 @@ public final class KaishekCliSmokeTest {
       // used by the first real mod acceptance corpus, while keeping unknown
       // script operations fail-closed.
       Path stellarisDecisions = Files.createDirectories(root.resolve("stellaris/common/decisions"));
+      Path stellarisTriggers = Files.createDirectories(root.resolve("stellaris/common/scripted_triggers"));
+      Path validTrigger = stellarisTriggers.resolve("vivhite_workplace_triggers.txt");
+      Files.writeString(validTrigger, "vivhite_workplace_supported_colony = {\n"
+          + "  OR = { is_planet_class = pc_ark owner = { is_nomadic = no } }\n}\n",
+          StandardCharsets.UTF_8);
+      b.reset();
+      int stellarisTrigger = KaishekCli.run(new String[]{"validate", "--profile",
+          "stellaris-4.4.6", "--file", validTrigger.toString()}, new PrintStream(b), System.err);
+      check(stellarisTrigger == 0 && b.toString(StandardCharsets.UTF_8)
+          .contains("\"status\":\"VALIDATED\""), b);
+
       Path validDecision = stellarisDecisions.resolve("workplace.txt");
       Files.writeString(validDecision, "test_decision = {\n"
           + "  owned_planets_only = yes\n  enactment_time = 180\n"
+          + "  potential = { vivhite_workplace_supported_colony = yes }\n"
           + "  resources = { category = decisions cost = { minerals = 1000 } }\n"
           + "  ai_weight = { weight = 0 }\n"
           + "  effect = { add_deposit = test_deposit }\n}\n", StandardCharsets.UTF_8);

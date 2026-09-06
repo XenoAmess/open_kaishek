@@ -8,6 +8,8 @@
   <packaging>jar</packaging>
   <dependencies>
     <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-profile-api</artifactId><version>${project.version}</version></dependency>
+    <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-syntax</artifactId><version>${project.version}</version><scope>test</scope></dependency>
+    <dependency><groupId>com.xenoamess.kaishek</groupId><artifactId>kaishek-validator</artifactId><version>${project.version}</version><scope>test</scope></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter-api</artifactId><scope>test</scope></dependency>
     <dependency><groupId>org.junit.jupiter</groupId><artifactId>junit-jupiter-engine</artifactId><scope>test</scope></dependency>
   </dependencies>
