@@ -91,3 +91,40 @@ Boundaries: `ck3_started=false`, `process_attached=false`,
 `save_mutated=false`, `public_capability_added=false`,
 `runtime_certification_promoted=false`, `decision_ready=false`,
 `automatic_surrender_ready=false`, `gen_034_resolved=false`.
+
+## 2026-09-07 follow-up: 014 provenance after effect sharding
+
+Companion `8a0482cdafd3110514fbede8ef3150ef0fef7218` updates the native result-case
+source-contract test dependency from deleted monolith `zg361_effects.txt` to
+the purpose shard `zg361_core_result_delivery_effects.txt`. That build fix
+exposed a separate stale path in open_kaishek's synthetic 014 differential
+fixture: its appeal-regrade provenance still named the deleted monolith.
+
+The fixture now binds the current appeal implementation at
+`zg361_core_appeal_scoreboard_effects.txt#31-137`, whole-file SHA-256
+`8fa31bc18a16a520dd1bf25dcf5cfe55c958c4a05c588a09640771dbda308211`.
+The acceptance source remains byte-identical at
+`66987c323fcfac3ecd2bd8dda2671744c8ba142ff3d8ae7b9969b128ec9b4f98`.
+This is a provenance/file-boundary repair only: the hand-authored replay,
+parser vocabulary, IR/runtime implementation, capability set, and
+`runtime-fixture` readiness do not change. The source pointer and whole-file
+hash do not assert CK3 equivalence.
+
+The audit continued through companion
+`a73d25667af2c5393035ec9c62ff61c2dd620349`. That range adds a
+side-effect-free G2 three-way exit intake composer and wires a source-specific
+outcome into it. It creates no transport capability, keeps
+`production_recommendation_ready` and `action_ready` false, and emits no action
+literal. Existing owner-budget, white-peace, and source-outcome metadata
+therefore remain sufficient; no open_kaishek G2 profile or runtime change is
+warranted.
+
+Verification against that exact companion tree: `mvn -o -ntp clean verify`
+passed 156 tests with zero failures, errors, or skips. The shaded CLI JAR is
+362,766 bytes, SHA-256
+`2e2e9f7edee40158cfe960390dcbf4279bf3fa75d8bc61500eb7de7a1ae5ba2e`.
+It parsed the current appeal/scoreboard shard losslessly (11,238 bytes, 2,614
+tokens, 91 blocks), and the full `mod_zhongguo_style` corpus passed 827/827,
+zero errors, corpus SHA-256
+`a45aa985afc53e3535f22589aef1bfa773aec73a81ea62ae386251ae1e176b78`.
+No CK3 process was started.

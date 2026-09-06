@@ -101,6 +101,7 @@ class Appeal014ReplayTest {
         assertTrue(json.contains("zg361-014-appeal-replay-v1"));
         assertTrue(json.contains("\"readiness\": \"runtime-fixture\""));
         assertTrue(json.contains(Appeal014DifferentialFixture.ACCEPTANCE_SOURCE_SHA256));
+        assertTrue(json.contains(Appeal014DifferentialFixture.EFFECT_SOURCE));
         assertTrue(json.contains(Appeal014DifferentialFixture.EFFECT_SOURCE_SHA256));
         assertFalse(json.contains("differential-certified"));
         assertFalse(json.contains("product-live"));

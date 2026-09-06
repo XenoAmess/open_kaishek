@@ -23,9 +23,10 @@ public final class Appeal014DifferentialFixture {
     public static final String ACCEPTANCE_SOURCE_SHA256 =
             "66987c323fcfac3ecd2bd8dda2671744c8ba142ff3d8ae7b9969b128ec9b4f98";
     public static final String EFFECT_SOURCE =
-            "mod_zhongguo_style/common/scripted_effects/zg361_effects.txt#676-804";
+            "mod_zhongguo_style/common/scripted_effects/"
+                    + "zg361_core_appeal_scoreboard_effects.txt#31-137";
     public static final String EFFECT_SOURCE_SHA256 =
-            "c08f450dbe3f3deafac35e337c8cb2001a9fdc1830b68d0ca8825e604c795f4c";
+            "8fa31bc18a16a520dd1bf25dcf5cfe55c958c4a05c588a09640771dbda308211";
 
     private static final String TREASURY_PATH = "subject_treasury/gold";
     private static final String GOLD_PATH = "subject_personal_gold/gold";
