@@ -69,10 +69,16 @@ public final class KaishekCliSmokeTest {
       Path validDecision = stellarisDecisions.resolve("workplace.txt");
       Files.writeString(validDecision, "test_decision = {\n"
           + "  owned_planets_only = yes\n  enactment_time = 180\n"
-          + "  potential = { vivhite_workplace_supported_colony = yes }\n"
+          + "  potential = { vivhite_workplace_supported_colony = yes\n"
+          + "    NOT = { has_planet_flag = vivhite_workplace_menu_expanded } }\n"
           + "  resources = { category = decisions cost = { minerals = 1000 } }\n"
           + "  ai_weight = { weight = 0 }\n"
-          + "  effect = { add_deposit = test_deposit }\n}\n", StandardCharsets.UTF_8);
+          + "  effect = { add_deposit = test_deposit\n"
+          + "    set_planet_flag = vivhite_workplace_menu_expanded }\n}\n"
+          + "test_collapse = {\n"
+          + "  potential = { has_planet_flag = vivhite_workplace_menu_expanded }\n"
+          + "  effect = { remove_planet_flag = vivhite_workplace_menu_expanded }\n}\n",
+          StandardCharsets.UTF_8);
       b.reset();
       int stellarisDecision = KaishekCli.run(new String[]{"validate", "--profile",
           "stellaris-4.4.6", "--file", validDecision.toString()}, new PrintStream(b), System.err);

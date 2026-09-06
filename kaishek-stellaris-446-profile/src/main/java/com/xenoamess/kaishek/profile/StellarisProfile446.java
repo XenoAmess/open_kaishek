@@ -50,8 +50,11 @@ public final class StellarisProfile446 implements KaishekProfile {
         add(result, "always", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "exists", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "is_gestalt", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
+        add(result, "has_planet_flag", OpcodeSpec.Kind.TRIGGER, 0, 0, "PLANET");
         add(result, "is_nomadic", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
         add(result, "is_planet_class", OpcodeSpec.Kind.TRIGGER, 0, 0, "PLANET");
+        add(result, "set_planet_flag", OpcodeSpec.Kind.EFFECT, 0, 0, "PLANET");
+        add(result, "remove_planet_flag", OpcodeSpec.Kind.EFFECT, 0, 0, "PLANET");
         // A scripted-trigger symbol is both a root declaration container and
         // a scalar call at use sites. Model the exact observed symbol as
         // structural so its declaration body is still checked fail-closed.

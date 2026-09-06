@@ -21,6 +21,9 @@ Pegasus 4.4.6 可执行文件 SHA-256
 - 方舟兼容切片：决议 `potential` 中的 `vivhite_workplace_supported_colony` 调用，及其
   scripted trigger 声明所需的 `OR`、planet-scope `is_planet_class`、country-scope
   `is_nomadic`。该切片只接受已登记的目标 Mod trigger 名，不把任意未知自定义调用放行。
+- I1-002 菜单状态切片：planet-scope `has_planet_flag` trigger，以及 planet-scope
+  `set_planet_flag`、`remove_planet_flag` effect。它们只提供 4.4.6 静态形状检查；flag
+  是否随存档持久化及两个零工期决议是否即时互斥，仍由 Stellaris 实机夹具验证。
 
 未登记的可执行键仍报告 `UNKNOWN_OPCODE`，未识别目录仍报告 `UNKNOWN_DIRECTORY`。
 
@@ -34,6 +37,11 @@ exact-build differential artifact 或认证语义；`profile --id stellaris-4.4.
 当前 validator 不沿 `owner` 等 scope link 做完整静态 scope 推导；这里登记的 PLANET/COUNTRY
 只固定 opcode 合同，不能替代方舟实机验证。未知 opcode 仍须 fail-closed，以防拼写错误被
 当成合法自定义 trigger。
+
+I1-002 对 flag 名采用标量值形状。当前通用 validator 能区分 trigger/effect kind、目录与
+显式 block 参数，但尚未对每个 opcode 的标量 token 类型建立独立模型；因此本切片用正向
+profile 测试固定三种已观察操作，并用拼错的 flag opcode 负例固定 fail-closed 边界，不把
+“任意标量值均已得到语义认证”写入能力声明。
 
 ## 使用
 

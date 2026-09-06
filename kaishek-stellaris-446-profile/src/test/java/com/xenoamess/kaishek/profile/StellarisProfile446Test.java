@@ -84,4 +84,42 @@ class StellarisProfile446Test {
                                 && d.message().contains("invented_trigger")),
                 diagnostics::toString);
     }
+
+    @Test
+    void planetFlagMenuToggleDecisionShapesValidate() {
+        String source = "decision_extend_workplace_expand = {\n"
+                + "  owned_planets_only = yes\n"
+                + "  enactment_time = 0\n"
+                + "  potential = {\n"
+                + "    NOT = { has_planet_flag = vivhite_workplace_menu_expanded }\n"
+                + "  }\n"
+                + "  effect = { set_planet_flag = vivhite_workplace_menu_expanded }\n"
+                + "}\n"
+                + "decision_extend_workplace_collapse = {\n"
+                + "  owned_planets_only = yes\n"
+                + "  enactment_time = 0\n"
+                + "  potential = { has_planet_flag = vivhite_workplace_menu_expanded }\n"
+                + "  effect = { remove_planet_flag = vivhite_workplace_menu_expanded }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        var diagnostics = Validator.validate(parsed, "common/decisions/workplace.txt", profile);
+
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                diagnostics::toString);
+    }
+
+    @Test
+    void misspelledPlanetFlagOperationFailsClosed() {
+        String source = "test_decision = {\n"
+                + "  effect = { set_planet_flags = vivhite_workplace_menu_expanded }\n"
+                + "}\n";
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        var diagnostics = Validator.validate(parsed, "common/decisions/workplace.txt", profile);
+
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("set_planet_flags")),
+                diagnostics::toString);
+    }
 }
