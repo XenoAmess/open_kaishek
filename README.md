@@ -59,11 +59,15 @@ py kaishek-zg361-profile/tools/validate_domains.py
 ```
 
 synthetic 014 夹具会由 Maven 测试覆盖；CLI smoke 是无框架的显式检查，需要手动运行时先
-执行上面的构建，再运行：
+执行上面的 `package`，再运行共享入口：
 
 ```powershell
-java -ea -cp "kaishek-cli/target/classes;kaishek-cli/target/test-classes;kaishek-validator/target/classes;kaishek-ck3-11906-profile/target/classes;kaishek-stellaris-446-profile/target/classes;kaishek-zg361-profile/target/classes;kaishek-ir/target/classes;kaishek-runtime/target/classes;kaishek-diff-contract/target/classes;kaishek-profile-api/target/classes;kaishek-syntax/target/classes" com.xenoamess.kaishek.cli.KaishekCliSmokeTest
+py tools/run_cli_smoke.py
 ```
+
+该入口使用 Maven Shade 按 `kaishek-cli/pom.xml` 的依赖图生成的自包含 JAR，同时执行
+`KaishekCliSmokeTest` 与 synthetic 014 preflight。新增 CLI 模块依赖时不再需要维护第二份
+手工 classpath。
 
 目标 corpus 是外部输入。例如在 Windows 上可将 `Z:\ck3_mod_rewrite\mod_zhongguo_style`
 （或其独立副本）传给 parser smoke 的 `--root` 参数，或传给 CLI `corpus <path>` 子命令；
