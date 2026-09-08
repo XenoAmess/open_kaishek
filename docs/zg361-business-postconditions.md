@@ -6,25 +6,38 @@ start CK3, or claim a live native provider.
 
 ## Capability bindings
 
-`game.command.query-zhongguo-projects-metrics-postcondition-v1` requires the
-CP #026 contribution receipt id/revision and the Phase-3 #229 source-lineage
-fields. Companion commit `953634265ebf298cec3f2cf3065060e577dc8d17`
-also makes top-level `checkpoint_state` mandatory, with the bounded states
+`game.command.query-zhongguo-projects-metrics-postcondition-v1` requires an
+explicit project subject, the closed Credit Project portfolio tuple, the CP
+#026 contribution receipt id/revision, and the Phase-3 #229 source-lineage
+fields. Companion commit `45024edf723a75502728f8f07b345f4271697cfe`
+keeps top-level
+`checkpoint_state` mandatory, with the bounded states
 `cp26_ready_p3_absent`, `p3_initialized_source_not_ready`,
 `p3_source_ready_result_pending`, and `p3_result_committed`. The projected
 invariants are:
 
+* the native request carries distinct owner and subject identities, while the
+  paused player is one of those two actors;
+* the observed portfolio cycle matches the direct CP source cycle;
+* closure binds the final owner, subject, cycle, case and state, proves
+  conservation, and leaves no pending player-event cursor;
 * the contribution receipt id and revision are positive;
 * Phase-3 project source id/revision equal the CP receipt id/revision;
 * the #229 source id/revision equal the Phase-3 project source id/revision;
 * the #229 metrics revision is positive; and
 * the #229 dictionary key code is positive.
 
-The provider-internal allowlist grew from 24 to 40 fields under
-`zg361-cp26-direct-p3m229-lineage-v2` so the reader can bind direct CP26 state.
-That allowlist and the central stage 7/8 source ordering do not add parser
-vocabulary, an action, or a runtime handler. The candidate remains default
-OFF, uncertified, and non-live.
+The provider-internal allowlist is now 49 fields under
+`zg361-cp-portfolio-cp26-direct-p3m229-lineage-v3`. The nine added variables
+cover portfolio closed/cycle, the frozen final owner/subject/cycle/case/state,
+the conservation result, and the pending player-event cursor. The MCP argument
+is optional for legacy callers and defaults to the paused player, but the
+native command wire always carries the selected subject explicitly. These
+changes add no parser vocabulary, action, or runtime handler. Exact-build R303
+validated the read-only private candidate with artifact SHA-256
+`926BBD25076F69205B8AAA7CCC366AB470227BCBE174017B7E86C282862D7B01`.
+The switch remains default OFF, and the public descriptor remains
+`nativeCertified=false`, `runtimeCertified=false`, and production non-live.
 
 `game.command.query-zhongguo-promotion-compensation-postcondition-v1` requires
 the `zg361_pp_m147_receipt_serial/revision` and
@@ -80,6 +93,8 @@ java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar preflight --fixture 
 java -jar kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar preflight --fixture zg361-promotion-compensation-postcondition-v1
 ```
 
-Each fixture is BOM-bearing and must produce parser/validator `GREEN`,
+Each fixture is BOM-bearing and must produce parser/validator `GREEN`. The
+projects/metrics fixture includes all nine v3 portfolio variables, the closed
+tuple checks, and pending-event absence. Both fixtures keep
 IR/runtime `SKIPPED`, `ck3_started=false`, and the corresponding capability ID
 with both certification flags false.

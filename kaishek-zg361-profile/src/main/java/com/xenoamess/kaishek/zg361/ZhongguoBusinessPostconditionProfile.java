@@ -18,18 +18,26 @@ import java.util.TreeMap;
 public final class ZhongguoBusinessPostconditionProfile {
     public static final String ID = "ck3-1.19.0.6-zg361-business-postconditions-v1";
     public static final String PROJECTS_METRICS_ROOT_COMMIT =
-            "953634265ebf298cec3f2cf3065060e577dc8d17";
+            "45024edf723a75502728f8f07b345f4271697cfe";
     public static final String PROJECTS_METRICS_SOURCE_CONTRACT_SHA256 =
-            "362e9e88ff0a2ac8a7ec5cd396959a7200ed9f4f6d8519c953fe1798b903f0f2";
+            "bea30b47cee6fdc66c04e48a42ebf5ac0115c62a8ea34698fcd0428530f4649a";
     public static final String PROJECTS_METRICS_ABI_SHA256 =
-            "c0135b790089de3807ae2139431c3cd1df3867d61408e36cd64df17b5dc4fadd";
+            "1624d793b9461dbf6d08c64f60219f3567bc9fdf2805afe94c60f6aaf4deac6c";
     public static final String PROJECTS_METRICS_SCHEMA_SHA256 =
-            "3763b17f937d4c36c5643a41d54ccd449cd23a8f5f94cddb4a4edbed7bbdbfd4";
+            "44f0429e8b5ab46db38611a9779198cefd97b0fe435c0c847f3cb57674732380";
     public static final String PROJECTS_METRICS_PYTHON_CONTRACT_SHA256 =
-            "468d4ce43a28606148290b00b715f04dc33ba7f5bf95299949afe37b66b37195";
+            "b2dba9ee76457d0ec72bd87464eec145618e76482bb77d4b6687a03c88a60436";
     public static final String PROJECTS_METRICS_ALLOWLIST_ID =
-            "zg361-cp26-direct-p3m229-lineage-v2";
+            "zg361-cp-portfolio-cp26-direct-p3m229-lineage-v3";
+    public static final int PROJECTS_METRICS_ALLOWLIST_COUNT = 49;
     public static final boolean PROJECTS_METRICS_CHECKPOINT_STATE_REQUIRED = true;
+    public static final boolean PROJECTS_METRICS_EXPLICIT_SUBJECT_REQUIRED = true;
+    public static final boolean PROJECTS_METRICS_PORTFOLIO_CLOSURE_REQUIRED = true;
+    public static final String PROJECTS_METRICS_PRIVATE_CANDIDATE_SWITCH =
+            "XAR_CK3_ENABLE_ZHONGGUO_PROJECTS_METRICS_CANDIDATE_V1";
+    public static final boolean PROJECTS_METRICS_PRIVATE_CANDIDATE_LIVE_TESTED = true;
+    public static final String PROJECTS_METRICS_PAUSED_LIVE_ARTIFACT_SHA256 =
+            "926BBD25076F69205B8AAA7CCC366AB470227BCBE174017B7E86C282862D7B01";
     public static final boolean PROJECTS_METRICS_DEFAULT_CANDIDATE_ENABLED = false;
     public static final boolean PROJECTS_METRICS_PRODUCTION_LIVE = false;
     public static final String PROMOTION_COMPENSATION_ROOT_COMMIT =
@@ -54,6 +62,17 @@ public final class ZhongguoBusinessPostconditionProfile {
             "game.command.query-zhongguo-projects-metrics-postcondition-v1",
             List.of(
                     "checkpoint_state",
+                    "requested_subject_character_id",
+                    "credit_project_portfolio.closed",
+                    "credit_project_portfolio.cycle_serial",
+                    "credit_project_portfolio.final_owner_character_id",
+                    "credit_project_portfolio.final_subject_character_id",
+                    "credit_project_portfolio.final_cycle_serial",
+                    "credit_project_portfolio.final_case_serial",
+                    "credit_project_portfolio.final_state",
+                    "credit_project_portfolio.final_conservation_ok",
+                    "credit_project_portfolio.pending_player_event",
+                    "credit_project_portfolio.provider_observed",
                     "source_identity.owner_character_id",
                     "source_identity.subject_character_id",
                     "source_identity.cycle_serial",
@@ -68,10 +87,16 @@ public final class ZhongguoBusinessPostconditionProfile {
                     "metrics_result.source_contribution_receipt_id",
                     "metrics_result.source_contribution_receipt_revision",
                     "metrics_result.metrics_revision",
-                    "metrics_result.dictionary_key"),
+                    "metrics_result.dictionary_key",
+                    "readiness.portfolio_observed",
+                    "readiness.portfolio_closed"),
             List.of(
                     "cp26_routes_a_b_mint_positive_monotonic_receipt_id",
                     "cp26_receipt_revision_matches_post_operation_case_e_revision",
+                    "provider_reads_explicit_subject_portfolio_closure_while_paused_player_is_bound_owner_or_subject",
+                    "portfolio_closure_requires_final_tuple_conservation_and_no_pending_player_event",
+                    "provider_reads_only_the_explicit_project_subject_scope",
+                    "r303_exact_build_private_candidate_proves_explicit_subject_portfolio_closure_and_cp26_to_p3m229_lineage",
                     "phase3_initializer_requires_current_owner_subject_cycle",
                     "source_result_contribution_metrics_share_project_identity",
                     "metrics_receipt_id_and_revision_equal_contribution",

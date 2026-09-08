@@ -78,8 +78,10 @@ validator `RED` with `UNKNOWN_OPCODE` for activity-owned keys such as
 observation without guessing a CK3 activity schema. IR/runtime stay
 `SKIPPED`, and no CK3 process, save, or native capability is involved.
 `--fixture zg361-projects-metrics-postcondition-v1` (alias
-`zg361-projects-metrics`) selects the schema-only CP #026 to Phase-3 #229
-lineage fixture. It exercises receipt cursor/id/revision writes and the
+`zg361-projects-metrics`) selects the schema-only explicit-subject Credit
+Project portfolio closure and CP #026 to Phase-3 #229 lineage fixture. It
+exercises the nine v3 portfolio variables, final tuple/conservation checks,
+pending-player-event absence, receipt cursor/id/revision writes, and the
 project/metrics source projection, including uppercase `NOT` and trigger-side
 scalar `var:*` comparisons. Parser and validator are GREEN while IR/runtime
 remain explicitly `SKIPPED`; provenance includes the product capability ID and

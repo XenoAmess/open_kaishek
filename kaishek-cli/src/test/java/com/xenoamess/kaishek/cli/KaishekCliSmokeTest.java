@@ -1,5 +1,7 @@
 package com.xenoamess.kaishek.cli;
 
+import com.xenoamess.kaishek.zg361.ZhongguoProjectsMetricsPostconditionFixture;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -434,6 +436,9 @@ public final class KaishekCliSmokeTest {
           "--fixture", "zg361-projects-metrics-postcondition-v1"},
           new PrintStream(b), System.err);
       String projectsMetricsJson = b.toString(StandardCharsets.UTF_8);
+      String projectsMetricsSource = new String(
+          ZhongguoProjectsMetricsPostconditionFixture.render(),
+          StandardCharsets.UTF_8);
       check(projectsMetricsPreflight == 0
           && projectsMetricsJson.contains("\"status\":\"GREEN\"")
           && projectsMetricsJson.contains(
@@ -445,7 +450,11 @@ public final class KaishekCliSmokeTest {
           && projectsMetricsJson.contains("\"native_certified\":\"false\"")
           && projectsMetricsJson.contains("\"runtime_certified\":\"false\"")
           && projectsMetricsJson.contains("\"runtime\":{\"status\":\"SKIPPED\"")
-          && projectsMetricsJson.contains("\"ck3_started\":\"false\""),
+          && projectsMetricsJson.contains("\"ck3_started\":\"false\"")
+          && projectsMetricsSource.contains("zg361_cp_final_subject")
+          && projectsMetricsSource.contains("zg361_cp_final_conservation_ok")
+          && projectsMetricsSource.contains(
+              "NOT = { has_variable = zg361_cp_pending_player_event }"),
           projectsMetricsJson);
 
       b.reset();

@@ -3,7 +3,8 @@ package com.xenoamess.kaishek.zg361;
 import java.nio.charset.StandardCharsets;
 
 /**
- * Parser/profile fixture for the CP #026 to Phase-3 #229 receipt lineage.
+ * Parser/profile fixture for explicit-subject CP portfolio closure and the
+ * CP #026 to Phase-3 #229 receipt lineage.
  *
  * <p>The source is a compact, authored projection of the companion
  * generators.  It proves only that the exact variable operations can be
@@ -23,7 +24,7 @@ public final class ZhongguoProjectsMetricsPostconditionFixture {
     private ZhongguoProjectsMetricsPostconditionFixture() { }
 
     public static byte[] render() {
-        String body = "# Static-only CP #026 to Phase-3 #229 lineage fixture\n"
+        String body = "# Static-only explicit-subject portfolio closure and CP #026 to Phase-3 #229 lineage fixture\n"
                 + "zg361_projects_metrics_postcondition_fixture = {\n"
                 + "    if = {\n"
                 + "        limit = { NOT = { has_variable = zg361_cp_contribution_receipt_cursor } }\n"
@@ -32,8 +33,31 @@ public final class ZhongguoProjectsMetricsPostconditionFixture {
                 + "    change_variable = { name = zg361_cp_contribution_receipt_cursor add = 1 }\n"
                 + "    set_variable = { name = zg361_cp_m26_contribution_receipt_id value = var:zg361_cp_contribution_receipt_cursor }\n"
                 + "    set_variable = { name = zg361_cp_m26_contribution_receipt_revision value = var:zg361_case_e_revision }\n"
+                + "    set_variable = { name = zg361_cp_portfolio_closed value = 0 }\n"
+                + "    set_variable = { name = zg361_cp_portfolio_cycle value = 9 }\n"
+                + "    set_variable = { name = zg361_cp_pending_player_event value = 27 }\n"
+                + "    remove_variable = zg361_cp_pending_player_event\n"
+                + "    set_variable = { name = zg361_cp_final_owner value = 147 }\n"
+                + "    set_variable = { name = zg361_cp_final_subject value = 361 }\n"
+                + "    set_variable = { name = zg361_cp_final_cycle value = var:zg361_cp_portfolio_cycle }\n"
+                + "    set_variable = { name = zg361_cp_final_case value = 133 }\n"
+                + "    set_variable = { name = zg361_cp_final_state value = 5 }\n"
+                + "    set_variable = { name = zg361_cp_final_conservation_ok value = 1 }\n"
+                + "    set_variable = { name = zg361_cp_portfolio_closed value = 1 }\n"
                 + "    if = {\n"
                 + "        limit = {\n"
+                + "            has_variable = zg361_cp_portfolio_closed\n"
+                + "            has_variable = zg361_cp_portfolio_cycle\n"
+                + "            has_variable = zg361_cp_final_owner\n"
+                + "            has_variable = zg361_cp_final_subject\n"
+                + "            has_variable = zg361_cp_final_cycle\n"
+                + "            has_variable = zg361_cp_final_case\n"
+                + "            has_variable = zg361_cp_final_state\n"
+                + "            has_variable = zg361_cp_final_conservation_ok\n"
+                + "            NOT = { has_variable = zg361_cp_pending_player_event }\n"
+                + "            var:zg361_cp_portfolio_closed = 1\n"
+                + "            var:zg361_cp_final_cycle = var:zg361_cp_portfolio_cycle\n"
+                + "            var:zg361_cp_final_conservation_ok = 1\n"
                 + "            has_variable = zg361_cp_m26_contribution_receipt_id\n"
                 + "            has_variable = zg361_cp_m26_contribution_receipt_revision\n"
                 + "            var:zg361_cp_m26_contribution_receipt_id > 0\n"

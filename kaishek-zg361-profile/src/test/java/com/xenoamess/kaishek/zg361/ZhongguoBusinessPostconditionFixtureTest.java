@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,6 +31,20 @@ class ZhongguoBusinessPostconditionFixtureTest {
         String text = new String(source, StandardCharsets.UTF_8);
         assertTrue(text.contains("zg361_cp_m26_contribution_receipt_id"));
         assertTrue(text.contains("zg361_p3_m229_source_contribution_receipt_revision"));
+        for (String variable : List.of(
+                "zg361_cp_portfolio_closed",
+                "zg361_cp_portfolio_cycle",
+                "zg361_cp_final_owner",
+                "zg361_cp_final_subject",
+                "zg361_cp_final_cycle",
+                "zg361_cp_final_case",
+                "zg361_cp_final_state",
+                "zg361_cp_final_conservation_ok",
+                "zg361_cp_pending_player_event")) {
+            assertTrue(text.contains(variable), variable);
+        }
+        assertTrue(text.contains(
+                "NOT = { has_variable = zg361_cp_pending_player_event }"));
     }
 
     @Test
