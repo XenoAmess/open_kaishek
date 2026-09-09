@@ -68,10 +68,10 @@ class VanillaEventKnowledgeCapabilityProfileTest {
                 "2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86",
                 Ck3Profile11906.EXE_SHA256);
         assertEquals(
-                "493c4bf9ece11e0b2de01ea03fe39e296c6d5e2d52f2fb5d27baabb3a834bbb9",
+                "9d81716542888ca9ef64bc2e5fbe11a44fe16d8b3f244dd1da415ae189ce7e89",
                 VanillaEventKnowledgeCapabilityProfile.ROOT_REGISTRY_SHA256);
         assertEquals(
-                "d1490c78446a8f0bb725ab977cecf7acd6c198a6cf040d48dffeaf300a1fa9ae",
+                "426743527f488aa3efe5023f80cfdb69e098e675ae6b75895792bf60a636b476",
                 VanillaEventKnowledgeCapabilityProfile.ROOT_MCP_SERVER_SHA256);
     }
 }

@@ -20,9 +20,9 @@ public final class VanillaEventKnowledgeCapabilityProfile {
             "xar.ck3.vanilla-event-knowledge";
     public static final int SCHEMA_VERSION = 1;
     public static final String ROOT_REGISTRY_SHA256 =
-            "493c4bf9ece11e0b2de01ea03fe39e296c6d5e2d52f2fb5d27baabb3a834bbb9";
+            "9d81716542888ca9ef64bc2e5fbe11a44fe16d8b3f244dd1da415ae189ce7e89";
     public static final String ROOT_MCP_SERVER_SHA256 =
-            "d1490c78446a8f0bb725ab977cecf7acd6c198a6cf040d48dffeaf300a1fa9ae";
+            "426743527f488aa3efe5023f80cfdb69e098e675ae6b75895792bf60a636b476";
 
     public static final List<String> REQUEST_FIELDS = List.of(
             "event_definition_key",

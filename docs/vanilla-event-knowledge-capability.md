@@ -35,12 +35,14 @@ The exact game binding is CK3 `1.19.0.6`, executable SHA-256
 
 The companion integration commit was still being assembled when this
 open_kaishek projection was created. The exact reviewed API bytes are therefore
-bound directly:
+bound directly. These hashes include the companion repository's required
+UTF-8 BOM; adding that BOM changed the byte identity without changing the API
+semantics:
 
 | companion input | SHA-256 |
 | --- | --- |
-| `ck3_autonomous_player/src/xar_autoplayer/vanilla_events/registry.py` | `493c4bf9ece11e0b2de01ea03fe39e296c6d5e2d52f2fb5d27baabb3a834bbb9` |
-| `ck3_autonomous_player/src/xar_autoplayer/bridge/mcp_server.py` | `d1490c78446a8f0bb725ab977cecf7acd6c198a6cf040d48dffeaf300a1fa9ae` |
+| `ck3_autonomous_player/src/xar_autoplayer/vanilla_events/registry.py` | `9d81716542888ca9ef64bc2e5fbe11a44fe16d8b3f244dd1da415ae189ce7e89` |
+| `ck3_autonomous_player/src/xar_autoplayer/bridge/mcp_server.py` | `426743527f488aa3efe5023f80cfdb69e098e675ae6b75895792bf60a636b476` |
 
 The companion's focused MCP test lists and calls the tool through a driver
 whose every gameplay method raises. Both cases pass, proving that this query
