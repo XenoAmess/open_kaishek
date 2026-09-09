@@ -178,4 +178,45 @@ class StellarisProfile446Test {
                                 && d.message().contains("has_valid_civic")),
                 invalidDiagnostics::toString);
     }
+
+    @Test
+    void habitatDistrictSetTriggerValidatesAndMalformedFormsFailClosed() {
+        String valid = "test_deposit = {\n"
+                + "  triggered_planet_modifier = {\n"
+                + "    potential = { uses_district_set = habitat }\n"
+                + "    modifier = { district_hab_science_max_add = 2 }\n"
+                + "  }\n"
+                + "}\n";
+        var parsedValid = Parser.parse(valid.getBytes(StandardCharsets.UTF_8));
+        var validDiagnostics = Validator.validate(parsedValid,
+                "common/deposits/extend_workplace.txt", profile);
+
+        assertTrue(validDiagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                validDiagnostics::toString);
+        assertEquals(OpcodeSpec.Kind.TRIGGER, profile.opcode("uses_district_set").kind());
+        assertEquals(Set.of("PLANET", "planet", "SHIP", "ship"),
+                profile.opcode("uses_district_set").allowedScopes());
+
+        String invalid = "test_deposit = { triggered_planet_modifier = { potential = {\n"
+                + "  uses_district_sets = habitat\n"
+                + "  uses_district_set = { scope = COUNTRY value = habitat }\n"
+                + "} modifier = { district_hab_science_max_add = 2 } } }\n";
+        var parsedInvalid = Parser.parse(invalid.getBytes(StandardCharsets.UTF_8));
+        var invalidDiagnostics = Validator.validate(parsedInvalid,
+                "common/deposits/extend_workplace.txt", profile);
+
+        assertTrue(invalidDiagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("uses_district_sets")),
+                invalidDiagnostics::toString);
+        assertTrue(invalidDiagnostics.stream().anyMatch(d ->
+                        d.code().equals("INVALID_SCOPE")
+                                && d.message().contains("COUNTRY")),
+                invalidDiagnostics::toString);
+        assertTrue(invalidDiagnostics.stream().anyMatch(d ->
+                        d.code().equals("INVALID_PARAMETERS")
+                                && d.message().contains("uses_district_set")),
+                invalidDiagnostics::toString);
+    }
 }

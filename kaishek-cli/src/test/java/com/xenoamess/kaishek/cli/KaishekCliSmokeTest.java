@@ -98,6 +98,10 @@ public final class KaishekCliSmokeTest {
           + "      has_valid_civic = civic_machine_servitor } }\n"
           + "    modifier = { job_miner_add = 2 }\n"
           + "  }\n"
+          + "  triggered_planet_modifier = {\n"
+          + "    potential = { uses_district_set = habitat }\n"
+          + "    modifier = { district_hab_mining_max_add = 2 }\n"
+          + "  }\n"
           + "  potential = { always = no }\n"
           + "  drop_weight = { weight = 0 }\n"
           + "  should_swap_deposit_on_terraforming = no\n}\n", StandardCharsets.UTF_8);

@@ -39,3 +39,13 @@ Stellaris.
 4. An explicit country scope remains `INVALID_SCOPE`.
 5. Maven tests, packaged CLI smoke, deterministic packaging, whitespace, and
    remote `core-ci` all pass before the companion mod consumes the profile.
+
+## Local verification
+
+The 2026-09-09 implementation added the bounded opcode descriptor, a JUnit
+positive/negative contract, and a packaged CLI smoke case. The focused reactor
+test passed all 9 Stellaris profile tests. A subsequent full
+`mvn -B -ntp clean package`, metadata check, 8 Python schema tests, domain
+validation, packaged CLI smoke, and synthetic-014 preflight all passed. Remote
+CI remains the final gate; two local clean packages also produced identical
+SHA-256 lists for all 12 JARs.

@@ -29,6 +29,10 @@ Pegasus 4.4.6 可执行文件 SHA-256
 - I1-003 失控机仆切片：country-scope `has_valid_civic` trigger，用于殖民载体
   `owner` 条件中的 `civic_machine_servitor` 标量判定。profile 只登记 opcode、trigger
   kind 和 COUNTRY scope；具体 civic 是否有效、岗位能否就业仍由 Stellaris 实机证明。
+- I2-001 居住站切片：carrier-scope `uses_district_set` trigger，用于 deposit 的
+  `triggered_planet_modifier/potential` 精确限定 `habitat` district set。profile 登记
+  PLANET/SHIP scope 并保留未知拼写、错误显式 scope 的 fail-closed 诊断；它不模拟
+  `district_hab_*_max_add` 的游戏运行时效果。
 
 未登记的可执行键仍报告 `UNKNOWN_OPCODE`，未识别目录仍报告 `UNKNOWN_DIRECTORY`。
 
