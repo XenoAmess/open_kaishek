@@ -61,10 +61,10 @@ authority, or event-selection policy. A later consumer may query the companion
 MCP and validate schema version/build identity, but open_kaishek does not become
 a second owner of the companion registry.
 
-At companion audit revision `f6e2d3f42d24e1bc96ecdcb8270f72637a90bbf7`,
+At companion audit revision `6aa1cf5dd3264d152247ed1b96934bc11a730dbd`,
 the default catalog contains 159 contracts and 159 analysis records. Observation
-metadata is present for six keys: `epidemic_events.1064`,
-`great_holy_war.0011`, `stress_threshold.1721`,
+metadata is present for seven keys: `epidemic_events.1064`,
+`epidemic_events.5009`, `great_holy_war.0011`, `stress_threshold.1721`,
 `tgp_dynastic_cycle_events.0001`, `tgp_dynastic_cycle_events.0020`, and
 `tgp_movement_events.0160`. These catalog and metadata counts are content
 inventory, not part of the v1 ABI; compatible records and metadata may be added
