@@ -32,13 +32,13 @@ public final class ZhongguoPromotionSourceTransportCapabilityProfile {
     public static final String EXECUTABLE_SHA256 =
             "2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86";
     public static final String ROOT_INTEGRATION_COMMIT =
-            "a05b94e545fc6074fa2ffae2ffa76e34d9990d62";
+            "4974324fece6ba152bada6069f8a12718e4da8f6";
     public static final String ROOT_SOURCE_CONTRACT_SHA256 =
-            "a167bfe43cb1b0254e124abebef954a5fb8b2164afee31b16be8badc5e8fa786";
+            "4ebeb1463d421d2278d69b68ab9a070de776a3d38a7e03e54719b0401d6817b5";
     public static final String ROOT_ABI_SHA256 =
-            "eb22c5339a483614e75cd5135b896742ac9e0040166ac9689fb8af3070c94068";
+            "f489cae78e8a15da7b284b93eb33a6ad3fe6fd5735899f797a4a0e690e75f400";
     public static final String ROOT_PYTHON_CONTRACT_SHA256 =
-            "5cfa9fdea255b180612cace27687e9b3c89fa884f2a9fa92ac2c268c19876aea";
+            "9f8acf825ed2df8410484f48a5da979f0fb290056cf5080936e1c52409d21094";
     public static final boolean QUERY_PRODUCTION_CAPABILITY_ADVERTISED = false;
     public static final boolean ACTION_PRODUCTION_CAPABILITY_ADVERTISED = false;
     public static final boolean PRODUCTION_LIVE_READY = false;
@@ -49,7 +49,31 @@ public final class ZhongguoPromotionSourceTransportCapabilityProfile {
             "zg361_promotion_source_review_now_action",
             "zg361_promotion_source_b1_active",
             "zg361_promotion_source_central_active",
-            "zg361_promotion_source_pp_active");
+            "zg361_promotion_source_pp_active",
+            "zg361_promotion_source_central_stage_1",
+            "zg361_promotion_source_central_stage_2",
+            "zg361_promotion_source_central_stage_3",
+            "zg361_promotion_source_central_stage_4",
+            "zg361_promotion_source_central_stage_5",
+            "zg361_promotion_source_central_stage_6",
+            "zg361_promotion_source_central_stage_7",
+            "zg361_promotion_source_central_stage_8",
+            "zg361_promotion_source_central_stage_9",
+            "zg361_promotion_source_central_stage_10",
+            "zg361_promotion_source_central_stage_11",
+            "zg361_promotion_source_central_status_0",
+            "zg361_promotion_source_central_status_1",
+            "zg361_promotion_source_central_status_2",
+            "zg361_promotion_source_central_status_3",
+            "zg361_promotion_source_central_status_4",
+            "zg361_promotion_source_central_status_5",
+            "zg361_promotion_source_cl_partial_open",
+            "zg361_promotion_source_cl_digest_pending",
+            "zg361_promotion_source_cl_cycle_matches",
+            "zg361_promotion_source_cl_frozen_positive",
+            "zg361_promotion_source_cl_expectations_match",
+            "zg361_promotion_source_cl_ah_complete",
+            "zg361_promotion_source_cl_ai_complete");
 
     public static final CapabilityDescriptor QUERY_TRANSPORT =
             new CapabilityDescriptor(
@@ -78,7 +102,7 @@ public final class ZhongguoPromotionSourceTransportCapabilityProfile {
                     List.of(
                             "public_request_is_nonce_plus_expected_revision_only",
                             "caller_cannot_select_character_widget_variable_or_decision",
-                            "fixed_five_widget_allowlist_is_exact",
+                            "fixed_twenty_nine_widget_allowlist_is_exact",
                             "query_runs_twice_on_one_paused_application_main_frame",
                             "missing_or_inconsistent_data_is_typed_unavailable",
                             "product_query_capability_remains_unadvertised_until_live"),

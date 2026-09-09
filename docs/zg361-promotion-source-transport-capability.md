@@ -1,6 +1,6 @@
 # Zhongguo B7 promotion source transport boundary
 
-Date: 2026-09-04 (Asia/Shanghai)
+Date: 2026-09-04; synchronized 2026-09-09 (Asia/Shanghai)
 
 Companion commit `d53befaa4872662562f5db5d31757ca731e799e0`
 adds two advertised fail-closed transport capabilities:
@@ -16,7 +16,7 @@ records only the two transports as descriptors. It does not promote either
 product capability, implement a native query/action, or add parser vocabulary,
 IR/runtime handlers, opcodes, or CLI commands.
 
-The query reads a fixed five-widget allowlist twice on one paused
+The query reads a fixed twenty-nine-widget allowlist twice on one paused
 application-main frame. Missing or inconsistent data is typed unavailable.
 The action is fixed to the product's review-now semantics and is bound to the
 prior progress query. An accepted action ACK remains verification-pending; a
@@ -24,9 +24,9 @@ separately nonced later progress query must prove B1 entry.
 
 | companion input | SHA-256 |
 | --- | --- |
-| source contract | `a167bfe43cb1b0254e124abebef954a5fb8b2164afee31b16be8badc5e8fa786` |
-| ABI ledger | `10fb508a960ee8819166d34dd2b303bfede43e3fff30ae64230913fdfe34fac6` |
-| Python contract | `5cfa9fdea255b180612cace27687e9b3c89fa884f2a9fa92ac2c268c19876aea` |
+| source contract | `4ebeb1463d421d2278d69b68ab9a070de776a3d38a7e03e54719b0401d6817b5` |
+| ABI ledger | `f489cae78e8a15da7b284b93eb33a6ad3fe6fd5735899f797a4a0e690e75f400` |
+| Python contract | `9f8acf825ed2df8410484f48a5da979f0fb290056cf5080936e1c52409d21094` |
 
 Companion commit `f730aeb677066e39aa7f19e53c66e2a84b842f88`
 changes only the B3 localization/freezer projection. It adds no public
@@ -68,3 +68,18 @@ bits remain unchanged. The new GUI branch uses existing Paradox logical blocks,
 vocabulary, opcode, IR lowering, runtime handler or native decoder. Parser
 round-trip evidence can establish syntax preservation only; the companion's
 next CK3 old-save run remains authoritative for the gameplay semantics.
+
+## 2026-09-09 Central diagnostic projection synchronization
+
+The source pin advances to companion
+`4974324fece6ba152bada6069f8a12718e4da8f6`. The fixed widget set expands
+from five to twenty-nine entries: the original five product/source widgets,
+eleven Central stage indicators, six Central status indicators, and seven
+stage-nine liveness predicates. The source-contract, ABI, and Python-contract
+hashes in the table above bind that exact set and order.
+
+This is a read-only diagnostic projection on the existing v1 query transport.
+The query and action capability IDs, request fields, per-widget response shape,
+same-frame rule, typed-unavailability behavior, action semantics, and all
+production certification flags remain unchanged. It adds no parser vocabulary,
+IR lowering, runtime handler, opcode, CLI command, or new action authority.
