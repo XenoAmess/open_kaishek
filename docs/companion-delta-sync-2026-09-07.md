@@ -163,3 +163,20 @@ handler, CLI/service endpoint, CK3 process access, or write authority was
 added. The B1 cycle snapshot compatibility logic from `c552744` is retained
 unchanged. Detailed fields and hashes are recorded in
 `docs/vanilla-event-portable-assets-capability.md`.
+
+## 2026-09-10 follow-up: portable operator MCP handoff
+
+Companion commit `e684fd05f94290d58e9fb7009046eb95d60468f4` adds
+four target-side operator tools under contract `1.0.0` / profile schema `1`.
+This is an `ADDITIVE-CLIENT-AND-PROFILE-CHANGE`: open_kaishek pins the public
+capabilities/status/preflight/handoff envelopes and provider hashes, then adds
+a transport-neutral Java adapter for the read-only readiness sequence and
+request-ID-idempotent handoff/recovery.
+
+Endpoint, target ID, job name and request ID are caller/deployment values;
+operator identity, commands, process gates and paths remain target profile
+data. The adapter contains no operator, machine, campaign, turn or path
+constant, accepts no arbitrary command, and launches nothing itself. A first
+handoff requires GREEN readiness; an ambiguous response can be retried with
+the same request ID without rerunning a preflight that the already-started job
+would make RED. See `docs/operator-mcp-compatibility.md`.
