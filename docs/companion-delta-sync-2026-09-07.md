@@ -127,3 +127,19 @@ tests: 11 tests, zero failures, errors, or skips, and `BUILD SUCCESS`.
 passed 8/8, and `validate_domains.py` returned
 `PASS (schema-only; runtime not implemented)`. No CK3 process was started or
 attached, no save was mutated, and no runtime/readiness claim was promoted.
+
+## 2026-09-10 follow-up: portable B1 cycle snapshot MCP
+
+Companion commit `4c4891eb899e736ad4f5c6eaabdaaedc2f296f05` adds the
+public read-only MCP tool `ck3_query_zhongguo_b1_cycle_snapshot_v1` and its
+exact-build response schema. Unlike the preceding private path overrides, this
+is a new consumer-visible capability, so the compatibility decision is
+`ADDITIVE-PROFILE-CHANGE`: open_kaishek now records its identity, 68 response
+leaves, 14 consumption invariants, 38-variable fixed allowlist, and four
+canonical input hashes in `ZhongguoB1CycleSnapshotCapabilityProfile`.
+
+The implementation remains parent-owned. No parser vocabulary, IR/runtime
+handler, write action, CLI command, or service endpoint is added here, and all
+native/runtime certification flags remain false pending paused live evidence.
+The synchronization used `git fetch origin` followed by
+`git rebase origin/main`; no merge and no CK3 process were used.
