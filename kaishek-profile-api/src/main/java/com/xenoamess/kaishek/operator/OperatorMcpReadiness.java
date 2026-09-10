@@ -29,6 +29,38 @@ public record OperatorMcpReadiness(
         return (String) capabilities.get("profile_sha256");
     }
 
+    public String serverVersion() {
+        return (String) capabilities.get("server_version");
+    }
+
+    public List<String> controlsFor(String jobName) {
+        return controlsFor(capabilities, jobName);
+    }
+
+    static List<String> controlsFor(Map<String, Object> capabilities, String jobName) {
+        Object rawJobControls = capabilities.get("job_controls");
+        if (rawJobControls == null) {
+            return List.of();
+        }
+        if (!(rawJobControls instanceof Map<?, ?> jobControls)) {
+            throw new OperatorMcpContractException("capabilities.job_controls is not an object");
+        }
+        Object rawControls = jobControls.get(jobName);
+        if (!(rawControls instanceof List<?> controls)) {
+            throw new OperatorMcpContractException(
+                    "capabilities.job_controls does not contain the selected job");
+        }
+        List<String> result = new ArrayList<>(controls.size());
+        for (Object rawControl : controls) {
+            if (!(rawControl instanceof String control) || control.isBlank()) {
+                throw new OperatorMcpContractException(
+                        "capabilities.job_controls contains an invalid control name");
+            }
+            result.add(control);
+        }
+        return List.copyOf(result);
+    }
+
     static Map<String, Object> freezeMap(Map<String, Object> source) {
         if (source == null) {
             throw new OperatorMcpContractException("MCP response is null");

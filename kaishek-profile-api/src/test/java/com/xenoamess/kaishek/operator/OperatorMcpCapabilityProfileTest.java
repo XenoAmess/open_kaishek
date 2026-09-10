@@ -9,10 +9,11 @@ import static org.junit.jupiter.api.Assertions.*;
 class OperatorMcpCapabilityProfileTest {
     @Test
     void providerVersionToolsAndRequestShapesArePinned() {
-        assertEquals("1.0.0", OperatorMcpCapabilityProfile.CONTRACT_VERSION);
+        assertEquals("1.1.0", OperatorMcpCapabilityProfile.CONTRACT_VERSION);
+        assertEquals("1.0.0", OperatorMcpCapabilityProfile.LEGACY_CONTRACT_VERSION);
         assertEquals(1, OperatorMcpCapabilityProfile.PROFILE_SCHEMA_VERSION);
         assertEquals(
-                "e684fd05f94290d58e9fb7009046eb95d60468f4",
+                "5610de6bae4f5ac7e04ba3bedb25084837608183",
                 OperatorMcpCapabilityProfile.ROOT_PROVIDER_COMMIT);
         assertEquals(
                 List.of(
@@ -20,6 +21,14 @@ class OperatorMcpCapabilityProfileTest {
                         "operator_get_status",
                         "operator_preflight_job",
                         "operator_handoff_job"),
+                OperatorMcpCapabilityProfile.LEGACY_TOOLS);
+        assertEquals(
+                List.of(
+                        "operator_get_capabilities",
+                        "operator_get_status",
+                        "operator_preflight_job",
+                        "operator_handoff_job",
+                        "operator_control_job"),
                 OperatorMcpCapabilityProfile.TOOLS);
         assertEquals(List.of(), OperatorMcpCapabilityProfile.GET_CAPABILITIES_REQUEST_FIELDS);
         assertEquals(
@@ -31,6 +40,12 @@ class OperatorMcpCapabilityProfileTest {
         assertEquals(
                 List.of("target_id", "job_name", "request_id"),
                 OperatorMcpCapabilityProfile.HANDOFF_JOB_REQUEST_FIELDS);
+        assertEquals(
+                List.of(
+                        "target_id", "job_name", "job_id", "control_name", "request_id"),
+                OperatorMcpCapabilityProfile.CONTROL_JOB_REQUEST_FIELDS);
+        assertTrue(OperatorMcpCapabilityProfile.isCompatibleUpgrade("1.0.0", "1.1.0"));
+        assertFalse(OperatorMcpCapabilityProfile.isCompatibleUpgrade("1.1.0", "1.0.0"));
     }
 
     @Test
@@ -49,6 +64,20 @@ class OperatorMcpCapabilityProfileTest {
                 "request_id_is_portable_and_idempotent_per_server_instance"));
         assertTrue(OperatorMcpCapabilityProfile.HANDOFF_JOB.invariants().contains(
                 "caller_cannot_supply_a_command_or_working_directory"));
+        assertFalse(OperatorMcpCapabilityProfile.CONTROL_JOB.readOnly());
+        assertFalse(OperatorMcpCapabilityProfile.CONTROL_JOB.deterministic());
+        assertTrue(OperatorMcpCapabilityProfile.CONTROL_JOB.invariants().contains(
+                "caller_cannot_supply_stdin_payload"));
+        assertTrue(OperatorMcpCapabilityProfile.CONTROL_JOB.invariants().contains(
+                "red_write_results_are_frozen_and_not_silently_retried"));
+        for (var capability : List.of(
+                OperatorMcpCapabilityProfile.GET_CAPABILITIES,
+                OperatorMcpCapabilityProfile.GET_STATUS,
+                OperatorMcpCapabilityProfile.PREFLIGHT_JOB,
+                OperatorMcpCapabilityProfile.HANDOFF_JOB,
+                OperatorMcpCapabilityProfile.CONTROL_JOB)) {
+            assertTrue(capability.profileVersion().endsWith("-1.1.0"));
+        }
     }
 
     @Test

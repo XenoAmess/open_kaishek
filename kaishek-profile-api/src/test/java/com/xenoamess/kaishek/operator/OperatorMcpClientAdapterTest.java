@@ -135,6 +135,128 @@ class OperatorMcpClientAdapterTest {
         assertThrows(IllegalArgumentException.class, () -> adapter.handoffJob("bad request"));
     }
 
+    @Test
+    void legacyContractDiscoversNoControlsAndRejectsControlLocally() {
+        var target = OperatorMcpTarget.contractV1("endpoint-legacy", "target-old", "job-old");
+        var transport = new FakeTransport(target);
+        var adapter = new OperatorMcpClientAdapter(target, transport);
+
+        assertEquals(List.of(), adapter.discoverControls());
+        assertThrows(
+                OperatorMcpContractException.class,
+                () -> adapter.controlJob("job-id-old", "resume", "control-old"));
+        assertEquals(0, transport.controlCalls);
+    }
+
+    @Test
+    void legacyTargetAcceptsCompatibleUpgradeAndInvokesAdvertisedControl() {
+        var target = OperatorMcpTarget.contractV1("endpoint-upgraded", "target-up", "job-up");
+        var transport = new FakeTransport(target);
+        transport.serverVersion = "1.1.0";
+        transport.controls = List.of("resume", "stop");
+        var adapter = new OperatorMcpClientAdapter(target, transport);
+
+        assertEquals(List.of("resume", "stop"), adapter.discoverControls());
+        Map<String, Object> response = adapter.controlJob(
+                "job-id-fake", "resume", "control-request-1");
+        Map<String, Object> cached = adapter.controlJob(
+                "job-id-fake", "resume", "control-request-1");
+
+        assertEquals("ACCEPTED", response.get("result"));
+        assertEquals(false, response.get("idempotent_replay"));
+        assertEquals(7, response.get("payload_bytes"));
+        assertSame(response, cached);
+        assertEquals(1, transport.controlCalls);
+        assertEquals(
+                Map.of(
+                        "target_id", target.targetId(),
+                        "job_name", target.jobName(),
+                        "job_id", "job-id-fake",
+                        "control_name", "resume",
+                        "request_id", "control-request-1"),
+                transport.lastControlArguments);
+        assertThrows(UnsupportedOperationException.class, () -> response.put("x", "y"));
+    }
+
+    @Test
+    void readinessDomainCarriesVersionAndSelectedJobControls() {
+        var target = OperatorMcpTarget.contractV11(
+                "endpoint-domain", "target-domain", "job-domain");
+        var transport = new FakeTransport(target);
+        transport.serverVersion = "1.1.0";
+        transport.controls = List.of("advance", "finish");
+        var adapter = new OperatorMcpClientAdapter(target, transport);
+
+        OperatorMcpReadiness readiness = adapter.inspectReadiness();
+
+        assertTrue(readiness.green());
+        assertEquals("1.1.0", readiness.serverVersion());
+        assertEquals(List.of("advance", "finish"), readiness.controlsFor(target.jobName()));
+        assertThrows(
+                OperatorMcpContractException.class,
+                () -> readiness.controlsFor("another-job"));
+    }
+
+    @Test
+    void lostControlResponseRetriesSameBindingAndServerInstance() {
+        var target = OperatorMcpTarget.contractV11(
+                "endpoint-control-retry", "target-retry", "job-retry");
+        var transport = new FakeTransport(target);
+        transport.serverVersion = "1.1.0";
+        transport.controls = List.of("continue");
+        transport.loseFirstControlResponse = true;
+        var adapter = new OperatorMcpClientAdapter(target, transport);
+
+        assertThrows(
+                SimulatedLostResponse.class,
+                () -> adapter.controlJob(
+                        "job-id-fake", "continue", "control-request-retry"));
+        Map<String, Object> replay = adapter.controlJob(
+                "job-id-fake", "continue", "control-request-retry");
+
+        assertEquals(true, replay.get("idempotent_replay"));
+        assertEquals(2, transport.controlCalls);
+        assertThrows(
+                OperatorMcpContractException.class,
+                () -> adapter.controlJob(
+                        "different-job", "continue", "control-request-retry"));
+    }
+
+    @Test
+    void redControlResponseIsReturnedAndNeverRetried() {
+        var target = OperatorMcpTarget.contractV11(
+                "endpoint-control-red", "target-red", "job-red");
+        var transport = new FakeTransport(target);
+        transport.serverVersion = "1.1.0";
+        transport.controls = List.of("stop");
+        transport.controlRed = true;
+        var adapter = new OperatorMcpClientAdapter(target, transport);
+
+        Map<String, Object> red = adapter.controlJob(
+                "job-id-fake", "stop", "control-red-request");
+        Map<String, Object> cached = adapter.controlJob(
+                "job-id-fake", "stop", "control-red-request");
+
+        assertEquals("RED", red.get("result"));
+        assertEquals("BrokenPipeError: configured failure", red.get("error"));
+        assertSame(red, cached);
+        assertEquals(1, transport.controlCalls);
+    }
+
+    @Test
+    void newContractRejectsMissingControlMetadataOrOldServer() {
+        var target = OperatorMcpTarget.contractV11("endpoint-new", "target-new", "job-new");
+        var oldTransport = new FakeTransport(target);
+        var oldAdapter = new OperatorMcpClientAdapter(target, oldTransport);
+        assertThrows(OperatorMcpContractException.class, oldAdapter::getCapabilities);
+
+        var missingMetadata = new FakeTransport(target);
+        missingMetadata.serverVersion = "1.1.0";
+        missingMetadata.omitJobControls = true;
+        var missingAdapter = new OperatorMcpClientAdapter(target, missingMetadata);
+        assertThrows(OperatorMcpContractException.class, missingAdapter::getCapabilities);
+    }
+
     private static final class FakeTransport implements OperatorMcpTransport {
         private final OperatorMcpTarget target;
         private final List<String> tools = new ArrayList<>();
@@ -142,12 +264,19 @@ class OperatorMcpClientAdapterTest {
         private int statusCalls;
         private int preflightCalls;
         private int handoffCalls;
+        private int controlCalls;
         private boolean identityMatches = true;
         private boolean forceRed;
         private boolean loseFirstHandoffResponse;
+        private boolean loseFirstControlResponse;
+        private boolean controlRed;
+        private boolean omitJobControls;
         private boolean started;
+        private List<String> controls = List.of();
         private String lastEndpoint;
         private String serverInstanceId = "server-instance-fake";
+        private String serverVersion = "1.0.0";
+        private Map<String, Object> lastControlArguments;
 
         private FakeTransport(OperatorMcpTarget target) {
             this.target = target;
@@ -165,24 +294,33 @@ class OperatorMcpClientAdapterTest {
                 case "operator_get_status" -> status(arguments);
                 case "operator_preflight_job" -> preflight(arguments);
                 case "operator_handoff_job" -> handoff(arguments);
+                case "operator_control_job" -> control(arguments);
                 default -> throw new AssertionError("unexpected tool " + toolId);
             };
         }
 
         private Map<String, Object> capabilities() {
             capabilitiesCalls++;
-            return Map.ofEntries(
-                    Map.entry("schema_version", 1),
-                    Map.entry("server_version", "1.0.0"),
-                    Map.entry("server_instance_id", serverInstanceId),
-                    Map.entry("target_id", target.targetId()),
-                    Map.entry("display_name", "Configured target"),
-                    Map.entry("profile_sha256", PROFILE_SHA),
-                    Map.entry("endpoint", Map.of("transport", "test")),
-                    Map.entry("jobs", List.of(target.jobName())),
-                    Map.entry("tools", OperatorMcpCapabilityProfile.TOOLS),
-                    Map.entry("caller_supplied_commands", false),
-                    Map.entry("operator_bootstrap_required", true));
+            Map<String, Object> result = new LinkedHashMap<>();
+            result.put("schema_version", 1);
+            result.put("server_version", serverVersion);
+            result.put("server_instance_id", serverInstanceId);
+            result.put("target_id", target.targetId());
+            result.put("display_name", "Configured target");
+            result.put("profile_sha256", PROFILE_SHA);
+            result.put("endpoint", Map.of("transport", "test"));
+            result.put("jobs", List.of(target.jobName()));
+            if ("1.1.0".equals(serverVersion) && !omitJobControls) {
+                result.put("job_controls", Map.of(target.jobName(), controls));
+            }
+            result.put(
+                    "tools",
+                    "1.1.0".equals(serverVersion)
+                            ? OperatorMcpCapabilityProfile.TOOLS
+                            : OperatorMcpCapabilityProfile.LEGACY_TOOLS);
+            result.put("caller_supplied_commands", false);
+            result.put("operator_bootstrap_required", true);
+            return result;
         }
 
         private Map<String, Object> status(Map<String, Object> arguments) {
@@ -243,6 +381,9 @@ class OperatorMcpClientAdapterTest {
             job.put("started_unix", 123.5);
             job.put("stdout_path", "configured/stdout.log");
             job.put("stderr_path", "configured/stderr.log");
+            if ("1.1.0".equals(serverVersion)) {
+                job.put("available_controls", controls);
+            }
             return Map.of(
                     "schema_version", 1,
                     "result", "ACCEPTED",
@@ -250,6 +391,33 @@ class OperatorMcpClientAdapterTest {
                     "target_id", target.targetId(),
                     "profile_sha256", PROFILE_SHA,
                     "job", job);
+        }
+
+        private Map<String, Object> control(Map<String, Object> arguments) {
+            controlCalls++;
+            lastControlArguments = Map.copyOf(arguments);
+            assertEquals(target.targetId(), arguments.get("target_id"));
+            assertEquals(target.jobName(), arguments.get("job_name"));
+            assertEquals("job-id-fake", arguments.get("job_id"));
+            assertTrue(controls.contains(arguments.get("control_name")));
+            boolean replay = controlCalls > 1;
+            if (loseFirstControlResponse && controlCalls == 1) {
+                throw new SimulatedLostResponse();
+            }
+            Map<String, Object> response = new LinkedHashMap<>();
+            response.put("schema_version", 1);
+            response.put("result", controlRed ? "RED" : "ACCEPTED");
+            response.put("idempotent_replay", replay);
+            response.put("target_id", target.targetId());
+            response.put("profile_sha256", PROFILE_SHA);
+            response.put("job_id", arguments.get("job_id"));
+            response.put("job_name", target.jobName());
+            response.put("control_name", arguments.get("control_name"));
+            response.put("payload_bytes", 7);
+            if (controlRed) {
+                response.put("error", "BrokenPipeError: configured failure");
+            }
+            return response;
         }
     }
 

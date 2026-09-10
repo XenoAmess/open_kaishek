@@ -180,3 +180,22 @@ constant, accepts no arbitrary command, and launches nothing itself. A first
 handoff requires GREEN readiness; an ambiguous response can be retried with
 the same request ID without rerunning a preflight that the already-started job
 would make RED. See `docs/operator-mcp-compatibility.md`.
+
+## 2026-09-10 follow-up: portable operator MCP job controls
+
+Companion commit `5610de6bae4f5ac7e04ba3bedb25084837608183`
+advances the operator contract to `1.1.0` while retaining profile schema `1`.
+Optional per-job controls are frozen in the target profile; capabilities and
+job status disclose only their names, and the fifth tool sends only the
+selected profile-owned payload to the matching live job. This is an
+`ADDITIVE-CLIENT-AND-PROFILE-CHANGE`.
+
+open_kaishek now pins the 1.1 provider hashes and control request/response
+metadata. The transport-neutral adapter discovers controls before calling
+them, preserves request-ID/server-instance idempotency, returns and caches
+write `RED` results without an implicit retry, and never accepts caller stdin
+bytes. Existing `1.0.0` four-tool servers and profiles remain supported with
+an empty control set; existing contract-V1 targets accept the compatible 1.1
+server upgrade. Endpoint, target, job, control and request identifiers remain
+deployment/caller inputs, with no account, machine, run number or path bound
+into the client. No CK3 or promotional-video action is performed.

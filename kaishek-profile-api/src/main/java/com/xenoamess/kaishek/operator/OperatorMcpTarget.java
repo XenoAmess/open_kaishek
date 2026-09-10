@@ -20,7 +20,18 @@ public record OperatorMcpTarget(
                 expectedServerVersion, "expectedServerVersion");
     }
 
+    /** Select the compatible v1 baseline; the client also accepts its additive 1.1 upgrade. */
     public static OperatorMcpTarget contractV1(
+            String endpoint, String targetId, String jobName) {
+        return new OperatorMcpTarget(
+                endpoint,
+                targetId,
+                jobName,
+                OperatorMcpCapabilityProfile.LEGACY_CONTRACT_VERSION);
+    }
+
+    /** Require the 1.1 control-capable server contract. */
+    public static OperatorMcpTarget contractV11(
             String endpoint, String targetId, String jobName) {
         return new OperatorMcpTarget(
                 endpoint,
