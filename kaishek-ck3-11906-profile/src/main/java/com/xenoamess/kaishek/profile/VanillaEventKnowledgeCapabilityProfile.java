@@ -22,7 +22,7 @@ public final class VanillaEventKnowledgeCapabilityProfile {
     public static final String ROOT_REGISTRY_SHA256 =
             "9d81716542888ca9ef64bc2e5fbe11a44fe16d8b3f244dd1da415ae189ce7e89";
     public static final String ROOT_MCP_SERVER_SHA256 =
-            "426743527f488aa3efe5023f80cfdb69e098e675ae6b75895792bf60a636b476";
+            "A67D98C4D3B452D09AF0B9A830E5E95BB58C31AF52B31AAA586423B18E4ED320";
 
     public static final List<String> REQUEST_FIELDS = List.of(
             "event_definition_key",

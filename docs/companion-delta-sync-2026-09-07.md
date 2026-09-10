@@ -143,3 +143,23 @@ handler, write action, CLI command, or service endpoint is added here, and all
 native/runtime certification flags remain false pending paused live evidence.
 The synchronization used `git fetch origin` followed by
 `git rebase origin/main`; no merge and no CK3 process were used.
+
+## 2026-09-10 follow-up: portable vanilla-event discovery and evidence MCP
+
+Companion commit `df1ed7cb00ef6c54de602fbf182e6204c77c1202` adds four
+offline, read-only MCP tools: knowledge discovery, portable evidence listing,
+bounded evidence reads, and exact-build source provenance. This is an
+`ADDITIVE-PROFILE-CHANGE`; open_kaishek now pins each request/response envelope,
+the four schema identities, provider source hashes, the content-addressed
+manifest, and the 167-event source-index dataset in
+`VanillaEventPortableAssetCapabilityProfile`.
+
+The evidence transport exposes no machine-local bundle root or blob path.
+Reads are addressed by uncompressed SHA-256 and bounded to 64 KiB; source paths
+are repository-relative, and caller candidates remain explicitly lexical-only.
+All four capability descriptors remain read-only, deterministic, and neither
+native- nor runtime-certified. No parser vocabulary, opcode, IR/runtime
+handler, CLI/service endpoint, CK3 process access, or write authority was
+added. The B1 cycle snapshot compatibility logic from `c552744` is retained
+unchanged. Detailed fields and hashes are recorded in
+`docs/vanilla-event-portable-assets-capability.md`.
