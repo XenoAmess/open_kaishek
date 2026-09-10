@@ -1,6 +1,6 @@
 # CK3 vanilla-event knowledge MCP compatibility boundary
 
-Date: 2026-09-09 (Asia/Shanghai)
+Date: 2026-09-10 (Asia/Shanghai)
 
 The companion CK3 project now exposes the offline, read-only MCP tool
 `ck3_query_vanilla_event_knowledge_v1`. This document and
@@ -61,11 +61,41 @@ authority, or event-selection policy. A later consumer may query the companion
 MCP and validate schema version/build identity, but open_kaishek does not become
 a second owner of the companion registry.
 
-At companion audit revision `6aa1cf5dd3264d152247ed1b96934bc11a730dbd`,
-the default catalog contains 159 contracts and 159 analysis records. Observation
-metadata is present for seven keys: `epidemic_events.1064`,
-`epidemic_events.5009`, `great_holy_war.0011`, `stress_threshold.1721`,
-`tgp_dynastic_cycle_events.0001`, `tgp_dynastic_cycle_events.0020`, and
-`tgp_movement_events.0160`. These catalog and metadata counts are content
-inventory, not part of the v1 ABI; compatible records and metadata may be added
+At companion audit revision `2fa9034a59ebec3677b184379611fd45471ba0b6`,
+the default catalog contains 167 contracts and 167 analysis records. The
+observation aggregate contains 29 keys:
+
+* `death_management.1007`, `ep3_emperor_yearly.2170`,
+  `ep3_emperor_yearly.2211`, `ep3_landless_admin.1000`,
+  `ep3_powerful_families.8012`, and `ep3_story_cycle_admin_eunuch.1001`;
+* `epidemic_events.0110`, `epidemic_events.1064`, `epidemic_events.5009`,
+  `faction_demand.1101`, `faction_demand.2001`, and
+  `great_holy_war.0011`;
+* `historical_char_creation_events.1`, `intrigue_temptation.3020`,
+  `natural_disaster.6901`, `natural_disaster.7021`,
+  `natural_disaster.7031`, `natural_disaster.8001`, and
+  `stress_threshold.1721`;
+* `tgp_china_ministry.0100`, `tgp_dynastic_cycle.0081`,
+  `tgp_dynastic_cycle.0091`, `tgp_dynastic_cycle_events.0001`,
+  `tgp_dynastic_cycle_events.0020`, and `tgp_movement_events.0160`;
+* `trait_specific.4001`, `travel_danger_events.3002`,
+  `tribute_mission.1005`, and `vassal_interaction.0040`.
+
+The current portability tranche covers eleven existing records:
+`great_holy_war.0011`, `tgp_dynastic_cycle.0091`,
+`ep3_emperor_yearly.2170`, `ep3_emperor_yearly.2211`,
+`ep3_powerful_families.8012`, `historical_char_creation_events.1`,
+`intrigue_temptation.3020`, `natural_disaster.8001`,
+`natural_disaster.7021`, `natural_disaster.6901`, and
+`travel_danger_events.3002`. Their reusable contracts bind the active player
+through `$player` and no longer carry a campaign date or numeric player
+identity. The removed live bindings remain queryable only in each record's
+`observations` projection, so another operator or machine can reuse the same
+contract without inheriting the original campaign identity.
+
+This tranche did not change `registry.py`, `mcp_server.py`, the MCP tool ID, or
+the v1 request/response envelope. Consequently the byte hashes and Java
+compatibility descriptor above remain current; only this content-audit revision
+and inventory advance. Catalog and metadata counts are content inventory, not
+part of the v1 ABI, so compatible records and metadata may continue to be added
 without changing the request/response shape.
