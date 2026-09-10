@@ -199,3 +199,20 @@ an empty control set; existing contract-V1 targets accept the compatible 1.1
 server upgrade. Endpoint, target, job, control and request identifiers remain
 deployment/caller inputs, with no account, machine, run number or path bound
 into the client. No CK3 or promotional-video action is performed.
+
+## 2026-09-10 follow-up: coat-of-arms source probe MCP
+
+Companion commit `16755189c172772669a0d30456da1f977d6b6de0` adds
+`ck3_probe_coat_of_arms_source_v1`, a public, parameterized native MCP command.
+This is an `ADDITIVE-PROFILE-CHANGE`: open_kaishek now records the three-field
+request, result/session-binding evidence, 128 KiB ASCII source boundary and
+side-effect semantics in `CoatOfArmsSourceProbeCapabilityProfile`.
+
+The tool is not read-only even when `apply=false`, because detection writes the
+OS clipboard and refreshes the designer paste preview. It is not exposed as an
+autonomous action and no native/runtime certification is promoted while the
+provider's new-DLL per-payload live matrix remains pending. The dedicated
+coat-of-arms reader does not extend open_kaishek's Paradox parser vocabulary,
+IR/runtime, CLI, or Quarkus service. Detailed compatibility and frozen hashes
+are in `docs/ck3-coat-of-arms-source-probe-capability.md`; this synchronization
+does not start or attach to CK3.
