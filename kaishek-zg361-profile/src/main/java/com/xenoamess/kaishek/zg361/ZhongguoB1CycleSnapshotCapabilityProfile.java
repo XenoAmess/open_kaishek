@@ -22,9 +22,9 @@ public final class ZhongguoB1CycleSnapshotCapabilityProfile {
     public static final String ROOT_SCHEMA_SHA256 =
             "42e5692943123ac71c8629c2a8a6c0656f6aab20ea2a8546a193707ba932c23b";
     public static final String ROOT_PYTHON_CONTRACT_SHA256 =
-            "470c596748669bff779fdbf2b18273250730f68ee1fbecebd2d7aa410eeeddff";
+            "247729b653d2ecca49a894024c9ab6e6450fb74fe17bd559174eca166291f06d";
     public static final String ROOT_PROVIDER_COMMIT =
-            "4c4891eb899e736ad4f5c6eaabdaaedc2f296f05";
+            "8f0aa54699b8f79e3695c56dd9f17e7c1203b633";
     public static final int FIXED_ALLOWLIST_COUNT = 38;
 
     public static final CapabilityDescriptor SNAPSHOT =

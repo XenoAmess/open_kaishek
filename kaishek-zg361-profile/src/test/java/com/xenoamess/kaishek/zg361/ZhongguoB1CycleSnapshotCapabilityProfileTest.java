@@ -42,7 +42,9 @@ class ZhongguoB1CycleSnapshotCapabilityProfileTest {
         assertEquals(64, ZhongguoB1CycleSnapshotCapabilityProfile.ROOT_SOURCE_CONTRACT_SHA256.length());
         assertEquals(64, ZhongguoB1CycleSnapshotCapabilityProfile.ROOT_SCHEMA_SHA256.length());
         assertEquals(64, ZhongguoB1CycleSnapshotCapabilityProfile.ROOT_PYTHON_CONTRACT_SHA256.length());
-        assertEquals("4c4891eb899e736ad4f5c6eaabdaaedc2f296f05",
+        assertEquals("247729b653d2ecca49a894024c9ab6e6450fb74fe17bd559174eca166291f06d",
+                ZhongguoB1CycleSnapshotCapabilityProfile.ROOT_PYTHON_CONTRACT_SHA256);
+        assertEquals("8f0aa54699b8f79e3695c56dd9f17e7c1203b633",
                 ZhongguoB1CycleSnapshotCapabilityProfile.ROOT_PROVIDER_COMMIT);
     }
 }
