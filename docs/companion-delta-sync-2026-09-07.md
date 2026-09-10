@@ -97,3 +97,33 @@ Boundaries: `ck3_started=false`, `process_attached=false`,
 `parser_vocabulary_added=false`, `runtime_handler_added=false`,
 `runtime_certification_promoted=false`, `decision_ready=false`, and
 `automatic_surrender_ready=false`.
+
+## 2026-09-10 follow-up: relocatable G2 adapter runtime paths
+
+Companion commit `dc829a3307ca572a2c8747325f34235cf91a0aa0` adds
+`--capture-executable`, `--bridge-dll`, and `--bridge-injector` to the private
+source-specific war-loss adapter. Each argument only overrides the local path
+for one runtime binary; the frozen manifest still supplies and enforces its
+expected SHA-256. Omitting the arguments preserves the previous manifest-path
+behavior. The exact runner SHA-256 is
+`94E179F41D9BAB852D9A8E5CB50D9D1E7ED9C69F792C4650E93B626BE267E9F7`,
+and the updated manifest SHA-256 is
+`056D765A29707D206432973960E4863D011C6132ECB5C87F97C72D0A7A4AAA9A`.
+
+`NO-CODE-CHANGE`: open_kaishek does not invoke this Python runner, interpret
+its manifest, or forward its process-launch CLI. The new switches do not alter
+a native bridge request/response schema, MCP capability, Paradox opcode,
+open_kaishek profile descriptor, parser vocabulary, IR/runtime handler, CLI
+command, or service endpoint. Therefore the existing G2 metadata and readiness
+flags remain correct; copying the three private wrapper arguments into the
+public Java CLI would create an unused duplicate launch surface.
+
+The audit started from and retained clean `main == origin/main ==
+6d26808df752398e0ba970f05547a81179c31a3b`; `git fetch origin` followed by
+`git rebase origin/main` reported the
+branch current. Focused Maven verification covered all four G2 metadata/profile
+tests: 11 tests, zero failures, errors, or skips, and `BUILD SUCCESS`.
+`py -B tools/check_metadata.py` passed, the independent Python domain suite
+passed 8/8, and `validate_domains.py` returned
+`PASS (schema-only; runtime not implemented)`. No CK3 process was started or
+attached, no save was mutated, and no runtime/readiness claim was promoted.
