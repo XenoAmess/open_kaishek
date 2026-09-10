@@ -11,8 +11,10 @@ import java.util.List;
  * granting open_kaishek any CK3 process authority.</p>
  */
 public final class CoatOfArmsSourceProbeCapabilityProfile {
-    public static final String ROOT_PROVIDER_COMMIT =
+    public static final String ROOT_CAPABILITY_INTRODUCTION_COMMIT =
             "16755189c172772669a0d30456da1f977d6b6de0";
+    public static final String ROOT_PROVIDER_COMMIT =
+            "718a60d538249fb6eecd47284e622fd33d71d260";
     public static final String ROOT_MCP_SERVER_SHA256 =
             "7DD3207AB2C53385FBAEBB4C28B9A30614ED229C05A20B58694EF7B4A355ABC1";
     public static final String ROOT_PYTHON_CONTRACT_SHA256 =
@@ -21,12 +23,14 @@ public final class CoatOfArmsSourceProbeCapabilityProfile {
             "EFABF2A04C0A8AD4A61A63B7FA0E6301F2B63AAB96C7D362EBCDA0F61F8FA66B";
     public static final String ROOT_NATIVE_IMPLEMENTATION_SHA256 =
             "8E4209801529AB6C9505BFEB5CE0E587DA69D89C4289A4621FFEE122A66290A8";
+    public static final String ROOT_BRIDGE_BOOTSTRAP_SHA256 =
+            "42296A162E8D1505B3FE8CFA6343C364117C7F3DC9CE207911884F1F124A51C6";
     public static final String ROOT_SERVICE_SHA256 =
             "336BD52A1E32F62003AB53585401D961A060FBF8F37F40BC54ACD3D68DDBF564";
     public static final String ROOT_NATIVE_DRIVER_SHA256 =
             "82F6D94E22525400801E0885A4D0D77B6D1C4011F30462D124C062D02A9E3092";
     public static final String ROOT_PROVIDER_TEST_SHA256 =
-            "C8DE570BD7226094A4D52D0F607B2EBBDBE3319EBB877795CB0CCBFB44194FBE";
+            "09A689D1CAC62DDE550AF8DEECDA1E28C46897220D1D69FF3B2F3CC8A9CFDC70";
 
     public static final String TOOL_ID = "ck3_probe_coat_of_arms_source_v1";
     public static final String CAPABILITY_ID =
@@ -72,6 +76,7 @@ public final class CoatOfArmsSourceProbeCapabilityProfile {
                     List.of(
                             "source_is_nonempty_ascii_and_bounded_to_131072_bytes",
                             "expected_revision_is_zero_only_for_frontend_binding",
+                            "native_hook_bootstraps_before_gameplay_snapshot_availability",
                             "frontend_snapshot_and_gameplay_bindings_use_positive_revisions",
                             "request_and_result_are_bound_to_one_bridge_pid_and_connection_generation",
                             "hybrid_backend_routes_to_native_without_visual_fallback",

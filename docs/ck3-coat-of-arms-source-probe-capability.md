@@ -9,6 +9,13 @@ capability `game.command.probe-coat-of-arms-source-v1`. The request is exactly
 is bounded to 128 KiB. The response schema is
 `coat-of-arms-source-probe-v1` version 1.
 
+Follow-up commit `718a60d538249fb6eecd47284e622fd33d71d260` moves
+native hook installation into bridge worker bootstrap, before the gameplay
+snapshot-dependent mailbox lifetime. This makes the already-declared
+`frontend` binding reachable before a gameplay snapshot exists. Capability
+advertisement, MCP request/response schema, statuses and side effects are
+unchanged.
+
 open_kaishek records the public envelope as a static compatibility profile. It
 does not copy the native hook, start or attach to CK3, manipulate the
 clipboard, or add a CLI/service action. It also does not add parser vocabulary:
@@ -53,8 +60,9 @@ product-live, or persistence readiness.
 | Python contract | `031BF5DF84094953910C2AF147B16ED40949C649DFDCF76295F876E7F0F99E5A` |
 | native ABI | `EFABF2A04C0A8AD4A61A63B7FA0E6301F2B63AAB96C7D362EBCDA0F61F8FA66B` |
 | native implementation | `8E4209801529AB6C9505BFEB5CE0E587DA69D89C4289A4621FFEE122A66290A8` |
+| bridge bootstrap | `42296A162E8D1505B3FE8CFA6343C364117C7F3DC9CE207911884F1F124A51C6` |
 | service | `336BD52A1E32F62003AB53585401D961A060FBF8F37F40BC54ACD3D68DDBF564` |
 | native driver | `82F6D94E22525400801E0885A4D0D77B6D1C4011F30462D124C062D02A9E3092` |
-| focused provider test | `C8DE570BD7226094A4D52D0F607B2EBBDBE3319EBB877795CB0CCBFB44194FBE` |
+| focused provider test | `09A689D1CAC62DDE550AF8DEECDA1E28C46897220D1D69FF3B2F3CC8A9CFDC70` |
 
 No CK3 process or promotional-video asset is touched by this synchronization.

@@ -216,3 +216,12 @@ coat-of-arms reader does not extend open_kaishek's Paradox parser vocabulary,
 IR/runtime, CLI, or Quarkus service. Detailed compatibility and frozen hashes
 are in `docs/ck3-coat-of-arms-source-probe-capability.md`; this synchronization
 does not start or attach to CK3.
+
+Companion follow-up `718a60d538249fb6eecd47284e622fd33d71d260`
+installs the same native probe hook during bridge worker bootstrap instead of
+waiting for the gameplay-snapshot mailbox gate. The compatibility impact is a
+provider-pin and readiness-invariant refresh: frontend probing can now become
+available before a gameplay snapshot. Tool advertisement, request/result
+schemas, status meanings, clipboard/designer side effects and certification
+boundary are unchanged. open_kaishek pins the new bridge/test bytes without
+adding runtime behavior or launching CK3.

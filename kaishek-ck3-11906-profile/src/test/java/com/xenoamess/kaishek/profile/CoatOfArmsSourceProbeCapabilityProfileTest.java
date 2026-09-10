@@ -65,16 +65,22 @@ class CoatOfArmsSourceProbeCapabilityProfileTest {
     void providerInputsAreExactHashPins() {
         assertEquals(
                 "16755189c172772669a0d30456da1f977d6b6de0",
+                CoatOfArmsSourceProbeCapabilityProfile.ROOT_CAPABILITY_INTRODUCTION_COMMIT);
+        assertEquals(
+                "718a60d538249fb6eecd47284e622fd33d71d260",
                 CoatOfArmsSourceProbeCapabilityProfile.ROOT_PROVIDER_COMMIT);
         for (String hash : List.of(
                 CoatOfArmsSourceProbeCapabilityProfile.ROOT_MCP_SERVER_SHA256,
                 CoatOfArmsSourceProbeCapabilityProfile.ROOT_PYTHON_CONTRACT_SHA256,
                 CoatOfArmsSourceProbeCapabilityProfile.ROOT_NATIVE_ABI_SHA256,
                 CoatOfArmsSourceProbeCapabilityProfile.ROOT_NATIVE_IMPLEMENTATION_SHA256,
+                CoatOfArmsSourceProbeCapabilityProfile.ROOT_BRIDGE_BOOTSTRAP_SHA256,
                 CoatOfArmsSourceProbeCapabilityProfile.ROOT_SERVICE_SHA256,
                 CoatOfArmsSourceProbeCapabilityProfile.ROOT_NATIVE_DRIVER_SHA256,
                 CoatOfArmsSourceProbeCapabilityProfile.ROOT_PROVIDER_TEST_SHA256)) {
             assertTrue(hash.matches("[0-9A-F]{64}"));
         }
+        assertTrue(CoatOfArmsSourceProbeCapabilityProfile.PROBE.invariants().contains(
+                "native_hook_bootstraps_before_gameplay_snapshot_availability"));
     }
 }
