@@ -280,3 +280,20 @@ the G2 manifest. A fresh target-side no-launch run returned
 The existing adapter test result remains applicable, so no Java test is
 repeated. No CK3 process or promotional-video asset was created or changed by
 this sync.
+
+### R440 blocker repair refresh
+
+Root commit `a911c253ec29d3de1b204d4e4b91780e3a81e891` replaces the
+G2 adapter's ineffective blind event shortcut with its existing verified OCR
+recovery. The target-side adapter and manifest SHA-256 values are now
+`CE9FF6D910D68003EA2768AA28E4B4871595FE648EB9EDDA3CCFECC9C4224848`
+and `29549DFC108DFB734A3FB38D2AF00DE3C042DD928E71E9324F1FAD1C0B4113DE`.
+R440 stopped before source capture on a stock single-option event; its harness
+RED receipt SHA-256 is
+`4016A49E72071DCA176224C5AE1283DBBC2293685F384EDB00023DFE7520B441`.
+
+This is still `NO-PRODUCTION-CODE-CHANGE` for open_kaishek. The job command,
+manifest and runtime evidence remain target-owned inputs, and Operator MCP 1.1
+does not interpret their product fields. No Java API/schema/profile change or
+new test is required. The target's focused Python tests and no-launch preflight
+are GREEN; the live retry remains pending, and no readiness is promoted here.
