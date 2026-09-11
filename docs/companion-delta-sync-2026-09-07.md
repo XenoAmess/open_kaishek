@@ -618,3 +618,27 @@ The read-only run created no checkpoint, submitted no command, and did not
 start postwar polling. This updates the private capability evidence only:
 source-specific loss, comparison, action, and GEN-034 remain false. No public
 open_kaishek MCP/Java/profile contract changes.
+
+### R456 checkpoint successor binding
+
+R456 proved that a successful `save-checkpoint` publishes a successor snapshot
+while the paused gameplay identity remains stable. Root commit
+`eced42e8cf09cc061dd900e0f6f8c87678e8f817` keeps the exact pre-save source
+frame as the command authorization anchor and adds a hash-bound
+`post_checkpoint_frame`. The latter requires a different nonempty snapshot ID
+and strictly greater public/native revisions while PID, connection generation,
+date, episode, played character, paused state, and active WarID remain equal.
+
+The R456 checkpoint is `69,302,764` bytes with SHA-256
+`0759E25C2612E127A63C676CC73A9DB95B336319DAC16CF0C632CDE7ED817530`.
+Surrender was not submitted; report SHA-256 is
+`E28E820CE713897A92E51416D6F655F399B1C0B421ABBC8FBEF0A19ACD095668`.
+Focused root lifecycle/owner/adapter tests pass `48/48` in normal and optimized
+Python. R457 no-launch admission is
+`3AAE6BA08E360E0380AC4B11B4F11CB4BBC68EF0D2E3F65EBA8DC9DFB17FD701`.
+
+This is an additive private lifecycle receipt change. open_kaishek's public
+MCP envelope, Java API, capability IDs, profile schema, bridge DLL, game files,
+and load order do not change. No Java suite or CK3 run is required for this
+companion sync. Source-loss, comparison, action, and GEN-034 readiness remain
+false pending one bounded R457 normal lifecycle.

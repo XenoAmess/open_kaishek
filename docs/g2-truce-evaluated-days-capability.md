@@ -154,3 +154,19 @@ This closes the current-input truce observation RED. The run was read-only, so
 source-loss, comparison, decision/action, and GEN-034 readiness remain false.
 The next evidence step is one normal checkpoint/surrender/postwar lifecycle;
 the read-only probe is complete and should not be repeated.
+
+### R456 checkpoint successor contract
+
+Root R456 saved a byte-verified `69,302,764`-byte checkpoint
+(`0759E25C...17530`) on the same PID, bridge generation, date, episode,
+character, pause state, and active WarID. The save command itself advanced the
+snapshot, public revision, and native revision, so the old post-save equality
+gate stopped before surrender.
+
+Root commit `eced42e8cf09cc061dd900e0f6f8c87678e8f817` now retains the pre-save
+frame as the exact authorization anchor and records a separate hash-bound
+successor frame with monotonic revision requirements. Focused tests pass
+`48/48` in both Python modes; R457 admission `3AAE6BA0...FD701` is READY. This
+private receipt extension does not change the open_kaishek public descriptor or
+promote source-loss, comparison, decision/action, automatic-surrender, or
+GEN-034 readiness.
