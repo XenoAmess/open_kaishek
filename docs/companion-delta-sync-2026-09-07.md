@@ -773,3 +773,16 @@ manifest SHA-256 is
 This is an additive content update inside the existing read-only v1 contracts;
 public MCP/Java/profile schemas, capability IDs, DLL/game files, startup
 configuration, load order, and machine-independent access remain unchanged.
+
+### Promotion-source deadline stop behavior
+
+Root commit `c39b51dbb843c017175c2d38a1a11e964d8201c9` fixes the concrete
+R465 observation-window overshoot. The target-owned Python runner keeps speed 5
+for the main route, slows to speed 1 for the final three game days, and refuses
+another resume after checking the declared deadline frame. Focused normal and
+optimized tests pass `2/2`; no separate CK3 run was added for this small fix.
+
+This changes no Operator MCP control name or payload, public event-knowledge
+schema, Java API, profile format, capability ID, bridge DLL, game file, startup
+configuration, or load order. open_kaishek needs no source or test change; the
+next required root source route will provide the live verification.
