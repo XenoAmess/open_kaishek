@@ -666,3 +666,12 @@ R458 used the intended postwar bridge and completed source capture, two GREEN te
 Root commit `35e5f9ac2d0964def1fd8ecba0e41e9909213e2a` passes `post_checkpoint_frame.revision` into the immediate surrender continuation and requires it to be a strict integer successor of the pre-save revision. The standalone continuation keeps its existing behavior. Focused root tests pass `59/59` in normal and optimized Python; R459 admission is `45B981E2...26F1`.
 
 This changes an internal Python lifecycle argument only. open_kaishek's public MCP envelope, Java API, profile schema, capability IDs, bridge DLL, game files, startup configuration, and load order remain unchanged. No Java suite or CK3 run is required for this companion sync. Source-loss, comparison, action, and GEN-034 readiness remain false pending one bounded R459 lifecycle.
+
+
+### R459 source-specific surrender outcome consumed
+
+Root commit `2bc9f01f0eebda5086e250400b9591fce95678ae` records the first qualified same-PID source?terms?checkpoint?single-surrender?postwar lifecycle. R459 measured the six source executions at 3000 soldiers before termination, proved the exact generations destroyed to zero at the surrender boundary, and read persisted truce expiry `53227656` for `evaluated_days=1825`. Root report and offline policy-intake hashes are `87ADB7E1...4B34` and `43B0A053...4FE1`.
+
+The offline consumer now validates the producer's actual `terms_ready=true` and preflight `live_executed=false` fields and includes the checkpoint successor in its fixture. This is an internal Python report-consumption alignment. open_kaishek's public MCP, Java, profile, capability IDs, bridge DLL, game files, startup configuration, and load order remain unchanged; no Java suite or CK3 rerun is required here.
+
+Compatibility readiness advances only for the private observed-surrender input: `source_specific_loss_ready=true` and `comparison_input_ready=true`. Campaign dominance, owner budget, and same-frame white-peace comparison remain unavailable, so three-way comparison, decision/action, automatic surrender, and `GEN-034` remain false.

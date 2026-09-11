@@ -183,3 +183,10 @@ one R458 lifecycle; R458 no-launch admission is `A270F42E...D20F`.
 ### R458 checkpoint-to-action revision correction
 
 R458 confirmed the postwar-capable bridge and the 1,825-day terms result, then stopped after its successful checkpoint because surrender was guarded with the pre-save public revision. Root commit `35e5f9ac2d0964def1fd8ecba0e41e9909213e2a` now supplies the validated post-checkpoint successor revision to that immediate action. The command history contains no surrender, so no action or postwar readiness is promoted from R458. Focused tests pass `59/59` in both Python modes and R459 admission is `45B981E2...26F1`.
+
+
+### R459 action-bound persisted expiry evidence
+
+R459 converted the read-only 1825-day terms result into an action-bound outcome on unique PID `123140`. One typed surrender ended WarID `33554473`; two postwar native reads returned persisted expiry `53227656` on the same paused frame, while the exact six-execution source set was destroyed from 3000 soldiers to zero. Report `87ADB7E1...4B34` and offline intake `43B0A053...4FE1` make the source-specific loss and comparison input consumable.
+
+This evidence does not complete the three-way policy. Campaign, owner-budget, and white-peace providers remain missing; decision/action/automatic-surrender readiness and `GEN-034` stay false.
