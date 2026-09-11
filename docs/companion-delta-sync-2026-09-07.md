@@ -262,3 +262,21 @@ control without parsing product-specific activation fields. The existing
 `13/13` focused adapter result therefore remains applicable. No Java test is
 repeated for this documentation-only sync, and no CK3 round or video asset is
 created.
+
+## 2026-09-11 follow-up: G2 live admission manifest refresh
+
+Root commit `c7a4cf234bd3596e3ebd2f2668615208c1300d56` refreshes one
+whole-file SHA-256 in the target-owned G2 source-specific war-loss live
+manifest. The shared Phase2 module had acquired unrelated later behavior; an
+AST comparison showed that all seven definitions consumed by the G2 adapter
+remain identical to its frozen source. The new manifest SHA-256 is
+`4A370EEAE10B588ABD6730D2F4E0FC0998A73D80ADECE1A8CF778F2F54D73079`.
+
+This remains `NO-PRODUCTION-CODE-CHANGE` for open_kaishek. Operator MCP 1.1
+treats manifest paths and hashes as target profile inputs and does not parse
+the G2 manifest. A fresh target-side no-launch run returned
+`READY_TO_RUN_G2_SOURCE_SPECIFIC_LIFECYCLE`; its receipt SHA-256 is
+`81A9F1D38FF1ED1F86FC89652A3D268D9F1ADCC336FFCE91ED5C729CEDCFAE4C`.
+The existing adapter test result remains applicable, so no Java test is
+repeated. No CK3 process or promotional-video asset was created or changed by
+this sync.
