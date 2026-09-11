@@ -170,3 +170,11 @@ successor frame with monotonic revision requirements. Focused tests pass
 private receipt extension does not change the open_kaishek public descriptor or
 promote source-loss, comparison, decision/action, automatic-surrender, or
 GEN-034 readiness.
+
+### R457 normal build dependency correction
+
+Root commit `35cb830f45434dc713d4e580692e0c6ab5f36796` restores the hash-bound
+postwar-capable DLL for the normal lifecycle after R457 proved that the R451
+diagnostic DLL lacked the two required private capabilities. R457 submitted no
+surrender. The public descriptor and readiness flags remain unchanged pending
+one R458 lifecycle; R458 no-launch admission is `A270F42E...D20F`.

@@ -642,3 +642,18 @@ MCP envelope, Java API, capability IDs, profile schema, bridge DLL, game files,
 and load order do not change. No Java suite or CK3 run is required for this
 companion sync. Source-loss, comparison, action, and GEN-034 readiness remain
 false pending one bounded R457 normal lifecycle.
+
+### R457 normal lifecycle bridge-profile correction
+
+R457 passed the checkpoint successor gate but stopped before surrender because
+the normal manifest still selected the completed R451 read-only diagnostic DLL.
+That build has both private postwar candidates OFF. Root commit
+`35cb830f45434dc713d4e580692e0c6ab5f36796` restores the frozen normal DLL and
+injector `4D839524...238B` / `43983E28...E08D`, whose build profile enables
+actual-truce-expiry and war-bound-loss-cleanup.
+
+Focused root lifecycle/owner/adapter tests pass `48/48` in normal and optimized
+Python. R458 no-launch admission is `A270F42E...D20F`. This changes the private
+runtime dependency selected for the normal evidence run; open_kaishek's public
+MCP, Java, profile, capability IDs, and game files remain unchanged. No CK3 or
+Java test is needed for this companion documentation sync.
