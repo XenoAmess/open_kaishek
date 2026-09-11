@@ -121,3 +121,13 @@ resume when Prepare fails. The private R453 no-launch receipt is
 `A4C58C0E23CF658E5449887DBD300CDD3B5F0E2AA33943A00FA5799071143EEA`.
 No public open_kaishek descriptor or command changes, and evaluated-days/action
 readiness remains pending one bounded live probe.
+### R453 retained-handle path fallback
+
+The first suspended launch exposed a real Windows timing boundary: the unique
+PID was visible while its inventory `ExecutablePath` was blank. Root commit
+`69f0fbf5d7e7d723d12726064c1c23a9f1b4563e` now uses the retained process
+handle's `image_path()` for exact path/hash verification in only that case;
+global one-PID identity remains mandatory. R453 was reclaimed before resume,
+Prepare, source capture, or query. The R454 admission is
+`5DBB22DE0BD7674242CC3B36EC9C02CD3B15902BBCA652008696DD48AADE6F46`.
+No public descriptor or action readiness changes.

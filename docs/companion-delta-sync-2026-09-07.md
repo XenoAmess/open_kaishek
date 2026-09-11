@@ -575,3 +575,16 @@ This is a private runner/manifest dependency update. open_kaishek's public MCP
 envelope, Java API, capability IDs, profile schema, bridge DLL, game files, and
 load order remain unchanged. No Java suite or CK3 run is required for this
 companion sync; live readiness remains false until the bounded R453 probe.
+### R453 suspended-process identity dependency
+
+R453 proved that the unique newly suspended CK3 PID can appear in the global
+inventory before CIM/Toolhelp publishes `ExecutablePath`. Root commit
+`69f0fbf5d7e7d723d12726064c1c23a9f1b4563e` keeps the unique-PID requirement
+and, only when the inventory path is blank, reads the exact image path from the
+shared runtime's retained Win32 process handle before applying the existing
+path/hash checks. The failed target never resumed or reached Prepare.
+
+The R454 no-launch receipt is
+`5DBB22DE0BD7674242CC3B36EC9C02CD3B15902BBCA652008696DD48AADE6F46`.
+This private orchestration behavior does not change open_kaishek's public MCP,
+Java, profile, or command contracts; readiness remains pending live evidence.
