@@ -2,7 +2,7 @@
 
 Date: 2026-09-10 (Asia/Shanghai)
 
-Companion commit `ee185c4ecaa84240a0a0f6090e8fa4d825cc1ae4` carries four
+Companion commit `dacc1d759d349ff142f167e265f09077c51da27d` carries four
 offline, read-only MCP tools around the existing single-event knowledge query.
 `VanillaEventPortableAssetCapabilityProfile` pins their consumer-visible v1
 contracts in open_kaishek:

@@ -380,14 +380,14 @@ asset was created by this compatibility sync.
 
 ### R445 letter recovery and vanilla-event asset refresh
 
-Root commit `081baea2ee61809d08314f3b152d899f472ec122` adds a target-side
+Root commit `3b632641ab839a6b9d569208e762fc39ad9fa052` adds a target-side
 visual handler for the real `chancellor_task.1004` foreign-affairs letter. It
 requires the three rendered tokens `掌玺大臣 / 外交行为 / 可怕的误会` and locates
 the option inside the existing event-option region before clicking. This UI
 choreography does not change an MCP command, schema, native bridge, game file,
 or open_kaishek runtime contract.
 
-Root commit `ee185c4ecaa84240a0a0f6090e8fa4d825cc1ae4` then publishes the
+Root commit `dacc1d759d349ff142f167e265f09077c51da27d` then publishes the
 event as an additive shared vanilla-event asset. The public v1 envelopes stay
 unchanged; the catalog and exact-build source index advance from 182 to 183
 events, and the source-index dataset identity becomes

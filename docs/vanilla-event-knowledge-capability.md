@@ -61,7 +61,7 @@ authority, or event-selection policy. A later consumer may query the companion
 MCP and validate schema version/build identity, but open_kaishek does not become
 a second owner of the companion registry.
 
-At companion audit revision `ee185c4ecaa84240a0a0f6090e8fa4d825cc1ae4`,
+At companion audit revision `dacc1d759d349ff142f167e265f09077c51da27d`,
 the default catalog contains 183 contracts, 183 analysis records, and 183
 observation projections. The R445 addition `chancellor_task.1004` keeps its
 dynamic councillor and neighbor identities observation-pending while exposing

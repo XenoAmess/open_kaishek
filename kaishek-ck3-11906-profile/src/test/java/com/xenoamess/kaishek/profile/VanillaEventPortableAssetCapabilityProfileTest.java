@@ -58,7 +58,7 @@ class VanillaEventPortableAssetCapabilityProfileTest {
     void schemasAndProviderInputsAreHashBound() {
         assertEquals(1, VanillaEventPortableAssetCapabilityProfile.SCHEMA_VERSION);
         assertEquals(
-                "ee185c4ecaa84240a0a0f6090e8fa4d825cc1ae4",
+                "dacc1d759d349ff142f167e265f09077c51da27d",
                 VanillaEventPortableAssetCapabilityProfile.ROOT_PROVIDER_COMMIT);
         assertEquals(
                 "265EBCE989627D68C69DDEF178A7BC0EBE1DE846721E42584D2B8271D14E9CFD",

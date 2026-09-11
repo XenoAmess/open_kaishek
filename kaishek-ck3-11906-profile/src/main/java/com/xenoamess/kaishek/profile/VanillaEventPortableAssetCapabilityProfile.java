@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class VanillaEventPortableAssetCapabilityProfile {
     public static final String ROOT_PROVIDER_COMMIT =
-            "ee185c4ecaa84240a0a0f6090e8fa4d825cc1ae4";
+            "dacc1d759d349ff142f167e265f09077c51da27d";
     public static final String ROOT_MCP_SERVER_SHA256 =
             "A67D98C4D3B452D09AF0B9A830E5E95BB58C31AF52B31AAA586423B18E4ED320";
     public static final String ROOT_DISCOVERY_SHA256 =
