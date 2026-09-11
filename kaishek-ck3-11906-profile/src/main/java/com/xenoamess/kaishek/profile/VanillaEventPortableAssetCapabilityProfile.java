@@ -6,12 +6,13 @@ import java.util.List;
  * Static compatibility projection for the companion's portable vanilla-event assets.
  *
  * <p>The companion remains the canonical implementation and data owner. This class pins
- * only four offline, read-only MCP v1 envelopes added by provider commit {@link
- * #ROOT_PROVIDER_COMMIT}; it neither copies evidence into open_kaishek nor contacts CK3.</p>
+ * only four offline, read-only MCP v1 envelopes and their current data revision
+ * at {@link #ROOT_PROVIDER_COMMIT}; it neither copies evidence into open_kaishek
+ * nor contacts CK3.</p>
  */
 public final class VanillaEventPortableAssetCapabilityProfile {
     public static final String ROOT_PROVIDER_COMMIT =
-            "df1ed7cb00ef6c54de602fbf182e6204c77c1202";
+            "ee185c4ecaa84240a0a0f6090e8fa4d825cc1ae4";
     public static final String ROOT_MCP_SERVER_SHA256 =
             "A67D98C4D3B452D09AF0B9A830E5E95BB58C31AF52B31AAA586423B18E4ED320";
     public static final String ROOT_DISCOVERY_SHA256 =
@@ -23,7 +24,7 @@ public final class VanillaEventPortableAssetCapabilityProfile {
     public static final String ROOT_PORTABLE_EVIDENCE_MANIFEST_SHA256 =
             "BC843955BF8EAC8E0133386EFDD0D9DEF4DE794C50559E4F8C93EA6DFF9A5545";
     public static final String ROOT_SOURCE_INDEX_DATASET_SHA256 =
-            "50DAE4938EF8D2D7677C10C55CB89FB34189B1E11F6788DCB00A4C8FA248759B";
+            "265EBCE989627D68C69DDEF178A7BC0EBE1DE846721E42584D2B8271D14E9CFD";
 
     public static final String LIST_KNOWLEDGE_TOOL_ID =
             "ck3_list_vanilla_event_knowledge_v1";

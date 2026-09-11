@@ -377,3 +377,30 @@ pre-target save admission is GREEN with receipt SHA-256
 Operator MCP 1.1 continues to forward the target command without parsing UI
 recognition details, so no Java test is repeated. No CK3 round or promotional
 asset was created by this compatibility sync.
+
+### R445 letter recovery and vanilla-event asset refresh
+
+Root commit `081baea2ee61809d08314f3b152d899f472ec122` adds a target-side
+visual handler for the real `chancellor_task.1004` foreign-affairs letter. It
+requires the three rendered tokens `掌玺大臣 / 外交行为 / 可怕的误会` and locates
+the option inside the existing event-option region before clicking. This UI
+choreography does not change an MCP command, schema, native bridge, game file,
+or open_kaishek runtime contract.
+
+Root commit `ee185c4ecaa84240a0a0f6090e8fa4d825cc1ae4` then publishes the
+event as an additive shared vanilla-event asset. The public v1 envelopes stay
+unchanged; the catalog and exact-build source index advance from 182 to 183
+events, and the source-index dataset identity becomes
+`265EBCE989627D68C69DDEF178A7BC0EBE1DE846721E42584D2B8271D14E9CFD`.
+The contract is campaign-neutral and records authored option 1/native option
+0. Its analysis preserves the actual negative-opinion effect; the R445
+observation explicitly says native event-window context was unavailable and
+does not invent dynamic scope identities.
+
+open_kaishek updates only its read-only capability pin and documentation. It
+adds no parser, IR, runtime, CLI, service, CK3 process access, or mutation
+behavior. The focused Java profile test is the only required executable check;
+it passes `4/4` with zero failures, errors, or skips. The first Maven invocation
+was rejected before compilation because PowerShell split the unquoted
+`-Dsurefire.failIfNoSpecifiedTests=false` argument; the quoted retry is GREEN.
+No CK3 or promotional asset is involved.

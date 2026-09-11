@@ -2,7 +2,7 @@
 
 Date: 2026-09-10 (Asia/Shanghai)
 
-Companion commit `df1ed7cb00ef6c54de602fbf182e6204c77c1202` adds four
+Companion commit `ee185c4ecaa84240a0a0f6090e8fa4d825cc1ae4` carries four
 offline, read-only MCP tools around the existing single-event knowledge query.
 `VanillaEventPortableAssetCapabilityProfile` pins their consumer-visible v1
 contracts in open_kaishek:
@@ -40,15 +40,18 @@ The compatibility descriptor binds the exact provider commit and these inputs:
 | portable evidence implementation | `FECDEC3F78349A2D25B24DC29AAF342D48893764375547171DE3D9F06545B29E` |
 | source index implementation | `959DF0ED0D704A10AC4D0CE2CC57ABD0C6FACC52EFD204EFF8F84210E552F5DF` |
 | portable evidence manifest | `BC843955BF8EAC8E0133386EFDD0D9DEF4DE794C50559E4F8C93EA6DFF9A5545` |
-| source index dataset | `50DAE4938EF8D2D7677C10C55CB89FB34189B1E11F6788DCB00A4C8FA248759B` |
+| source index dataset | `265EBCE989627D68C69DDEF178A7BC0EBE1DE846721E42584D2B8271D14E9CFD` |
 
 The four response schema byte hashes are pinned in the Java descriptor. The
 manifest contains 213 content-addressed evidence entries: 157 deduplicated
 source-definition payloads and 56 observation artifacts. Its 902 references
 include 167 generated definition references, 497 explicitly lexical caller
 candidates, 181 manually reviewed analysis-source references, and 57
-observation-artifact references. The source index covers all 167 registered
-events with zero missing, ambiguous, or namespace-mismatched definitions.
+observation-artifact references. The source index covers all 183 registered
+events with zero missing, ambiguous, or namespace-mismatched definitions. The
+newest additive record is `chancellor_task.1004`; its knowledge and
+source-provenance queries are available, while its large R445 screenshot
+remains an external observation reference rather than a packaged evidence blob.
 
 ## open_kaishek scope
 
