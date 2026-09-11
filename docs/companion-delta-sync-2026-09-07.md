@@ -602,3 +602,19 @@ Python. R455 admission is
 
 This is a private orchestration receipt change. open_kaishek's public MCP,
 Java, profile, command, and readiness contracts do not change.
+### R455 current-war truce result
+
+R455 completed the prepared source-first read-only path on PID `196216`. Both
+public terms queries for WarID `33554473` returned
+`evaluated_days_observable=true`, `evaluated_days=1825`, and
+`terms_ready=true`. Both private diagnostic rows completed one callback and one
+valid evaluation context, returned without failure, and destroyed the context.
+Root evidence commit is `4bed362d87eda2028e745db6f03a8c44f7df401f`;
+report and diagnostic SHA-256 values are
+`E4C3DCFCA6B8DF1CF90ED376E638BD73241A227744D06B46FA212083BFB3DC69` and
+`28CA8EB52E53A83B42CD2A0E29AF28A174A620E8439475DCB6DA1A6B81F0E774`.
+
+The read-only run created no checkpoint, submitted no command, and did not
+start postwar polling. This updates the private capability evidence only:
+source-specific loss, comparison, action, and GEN-034 remain false. No public
+open_kaishek MCP/Java/profile contract changes.

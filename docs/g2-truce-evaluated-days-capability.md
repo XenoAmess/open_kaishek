@@ -140,3 +140,17 @@ literal to `suspended-prepared-normal-event`; invalid modes remain RED. R454
 made no query or mutation and cleaned PID `77472`. The R455 no-launch receipt
 is `B43F5BD9D9F16F75A3F55F51781E46A23E7A3C1A17B88DD9732058CC78150BB0`.
 No public capability descriptor changes.
+### R455 live result
+
+On unique PID `196216`, both same-paused-lifecycle terms queries for WarID
+`33554473` returned 1,825 evaluated truce days and `terms_ready=true`. The two
+diagnostic rows each completed one callback and valid evaluation context with
+no failure and proven destruction. Root report SHA-256 is
+`E4C3DCFCA6B8DF1CF90ED376E638BD73241A227744D06B46FA212083BFB3DC69`;
+the diagnostic SHA-256 is
+`28CA8EB52E53A83B42CD2A0E29AF28A174A620E8439475DCB6DA1A6B81F0E774`.
+
+This closes the current-input truce observation RED. The run was read-only, so
+source-loss, comparison, decision/action, and GEN-034 readiness remain false.
+The next evidence step is one normal checkpoint/surrender/postwar lifecycle;
+the read-only probe is complete and should not be repeated.
