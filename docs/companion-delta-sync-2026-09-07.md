@@ -588,3 +588,17 @@ The R454 no-launch receipt is
 `5DBB22DE0BD7674242CC3B36EC9C02CD3B15902BBCA652008696DD48AADE6F46`.
 This private orchestration behavior does not change open_kaishek's public MCP,
 Java, profile, or command contracts; readiness remains pending live evidence.
+### R454 prepared startup receipt dependency
+
+R454 completed suspended identity validation, pre-resume Prepare, and primary
+thread resume on PID `77472`; the private outer owner then rejected the new
+`suspended-prepared-normal-event` receipt because its validator retained the
+old `normal-event` literal. Root commit
+`55702c167ed31c940a717484e0d939560397f4c3` aligns the owner validator and
+fixture with the truthful prepared startup mode while continuing to reject
+unrelated modes. Combined focused tests pass `40/40` in normal and optimized
+Python. R455 admission is
+`B43F5BD9D9F16F75A3F55F51781E46A23E7A3C1A17B88DD9732058CC78150BB0`.
+
+This is a private orchestration receipt change. open_kaishek's public MCP,
+Java, profile, command, and readiness contracts do not change.

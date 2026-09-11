@@ -131,3 +131,12 @@ global one-PID identity remains mandatory. R453 was reclaimed before resume,
 Prepare, source capture, or query. The R454 admission is
 `5DBB22DE0BD7674242CC3B36EC9C02CD3B15902BBCA652008696DD48AADE6F46`.
 No public descriptor or action readiness changes.
+### R454 outer-owner prepared-mode alignment
+
+The bridge was prepared and CK3 resumed, but the owner rejected the adapter's
+new startup mode before source capture. Root commit
+`55702c167ed31c940a717484e0d939560397f4c3` updates that private receipt
+literal to `suspended-prepared-normal-event`; invalid modes remain RED. R454
+made no query or mutation and cleaned PID `77472`. The R455 no-launch receipt
+is `B43F5BD9D9F16F75A3F55F51781E46A23E7A3C1A17B88DD9732058CC78150BB0`.
+No public capability descriptor changes.
