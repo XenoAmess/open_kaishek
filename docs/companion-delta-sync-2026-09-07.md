@@ -456,3 +456,30 @@ open_kaishek. Operator MCP 1.1 forwards the target-owned command and does not
 parse the capture rows, so no Java API, public schema, capability profile,
 bridge DLL, game file, or launch order changes. It does not promote G2
 readiness and does not affect the T0 P1 or promotional-video gates.
+
+### R449 dynamic source-WarID lifecycle binding
+
+R448 also proved that a newly created `raiktor_claim_cb` WarID is a dynamic
+full-generation identity: the captured value was `33554473`, while the old
+source lifecycle command still froze an unrelated historical value
+`50331699`. The previously unexecuted live continuation would therefore have
+failed after a GREEN observer handoff. Root commit
+`5743466d1074af68ff12930bbe299becc12fef8c` now derives the lifecycle WarID
+from the already validated source capture. An optional CLI value is retained
+only as an equality assertion after capture; it is no longer required before a
+natural event creates the WarID.
+
+The source WarID remains subject to the existing full-generation, six-row,
+persistent-regiment, active-war, same-PID, same-frame, and postwar identity
+checks. The change does not weaken a query or action gate. Target focused tests
+pass `53/53` in normal and optimized Python. The lifecycle, outer-owner, and
+live-adapter manifest SHA-256 values become
+`A026E526B0495087B3AF575BE7547CD54D1374AE0BBDAA72CBE0D278D116716C`,
+`0E941BDB65EE2700DC2952F3431A4FDF1818C8E3D0B13A91405FCB593533EF87`,
+and `C67C711401A1DA4BC8509FED9EE8AC0A4EA8D24EE46D762440EC0E88FE46F1F2`.
+
+This remains `NO-PRODUCTION-CODE-CHANGE` for open_kaishek. Operator MCP does
+not interpret the target-owned CLI assertion or private source WarID handoff;
+no public envelope, Java API, profile schema, bridge DLL, game file, or load
+order changed. No CK3 process or promotional-video asset is involved in this
+compatibility sync.
