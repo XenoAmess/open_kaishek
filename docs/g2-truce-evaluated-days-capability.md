@@ -103,3 +103,21 @@ receipt is SHA-256
 `F89EE9D57A34038B822B74E2B75DD1F2BE9CCF1ED4798B7E636C78C033F02CCF`.
 This changes only private orchestration and does not alter this repository's
 public capability descriptor or its existing readiness limits.
+
+### R452 proved the adapter had skipped startup Prepare
+
+The R452 diagnostic returned `collector-vtable-verified`, `callback_count=0`,
+and `invalid_request` twice. The default reader could not arm because the live
+adapter loaded the bridge only through late `--pipe` mode; that path starts the
+worker but does not execute the pre-resume Prepare export that installs the
+preview-entry observer.
+
+Root commit `8f1a522c0163796056ae8bc1281839b4fed8edf1` now reuses the shared
+suspended-process primitive and calls the existing injector without `--pipe`
+before resuming CK3. Its later same-PID `--pipe` worker start remains unchanged.
+The runtime source is an explicit manifest dependency; focused normal and
+optimized adapter tests pass `31/31`, including fail-closed cleanup without
+resume when Prepare fails. The private R453 no-launch receipt is
+`A4C58C0E23CF658E5449887DBD300CDD3B5F0E2AA33943A00FA5799071143EEA`.
+No public open_kaishek descriptor or command changes, and evaluated-days/action
+readiness remains pending one bounded live probe.

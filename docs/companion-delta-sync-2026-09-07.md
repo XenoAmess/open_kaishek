@@ -552,3 +552,26 @@ SHA-256
 This is a private runner dependency. No open_kaishek parser, runtime, public
 MCP envelope, Java profile, bridge DLL, game file, or load order changes, so
 no Java test is repeated and no promotional-video asset is touched.
+
+### R452 pre-resume Prepare dependency
+
+R452 reached the bounded read-only terms probe on unique PID `132200`, but the
+default-reader diagnostic stopped at `collector-vtable-verified` with
+`callback_count=0` and `last_failure=invalid_request`. Static call-chain review
+showed that the source-specific adapter's ordinary launch followed by late
+`--pipe` injection never called `XarCk3BridgePrepareStartup`, so the
+preview-entry observer was absent before its arm request.
+
+Root commit `8f1a522c0163796056ae8bc1281839b4fed8edf1` changes the private adapter
+composition to use the shared suspended-process runtime: verify the unique
+exact PID, inject without `--pipe` to execute Prepare, then resume; the existing
+post-source `--pipe` call only starts the same-PID MCP worker. The manifest now
+hash-binds `ck3_autonomous_player/src/xar_autoplayer/runtime.py` and reports
+`suspended_launch_before_observer=true` plus
+`native_bridge_prepared_before_resume=true`. The R453 no-launch admission is
+SHA-256 `A4C58C0E23CF658E5449887DBD300CDD3B5F0E2AA33943A00FA5799071143EEA`.
+
+This is a private runner/manifest dependency update. open_kaishek's public MCP
+envelope, Java API, capability IDs, profile schema, bridge DLL, game files, and
+load order remain unchanged. No Java suite or CK3 run is required for this
+companion sync; live readiness remains false until the bounded R453 probe.
