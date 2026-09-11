@@ -89,3 +89,17 @@ The diagnostic DLL and injector SHA-256 values are
 and `B5353527B56B4C99A7AF11A09C59A0850C481A45ED7CDA4C519AF956D97B39EC`.
 No open_kaishek parser, runtime, MCP envelope, Java descriptor, or command is
 changed by this private diagnostic dependency.
+
+### R451 pause-confirmation runner repair
+
+R451 reached the natural source with six valid rows and detached its debugger,
+then stopped before bridge attach because a top-center in-game notification
+occluded the transient pause OCR marker. It produced no default-reader row and
+made no mutation. Root commit
+`d486e7066ff65e1d3c8abeeb337346bf3f0e2f48` adds one narrow fallback after
+the pause click: the HUD date must be readable and unchanged across three
+seconds. An unreadable or advancing date still fails. The next no-launch
+receipt is SHA-256
+`F89EE9D57A34038B822B74E2B75DD1F2BE9CCF1ED4798B7E636C78C033F02CCF`.
+This changes only private orchestration and does not alter this repository's
+public capability descriptor or its existing readiness limits.

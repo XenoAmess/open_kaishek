@@ -536,3 +536,19 @@ This is a private runner/build dependency sync. open_kaishek's public MCP
 envelope, Java API, profile schema, capability IDs, bridge DLL, game files, and
 load order do not change, so no Java test is repeated. No CK3 process or
 promotional-video asset is involved in this compatibility sync.
+
+### R451 pause-OCR occlusion dependency
+
+R451 captured six valid natural-source rows for WarID `33554473` and detached
+the debugger, then a top-center in-game notification covered the pause OCR
+region. The run stopped before bridge attach with zero diagnostic rows,
+checkpoint, mutation, or postwar activity; cleanup was GREEN. Root commit
+`d486e7066ff65e1d3c8abeeb337346bf3f0e2f48` accepts only a strict
+three-second HUD-date freeze after the pause click when that OCR check times
+out. Missing or advancing dates remain RED. The R452 no-launch receipt is
+SHA-256
+`F89EE9D57A34038B822B74E2B75DD1F2BE9CCF1ED4798B7E636C78C033F02CCF`.
+
+This is a private runner dependency. No open_kaishek parser, runtime, public
+MCP envelope, Java profile, bridge DLL, game file, or load order changes, so
+no Java test is repeated and no promotional-video asset is touched.
