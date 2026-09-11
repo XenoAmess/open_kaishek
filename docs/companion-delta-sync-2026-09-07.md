@@ -337,3 +337,24 @@ tests pass `23/23` in normal and optimized Python, and the exact R442 successor
 passed no-launch admission with receipt SHA-256
 `C10FDE71DAB6912562B47581406E1636FC2EEC2F295D21FDD1E5475AAB545391`.
 No CK3 or promotional-video action is part of this compatibility sync.
+
+### R444 canonical played-character binding refresh
+
+Root commit `6dec09cc905b0ce07636097b6f0c1258b8e90805` fixes a target-side
+bridge-readiness harness RED. The exact bridge had connected and published a
+valid canonical snapshot, but the G2 adapter still required the obsolete
+convenience field `played_character_id`; it now normalizes either that legacy
+shape or `played_character.character_id`. No bridge DLL, wire protocol, MCP
+schema, command, capability, game file, or launch profile changed. The current
+target adapter and manifest SHA-256 values are
+`9F88417E62F54E4D255C5495513E05F2FC0E568B8082ED1EE73AFAA46DF608A9`
+and `AF5533CA4D086B46F1DCDEF0DC920DFE30208C88D0B10D13C5F859112D22165B`.
+
+This is `NO-PRODUCTION-CODE-CHANGE` for open_kaishek. Operator MCP 1.1 forwards
+the target-owned command and receipt without interpreting either played
+character representation. The existing compatibility tests remain applicable;
+no Java test is repeated. Target focused tests pass `23/23` in normal and
+optimized Python, and the refreshed real-save no-launch admission SHA-256 is
+`979DCD959E125310DC9A32CF9F6FF14C30CB33F0AC821C983E222B7DC1BA0489`.
+R444 cleanup is GREEN with no CK3 process remaining, and no promotional-video
+asset was touched.
