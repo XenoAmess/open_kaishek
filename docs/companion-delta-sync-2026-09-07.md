@@ -225,3 +225,22 @@ available before a gameplay snapshot. Tool advertisement, request/result
 schemas, status meanings, clipboard/designer side effects and certification
 boundary are unchanged. open_kaishek pins the new bridge/test bytes without
 adding runtime behavior or launching CK3.
+
+## 2026-09-11 follow-up: Stage 10 target-owned job controls
+
+The companion adds a repeatable target-side `stage10-player-subject` operator
+with exactly `status`, `run-stage10`, and `cleanup`. It deliberately omits an
+in-place retry and keeps its exact Stage 9 source plus Stage 10 terminal saves
+in target-owned artifacts. The action and operator source SHA-256 values are
+`64571FE39EDCB0D9811745D9DDD8E57F9E7E113B5812F290AF8263D6B1216FED`
+and `8ADFE06C3910DB359FEDB49E36780055A5F27499FB0478B45D415E882BD04DF2`.
+
+This is `NO-PRODUCTION-CODE-CHANGE` for open_kaishek. Contract 1.1 already
+discovers arbitrary profile-owned job/control identifiers and forwards only
+those identifiers through `operator_control_job`; it does not enumerate
+product job names. A focused compatibility test now binds the exact three
+controls, forwards `run-stage10`, and rejects unadvertised `retry-stage10`;
+the focused test class passes `13/13`.
+No Java API, profile schema, provider pin, parser/IR/runtime behavior, endpoint,
+credential, machine path, account, or CK3 round is added. No CK3 process or
+promotional-video asset is started, attached, or changed.

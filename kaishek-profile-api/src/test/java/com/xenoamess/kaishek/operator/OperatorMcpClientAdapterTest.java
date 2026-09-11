@@ -198,6 +198,34 @@ class OperatorMcpClientAdapterTest {
     }
 
     @Test
+    void stage10PlayerSubjectControlsRemainTargetProfileData() {
+        var target = OperatorMcpTarget.contractV11(
+                "endpoint-stage10", "target-stage10", "stage10-player-subject");
+        var transport = new FakeTransport(target);
+        transport.serverVersion = "1.1.0";
+        transport.controls = List.of("status", "run-stage10", "cleanup");
+        var adapter = new OperatorMcpClientAdapter(target, transport);
+
+        assertEquals(transport.controls, adapter.discoverControls());
+        Map<String, Object> response = adapter.controlJob(
+                "job-id-fake", "run-stage10", "stage10-request-1");
+
+        assertEquals("ACCEPTED", response.get("result"));
+        assertEquals(
+                Map.of(
+                        "target_id", "target-stage10",
+                        "job_name", "stage10-player-subject",
+                        "job_id", "job-id-fake",
+                        "control_name", "run-stage10",
+                        "request_id", "stage10-request-1"),
+                transport.lastControlArguments);
+        assertThrows(
+                OperatorMcpContractException.class,
+                () -> adapter.controlJob(
+                        "job-id-fake", "retry-stage10", "stage10-request-2"));
+    }
+
+    @Test
     void lostControlResponseRetriesSameBindingAndServerInstance() {
         var target = OperatorMcpTarget.contractV11(
                 "endpoint-control-retry", "target-retry", "job-retry");
