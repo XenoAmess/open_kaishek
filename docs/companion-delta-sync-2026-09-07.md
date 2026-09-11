@@ -914,3 +914,34 @@ Java API, schema, transport, endpoint, credential, machine path, DLL, launch
 configuration, or load order changed. The prior `.390`/selector receipt is
 retained only as historical evidence and must not be used for new Stage 10
 profiles. Runtime certification remains pending one bounded live `.120`.
+
+### Stage 10 target receipt v3 and multiplayer-source rejection
+
+Root commit `01c2dd6ef00465fa11755183ffaf3315eb4f4bb7` preserves the
+R481/R482 source-admission RED and closes the target-specific prelaunch gap.
+The attempted `SAV0101` source contained `meta_number_of_players=5` and five
+`played_character` records; exact-build CK3 reached the in-game map but did
+not restore a played character or install the main-thread mailbox. The Stage
+10 action never ran, so the result does not reclassify the player-publication
+product fix.
+
+The Stage 10 job now consumes
+`zg361_stage10_player_publication_source_v3`. In addition to the v2 hash,
+build, product-tree, and player-manager topology bindings, v3 requires one
+offline player record and a hash-verified
+`zg361_stage10_player_source_capture_v1` artifact. That artifact must bind the
+same MCP-native checkpoint to a paused, map-ready, non-independent celestial
+player manager and its direct superior. This target-specific receipt is
+validated before CK3 launch.
+
+The portable Operator MCP remains version `1.1.0`; target discovery, job
+handoff, `status` / `run-stage10` / `cleanup`, identity checks, and file-record
+transport are unchanged. No Java adapter, public schema, DLL, game file,
+startup setting, or load order changed. Operators on other machines rebuild
+the v3 file records with their own absolute paths and the same content hashes;
+there is no dependency on R481/R482, account `xenoa`, or this machine.
+
+The canonical and managed R482 cleanup artifacts are GREEN. T0 P1 remains
+`8/9`, Stage 10 remains live-pending, and the final-video lock remains active.
+The next launch is allowed only after a live-admitted single-player checkpoint
+has produced the v3 source receipt.
