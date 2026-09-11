@@ -836,3 +836,15 @@ request or response field, schema/version, Java API/profile, bridge DLL, game
 file, startup configuration, load order, or machine-independent path behavior.
 open_kaishek therefore requires no source-code or Java-test change. T0 P1 and
 its final promotional-video lock remain owned by the root project.
+
+Root follow-up commit `d0f471c5b7c8bacf2a81c9e01d15a86423e173ea`
+applies the same process-local rule to the target-owned managed-cleanup
+consumer. The original cleanup RED is retained byte-for-byte at SHA-256
+`3CCF3EBCA1647B6CF28824C2AD3FF7B0B51FA7EA3BBB749147DAB86790D268BF`;
+an offline replay of that frozen session report produces GREEN cleanup
+`2C578FF4F8BB4D23DF10C1D01C4D0CEE80B3B31D0E48C58ACDFCF9BBD21A1F56`
+for PID lineage `86544 -> 77320` and process-local generation lineage `1 -> 1`.
+The target's cleanup-related normal and optimized Python tests pass `21/21`.
+This follow-up changes only target-owned acceptance evidence semantics; the
+public MCP contract and every open_kaishek runtime surface listed above remain
+unchanged.
