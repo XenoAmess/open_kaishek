@@ -60,6 +60,14 @@ alter the packaged evidence bytes, manifest, source index, request/response
 schemas, or offline verification result; only live recovery now requires a new
 bounded round.
 
+Root revision `53e229e1d7c5227e1b7d8f1f06ab3d7f456271f8` adds the R465
+post-selection artifact for `.1030`. The bundle now contains 281 evidence
+entries, 89 unique observation artifacts, 105 observation references, and
+1,087 total references. The current manifest SHA-256 is
+`B9910108273AB057E4FC246E89FCE303D65C2986C42B8CF33ACC016CEC694D55`.
+The new artifact is content-addressed and remains available without the
+originating runtime path.
+
 ## open_kaishek scope
 
 All four descriptors are read-only and deterministic, with

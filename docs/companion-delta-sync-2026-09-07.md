@@ -756,3 +756,20 @@ operational correction changes no public MCP envelope, Java API, profile
 schema, capability ID, bridge DLL, game file, startup configuration, load
 order, or machine-independent lookup behavior. No Java or CK3 rerun is needed
 for this documentation-only compatibility correction.
+
+### R465 event closure and bounded source exhaustion
+
+Root commit `53e229e1d7c5227e1b7d8f1f06ab3d7f456271f8` adds the R465
+post-selection observation for `tgp_japan_yearly_events.1030`. The native
+postcondition proves authored option 1 / native index 0 advanced event instance
+`343`; the event contract is therefore a production-live primitive. The same
+run exhausted its fixed Stage 10 source window without seeing `zg361cl.390`,
+so no source receipt or P1 gate was claimed.
+
+The portable bundle now contains 281 evidence entries and 1,087 references,
+including 89 unique observation artifacts and 105 observation references. Its
+manifest SHA-256 is
+`B9910108273AB057E4FC246E89FCE303D65C2986C42B8CF33ACC016CEC694D55`.
+This is an additive content update inside the existing read-only v1 contracts;
+public MCP/Java/profile schemas, capability IDs, DLL/game files, startup
+configuration, load order, and machine-independent access remain unchanged.

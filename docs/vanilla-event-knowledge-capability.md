@@ -76,6 +76,13 @@ unexplained process exit and GREEN cleanup without changing the 184-record
 catalog or this v1 capability. Live closure of the new record remains pending
 in a fresh bounded gameplay round.
 
+At root revision `53e229e1d7c5227e1b7d8f1f06ab3d7f456271f8`, R465 proved the
+registered authored1/native0 selection through an event-instance-advanced
+postcondition. The `.1030` contract is now a production-live primitive while
+its later Stage 10 source-window exhaustion remains a separate RED and emits
+no P1 source receipt. Catalog counts and the v1 query envelope remain
+unchanged.
+
 The earlier 29-key observation inventory at revision
 `2fa9034a59ebec3677b184379611fd45471ba0b6` was:
 
