@@ -483,3 +483,30 @@ not interpret the target-owned CLI assertion or private source WarID handoff;
 no public envelope, Java API, profile schema, bridge DLL, game file, or load
 order changed. No CK3 process or promotional-video asset is involved in this
 compatibility sync.
+
+### R449 bounded debugger-detach retry dependency
+
+R449 passed the corrected six-row localized-name and dynamic-WarID checks, but
+the private observer returned `debugger-detach-failed` immediately after the
+final debug event was continued. The same detach seam succeeded in R448, so
+the evidence identifies an intermittent release race. The frozen R449 capture
+contains six complete rows and has SHA-256
+`E382E079DC7A6124A9961E174A3E802F8E67B0C95403325FB16485FD51A5E178`;
+the outer cleanup remained GREEN and no CK3 process survives.
+
+Root commit `454f515d8ef55ddf6e3cd5eccfa0a8cfb26e7630` adds a bounded
+detach retry: at most 20 calls separated by 25 ms, for a maximum sleep budget
+of 475 ms. The private artifact now records the attempt count and final Win32
+error. All existing breakpoint restoration, detach-before-bridge, fail-closed,
+and cleanup gates remain. The replacement private executable SHA-256 is
+`EEE39F858E941E1500DA13FB11906814FA4D70EE42DED894CFDEB03ACEF709B8`;
+the source contract and live-adapter manifest SHA-256 values are
+`346D3DE9105B44749D9BA1E11F820A7C538063980CE53C24A9572B486F9FB247`
+and `657E538D8754C6094F6FC3B3055BFE31D49C0BC7F27DAF6A7D392E1155A2A247`.
+The executable self-test and target focused normal/optimized matrices are
+GREEN (`54/54` each).
+
+This remains a private dependency change. open_kaishek's public MCP envelope,
+Java API, profile schema, capability set, bridge DLL, game files, and load order
+do not change, so no Java test is repeated. No CK3 process or promotional-video
+asset is involved in this compatibility sync.
