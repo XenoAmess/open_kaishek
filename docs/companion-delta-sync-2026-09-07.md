@@ -694,3 +694,24 @@ endpoint, and machine-independent adapter behavior are unchanged. Focused root
 action/operator tests pass `20/20` in normal and optimized Python; the existing
 Operator MCP adapter result remains applicable and is not repeated. No CK3
 process or promotional-video asset was started or changed by this sync.
+
+
+### R463 `health.2201` non-epidemic physician contract variant
+
+Root commit `d3fcf7cb0cee450f835d62ece615e3bda6964b9e` extends the
+shared CK3 1.19.0.6 vanilla-event knowledge record for `health.2201`. R463
+observed the already reviewed four-option physician projection with five exact
+saved scopes and no `epidemic`; the previous record only represented that
+projection when an upstream epidemic scope was also present. The new variant
+keeps authored option 1 / native index 0, root/third-party bindings, scope
+types, and exact option indices unchanged. Focused normal and optimized Python
+tests each pass `1/1`; the selection-before RED remains frozen at SHA-256
+`555AA864F9BB9FC982E8C1E174CF095AF651AAED687F3329765A0D8606E98D8D`.
+
+This changes only data returned inside the existing
+`xar.ck3.vanilla-event-knowledge` v1 contract for one event. The MCP envelope,
+tool name, schema version, Java adapter, target profile, capability IDs, bridge
+DLL, game files, startup configuration, and load order do not change. Existing
+consumers already treat contract payloads as detached JSON, so no Java code or
+test change is required. R463 remains paused for the target-owned same-process
+Python hot recovery; this companion sync does not launch or control CK3.
