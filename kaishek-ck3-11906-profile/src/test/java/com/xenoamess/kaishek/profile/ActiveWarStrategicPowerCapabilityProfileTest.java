@@ -43,18 +43,24 @@ class ActiveWarStrategicPowerCapabilityProfileTest {
         assertTrue(capability.invariants().contains(
                 "corrected_native_frame_freezes_declaration_and_active_war_sources_separately"));
         assertTrue(capability.invariants().contains(
-                "corrected_native_reader_admits_either_source_with_live_recheck_pending"));
+                "corrected_native_reader_admits_either_source"));
+        assertTrue(capability.invariants().contains(
+                "r471_two_official_queries_are_identical_on_one_unchanged_paused_frame"));
+        assertTrue(capability.invariants().contains(
+                "r471_native_command_history_contains_only_two_successful_read_only_queries"));
+        assertTrue(capability.invariants().contains(
+                "strategic_power_observation_does_not_certify_campaign_dominance"));
     }
 
     @Test
-    void readOnlyNativeQueryAwaitsActiveWarRuntimeCertification() {
+    void readOnlyNativeQueryIsNarrowlyRuntimeCertified() {
         var capability = ActiveWarStrategicPowerCapabilityProfile.QUERY;
 
         assertTrue(capability.readOnly());
         assertTrue(capability.deterministic());
-        assertFalse(capability.nativeCertified());
-        assertFalse(capability.runtimeCertified());
-        assertFalse(capability.certified());
+        assertTrue(capability.nativeCertified());
+        assertTrue(capability.runtimeCertified());
+        assertTrue(capability.certified());
         assertTrue(capability.invariants().contains(
                 "query_does_not_enable_declaration_surrender_or_white_peace"));
         assertTrue(capability.invariants().contains(
@@ -79,7 +85,18 @@ class ActiveWarStrategicPowerCapabilityProfileTest {
         assertEquals(
                 "CCF29894130EB673C59FDAD03E39D15A6BEB649392C6A2D02E1DF8A92C7E022D",
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_R470_REPORT_SHA256);
+        assertEquals(
+                "050c94fbd2ba9ecd41f4419e1dc936bd7c083774",
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_R471_EVIDENCE_COMMIT);
+        assertEquals(
+                "F467676201497A75C08ED5F6C72AFE64618337C73EFD2BA816B981470CE1E7CD",
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_R471_REPORT_SHA256);
+        assertEquals(
+                "D8F43EABC2A38F451FCAB1FE8DAEEB157EF8C62439B904DF96E8AFA301E924C9",
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_R471_RECLASSIFICATION_SHA256);
         for (String hash : List.of(
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_R471_RUNNER_SHA256,
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_R471_RUNNER_TEST_SHA256,
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_MCP_SERVER_SHA256,
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_PYTHON_CONTRACT_SHA256,
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_SERVICE_SHA256,

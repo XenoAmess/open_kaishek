@@ -3,7 +3,7 @@ package com.xenoamess.kaishek.profile;
 import java.util.List;
 
 /**
- * Static compatibility projection for the companion strategic-power query.
+ * Exact-build compatibility projection for the companion strategic-power query.
  *
  * <p>The provider owns the native reader, paused-frame binding and MCP server.
  * This profile freezes the additive active-war target scope without granting
@@ -18,6 +18,16 @@ public final class ActiveWarStrategicPowerCapabilityProfile {
             "4ac06131ce04a4af02cbe9898b8eca780c8aa181";
     public static final String ROOT_R470_REPORT_SHA256 =
             "CCF29894130EB673C59FDAD03E39D15A6BEB649392C6A2D02E1DF8A92C7E022D";
+    public static final String ROOT_R471_EVIDENCE_COMMIT =
+            "050c94fbd2ba9ecd41f4419e1dc936bd7c083774";
+    public static final String ROOT_R471_REPORT_SHA256 =
+            "F467676201497A75C08ED5F6C72AFE64618337C73EFD2BA816B981470CE1E7CD";
+    public static final String ROOT_R471_RECLASSIFICATION_SHA256 =
+            "D8F43EABC2A38F451FCAB1FE8DAEEB157EF8C62439B904DF96E8AFA301E924C9";
+    public static final String ROOT_R471_RUNNER_SHA256 =
+            "A364FCFB89AAD6C25DABAB72AD708BB564793B484B79B983AB3DCE11ACC10679";
+    public static final String ROOT_R471_RUNNER_TEST_SHA256 =
+            "F14E420ECE5784BC6B3B2F7FBB9DF79E8D13416D8AE2955ECC069B684110FED3";
     public static final String ROOT_MCP_SERVER_SHA256 =
             "3723D21778A5DEAD2D7539BEC9E35E95BB040CE7478334446F375879B2918DBA";
     public static final String ROOT_PYTHON_CONTRACT_SHA256 =
@@ -51,7 +61,7 @@ public final class ActiveWarStrategicPowerCapabilityProfile {
     public static final String STEP_TEMPLATE =
             "query-war-entry-assessments-v1-1-<target_character_id>";
     public static final String PROFILE_VERSION =
-            "ck3-1.19.0.6-active-war-strategic-power-v2";
+            "ck3-1.19.0.6-active-war-strategic-power-v3";
     public static final int SCHEMA_VERSION = 1;
     public static final int MAXIMUM_TARGETS = 1;
 
@@ -86,15 +96,19 @@ public final class ActiveWarStrategicPowerCapabilityProfile {
                             "native_schema_v1_payload_and_exact_build_binding_are_preserved",
                             "r470_native_reader_rejected_active_war_only_target_as_target_not_declarable",
                             "corrected_native_frame_freezes_declaration_and_active_war_sources_separately",
-                            "corrected_native_reader_admits_either_source_with_live_recheck_pending",
+                            "corrected_native_reader_admits_either_source",
+                            "r471_two_official_queries_are_identical_on_one_unchanged_paused_frame",
+                            "r471_native_command_history_contains_only_two_successful_read_only_queries",
+                            "r471_report_red_is_confined_to_the_corrected_history_field_audit",
+                            "strategic_power_observation_does_not_certify_campaign_dominance",
                             "query_does_not_enable_declaration_surrender_or_white_peace",
                             "parameterized_query_never_authorizes_an_autonomous_action",
                             "unknown_mcp_arguments_are_rejected",
                             "contract_does_not_depend_on_machine_account_path_or_ck3_round"),
                     true,
                     true,
-                    false,
-                    false);
+                    true,
+                    true);
 
     private ActiveWarStrategicPowerCapabilityProfile() { }
 }

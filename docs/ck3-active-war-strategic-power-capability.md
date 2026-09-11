@@ -15,30 +15,43 @@ provider checks that source before the native request and again on the same
 paused frame after the result. An unrelated CharacterID is rejected before a
 named-pipe request.
 
-The native schema-v1 result shape remains unchanged, but the old DLL does not
-yet produce that result for an active-war-only target. R470 reached the exact
-paused checkpoint and failed its first official MCP query with
-`target_not_declarable`: the native frame and reader still admit only current
-declaration targets. The frozen readiness key `targets_declarable_ready`
-therefore cannot yet represent active-war eligibility.
+The native schema-v1 result shape remains unchanged. R470 proved that the old
+DLL rejected an active-war-only target with `target_not_declarable`; root
+provider commit `283904d5438e07c18a49903333eafcaaabb75e80` corrected the
+native frame and reader to freeze and admit declaration targets and active-war
+primary opponents separately.
 
 ## Compatibility and readiness
 
-open_kaishek records this as a read-only, deterministic, native-uncertified and
-runtime-uncertified compatibility profile. It neither starts CK3 nor exposes a
-gameplay action. The root provider has now published a static-ready native
-candidate that freezes declaration targets and active-war primary opponents as
-separate same-frame sets and admits either source. Its focused native tests
-pass `2/2`; one bounded R459-checkpoint query in a new CK3 round is still
-required. This synchronization therefore
-does not certify campaign dominance, a surrender recommendation, action
-readiness, or GEN-034 completion.
+open_kaishek records this query as read-only, deterministic, native-certified,
+and runtime-certified for exact build CK3 `1.19.0.6`. It neither starts CK3
+nor exposes a gameplay action. R471 used the corrected DLL to issue two
+official MCP queries on one unchanged paused checkpoint frame. Both returned
+the active-war source and identical native results apart from monotonic query
+sequence: player `29829` power `13075500000`, opponent `28551` total power
+`16770900000`, and ratio `128262/100000`.
+
+The original R471 report is retained as RED because its runner audited absent
+`history` instead of public `native_command_history`. The canonical history
+contains exactly the two successful read-only queries and no mutation or time
+advance. Root commit `050c94fbd2ba9ecd41f4419e1dc936bd7c083774`
+fixes that audit and records a GREEN offline reclassification without replaying
+the query or restarting CK3.
+
+This narrow certification does not certify campaign dominance, a surrender
+recommendation, action readiness, or GEN-034 completion. Those remain separate
+policy and action capabilities.
 
 The R470 evidence is pinned by root commit
 `4ac06131ce04a4af02cbe9898b8eca780c8aa181` and report SHA-256
 `CCF29894130EB673C59FDAD03E39D15A6BEB649392C6A2D02E1DF8A92C7E022D`.
 R470 issued one read-only query, no retry, no time advance, and no mutation;
 cleanup was GREEN.
+
+The R471 original report SHA-256 is
+`F467676201497A75C08ED5F6C72AFE64618337C73EFD2BA816B981470CE1E7CD`;
+the GREEN offline reclassification SHA-256 is
+`D8F43EABC2A38F451FCAB1FE8DAEEB157EF8C62439B904DF96E8AFA301E924C9`.
 
 The contract stores no machine path, account name, credential, CK3 process ID,
 or CK3 round identifier. Another operator or machine can consume the same
@@ -60,6 +73,8 @@ versioned MCP boundary.
 | native unit test | `AF8D6425C40C220FD866F2A49C4C4E5B8183EB0C329310B8EDC6455098B1B135` |
 | native source-contract test | `927FFE8451423F7D09835B6FF280C4E83FFF4486C56DCF35A1D0B9ACE3B81058` |
 | native ABI ledger | `4F786F156356F3B52EE1D1C408CF4A2912E154867793ECF2E75A3728D0F1385A` |
-| static-ready candidate DLL | `65C14FE284EA99036DBFBA950B3BE38C3656FA2D064017FD8A38FF21B32B61EF` |
+| production-live DLL | `65C14FE284EA99036DBFBA950B3BE38C3656FA2D064017FD8A38FF21B32B61EF` |
+| corrected live runner | `A364FCFB89AAD6C25DABAB72AD708BB564793B484B79B983AB3DCE11ACC10679` |
+| focused runner test | `F14E420ECE5784BC6B3B2F7FBB9DF79E8D13416D8AE2955ECC069B684110FED3` |
 
 No CK3 process or promotional-video asset is touched by this synchronization.

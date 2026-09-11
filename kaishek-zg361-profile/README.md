@@ -62,6 +62,13 @@ surrender, and action readiness remain closed; the descriptor does not add an
 opcode or an action path. See
 [`../docs/g2-truce-evaluated-days-capability.md`](../docs/g2-truce-evaluated-days-capability.md).
 
+`ActiveWarStrategicPowerCapabilityProfile` records the separate exact-build,
+read-only active-war opponent power query. R471 passed two official MCP reads
+on one unchanged paused frame, so that narrow observation is native/runtime
+certified. Campaign dominance, exit recommendation, white-peace comparison,
+surrender action, and GEN-034 remain outside this certification; see
+[`../docs/ck3-active-war-strategic-power-capability.md`](../docs/ck3-active-war-strategic-power-capability.md).
+
 `G2WarBoundLossCandidateMetadata` pins the separate default-OFF frozen-set
 `598 -> 0` cleanup candidate without registering a capability or changing the
 public wire. Source attribution, termination/surrender causality, public

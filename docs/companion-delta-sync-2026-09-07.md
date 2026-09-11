@@ -792,3 +792,20 @@ next required root source route will provide the live verification.
 Root commit `81f76e04704305df214e34961a32b768ce14a485` extends the existing one-target strategic-power query from declaration targets to the union of declaration targets and current active-war primary opponents. The response adds an explicit `target_scopes` source classification; the native payload, DLL, exact-build binding and read-only behavior are unchanged.
 
 This is a public input-scope and response-field change, so open_kaishek adds `ActiveWarStrategicPowerCapabilityProfile` and a focused compatibility test. The profile is native-certified but remains runtime-uncertified for the new active-war scope until the root provider performs its one bounded R459 checkpoint query. No CK3 process or promotional-video asset is involved in this compatibility sync. Full field, invariant and hash pins are in [`ck3-active-war-strategic-power-capability.md`](ck3-active-war-strategic-power-capability.md).
+
+### R471 active-war strategic-power runtime certification
+
+Root commit `050c94fbd2ba9ecd41f4419e1dc936bd7c083774` records two
+identical official MCP results from the corrected DLL on one unchanged paused
+R459 checkpoint frame. The query now has exact-build native/runtime
+certification for the active-war primary-opponent scope. The original report
+RED is retained and explained as a runner-only field-name error; canonical
+`native_command_history` proves exactly two successful reads and no mutation or
+time advance, and the offline reclassification is GREEN.
+
+The open_kaishek profile advances to v3 and pins the root evidence commit,
+report/reclassification hashes, corrected runner, test, native sources, and
+DLL. This certification stops at the observation primitive: campaign
+dominance, owner budget, white-peace comparison, exit recommendation, action
+readiness, and GEN-034 remain uncertified/unresolved. This sync does not start
+or control CK3 and does not touch promotional-video assets.
