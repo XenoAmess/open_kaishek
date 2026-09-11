@@ -404,3 +404,26 @@ it passes `4/4` with zero failures, errors, or skips. The first Maven invocation
 was rejected before compilation because PowerShell split the unquoted
 `-Dsurefire.failIfNoSpecifiedTests=false` argument; the quoted retry is GREEN.
 No CK3 or promotional asset is involved.
+
+### R448 private-capture dependency refresh
+
+Root commit `8e2a8917143e261ccac589436b44baafdb1b9d14` corrects a
+target-owned diagnostic contract after R447 proved that the native
+`spawn_army` breakpoint was reached but the private capture executable rejected
+the hit before appending evidence. The executable now records the actual
+`evaluated_name` on every captured row; its final six-row validator still
+requires the reviewed target identity and therefore remains fail-closed. The
+external executable advances from SHA-256
+`B832777491953888E3878AFB47339A12E8AEC08736C16CF15EA4E13FBE6FEA30`
+to `B05E0B6D3CA8DBEC41C8C5107AB8F9AACD4E99981E442AC1DBF3077868241007`,
+and the target source-specific contract SHA-256 becomes
+`7DFA946A90F7C3DD5DF8305CFA07A39BD635BE06C5610FA1BC02FAD16D0B1654`.
+
+This is `NO-PRODUCTION-CODE-CHANGE` for open_kaishek. It changes no public MCP
+envelope, Java API, profile schema, command, capability, bridge DLL, game file,
+or launch order. The target's focused matrix passes `53/53` in normal and
+optimized Python, the rebuilt capture executable passes its self-test, and the
+R448 no-launch admission receipt is GREEN with SHA-256
+`5FF8771F9CCCA853FA4C4FE8FA7B7BE0787C3EAB5EEF25B18FD8FD5A9601E3EB`.
+R448 remains a bounded diagnostic run; no CK3 process or promotional-video
+asset was created by this compatibility sync.
