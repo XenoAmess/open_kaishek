@@ -1001,3 +1001,19 @@ Operator MCP adapter needs no code change. Focused root tests pass `4/4` in
 normal and optimized Python. Both rounds have GREEN cleanup and are
 terminated; the next attempt must use incremented rounds and a freshly
 hash-bound activation rather than retrying R484.
+
+### R485/R486 player-source certification and topology IDs
+
+Root commit `fec55f8a650a3b0fff41dd104fad79663afacb9c` records the
+successful bounded source capture. R486 used the existing native rebind and
+save capabilities to move the single player from `32904` to manager `29037`,
+verify its direct owner `32904`, and save at unchanged game date. Live source
+evidence is `EFCFE5DD...AE2CA`; checkpoint `C11AFCF4...21BFA` is one-player
+and has unique played/current character `29037`.
+
+`ck3_save_player_topology_offline_v1` manager candidates now include sorted
+`direct_landed_vassal_character_ids` alongside the existing count. This is an
+additive offline report field used by the target's v3 source receipt; it does
+not change Operator MCP 1.1, the native bridge, or a live query schema.
+Consumers that ignore unknown JSON fields remain compatible. R485/R486 have
+GREEN cleanup and are terminated; Stage 10 `.120` and P1 remain pending.
