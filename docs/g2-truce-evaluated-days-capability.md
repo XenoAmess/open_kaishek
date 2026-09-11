@@ -178,3 +178,8 @@ postwar-capable DLL for the normal lifecycle after R457 proved that the R451
 diagnostic DLL lacked the two required private capabilities. R457 submitted no
 surrender. The public descriptor and readiness flags remain unchanged pending
 one R458 lifecycle; R458 no-launch admission is `A270F42E...D20F`.
+
+
+### R458 checkpoint-to-action revision correction
+
+R458 confirmed the postwar-capable bridge and the 1,825-day terms result, then stopped after its successful checkpoint because surrender was guarded with the pre-save public revision. Root commit `35e5f9ac2d0964def1fd8ecba0e41e9909213e2a` now supplies the validated post-checkpoint successor revision to that immediate action. The command history contains no surrender, so no action or postwar readiness is promoted from R458. Focused tests pass `59/59` in both Python modes and R459 admission is `45B981E2...26F1`.

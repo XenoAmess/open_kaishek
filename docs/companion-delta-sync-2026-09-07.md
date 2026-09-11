@@ -657,3 +657,12 @@ Python. R458 no-launch admission is `A270F42E...D20F`. This changes the private
 runtime dependency selected for the normal evidence run; open_kaishek's public
 MCP, Java, profile, capability IDs, and game files remain unchanged. No CK3 or
 Java test is needed for this companion documentation sync.
+
+
+### R458 checkpoint-to-action revision handoff
+
+R458 used the intended postwar bridge and completed source capture, two GREEN terms reads, and the durable checkpoint `079F3573...9FB1`, then stopped before surrender. The successful save published the already validated successor frame, but the private lifecycle continuation passed the pre-save public revision to the optimistic action gate. Command history ends at `save-checkpoint`, so this is a harness contract RED and adds no product RED.
+
+Root commit `35e5f9ac2d0964def1fd8ecba0e41e9909213e2a` passes `post_checkpoint_frame.revision` into the immediate surrender continuation and requires it to be a strict integer successor of the pre-save revision. The standalone continuation keeps its existing behavior. Focused root tests pass `59/59` in normal and optimized Python; R459 admission is `45B981E2...26F1`.
+
+This changes an internal Python lifecycle argument only. open_kaishek's public MCP envelope, Java API, profile schema, capability IDs, bridge DLL, game files, startup configuration, and load order remain unchanged. No Java suite or CK3 run is required for this companion sync. Source-loss, comparison, action, and GEN-034 readiness remain false pending one bounded R459 lifecycle.
