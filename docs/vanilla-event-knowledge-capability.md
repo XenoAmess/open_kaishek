@@ -70,6 +70,12 @@ route, and immutable pre-selection RED through the same read-only v1 envelope.
 The event's faith theme does not add a faith, doctrine, tenet, fervor, or
 conversion capability.
 
+The root Operator later found R463 absent before the planned same-process
+retry. Root commit `66b63f42a26a7ab16e6b4fa3e7394c7438e6079e` preserves the
+unexplained process exit and GREEN cleanup without changing the 184-record
+catalog or this v1 capability. Live closure of the new record remains pending
+in a fresh bounded gameplay round.
+
 The earlier 29-key observation inventory at revision
 `2fa9034a59ebec3677b184379611fd45471ba0b6` was:
 

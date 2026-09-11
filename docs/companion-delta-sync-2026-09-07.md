@@ -738,3 +738,21 @@ profiles, DLL/game files, startup configuration, load order, and machine/path
 independence are unchanged. No Java code or repeated adapter test is required.
 This sync neither launches nor controls CK3; current round R463 remains owned
 by the root Operator job for same-process Python hot recovery.
+
+### R463 post-checkpoint process exit
+
+Root closure commit `66b63f42a26a7ab16e6b4fa3e7394c7438e6079e` records that
+the R463 CK3 process disappeared after the `.1030` RED checkpoint was saved and
+before the planned same-process retry began. No CK3 control or gameplay input
+was sent by the root operator before the disappearance, and no crash event,
+dump, or exception artifact was found, so the termination source remains
+unproven. The old Operator job then completed canonical and managed cleanup as
+GREEN; CK3 and old Operator inventories are now empty.
+
+The content contract added at root commit `738650b0113b6a3a61933d0a23501ce503ebe755`
+is unchanged. The next root activation will consume the frozen partial
+checkpoint with only the original horizon's remaining 10 game days. This
+operational correction changes no public MCP envelope, Java API, profile
+schema, capability ID, bridge DLL, game file, startup configuration, load
+order, or machine-independent lookup behavior. No Java or CK3 rerun is needed
+for this documentation-only compatibility correction.

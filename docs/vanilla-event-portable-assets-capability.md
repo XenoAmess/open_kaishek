@@ -54,6 +54,12 @@ newest additive record is `tgp_japan_yearly_events.1030`; its exact-build
 definition, two lexical caller candidates, and R463 pre-selection RED are all
 available through the existing read-only interfaces.
 
+Root closure commit `66b63f42a26a7ab16e6b4fa3e7394c7438e6079e` subsequently
+records that R463 disappeared after that immutable RED was saved. This does not
+alter the packaged evidence bytes, manifest, source index, request/response
+schemas, or offline verification result; only live recovery now requires a new
+bounded round.
+
 ## open_kaishek scope
 
 All four descriptors are read-only and deterministic, with
