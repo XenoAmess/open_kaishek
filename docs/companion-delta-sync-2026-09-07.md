@@ -945,3 +945,20 @@ The canonical and managed R482 cleanup artifacts are GREEN. T0 P1 remains
 `8/9`, Stage 10 remains live-pending, and the final-video lock remains active.
 The next launch is allowed only after a live-admitted single-player checkpoint
 has produced the v3 source receipt.
+
+### Reusable offline CK3 save-topology inspection
+
+Root commit `7f756c6ac63096963b6e919453c720309474af18` replaces the
+temporary R482 save scan with `ck3_save_player_topology_offline_v1`. The CLI
+accepts caller-supplied save, Rakaly, target-character, and output paths; it
+records file hashes, player metadata and records, then derives celestial
+manager candidates from title, living landed character, and vassal-contract
+tables. It contains no target account, machine path, round, or fixed character.
+
+This is an offline prelaunch asset and does not alter the public Operator MCP
+or claim live state. A consumer must still obtain exact-build campaign-root
+evidence and an MCP-native checkpoint before creating a Stage 10 v3 receipt.
+Focused normal/optimized parser tests pass `2/2`. The root evidence reports
+deterministically reject the five-player R482 source and select `29037 ->
+32904` from the already admitted R159 single-player world for the next native
+capture.
