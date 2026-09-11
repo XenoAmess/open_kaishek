@@ -12,6 +12,10 @@ import java.util.List;
 public final class ActiveWarStrategicPowerCapabilityProfile {
     public static final String ROOT_PROVIDER_COMMIT =
             "81f76e04704305df214e34961a32b768ce14a485";
+    public static final String ROOT_R470_EVIDENCE_COMMIT =
+            "4ac06131ce04a4af02cbe9898b8eca780c8aa181";
+    public static final String ROOT_R470_REPORT_SHA256 =
+            "CCF29894130EB673C59FDAD03E39D15A6BEB649392C6A2D02E1DF8A92C7E022D";
     public static final String ROOT_MCP_SERVER_SHA256 =
             "3723D21778A5DEAD2D7539BEC9E35E95BB040CE7478334446F375879B2918DBA";
     public static final String ROOT_PYTHON_CONTRACT_SHA256 =
@@ -64,14 +68,15 @@ public final class ActiveWarStrategicPowerCapabilityProfile {
                             "target_scope_is_rechecked_after_the_native_result",
                             "query_is_bound_to_one_unchanged_paused_snapshot",
                             "native_schema_v1_payload_and_exact_build_binding_are_preserved",
-                            "native_targets_declarable_ready_is_a_legacy_approved_scope_spelling",
+                            "r470_native_reader_rejected_active_war_only_target_as_target_not_declarable",
+                            "native_active_war_target_admission_requires_a_corrected_dll",
                             "query_does_not_enable_declaration_surrender_or_white_peace",
                             "parameterized_query_never_authorizes_an_autonomous_action",
                             "unknown_mcp_arguments_are_rejected",
                             "contract_does_not_depend_on_machine_account_path_or_ck3_round"),
                     true,
                     true,
-                    true,
+                    false,
                     false);
 
     private ActiveWarStrategicPowerCapabilityProfile() { }

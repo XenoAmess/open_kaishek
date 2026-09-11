@@ -15,19 +15,28 @@ provider checks that source before the native request and again on the same
 paused frame after the result. An unrelated CharacterID is rejected before a
 named-pipe request.
 
-The native schema-v1 result remains unchanged. Its frozen readiness key
-`targets_declarable_ready` is a legacy spelling for a Python-approved target
-scope; consumers use the new outer `target_scopes` field to distinguish an
-active-war opponent from a declaration target.
+The native schema-v1 result shape remains unchanged, but the old DLL does not
+yet produce that result for an active-war-only target. R470 reached the exact
+paused checkpoint and failed its first official MCP query with
+`target_not_declarable`: the native frame and reader still admit only current
+declaration targets. The frozen readiness key `targets_declarable_ready`
+therefore cannot yet represent active-war eligibility.
 
 ## Compatibility and readiness
 
-open_kaishek records this as a read-only, deterministic, native-certified
-compatibility profile. It neither starts CK3 nor exposes a gameplay action.
-The active-war scope remains runtime-uncertified until the root provider
-captures its bounded R459 pre-surrender query. This synchronization therefore
+open_kaishek records this as a read-only, deterministic, native-uncertified and
+runtime-uncertified compatibility profile. It neither starts CK3 nor exposes a
+gameplay action. The root provider must first publish a corrected DLL that
+freezes same-frame active-war opponent eligibility, then pass one bounded
+R459-checkpoint query in a new CK3 round. This synchronization therefore
 does not certify campaign dominance, a surrender recommendation, action
 readiness, or GEN-034 completion.
+
+The R470 evidence is pinned by root commit
+`4ac06131ce04a4af02cbe9898b8eca780c8aa181` and report SHA-256
+`CCF29894130EB673C59FDAD03E39D15A6BEB649392C6A2D02E1DF8A92C7E022D`.
+R470 issued one read-only query, no retry, no time advance, and no mutation;
+cleanup was GREEN.
 
 The contract stores no machine path, account name, credential, CK3 process ID,
 or CK3 round identifier. Another operator or machine can consume the same
