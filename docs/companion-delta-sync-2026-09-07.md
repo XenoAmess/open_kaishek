@@ -786,3 +786,9 @@ This changes no Operator MCP control name or payload, public event-knowledge
 schema, Java API, profile format, capability ID, bridge DLL, game file, startup
 configuration, or load order. open_kaishek needs no source or test change; the
 next required root source route will provide the live verification.
+
+### Active-war strategic-power MCP scope
+
+Root commit `81f76e04704305df214e34961a32b768ce14a485` extends the existing one-target strategic-power query from declaration targets to the union of declaration targets and current active-war primary opponents. The response adds an explicit `target_scopes` source classification; the native payload, DLL, exact-build binding and read-only behavior are unchanged.
+
+This is a public input-scope and response-field change, so open_kaishek adds `ActiveWarStrategicPowerCapabilityProfile` and a focused compatibility test. The profile is native-certified but remains runtime-uncertified for the new active-war scope until the root provider performs its one bounded R459 checkpoint query. No CK3 process or promotional-video asset is involved in this compatibility sync. Full field, invariant and hash pins are in [`ck3-active-war-strategic-power-capability.md`](ck3-active-war-strategic-power-capability.md).
