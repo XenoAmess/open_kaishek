@@ -848,3 +848,40 @@ The target's cleanup-related normal and optimized Python tests pass `21/21`.
 This follow-up changes only target-owned acceptance evidence semantics; the
 public MCP contract and every open_kaishek runtime surface listed above remain
 unchanged.
+
+### Stage 10 player-publication reachability correction
+
+Root commit `58e8cc9e616fe0621b967b40871c36580b2bf909` replaces the
+obsolete Stage 10 activation topology. The target no longer treats an AI
+manager selected from an owner-side `.390` frame as the formal source. A real
+player manager now schedules one idempotent callback after publishing B1;
+`zg361mg.90` re-roots only the case owner on that player's direct superior and
+opens F/AK on the player subject. The owner-local evaluation cycle is the
+published subject review serial plus one. It preserves strict lag without
+creating an AI review serial. Stage 10 enumeration and the common opener both
+reject AI subjects, including old saves that retain historical serials.
+
+The Operator MCP 1.1 surface remains compatible: target-owned profiles still
+advertise exactly `status`, `run-stage10`, and `cleanup`, and open_kaishek still
+forwards only those identifiers. The source receipt and job implementation are
+target-owned data, so no Java API, adapter, profile schema, MCP request/result,
+endpoint, credential, path, DLL, launch configuration, or load order changes.
+The previous `.390` plus AI-selector activation description is superseded for
+future target profiles; it remains historical evidence for the rejected R467
+route. Runtime certification is pending one bounded R481 `.120` observation.
+
+Frozen root provider hashes are:
+
+| root artifact | SHA-256 |
+| --- | --- |
+| manager dispatch effects | `51BF1761AB581F491F0D9A52852429B354136211891CB6838163C7D76A558DD3` |
+| manager runtime events | `4B82F54D4E15391C1DF8154B0F7AA1A5F5C7235F035E978EC9F2F2D46C5E7444` |
+| Central publication hook effects | `964F596685A4F9A541059E54056207783B74DF126973BD4742399D1DF2665FB0` |
+| F case open wrapper | `8E049F2A97A8BF4C66A9DF0A9E7BDFA144D890918F7DC167F036F3A9DC25A307` |
+| AK case open wrapper | `4848CBFB7D7F7C7E325BBEEFD6FB167E05B419E256EA4BD35FB21A68FD047828` |
+| root reachability note | `DE7467F791C130DB1F1A5DA767F5AA72A166EB20D1E6D9F05614E011F0DE7A8D` |
+
+Root focused validation is case kernel `12/12`, manager `53/53`, and Central
+`45/45` in both normal and optimized Python, plus current generators and local
+static validation. No CK3 instance or promotional-video asset was touched by
+this compatibility sync.
