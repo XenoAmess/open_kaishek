@@ -297,3 +297,24 @@ manifest and runtime evidence remain target-owned inputs, and Operator MCP 1.1
 does not interpret their product fields. No Java API/schema/profile change or
 new test is required. The target's focused Python tests and no-launch preflight
 are GREEN; the live retry remains pending, and no readiness is promoted here.
+
+### Hash-bound G2 resume admission
+
+Root commit `0221a419780e41a2911ff7309389784c47174da6` adds the optional
+target-side pair `--resume-save / --resume-save-sha256`. The adapter checks an
+exact CK3 `1.19.0.6` save header and SHA-256 before launch, copies it into a
+fresh userdir, and verifies destination size and hash before creating CK3. It
+preserves `startup_mode=normal-event` and adds
+`startup_source=resume-checkpoint` to the target-owned launch receipt. The new
+adapter and manifest SHA-256 values are
+`13202ADABC42D0A777EA22B946B9988CC9A9B287AAAF16C3D80C97CBDAAAB33C`
+and `A2C2A93F08E23074D18B3181D7CF6C4ADDA5635C9B5E609BD736333564D59763`.
+
+Operator MCP 1.1 continues to forward only profile-frozen target commands and
+does not parse these adapter arguments or receipt fields. Therefore this is
+`NO-PRODUCTION-CODE-CHANGE` for open_kaishek and requires no Java API, schema,
+profile or test update. The target's focused Python tests are GREEN, and its
+real-save no-launch receipt SHA-256 is
+`1D5B0B773897A8975369D605272D2638D2C00E38F263F4EA8EC8074C7F9CB88B`.
+No CK3 process or promotional-video asset was created by this compatibility
+sync; G2 source-specific readiness remains unchanged.
