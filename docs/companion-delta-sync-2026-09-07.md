@@ -318,3 +318,22 @@ real-save no-launch receipt SHA-256 is
 `1D5B0B773897A8975369D605272D2638D2C00E38F263F4EA8EC8074C7F9CB88B`.
 No CK3 process or promotional-video asset was created by this compatibility
 sync; G2 source-specific readiness remains unchanged.
+
+### R442 non-modal timeline recovery refresh
+
+Root commit `e073216a916988707fa2010c47c9885e83a1df75` repairs a target-side
+harness RED observed after the resume path had loaded and advanced the game.
+When no verified modal option exists, the adapter now reapplies its existing
+timeline controls and continues only after OCR proves a strictly later game
+day. The event-option path and all native source, MCP, action and readiness
+boundaries are unchanged. The current adapter and manifest SHA-256 values are
+`94E4C57404E8ECE7445B620592BC71D3493876B5E46A6FB2AE4CE9ABF12C736C`
+and `90D1B3080165B3E64D40A8C999358599FDD5FA90C94639E062A2F9F72CE2C28B`.
+
+This remains `NO-PRODUCTION-CODE-CHANGE` in open_kaishek: Operator MCP 1.1
+forwards the target-frozen command and does not interpret the recovery branch.
+No Java API/schema/profile or focused Java test changed. The target adapter
+tests pass `23/23` in normal and optimized Python, and the exact R442 successor
+passed no-launch admission with receipt SHA-256
+`C10FDE71DAB6912562B47581406E1636FC2EEC2F295D21FDD1E5475AAB545391`.
+No CK3 or promotional-video action is part of this compatibility sync.
