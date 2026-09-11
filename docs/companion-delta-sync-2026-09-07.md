@@ -358,3 +358,22 @@ optimized Python, and the refreshed real-save no-launch admission SHA-256 is
 `979DCD959E125310DC9A32CF9F6FF14C30CB33F0AC821C983E222B7DC1BA0489`.
 R444 cleanup is GREEN with no CK3 process remaining, and no promotional-video
 asset was touched.
+### G2 target-option arm guard refresh
+
+Root commit `4efd2ab80e26d42bf083d3f7a8237d41ade75d2e` changes only the
+target-side pre-bridge UI choreography. Before generic modal recovery, the G2
+adapter now identifies the exact `.1071.a` option by full text or by the three
+localized option-region tokens `扶上 / 君士坦丁堡 / 皇位`, then preserves the
+existing `atomic_arm` before click order. No native observer, DLL, MCP command,
+wire schema, capability, game file, dependency, or Operator MCP control changed.
+The target adapter/manifest SHA-256 values are
+`6CB7E3B97524C8EB2AFB56329BE97052A0E63752A96BF1887EDD51E5879079AB`
+and `C271267FBA0F4FA666EA121C0E7DE2B4D288011C70A893483B138F3098010648`.
+
+This remains `NO-PRODUCTION-CODE-CHANGE` in open_kaishek. The target's focused
+normal and optimized Python tests each pass `24/24`; its hash-bound R440
+pre-target save admission is GREEN with receipt SHA-256
+`5E6A0A00E3E77D63802D2783C273394D337BDA5F241A647AD25800A42263AACD`.
+Operator MCP 1.1 continues to forward the target command without parsing UI
+recognition details, so no Java test is repeated. No CK3 round or promotional
+asset was created by this compatibility sync.
