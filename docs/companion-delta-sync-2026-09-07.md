@@ -510,3 +510,29 @@ This remains a private dependency change. open_kaishek's public MCP envelope,
 Java API, profile schema, capability set, bridge DLL, game files, and load order
 do not change, so no Java test is repeated. No CK3 process or promotional-video
 asset is involved in this compatibility sync.
+
+### R451 read-only default-truce-reader diagnostic dependency
+
+R450 proved an input-current capability RED: both same-frame public term
+queries for WarID `33554473` returned the other domains while leaving
+`evaluated_days_observable=false`. No checkpoint, termination, postwar phase,
+or source-save mutation occurred. Root commit
+`ad3404d268c6a2a86d80ee2cb2b73ae5c36213a1` now provides an explicit
+read-only pre-termination probe plus default-OFF reader telemetry. Probe
+completion and terms readiness remain separate, and the normal action gate is
+unchanged.
+
+The root live-adapter manifest is SHA-256
+`7C66EAAA51AEAD8E020CB8E3D41D3F8794DB4BFF8742C6E182ADA6B7E95733E8`;
+the hash-bound no-launch receipt is
+`E10DA2DBF2DDD3F7B427972223F4162BA886875F1445F47C4320BD375FC6B56D`.
+The diagnostic DLL/injector hashes are
+`AB1BF87A1C4C20BC488F857BA0454E070225F0027259DDC6282530D92AAB1705`
+and `B5353527B56B4C99A7AF11A09C59A0850C481A45ED7CDA4C519AF956D97B39EC`.
+Focused root tests pass `57/57` in normal and optimized Python; diagnostic-ON
+and default-OFF bridge targets compile.
+
+This is a private runner/build dependency sync. open_kaishek's public MCP
+envelope, Java API, profile schema, capability IDs, bridge DLL, game files, and
+load order do not change, so no Java test is repeated. No CK3 process or
+promotional-video asset is involved in this compatibility sync.

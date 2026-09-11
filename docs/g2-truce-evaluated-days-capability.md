@@ -58,3 +58,34 @@ The exact game binding remains CK3 `1.19.0.6`, executable SHA-256
 `2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`.
 No parser, validator vocabulary, IR/runtime handler, or CLI command changes
 are required for this native provider transition.
+
+## 2026-09-11 current-input contradiction and bounded diagnostic
+
+Root R450 reached a different real `raiktor_claim_cb` input, WarID `33554473`,
+and queried the public terms wire twice on the same paused frame. Both calls
+returned the other term domains but reported
+`truce.evaluated_days_observable=false`. This does not erase the earlier
+production-live proof that the primitive can return 1,825 days; it proves that
+the provider is not ready for every current input. Full terms, decision,
+action, automatic surrender, and GEN-034 therefore remain unavailable.
+
+Root commit `ad3404d268c6a2a86d80ee2cb2b73ae5c36213a1` adds an explicitly
+selected read-only pre-termination probe and a default-OFF diagnostic build.
+The probe reuses the natural-source and same-PID query path, then requires zero
+checkpoint creation, zero mutation commands, and zero postwar polling. Its
+`PROBE_COMPLETE` status records execution completion separately from
+`terms_ready`; it cannot certify the capability by itself.
+
+The diagnostic CMake option
+`XAR_CK3_ENABLE_G2_TRUCE_DEFAULT_LEAF_DIAGNOSTICS_V1` adds only failure-stage,
+callback, enum-count, and context telemetry around the unchanged default leaf
+reader. It is mutually exclusive with the earlier private capture modes and
+does not change the public bridge ABI. The root live-adapter manifest and
+no-launch receipt SHA-256 values are
+`7C66EAAA51AEAD8E020CB8E3D41D3F8794DB4BFF8742C6E182ADA6B7E95733E8`
+and `E10DA2DBF2DDD3F7B427972223F4162BA886875F1445F47C4320BD375FC6B56D`.
+The diagnostic DLL and injector SHA-256 values are
+`AB1BF87A1C4C20BC488F857BA0454E070225F0027259DDC6282530D92AAB1705`
+and `B5353527B56B4C99A7AF11A09C59A0850C481A45ED7CDA4C519AF956D97B39EC`.
+No open_kaishek parser, runtime, MCP envelope, Java descriptor, or command is
+changed by this private diagnostic dependency.
