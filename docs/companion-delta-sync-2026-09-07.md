@@ -885,3 +885,32 @@ Root focused validation is case kernel `12/12`, manager `53/53`, and Central
 `45/45` in both normal and optimized Python, plus current generators and local
 static validation. No CK3 instance or promotional-video asset was touched by
 this compatibility sync.
+
+### Stage 10 target receipt v2 and bounded action alignment
+
+Root commit `c1d43ba385d50bbd3ac5dc47cdbdadc4f1d15873` completes the
+target-owned runner migration required by the player-publication correction.
+The Stage 10 job now consumes `zg361_stage10_player_publication_source_v2`.
+Its prelaunch receipt binds a SAV0101 CK3 1.19.0.6 checkpoint, product-tree
+hash, player-manager CharacterID, distinct immediate liege, at least one
+direct landed vassal, player title tier, and celestial government. Offline
+topology is only an input-admission hint: after launch, the existing
+campaign-root query must authoritatively reconfirm the played character,
+immediate liege, non-independent status, duke-or-higher tier, celestial flag,
+and `zg361_on` before any product action.
+
+The action then uses the existing review-now transport and promotion-source
+navigator, with one absolute 30-game-day deadline, to pause on the real
+`zg361mg.120`. It does not consume `.390`, run the AI-manager selector, or
+switch the played character. The existing manager-governance query verifies
+the same owner/player F case at `state=5 / active=false` before the event is
+acknowledged. Target-focused action and operator tests pass `5/5` and `4/4`
+in normal and optimized Python.
+
+This remains compatible with Operator MCP 1.1. The advertised target controls
+are still exactly `status`, `run-stage10`, and `cleanup`; the adapter treats
+receipt fields as target-owned activation data and does not parse them. No
+Java API, schema, transport, endpoint, credential, machine path, DLL, launch
+configuration, or load order changed. The prior `.390`/selector receipt is
+retained only as historical evidence and must not be used for new Stage 10
+profiles. Runtime certification remains pending one bounded live `.120`.
