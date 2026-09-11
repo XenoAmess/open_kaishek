@@ -675,3 +675,22 @@ Root commit `2bc9f01f0eebda5086e250400b9591fce95678ae` records the first qualifi
 The offline consumer now validates the producer's actual `terms_ready=true` and preflight `live_executed=false` fields and includes the checkpoint successor in its fixture. This is an internal Python report-consumption alignment. open_kaishek's public MCP, Java, profile, capability IDs, bridge DLL, game files, startup configuration, and load order remain unchanged; no Java suite or CK3 rerun is required here.
 
 Compatibility readiness advances only for the private observed-surrender input: `source_specific_loss_ready=true` and `comparison_input_ready=true`. Campaign dominance, owner budget, and same-frame white-peace comparison remain unavailable, so three-way comparison, decision/action, automatic surrender, and `GEN-034` remain false.
+
+### Terminal-stage activation game-day bound enforcement
+
+Root commit `980dc00ee1fcf24ceb94a8655cf88fb47ea507e0` makes the
+target-owned terminal-stage operator honor the existing
+`source_route.max_advance_days` activation field. The action cell persists the
+configured value and its absolute date deadline; a retained-session retry must
+keep the same value. Missing fields retain the previous global default. The
+action/operator source SHA-256 values are
+`1049E1A8D79984CCC682293630F8AA51B174A4C35F0102CBE71DF7E642732E55`
+and `DF958ABCAC6FEF1E8EEDDBF4326802DADEED7AE8BCA7D3153194E5EFC26D775B`.
+
+This remains `NO-PRODUCTION-CODE-CHANGE` for open_kaishek. Operator MCP 1.1
+forwards the target-advertised control and does not interpret the target-owned
+activation payload, so its public Java API, profile schema, capability IDs,
+endpoint, and machine-independent adapter behavior are unchanged. Focused root
+action/operator tests pass `20/20` in normal and optimized Python; the existing
+Operator MCP adapter result remains applicable and is not repeated. No CK3
+process or promotional-video asset was started or changed by this sync.
