@@ -985,3 +985,19 @@ account, or machine path is part of the interface.
 Focused root tests pass `3/3` in normal and optimized Python. This package did
 not launch CK3 and does not qualify Stage 10 `.120`; T0 P1 remains `8/9` and
 the final-video lock remains active until the later bounded live result.
+
+### R483/R484 source-capture dispatch correction
+
+Root commit `4c49425864954035154b69fb432241ec76bf1f1b` preserves the
+first live source-capture attempt as a harness RED. R483 frontend warmup ended
+before sole gameplay R484 restored the admitted player `32904`; the full
+loader/native gate was GREEN. The target worker then inherited the AF5 base
+validator and lost its source-specific fields before any rebind, save, or game
+time advance.
+
+The worker now explicitly calls the source-capture validator before entering
+the shared managed lifecycle. Controls and result kinds are unchanged, so the
+Operator MCP adapter needs no code change. Focused root tests pass `4/4` in
+normal and optimized Python. Both rounds have GREEN cleanup and are
+terminated; the next attempt must use incremented rounds and a freshly
+hash-bound activation rather than retrying R484.
