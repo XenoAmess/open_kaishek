@@ -244,3 +244,21 @@ the focused test class passes `13/13`.
 No Java API, profile schema, provider pin, parser/IR/runtime behavior, endpoint,
 credential, machine path, account, or CK3 round is added. No CK3 process or
 promotional-video asset is started, attached, or changed.
+
+### Qualified `.390` activation input
+
+The target-side Stage 9/11 job now captures a Stage 10 source only when the
+paused `zg361cl.390` frame and manager selector are both observed, archives the
+checkpoint immediately, and publishes a receipt bound to those bytes. The
+Stage 10 job requires that receipt before any CK3 launch. The current source
+hashes are `E9812CD4B2477760E957F7277A274195166CB00C120ED0BBDA2A39498FECA163`
+for the Stage 9/11 action, `EB8D1E10DF4BEE810324C28166DF70BD7C018B581B8509578914152CA2E5AC23`
+for its operator, and `5A88505525D24C049B905EC66C45B20530A2C222EC93E4EB30B5034AB324FE04`
+for the Stage 10 operator.
+
+This remains `NO-PRODUCTION-CODE-CHANGE` in open_kaishek. The activation and
+receipt are target-owned job inputs; Operator MCP 1.1 forwards the advertised
+control without parsing product-specific activation fields. The existing
+`13/13` focused adapter result therefore remains applicable. No Java test is
+repeated for this documentation-only sync, and no CK3 round or video asset is
+created.
