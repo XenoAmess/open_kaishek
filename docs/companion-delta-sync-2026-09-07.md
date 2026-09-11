@@ -414,7 +414,7 @@ the hit before appending evidence. The executable now records the actual
 `evaluated_name` on every captured row; its final six-row validator still
 requires the reviewed target identity and therefore remains fail-closed. The
 external executable advances from SHA-256
-`B832777491953888E3878AFB47339A12E8AEC08736C16CF15EA4E13FBE6FEA30`
+`B8328D5C0B52AF667BB71D2BBE660C803BF46EC0A7549A514083B7DBB8BA5A72`
 to `B05E0B6D3CA8DBEC41C8C5107AB8F9AACD4E99981E442AC1DBF3077868241007`,
 and the target source-specific contract SHA-256 becomes
 `7DFA946A90F7C3DD5DF8305CFA07A39BD635BE06C5610FA1BC02FAD16D0B1654`.
