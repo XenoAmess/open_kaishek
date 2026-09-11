@@ -251,9 +251,9 @@ The target-side Stage 9/11 job now captures a Stage 10 source only when the
 paused `zg361cl.390` frame and manager selector are both observed, archives the
 checkpoint immediately, and publishes a receipt bound to those bytes. The
 Stage 10 job requires that receipt before any CK3 launch. The current source
-hashes are `E9812CD4B2477760E957F7277A274195166CB00C120ED0BBDA2A39498FECA163`
-for the Stage 9/11 action, `EB8D1E10DF4BEE810324C28166DF70BD7C018B581B8509578914152CA2E5AC23`
-for its operator, and `5A88505525D24C049B905EC66C45B20530A2C222EC93E4EB30B5034AB324FE04`
+hashes are `6C6D486908394F1A6CD5E3CB7BF394DA063CD8BE33965C2C9BEBF3E1FC2BCDBD`
+for the Stage 9/11 action, `8884FA14CC34B1896E32F0B569F51CF527AD1BD6B2FD76F7C0EB2EE9C0C575FB`
+for its operator, and `D544708327D9D38865AAC1C36EFE934CD82FE704CB9CBAB00D06465F684E36EB`
 for the Stage 10 operator.
 
 This remains `NO-PRODUCTION-CODE-CHANGE` in open_kaishek. The activation and
