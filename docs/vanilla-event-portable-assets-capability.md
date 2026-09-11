@@ -39,19 +39,20 @@ The compatibility descriptor binds the exact provider commit and these inputs:
 | discovery implementation | `962966AD9AD18666F138E0B491F1FA68172CC149FC81261E0302534D8DF4A0D2` |
 | portable evidence implementation | `FECDEC3F78349A2D25B24DC29AAF342D48893764375547171DE3D9F06545B29E` |
 | source index implementation | `959DF0ED0D704A10AC4D0CE2CC57ABD0C6FACC52EFD204EFF8F84210E552F5DF` |
-| portable evidence manifest | `BC843955BF8EAC8E0133386EFDD0D9DEF4DE794C50559E4F8C93EA6DFF9A5545` |
-| source index dataset | `265EBCE989627D68C69DDEF178A7BC0EBE1DE846721E42584D2B8271D14E9CFD` |
+| portable evidence manifest | `C0BD96E2F4798D928940F6957B61E0A77210178651EB48AA5C654B37CD15C588` |
+| source index dataset | `7011B860532F091A79396909583E02E2AB2BEE6DF5AD5525E501C3AE987CC581` |
 
-The four response schema byte hashes are pinned in the Java descriptor. The
-manifest contains 213 content-addressed evidence entries: 157 deduplicated
-source-definition payloads and 56 observation artifacts. Its 902 references
-include 167 generated definition references, 497 explicitly lexical caller
-candidates, 181 manually reviewed analysis-source references, and 57
-observation-artifact references. The source index covers all 183 registered
+The four response schema byte hashes are pinned in the Java descriptor. At root
+revision `738650b0113b6a3a61933d0a23501ce503ebe755`, the manifest
+contains 280 content-addressed evidence entries: 192 deduplicated source
+definitions and 88 observation artifacts. Its 1,086 references include 184
+generated definition references, 522 explicitly lexical caller candidates,
+276 manually reviewed analysis-source references, and 104
+observation-artifact references. The source index covers all 184 registered
 events with zero missing, ambiguous, or namespace-mismatched definitions. The
-newest additive record is `chancellor_task.1004`; its knowledge and
-source-provenance queries are available, while its large R445 screenshot
-remains an external observation reference rather than a packaged evidence blob.
+newest additive record is `tgp_japan_yearly_events.1030`; its exact-build
+definition, two lexical caller candidates, and R463 pre-selection RED are all
+available through the existing read-only interfaces.
 
 ## open_kaishek scope
 

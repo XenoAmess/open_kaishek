@@ -61,12 +61,14 @@ authority, or event-selection policy. A later consumer may query the companion
 MCP and validate schema version/build identity, but open_kaishek does not become
 a second owner of the companion registry.
 
-At companion audit revision `dacc1d759d349ff142f167e265f09077c51da27d`,
-the default catalog contains 183 contracts, 183 analysis records, and 183
-observation projections. The R445 addition `chancellor_task.1004` keeps its
-dynamic councillor and neighbor identities observation-pending while exposing
-the exact-build call chain, source hashes, sole native option, and unavoidable
-opinion effect through the same read-only v1 envelope.
+At root audit revision `738650b0113b6a3a61933d0a23501ce503ebe755`, the
+default catalog contains 184 contracts, 184 analysis records, and 184
+observation projections. The R463 addition `tgp_japan_yearly_events.1030`
+exposes the exact-build call chain, empty saved-scope frame, four-option
+rendered projection, five-option source snapshot, authored1/native0 health
+route, and immutable pre-selection RED through the same read-only v1 envelope.
+The event's faith theme does not add a faith, doctrine, tenet, fervor, or
+conversion capability.
 
 The earlier 29-key observation inventory at revision
 `2fa9034a59ebec3677b184379611fd45471ba0b6` was:

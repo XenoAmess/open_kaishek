@@ -715,3 +715,26 @@ DLL, game files, startup configuration, and load order do not change. Existing
 consumers already treat contract payloads as detached JSON, so no Java code or
 test change is required. R463 remains paused for the target-owned same-process
 Python hot recovery; this companion sync does not launch or control CK3.
+
+### R463 `tgp_japan_yearly_events.1030` content compatibility
+
+Root commit `738650b0113b6a3a61933d0a23501ce503ebe755` adds the
+CK3 1.19.0.6 `tgp_japan_yearly_events.1030` record after R463 paused on its
+previously unknown event window. The campaign-neutral contract binds the
+played character, zero saved scopes, rendered native indices `0/1/2/3`, a
+five-option source snapshot, and authored option 1 / native index 0. The
+corresponding analysis freezes the exact event definition and yearly caller
+files; the portable bundle includes the immutable pre-selection RED at SHA-256
+`07BC6B2AA7A4AD2AC5AE4422CE9B129118C1940123DD187E2A3BC8AE2AE5A4C6`.
+
+The catalog and source index advance from 183 to 184 event keys. The source
+index now contains 522 lexical caller candidates. The portable bundle contains
+280 evidence entries and 1,086 references and passes its offline self-check.
+Focused contract tests pass `1/1` in normal and optimized Python.
+
+This is an additive content update inside the existing read-only v1 envelopes.
+MCP tool names, schemas, request fields, response fields, Java capability
+profiles, DLL/game files, startup configuration, load order, and machine/path
+independence are unchanged. No Java code or repeated adapter test is required.
+This sync neither launches nor controls CK3; current round R463 remains owned
+by the root Operator job for same-process Python hot recovery.
