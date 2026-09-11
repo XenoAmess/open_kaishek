@@ -962,3 +962,26 @@ Focused normal/optimized parser tests pass `2/2`. The root evidence reports
 deterministically reject the five-player R482 source and select `29037 ->
 32904` from the already admitted R159 single-player world for the next native
 capture.
+
+### Bounded Stage 10 player-source capture job
+
+Root commit `c87f7040f6d28b18068f5b5cd910160147e36e23` adds the
+target-owned `stage10-player-source-capture` job. It restores a previously
+live-admitted single-player checkpoint, verifies the current campaign root,
+uses the existing generic native character-rebind capability once, verifies
+the target player manager and direct owner, and saves a new checkpoint through
+the existing MCP native-save capability without advancing game time. The
+result kind is `zg361_stage10_player_source_capture_v1`.
+
+The job advertises exactly `status`, `capture-source`, and `cleanup`; it has no
+retry control. Its activation hash-binds the reusable offline topology report,
+the prior exact-build live qualification, and checkpoint provenance. The
+portable Operator MCP 1.1 already forwards controls advertised by a target, so
+no Java adapter, public MCP schema, transport, endpoint, credential, DLL, game
+file, launch configuration, or load order changes. Other operators supply
+their own absolute paths while preserving file hashes; no current round,
+account, or machine path is part of the interface.
+
+Focused root tests pass `3/3` in normal and optimized Python. This package did
+not launch CK3 and does not qualify Stage 10 `.120`; T0 P1 remains `8/9` and
+the final-video lock remains active until the later bounded live result.
