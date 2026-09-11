@@ -809,3 +809,30 @@ DLL. This certification stops at the observation primitive: campaign
 dominance, owner budget, white-peace comparison, exit recommendation, action
 readiness, and GEN-034 remain uncertified/unresolved. This sync does not start
 or control CK3 and does not touch promotional-video assets.
+
+### R479→R480 process-local restore generation correction
+
+Root commit `b9b24ce48243eb3618ffa9574d1e42e49e907f57` corrects the
+managed cold-restore contract after a real lifecycle exposed its invalid
+cross-process assumption. The supervisor replaced CK3 PID `86544` with
+`77320`, loaded the byte-bound checkpoint at `date_raw=53366616`, restored
+played character `32904`, and received a stable paused `map_ready` frame. Both
+DLL processes correctly reported their first process-local
+`connection_generation` as `1`; the old Python wait incorrectly required the
+second value to be greater than the first.
+
+Cold restore now proves the supervisor ACK's distinct PID pair and same pipe,
+then binds each positive process-local generation to its own PID and stable
+frame. A retry after an ACK-side timeout can resume without a third CK3 only
+when the replacement driver's command history, lifecycle outbox, checkpoint
+bytes, date, and played character all agree. Focused root tests pass terminal
+cold restore `14/14` and the completion gate `7/7` in normal and optimized
+Python, plus the native driver and next-episode regression pair `2/2` in both
+modes.
+
+This changes target-owned lifecycle validation semantics, so it is recorded
+here for companion compatibility. It does not change an Operator MCP tool,
+request or response field, schema/version, Java API/profile, bridge DLL, game
+file, startup configuration, load order, or machine-independent path behavior.
+open_kaishek therefore requires no source-code or Java-test change. T0 P1 and
+its final promotional-video lock remain owned by the root project.
