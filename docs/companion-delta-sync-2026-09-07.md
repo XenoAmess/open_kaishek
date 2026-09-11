@@ -427,3 +427,32 @@ R448 no-launch admission receipt is GREEN with SHA-256
 `5FF8771F9CCCA853FA4C4FE8FA7B7BE0787C3EAB5EEF25B18FD8FD5A9601E3EB`.
 R448 remains a bounded diagnostic run; no CK3 process or promotional-video
 asset was created by this compatibility sync.
+
+### R448 localized evaluated-name contract correction
+
+R448 captured all six action-bound `spawn_army` executions from the accepted
+`bookmark.1071.a` option. Every row carried the same exact WarID, a unique
+loaded node and CArmy generation, measured 500 creation-time soldiers, and the
+locale-dependent evaluated display name `诺曼路匪`. The previous private
+validator compared that runtime display text with the authored localization
+key `norman_highwaymen`, causing the otherwise complete capture to remain RED.
+The frozen RED capture SHA-256 is
+`B819D4C94B3BD25EC1B505368801FE5EC2BD09CBCEFB934543B687CB1A984A1D`;
+cleanup is GREEN and no CK3 process remains.
+
+Root commit `0235a50241f3dd6c37d375ff00bf56d76620d3a9` makes the private
+contract locale-neutral: the evaluated display name must be nonempty and equal
+across all six rows, while loaded-node, WarID, army generation, measured
+soldiers and regiment mappings remain hard identity checks. The rebuilt private
+capture executable SHA-256 is
+`020F051DDE034CBBC67C5A308F8E035FFA3E224844AC413261AA257466B0F185`;
+the source contract SHA-256 is
+`A96F54BC9556B23473C4BC9120009B6C6BC411CC0035F68E6C0CE8073F6C3586`.
+Its self-test and the target's focused normal/optimized Python matrices are
+GREEN (`53/53` each).
+
+This private data-contract revision remains `NO-PRODUCTION-CODE-CHANGE` for
+open_kaishek. Operator MCP 1.1 forwards the target-owned command and does not
+parse the capture rows, so no Java API, public schema, capability profile,
+bridge DLL, game file, or launch order changes. It does not promote G2
+readiness and does not affect the T0 P1 or promotional-video gates.
