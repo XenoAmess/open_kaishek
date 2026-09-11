@@ -11,6 +11,8 @@ import java.util.List;
  */
 public final class ActiveWarStrategicPowerCapabilityProfile {
     public static final String ROOT_PROVIDER_COMMIT =
+            "283904d5438e07c18a49903333eafcaaabb75e80";
+    public static final String ROOT_PYTHON_SCOPE_COMMIT =
             "81f76e04704305df214e34961a32b768ce14a485";
     public static final String ROOT_R470_EVIDENCE_COMMIT =
             "4ac06131ce04a4af02cbe9898b8eca780c8aa181";
@@ -28,6 +30,20 @@ public final class ActiveWarStrategicPowerCapabilityProfile {
             "13F794BE2B79F30C37ED99AF2064C53D424101F6E7E0130E3AF407AC5A584440";
     public static final String ROOT_CONTRACT_TEST_SHA256 =
             "67A601A0D4867B3224EDDED69B2769B7054944ADAB6467D0FBFDE721A4C6F533";
+    public static final String ROOT_NATIVE_FRAME_SHA256 =
+            "51F1830553A353C52A8AD757550791CFC556ECEB13BE7F07857361C901F9F2B9";
+    public static final String ROOT_NATIVE_READER_SHA256 =
+            "9448C95D787B88453085FA9AB76C895AC72B2911F320877396DF9962E4207D74";
+    public static final String ROOT_BRIDGE_CPP_SHA256 =
+            "25D62A80967B9AD41090C6310D4BE21A8B0A1F7F17FCEE02884CEC60425666AC";
+    public static final String ROOT_NATIVE_UNIT_TEST_SHA256 =
+            "AF8D6425C40C220FD866F2A49C4C4E5B8183EB0C329310B8EDC6455098B1B135";
+    public static final String ROOT_NATIVE_SOURCE_CONTRACT_TEST_SHA256 =
+            "927FFE8451423F7D09835B6FF280C4E83FFF4486C56DCF35A1D0B9ACE3B81058";
+    public static final String ROOT_NATIVE_ABI_SHA256 =
+            "4F786F156356F3B52EE1D1C408CF4A2912E154867793ECF2E75A3728D0F1385A";
+    public static final String ROOT_NATIVE_CANDIDATE_DLL_SHA256 =
+            "65C14FE284EA99036DBFBA950B3BE38C3656FA2D064017FD8A38FF21B32B61EF";
 
     public static final String TOOL_ID = "ck3_query_war_entry_assessments";
     public static final String CAPABILITY_ID =
@@ -35,7 +51,7 @@ public final class ActiveWarStrategicPowerCapabilityProfile {
     public static final String STEP_TEMPLATE =
             "query-war-entry-assessments-v1-1-<target_character_id>";
     public static final String PROFILE_VERSION =
-            "ck3-1.19.0.6-active-war-strategic-power-v1";
+            "ck3-1.19.0.6-active-war-strategic-power-v2";
     public static final int SCHEMA_VERSION = 1;
     public static final int MAXIMUM_TARGETS = 1;
 
@@ -69,7 +85,8 @@ public final class ActiveWarStrategicPowerCapabilityProfile {
                             "query_is_bound_to_one_unchanged_paused_snapshot",
                             "native_schema_v1_payload_and_exact_build_binding_are_preserved",
                             "r470_native_reader_rejected_active_war_only_target_as_target_not_declarable",
-                            "native_active_war_target_admission_requires_a_corrected_dll",
+                            "corrected_native_frame_freezes_declaration_and_active_war_sources_separately",
+                            "corrected_native_reader_admits_either_source_with_live_recheck_pending",
                             "query_does_not_enable_declaration_surrender_or_white_peace",
                             "parameterized_query_never_authorizes_an_autonomous_action",
                             "unknown_mcp_arguments_are_rejected",

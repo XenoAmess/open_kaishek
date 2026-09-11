@@ -41,7 +41,9 @@ class ActiveWarStrategicPowerCapabilityProfileTest {
         assertTrue(capability.invariants().contains(
                 "r470_native_reader_rejected_active_war_only_target_as_target_not_declarable"));
         assertTrue(capability.invariants().contains(
-                "native_active_war_target_admission_requires_a_corrected_dll"));
+                "corrected_native_frame_freezes_declaration_and_active_war_sources_separately"));
+        assertTrue(capability.invariants().contains(
+                "corrected_native_reader_admits_either_source_with_live_recheck_pending"));
     }
 
     @Test
@@ -66,8 +68,11 @@ class ActiveWarStrategicPowerCapabilityProfileTest {
                 "2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86",
                 Ck3Profile11906.EXE_SHA256);
         assertEquals(
-                "81f76e04704305df214e34961a32b768ce14a485",
+                "283904d5438e07c18a49903333eafcaaabb75e80",
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_PROVIDER_COMMIT);
+        assertEquals(
+                "81f76e04704305df214e34961a32b768ce14a485",
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_PYTHON_SCOPE_COMMIT);
         assertEquals(
                 "4ac06131ce04a4af02cbe9898b8eca780c8aa181",
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_R470_EVIDENCE_COMMIT);
@@ -80,7 +85,14 @@ class ActiveWarStrategicPowerCapabilityProfileTest {
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_SERVICE_SHA256,
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_NATIVE_DRIVER_SHA256,
                 ActiveWarStrategicPowerCapabilityProfile.ROOT_BRIDGE_TEST_SHA256,
-                ActiveWarStrategicPowerCapabilityProfile.ROOT_CONTRACT_TEST_SHA256)) {
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_CONTRACT_TEST_SHA256,
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_NATIVE_FRAME_SHA256,
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_NATIVE_READER_SHA256,
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_BRIDGE_CPP_SHA256,
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_NATIVE_UNIT_TEST_SHA256,
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_NATIVE_SOURCE_CONTRACT_TEST_SHA256,
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_NATIVE_ABI_SHA256,
+                ActiveWarStrategicPowerCapabilityProfile.ROOT_NATIVE_CANDIDATE_DLL_SHA256)) {
             assertTrue(hash.matches("[0-9A-F]{64}"));
         }
     }
