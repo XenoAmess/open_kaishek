@@ -101,3 +101,21 @@ This changes no bridge wire field, capability ID, schema version, parser
 vocabulary, IR/runtime handler, opcode, CLI command, or action authority.
 open_kaishek consumers must treat `raw_type_index` as exact-build diagnostic
 metadata and must not infer a stable cross-type enum from this observation.
+
+## 2026-09-12 pre-terminal Workforce source synchronization
+
+The source pin advances to companion
+`e168ad0c352e3b41eabdd387f27a96affa5a96ab`. Real R508 evidence at the
+owner-facing `zg361we.356` source bound the active AL tuple to cycle `5`, case
+`1`, state `1`, while the terminal-history group was honestly empty. The
+terminal history variables are created only after the portfolio closes, so a
+source-checkpoint consumer may now receive either an empty pre-terminal history
+shape or the existing partial-two closed-history shape. In both cases the
+current provider-bound cycle must be at least three and the owner, subject,
+case, event scopes and same-frame transport binding remain strict.
+
+This is a consumer data-contract correction. It changes no native wire field,
+capability ID, bridge ABI, parser vocabulary, IR/runtime handler, opcode, CLI
+command or action authority. open_kaishek must preserve the observed history
+status and must not infer terminal success, `.361`, debt, charter adoption or
+next-cycle effect from the source checkpoint.
