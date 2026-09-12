@@ -1081,3 +1081,30 @@ adapter, public live schema, native bridge, DLL, game files, launch settings,
 load order, endpoints, credentials, and portability requirements are
 unchanged. R489/R490 are terminated and cleanup is GREEN. P1 remains `8/9`,
 and the final-video lock remains active pending one v5-bound attempt.
+
+### Stage 10 B1 exact-roster repair and v5 invalidation
+
+Root commit `11cf6499879741860269b6fb5b9cc8325bf05cab` supersedes the
+assumption that only the Stage 10 observation bound remained unresolved.
+The sole R492 gameplay attempt reached the full 120-day deadline after seven
+season publications and ten final-callback compaction failures, while B1
+remained active and Central/PP remained inactive. Frozen source inspection
+found 29 live references in player-manager `29037`'s persistent subject list,
+but only six belonged to the current `owner/cycle/case=29037/17/17` tuple;
+the other 23 belonged to manager `29628` case `19/19`.
+
+The product repair applies the same owner, subject, cycle, case, active, and
+roster exact-tuple filter to both persistent B1 lists and fails closed when a
+row cannot publish that tuple. This is an internal mod state-machine semantic
+change. Operator MCP remains `1.1.0`; discovery, handoff, the three controls,
+Java adapter, public live schema, native bridge, DLL, launch settings, load
+order, endpoints, credentials, machine portability, and cleanup protocol are
+unchanged.
+
+`zg361_stage10_player_publication_source_v5` is now historical evidence only:
+it binds the old product tree and cannot admit another launch. The next target
+receipt must be v6 and bind the R492 product RED, exact-roster evidence, and
+the repaired product tree. Focused B1 runtime tests pass `76/76` in both normal
+and optimized Python; no additional CK3 run or broad suite was used for the
+repair. R491/R492 are terminated, cleanup is GREEN, P1 remains `8/9`, and the
+final-video lock remains active.
