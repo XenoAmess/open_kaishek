@@ -12,7 +12,7 @@ import java.util.List;
  */
 public final class VanillaEventPortableAssetCapabilityProfile {
     public static final String ROOT_PROVIDER_COMMIT =
-            "dacc1d759d349ff142f167e265f09077c51da27d";
+            "6e780e08d136df8d8fb0141c8f0d41bab644fcf2";
     public static final String ROOT_MCP_SERVER_SHA256 =
             "A67D98C4D3B452D09AF0B9A830E5E95BB58C31AF52B31AAA586423B18E4ED320";
     public static final String ROOT_DISCOVERY_SHA256 =
@@ -22,9 +22,9 @@ public final class VanillaEventPortableAssetCapabilityProfile {
     public static final String ROOT_SOURCE_INDEX_SHA256 =
             "959DF0ED0D704A10AC4D0CE2CC57ABD0C6FACC52EFD204EFF8F84210E552F5DF";
     public static final String ROOT_PORTABLE_EVIDENCE_MANIFEST_SHA256 =
-            "BC843955BF8EAC8E0133386EFDD0D9DEF4DE794C50559E4F8C93EA6DFF9A5545";
+            "11BA9FC515FB79358B635B793C11DD134F27C54AF81237A97128D4B767D3DD00";
     public static final String ROOT_SOURCE_INDEX_DATASET_SHA256 =
-            "265EBCE989627D68C69DDEF178A7BC0EBE1DE846721E42584D2B8271D14E9CFD";
+            "068843AC8DE172F8E087A401162F19ADC22DA6F808BA9BA2B71A4BF7D4843348";
 
     public static final String LIST_KNOWLEDGE_TOOL_ID =
             "ck3_list_vanilla_event_knowledge_v1";

@@ -120,3 +120,13 @@ compatibility descriptor above remain current; only this content-audit revision
 and inventory advance. Catalog and metadata counts are content inventory, not
 part of the v1 ABI, so compatible records and metadata may continue to be added
 without changing the request/response shape.
+
+At root revision `6e780e08d136df8d8fb0141c8f0d41bab644fcf2`, the catalog
+advances additively to 185 contracts, 185 analysis records, and 185 observation
+projections. The new `stress_threshold.1011` record binds the active player
+through `$player`, requires the exact R498 two-character-scope and native
+`0/1/5` projection, and selects authored option 6 / native option 5. Its
+analysis freezes the exact-build definition and level-one stress-pool caller;
+its observation preserves the R498 pre-selection RED. The query v1 envelope,
+request fields, registry implementation, MCP server implementation, and their
+previously pinned byte hashes do not change.

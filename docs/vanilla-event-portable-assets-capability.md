@@ -2,7 +2,7 @@
 
 Date: 2026-09-10 (Asia/Shanghai)
 
-Companion commit `dacc1d759d349ff142f167e265f09077c51da27d` carries four
+Companion commit `6e780e08d136df8d8fb0141c8f0d41bab644fcf2` carries four
 offline, read-only MCP tools around the existing single-event knowledge query.
 `VanillaEventPortableAssetCapabilityProfile` pins their consumer-visible v1
 contracts in open_kaishek:
@@ -39,8 +39,8 @@ The compatibility descriptor binds the exact provider commit and these inputs:
 | discovery implementation | `962966AD9AD18666F138E0B491F1FA68172CC149FC81261E0302534D8DF4A0D2` |
 | portable evidence implementation | `FECDEC3F78349A2D25B24DC29AAF342D48893764375547171DE3D9F06545B29E` |
 | source index implementation | `959DF0ED0D704A10AC4D0CE2CC57ABD0C6FACC52EFD204EFF8F84210E552F5DF` |
-| portable evidence manifest | `C0BD96E2F4798D928940F6957B61E0A77210178651EB48AA5C654B37CD15C588` |
-| source index dataset | `7011B860532F091A79396909583E02E2AB2BEE6DF5AD5525E501C3AE987CC581` |
+| portable evidence manifest | `11BA9FC515FB79358B635B793C11DD134F27C54AF81237A97128D4B767D3DD00` |
+| source index dataset | `068843AC8DE172F8E087A401162F19ADC22DA6F808BA9BA2B71A4BF7D4843348` |
 
 The four response schema byte hashes are pinned in the Java descriptor. At root
 revision `738650b0113b6a3a61933d0a23501ce503ebe755`, the manifest
@@ -67,6 +67,22 @@ entries, 89 unique observation artifacts, 105 observation references, and
 `B9910108273AB057E4FC246E89FCE303D65C2986C42B8CF33ACC016CEC694D55`.
 The new artifact is content-addressed and remains available without the
 originating runtime path.
+
+Root revision `6e780e08d136df8d8fb0141c8f0d41bab644fcf2` adds the
+source-reviewed `stress_threshold.1011` definition, its single exact-token
+external caller candidate, two manually reviewed source references, and the
+R498 pre-selection observation. The bundle now contains 282 evidence entries,
+90 unique observation artifacts, 106 observation references, and 1,092 total
+references. Generated-definition and lexical-caller references advance to 185
+and 523; manually reviewed analysis-source references advance to 278. The
+source index covers all 185 events with zero missing, ambiguous, or
+namespace-mismatched definitions. The R498 RED is addressed by
+`B51B8960C470FA5D76A73724F6791425EF5B23BF4FC10B6D361DF4B6574F392F`;
+the current manifest and source-index dataset hashes are pinned in the table
+above and in the Java descriptor.
+
+Focused offline Maven verification for the revised portable-asset descriptor
+passes `4/4` tests. No CK3 process or target runtime was contacted.
 
 ## open_kaishek scope
 

@@ -1237,3 +1237,32 @@ settings, load order, endpoints, credentials, and cleanup protocol are
 unchanged. No open_kaishek Java change or broad suite is required. Both CK3
 rounds are terminated. P1 remains `8/9`, and the final-video lock remains
 active until one bounded v7-backed Stage 10 attempt reaches `.120`.
+
+### R498 `stress_threshold.1011` vanilla-event asset revision
+
+Root commit `6e780e08d136df8d8fb0141c8f0d41bab644fcf2` adds one
+campaign-neutral vanilla-event contract after the v7-backed Stage 10 attempt
+parked on `stress_threshold.1011`. The product had not evaluated `.120` and no
+event selection was attempted. Exact-build source review binds the event to
+the level-one stress-threshold pool and the live projection to player/root
+`27181`, distinct `neglected_spouse=48337`, and rendered native options
+`0/1/5`. The reusable contract replaces campaign identities with `$player`,
+admits only that scope/option shape, and selects authored6/native5.
+
+This additive data revision advances the public read-only inventory to 185
+contracts and analysis/observation projections. The source-index dataset is
+`068843AC...3348`; portable evidence contains 282 blobs and manifest
+`11BA9FC5...DD00`, including the content-addressed R498 RED
+`B51B8960...F392F`. Root focused normal/optimized tests both pass 59 tests and
+82 subtests, and the frozen production frame resolves 18/18 checks GREEN.
+
+The four MCP tool IDs, v1 schemas, request/response fields, registry/server
+implementations, native bridge, DLL, game files, launch configuration, and
+Operator control surface remain unchanged. open_kaishek updates only the
+provider/data hashes and compatibility record; it gains no CK3 access or event
+selection authority. Current round R498 remains parked for the root's
+Python-only same-process hot recovery. P1 remains `8/9`, and the final-video
+lock remains active.
+
+Focused offline Maven verification of the revised data anchors passes `4/4`;
+no broad suite or CK3 process was required.
