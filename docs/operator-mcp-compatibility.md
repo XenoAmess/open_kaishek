@@ -1,6 +1,6 @@
 # Portable operator MCP compatibility boundary
 
-Date: 2026-09-10 (Asia/Shanghai)
+Date: 2026-09-12 (Asia/Shanghai)
 
 Companion commit `5610de6bae4f5ac7e04ba3bedb25084837608183`
 publishes target-side operator MCP contract `1.1.0` with profile schema `1`.
@@ -112,3 +112,31 @@ The first root no-launch preflight preserved a target-side lineage RED because
 the fourth row supplied an EXE SHA without the game version required by the
 existing schema-3 prefix. Root commit `b1a272151ef4e313bf68dae1824ce63a6c09cc2b`
 adds the exact version/SHA pair. Operator MCP `1.1.0` remains unchanged.
+
+## Standard pre-input retry control
+
+Root commit `1290a8907aa90c8cd8e4c3233f838352e8a01cb7` adds the
+target-owned `retry-policy` control to AF5, Stage 10, terminal stages, cold
+restore, source capture and bounded endgame-source jobs. It is a common control
+name over each job's existing retry implementation. Eligible jobs retain the
+same paused PID/generation and loaded game inputs, archive the prior RED, and
+create a new attempt artifact; ineligible jobs return a structured machine
+reason instead of omitting retry from their control surface.
+
+Operator MCP remains `1.1.0`. `job_controls` already treats control names as
+target profile data, and `operator_control_job` forwards only an advertised
+name, so the Java API, transport schema, endpoint and deployment identity do
+not change. The focused adapter fixture now discovers and forwards
+`retry-policy` beside the Stage 10 compatibility alias and continues to reject
+an unadvertised name.
+
+The frozen target operator source hashes for this control increment are:
+
+| target source | SHA-256 |
+| --- | --- |
+| AF5 base | `4ADED7C07AE29E9013D6C5E7B309A15032135805D3892D9C3CB80C070C752D59` |
+| endgame source | `EE195261568D0FCAD19B54F72FFD5DF0F46639B92BC8EB8B704AED725F0B0732` |
+| Stage 10 subject | `11222DD22567D30FA387F7636D371FEC8EE59ECA204B0DAF869A23D8A44D35CA` |
+| terminal stages | `54C4FB4F26F4E1087EEE7FF0DD64044559F66D4186D5AEF9F41548E01F3348C0` |
+| terminal cold restore | `4D840546C2F74001EEE48B24765F49B9DA2160C3B657F102B8A86F0345C56914` |
+| Stage 10 source capture | `B3C19066FBCFD0C36A8C7C7FF8F0DF9C44A10DACC6E3ACD8598EDFA962315C72` |

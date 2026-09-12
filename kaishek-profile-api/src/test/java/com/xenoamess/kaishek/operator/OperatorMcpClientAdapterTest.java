@@ -204,7 +204,7 @@ class OperatorMcpClientAdapterTest {
         var transport = new FakeTransport(target);
         transport.serverVersion = "1.1.0";
         transport.controls = List.of(
-                "status", "run-stage10", "retry-stage10", "cleanup");
+                "status", "run-stage10", "retry-policy", "retry-stage10", "cleanup");
         var adapter = new OperatorMcpClientAdapter(target, transport);
 
         assertEquals(transport.controls, adapter.discoverControls());
@@ -225,10 +225,15 @@ class OperatorMcpClientAdapterTest {
 
         assertEquals("ACCEPTED", retryResponse.get("result"));
         assertEquals("retry-stage10", transport.lastControlArguments.get("control_name"));
+        Map<String, Object> policyResponse = adapter.controlJob(
+                "job-id-fake", "retry-policy", "stage10-request-3");
+
+        assertEquals("ACCEPTED", policyResponse.get("result"));
+        assertEquals("retry-policy", transport.lastControlArguments.get("control_name"));
         assertThrows(
                 OperatorMcpContractException.class,
                 () -> adapter.controlJob(
-                        "job-id-fake", "resume-stage10", "stage10-request-3"));
+                        "job-id-fake", "resume-stage10", "stage10-request-4"));
     }
 
     @Test
