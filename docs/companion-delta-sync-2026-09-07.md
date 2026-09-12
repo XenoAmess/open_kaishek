@@ -1696,3 +1696,21 @@ dependencies, capability IDs and Operator MCP `1.1.0` therefore remain
 unchanged; no companion runtime or version edit is required. Root focused
 tests pass normal and optimized `8/8`. This compatibility sync is documentation
 only and launches no CK3 or desktop process.
+
+### G2-M2 bounded option-variant decision metadata
+
+Root commit `ff4cdf8fd2d9f5070c198ca891f1c69145894d46` adds the
+first evidence-bounded option-variant consumer for `natural_disaster.7031`.
+Only the exact source-reviewed native projections `[2]`, `[0,2]` and
+`[0,1,2]` resolve to native 2; unknown projections and all other variant event
+keys remain blocked. A recommended root registry decision now also reports
+additive `matched_option_variant_index` and `option_projection_source`
+metadata, which can appear inside a root `ck3_auto_turn` plan.
+
+This is `ROOT_CK3_AUTO_TURN_ADDITIVE_DECISION_METADATA /
+OPEN_KAISHEK_NO_CONSUMER`. open_kaishek has no `ck3_auto_turn` caller or closed
+Java record for the root planner decision. Its own Operator MCP request and
+response types, target controls, profiles, dependencies and version `1.1.0`
+remain unchanged. No companion runtime edit or version bump is needed. Root
+focused tests pass normal and optimized `8/8`; this documentation sync starts
+no CK3 or desktop process.
