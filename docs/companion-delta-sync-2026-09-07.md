@@ -1656,7 +1656,7 @@ not repeat them and launches no CK3 process.
 
 ### G2-M2 additive played-character stress observation
 
-Root commit `a9415fbbda3671aebf6c0f207743c89d21da7ef4` adds
+Root commit `a9415fb1e0d299df7acba2406b5288cc522ba9d9` adds
 `state_snapshot.state.played_character.stress_points` to the root native
 producer. The value is a non-negative exact-build integer read from the same
 generation-checked character-extension leaf already used by war-exit resource
@@ -1673,3 +1673,26 @@ version `1.1.0` remain unchanged. No Java, schema or version edit is required.
 Root validation built and linked the Release DLL, ran the native game-access
 fixture GREEN, and passed normal/optimized Python field tests `2/2`; this
 companion sync does not repeat those tests or launch CK3.
+
+### G2-M2 registered-event material postcondition response
+
+Root commit `6da3ca847c8ce1ac4791050b49fe01318ab721f5` carries the
+source-reviewed `.0030` stress expectation through the root planner and event
+action. For this exact supported choice, the public root `ck3_auto_turn` result
+may now include additive `plan.event_material_postcondition`,
+`result.event_selection.starting_played_character_stress`,
+`result.event_selection.ending_played_character_stress`, and
+`result.event_material_postcondition` objects. Older snapshots remain valid;
+unsupported events do not receive an expectation. A ready expectation whose
+result is missing, identity-drifted or stress-increasing remains a root auto-run
+RED.
+
+This is `ROOT_CK3_AUTO_TURN_ADDITIVE_RESPONSE_FIELDS /
+OPEN_KAISHEK_NO_CONSUMER`. Repository search confirms that open_kaishek neither
+invokes `ck3_auto_turn` nor deserializes its plan, event-selection or material
+postcondition result. Its portable Operator MCP forwards its own target jobs
+and does not share this response schema. Existing Java APIs, profiles,
+dependencies, capability IDs and Operator MCP `1.1.0` therefore remain
+unchanged; no companion runtime or version edit is required. Root focused
+tests pass normal and optimized `8/8`. This compatibility sync is documentation
+only and launches no CK3 or desktop process.
