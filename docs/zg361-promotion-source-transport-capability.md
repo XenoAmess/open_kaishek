@@ -83,3 +83,21 @@ The query and action capability IDs, request fields, per-widget response shape,
 same-frame rule, typed-unavailability behavior, action semantics, and all
 production certification flags remain unchanged. It adds no parser vocabulary,
 IR lowering, runtime handler, opcode, CLI command, or new action authority.
+
+## 2026-09-12 exact-build generic value-scope synchronization
+
+The source pin advances to companion
+`2c059aa4becf46ea26415cc0973b1d0fd9e2b9cb`. A real paused
+`zg361we.356` frame on CK3 `1.19.0.6` established that the saved scalar scopes
+`zg361_we_al_cycle` and `zg361_we_al_case` use `raw_type_index = 1` while
+retaining `type_key = value`, `subtype = 0`, and an intentionally unavailable
+generic payload identity. The former capture-side assumption that all such
+value scopes used raw index `9` was therefore a Python consumer contract bug.
+
+The repaired source/provider contract preserves the exact positive raw index
+reported by the bound build and excludes the independently established
+Character index `4`; semantic routing continues to use `type_key = value`.
+This changes no bridge wire field, capability ID, schema version, parser
+vocabulary, IR/runtime handler, opcode, CLI command, or action authority.
+open_kaishek consumers must treat `raw_type_index` as exact-build diagnostic
+metadata and must not infer a stable cross-type enum from this observation.
