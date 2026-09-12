@@ -1260,9 +1260,19 @@ The four MCP tool IDs, v1 schemas, request/response fields, registry/server
 implementations, native bridge, DLL, game files, launch configuration, and
 Operator control surface remain unchanged. open_kaishek updates only the
 provider/data hashes and compatibility record; it gains no CK3 access or event
-selection authority. Current round R498 remains parked for the root's
-Python-only same-process hot recovery. P1 remains `8/9`, and the final-video
+selection authority. During root commit/push and companion synchronization,
+current round R498 reached its configured 1200-second managed session limit.
+Root closure commit `f522fbe63556de74e5ff5446e9854ae33b0986cf`
+records `exit_reason=timeout`, `restart_count=0`, GREEN canonical/managed
+cleanup, and an empty final CK3 inventory. No second `run-stage10` was sent;
+current round R498 and old round R497 are terminated, so same-process recovery
+is cancelled. The next bounded attempt must use R499 warmup and R500 gameplay
+under the unchanged 120-game-day limit. P1 remains `8/9`, and the final-video
 lock remains active.
+
+This lifecycle closure changes no provider data, MCP tool ID, schema, field,
+runtime interface, dependency, or version. The pinned provider/data hashes
+above therefore remain current; this companion update is documentation-only.
 
 Focused offline Maven verification of the revised data anchors passes `4/4`;
 no broad suite or CK3 process was required.
