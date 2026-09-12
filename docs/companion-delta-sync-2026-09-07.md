@@ -1763,3 +1763,24 @@ No Java API, profile, dependency, capability/tool ID, endpoint or Operator MCP
 `1.1.0` behavior changes. Root Release compile/link and native fixture are
 GREEN; focused Python normal/optimized tests are each `30/30`. This sync does
 not repeat those tests or launch CK3, recording, or desktop-input processes.
+
+### G2-M2 heir-death scope consumer and third material comparator
+
+Root commit `4dd7b74d7497980bf473da71bbe277b3e39f5027` adds an exact
+direct-projection consumer for the existing `death_management.1007` record.
+Only this event key may consume its `unique_character_scope_excludes` rule,
+and the typed dead-character full ID must differ from the player. Its existing
+analysis gains a `xar.ck3.vanilla-event-choice-effect/v1` profile with authored
+stress base `+20`, non-exact runtime magnitude and a non-decreasing
+played-character stress postcondition. Root `ck3_auto_turn` may carry this
+profile and the already documented material-postcondition envelope.
+
+This is `ROOT_ADDITIVE_ANALYSIS_METADATA_AND_INTERNAL_POLICY /
+OPEN_KAISHEK_NO_CONSUMER`. open_kaishek does not deserialize record-analysis
+subfields, root planner decisions or `ck3_auto_turn` results. The v1 event-
+knowledge top-level envelope, query/tool and capability IDs, registry/MCP
+implementation hashes, Java profiles, dependencies, endpoint and Operator MCP
+`1.1.0` remain unchanged. Root focused policy/profile/comparator tests pass
+normal/optimized `25/25`; stale record-count assertions were corrected and
+their six focused modules pass `45/45`. This compatibility sync launches no
+CK3, recording, or desktop-input process.

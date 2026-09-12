@@ -161,3 +161,13 @@ increasing played-character gold postcondition. This changes record content
 only: catalog counts, query request, top-level response fields, tool ID,
 registry/MCP server implementation hashes and Java compatibility profile stay
 unchanged.
+
+At root revision `4dd7b74d7497980bf473da71bbe277b3e39f5027`, the existing
+`death_management.1007` analysis gains another additive
+`selected_choice_effect_profile`. It records authored
+`minor_stress_impact_gain=20`, explicitly non-exact runtime magnitude, a
+non-decreasing played-character stress postcondition, and a display-only after
+tooltip. The companion's exact-key direct planner consumer is internal and
+does not alter this query. Catalog counts, request and top-level response
+fields, tool ID, registry/MCP server implementation hashes and Java profile
+remain unchanged.
