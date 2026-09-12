@@ -1119,7 +1119,7 @@ report preserves its input hash, game version, raw list items, character
 liveness, and typed variable identities. It carries no fixed account, machine
 path, target round, or credential, and remains prelaunch-only.
 
-The target now accepts only
+At root commit `0b38d654f37f4e96ac77597f7ac54a1e18d603e4`, the target accepted only
 `zg361_stage10_player_publication_source_v6`. It separates the historical
 source product tree from the repaired launch tree and hash-binds the R492
 120-day product RED, live debug log, exact-roster report, and repair contract.
@@ -1199,3 +1199,41 @@ Public Operator MCP remains `1.1.0`. Discovery, handoff, control names, Java
 adapter, live query schema, native bridge, DLL, game files, launch settings,
 load order, endpoint, credentials, and cleanup protocol are unchanged. P1
 remains `8/9`, and the final-video lock remains active.
+
+### Stage 10 current-state source receipt v7
+
+Root commit `95dfbe627c1e805abb356248c6862bb42bd3e34a` preserves v6 for
+its R492 lineage and additively accepts
+`zg361_stage10_player_publication_source_v7`. A v7 receipt describes the
+newly captured checkpoint itself; it does not copy the old manager, checkpoint,
+three historical RED artifacts, debug-log counts, or `.102 +1d` queue into a
+different source lineage.
+
+The v7 validator hash-binds the checkpoint and current product tree plus these
+target-owned evidence kinds:
+
+- `ck3_save_player_topology_offline_v1`;
+- `zg361_stage10_player_source_capture_v1` with
+  `source_admission_kind=managed-autosave` and no game-time advance;
+- `zg361_rn_af5_managed_cleanup_v1`;
+- `ck3_character_scope_offline_v1` for the exact state-7 B1 domain;
+- `ck3_scheduled_event_queue_offline_v1` with one `.122 +30d` entry per
+  subject.
+
+R495 warmup terminated before sole gameplay round R496 captured the source.
+The resulting 65,244,992-byte checkpoint is `50B713F2...C7E4`; exact-build
+live evidence `1C511EC6...7ED87` and offline topology `335E566D...7B32`
+agree on the unique player-manager `27181`, immediate liege `36354`, tier 4,
+and celestial government. Character-scope evidence `E5E97614...C97D1`
+contains the same five case `5/5` subjects in both persistent lists, and queue
+evidence `4F031946...7753` contains five `.122 +30d` entries. The production
+v7 receipt is `B687CC04...FFBA`; focused target tests pass `4/4` in normal and
+optimized Python.
+
+This is an additive target admission/data-format update. Public Operator MCP
+remains `1.1.0`; discovery, handoff, `status` / `run-stage10` / `cleanup`, the
+Java adapter, live query schema, native bridge, DLL, game files, launch
+settings, load order, endpoints, credentials, and cleanup protocol are
+unchanged. No open_kaishek Java change or broad suite is required. Both CK3
+rounds are terminated. P1 remains `8/9`, and the final-video lock remains
+active until one bounded v7-backed Stage 10 attempt reaches `.120`.
