@@ -1515,3 +1515,23 @@ as target-owned data, so its Java/profile/adapter code needs no change. Focused
 upstream validation passed the native fixture and Python state/action contracts
 (`17 tests / 22 subtests`). R528 and R529 were terminated with cleanup GREEN;
 open_kaishek did not launch CK3 or repeat unrelated tests.
+
+### R531 scoreboard modal-routing diagnostic boundary
+
+Root commit `69194e654e2d9bd11bc21f58d28b23f6f28756c8` removes one
+provider-private cross-gate after R531 isolated it with live evidence. The
+scoreboard provider still reads and fingerprints the modal vector's absolute
+top receiver and its none/exact/descendant/other relation, but no longer treats
+that routing order as proof that the directly observed scoreboard surface is
+unavailable. The public `modal_blocking` field remains typed unavailable, and
+the independent exact action dispatcher continues to own action admission.
+
+This is `PROVIDER_PRIVATE_DIAGNOSTIC_DECOUPLED /
+NO_PUBLIC_WIRE_SHAPE_OR_VERSION_DELTA`. Response fields, field types, reason
+vocabulary, fingerprints, capability/tool names, endpoint, ACL, action rules,
+dependencies and Operator MCP `1.1.0` are unchanged. Unreadable/cyclic parent
+chains and invalid entry/page surfaces still fail closed. open_kaishek forwards
+the target-owned state and fingerprint without interpreting modal routing, so
+no Java/profile/adapter change is required. Focused upstream native and Python
+state/action contracts pass; R530/R531 are terminated with cleanup GREEN, and
+open_kaishek launched no CK3.
