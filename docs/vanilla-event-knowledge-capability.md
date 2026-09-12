@@ -140,3 +140,14 @@ Its exact-build definition, interaction caller, option effects, and R500 RED
 are available through the unchanged v1 read-only interfaces.
 
 At root revision `fdf23f537d4238850154f85184f503ba63136a3d`, the catalog advances additively to 187 contracts, analysis records, and observation projections. `travel_completion_event.1000` binds root and travel owner to the player, requires the exact two travel-plan/three province/distinct travel-leader scope shape, and selects the sole rendered native option `0`. Its exact-build definition, travel on-action callers, and R502 RED are available through the unchanged v1 read-only interfaces.
+
+At root revision `f4586847ec7d5a4201bde398a38137262e438d8c`, the existing
+`analysis` projection gains two additive `selected_choice_effect_profile`
+records. `tgp_travel_events.0030` identifies authored base stress loss `-30`
+while refusing an exact runtime delta because character stress-impact modifiers
+are not observed. `natural_disaster.7031` distinguishes the selected option's
+non-material warning tooltip from its common-after variable write. Both use
+`xar.ck3.vanilla-event-choice-effect`, version `1`, and remain offline
+source-structured metadata rather than native/runtime-certified effect preview.
+The query request, top-level response fields, tool ID, registry/MCP server
+implementation hashes and Java compatibility profile remain unchanged.

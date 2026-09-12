@@ -1714,3 +1714,27 @@ response types, target controls, profiles, dependencies and version `1.1.0`
 remain unchanged. No companion runtime edit or version bump is needed. Root
 focused tests pass normal and optimized `8/8`; this documentation sync starts
 no CK3 or desktop process.
+
+### G2-M2 selected-choice structured effect profiles
+
+Root commit `f4586847ec7d5a4201bde398a38137262e438d8c` adds two
+versioned `xar.ck3.vanilla-event-choice-effect/v1` objects under the existing
+`ck3_query_vanilla_event_knowledge_v1.analysis` projection. Exact
+`tgp_travel_events.0030` records authored base stress loss `-30`, explicitly
+marks the runtime delta non-exact, and publishes a non-increasing played-
+character stress postcondition. Exact `natural_disaster.7031` separates its
+selected warning-tooltip effect from the common-after character-variable
+write. The root registry decision may also carry the matching object as
+additive `choice_effect_profile`; the `.0030` material comparator consumes its
+observable postcondition.
+
+This is `ROOT_ADDITIVE_ANALYSIS_METADATA_AND_AUTO_TURN_DECISION_FIELD /
+OPEN_KAISHEK_PASS_THROUGH_COMPATIBLE`. Repository search confirms that
+open_kaishek neither deserializes analysis subfields nor calls/parses root
+`ck3_auto_turn`. `VanillaEventKnowledgeCapabilityProfile` freezes the unchanged
+top-level v1 envelope, registry implementation hash and MCP server hash; record
+metadata is explicitly additive content. No Java type, request/response
+top-level field, tool/capability ID, profile, dependency, endpoint or Operator
+MCP `1.1.0` behavior changes. Root focused tests pass normal and optimized
+`27/27`; this documentation sync does not repeat them or launch CK3, recording,
+or desktop-input processes.
