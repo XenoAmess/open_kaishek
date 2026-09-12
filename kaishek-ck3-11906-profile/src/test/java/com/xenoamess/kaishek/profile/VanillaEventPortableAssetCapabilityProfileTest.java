@@ -58,10 +58,10 @@ class VanillaEventPortableAssetCapabilityProfileTest {
     void schemasAndProviderInputsAreHashBound() {
         assertEquals(1, VanillaEventPortableAssetCapabilityProfile.SCHEMA_VERSION);
         assertEquals(
-                "0494375d74a4928573cf47672b6150a0ab894ed2",
+                "fdf23f537d4238850154f85184f503ba63136a3d",
                 VanillaEventPortableAssetCapabilityProfile.ROOT_PROVIDER_COMMIT);
         assertEquals(
-                "210E785F58FE6C176F0AE7DEFCF5301AB9E63BBC41161DBBF45590D4E6FE10C9",
+                "FE3A1D8472B14A6901117243A21E7A97E5AD60EE685D03057D5F17BC568F43DC",
                 VanillaEventPortableAssetCapabilityProfile.ROOT_SOURCE_INDEX_DATASET_SHA256);
         for (String hash : List.of(
                 VanillaEventPortableAssetCapabilityProfile.ROOT_MCP_SERVER_SHA256,

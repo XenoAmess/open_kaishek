@@ -38,9 +38,9 @@ The compatibility descriptor binds the exact provider commit and these inputs:
 | MCP server | `A67D98C4D3B452D09AF0B9A830E5E95BB58C31AF52B31AAA586423B18E4ED320` |
 | discovery implementation | `962966AD9AD18666F138E0B491F1FA68172CC149FC81261E0302534D8DF4A0D2` |
 | portable evidence implementation | `FECDEC3F78349A2D25B24DC29AAF342D48893764375547171DE3D9F06545B29E` |
-| source index implementation | `E4AAF2D9D91D40EBFD902E0D8CB314F05980B3E7DCDF7A87E194357C82780386` |
-| portable evidence manifest | `3660B8AC4BAE5C457A8A15913AF56BDEF07EBD30AB8166A2AE2CE327156DA2B1` |
-| source index dataset | `210E785F58FE6C176F0AE7DEFCF5301AB9E63BBC41161DBBF45590D4E6FE10C9` |
+| source index implementation | `4A8ECB5576FB5F140EC6FDE08CB8CB185E523CD833D5CE84B8EA34436C706D8D` |
+| portable evidence manifest | `F2D15B19DCEB80BE6EFDE6FCA49DAD2AE6842A49AE37A7F94DB1F6DE00B039E1` |
+| source index dataset | `FE3A1D8472B14A6901117243A21E7A97E5AD60EE685D03057D5F17BC568F43DC` |
 
 The four response schema byte hashes are pinned in the Java descriptor. At root
 revision `738650b0113b6a3a61933d0a23501ce503ebe755`, the manifest
@@ -117,3 +117,5 @@ B1 cycle snapshot descriptor from open_kaishek commit `c552744` is unchanged.
   fetched and `git rebase origin/main` reported current. No merge was used.
 - CK3 was not started or attached, and no save or companion repository file
   was modified.
+
+Root revision `fdf23f537d4238850154f85184f503ba63136a3d` adds the source-reviewed `travel_completion_event.1000` definition, travel on-action caller candidates, and R502 pre-selection observation. The bundle now contains 290 evidence entries, 92 unique observation artifacts, 108 observation references, and 1,105 total references. Generated-definition, lexical-caller, and manually reviewed analysis-source references advance to 187, 527, and 283. The source index covers all 187 events. R502 RED `E797ABDD300239ADBC9A60F41E7623B6F58E5B7ABA8D6BB97828F21CD24A6A5A` is included; current hashes are pinned in the table and Java descriptor above.

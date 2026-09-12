@@ -1298,3 +1298,11 @@ DLL, game files, launch configuration, and dependencies remain unchanged.
 open_kaishek updates only provider/data hashes and compatibility records; it
 does not launch or control CK3. P1 remains `8/9`, and the final-video lock
 remains active.
+
+### R502 `travel_completion_event.1000` asset revision
+
+Root commit `fdf23f537d4238850154f85184f503ba63136a3d` adds the campaign-neutral generic travel-completion contract after current round R502 preserved a pre-selection RED. The exact-build contract binds player as root and travel owner, preserves two travel-plan scopes, three province scopes, and a distinct travel leader, and selects the sole rendered authored1/native0 already-home response.
+
+The public inventory advances to 187 events and 290 portable blobs. Current source-index dataset is `FE3A1D84...F43DC`; manifest is `F2D15B19...039E1` and includes R502 RED `E797ABDD...A6A5A`. Root frozen production replay is `22/22` GREEN; focused normal/optimized validation and both offline byte checks are GREEN.
+
+The four MCP tool IDs, v1 schemas, fields, runtime interfaces, native bridge, DLL, game files, launch configuration, and dependencies remain unchanged. open_kaishek updates only provider/data hashes and compatibility records; it does not launch or control CK3. P1 remains `8/9`, and the final-video lock remains active.

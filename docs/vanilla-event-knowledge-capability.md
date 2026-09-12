@@ -138,3 +138,5 @@ root/recipient/subject, requires a distinct actor plus the exact weak-slot,
 boolean-theme, and native `0/1/2` projection, and selects authored2/native1.
 Its exact-build definition, interaction caller, option effects, and R500 RED
 are available through the unchanged v1 read-only interfaces.
+
+At root revision `fdf23f537d4238850154f85184f503ba63136a3d`, the catalog advances additively to 187 contracts, analysis records, and observation projections. `travel_completion_event.1000` binds root and travel owner to the player, requires the exact two travel-plan/three province/distinct travel-leader scope shape, and selects the sole rendered native option `0`. Its exact-build definition, travel on-action callers, and R502 RED are available through the unchanged v1 read-only interfaces.
