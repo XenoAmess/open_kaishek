@@ -38,9 +38,9 @@ The compatibility descriptor binds the exact provider commit and these inputs:
 | MCP server | `A67D98C4D3B452D09AF0B9A830E5E95BB58C31AF52B31AAA586423B18E4ED320` |
 | discovery implementation | `962966AD9AD18666F138E0B491F1FA68172CC149FC81261E0302534D8DF4A0D2` |
 | portable evidence implementation | `FECDEC3F78349A2D25B24DC29AAF342D48893764375547171DE3D9F06545B29E` |
-| source index implementation | `959DF0ED0D704A10AC4D0CE2CC57ABD0C6FACC52EFD204EFF8F84210E552F5DF` |
-| portable evidence manifest | `11BA9FC515FB79358B635B793C11DD134F27C54AF81237A97128D4B767D3DD00` |
-| source index dataset | `068843AC8DE172F8E087A401162F19ADC22DA6F808BA9BA2B71A4BF7D4843348` |
+| source index implementation | `E4AAF2D9D91D40EBFD902E0D8CB314F05980B3E7DCDF7A87E194357C82780386` |
+| portable evidence manifest | `3660B8AC4BAE5C457A8A15913AF56BDEF07EBD30AB8166A2AE2CE327156DA2B1` |
+| source index dataset | `210E785F58FE6C176F0AE7DEFCF5301AB9E63BBC41161DBBF45590D4E6FE10C9` |
 
 The four response schema byte hashes are pinned in the Java descriptor. At root
 revision `738650b0113b6a3a61933d0a23501ce503ebe755`, the manifest
@@ -80,6 +80,16 @@ namespace-mismatched definitions. The R498 RED is addressed by
 `B51B8960C470FA5D76A73724F6791425EF5B23BF4FC10B6D361DF4B6574F392F`;
 the current manifest and source-index dataset hashes are pinned in the table
 above and in the Java descriptor.
+
+Root revision `0494375d74a4928573cf47672b6150a0ab894ed2` adds the
+source-reviewed `trait_specific_interactions.0011` definition, its poetry
+interaction caller, option-effect source, and R500 pre-selection observation.
+The bundle now contains 286 evidence entries, 91 unique observation artifacts,
+107 observation references, and 1,098 total references. Generated-definition,
+lexical-caller, and manually reviewed analysis-source references advance to
+186, 524, and 281. The source index covers all 186 events. The R500 RED is
+addressed by `8DF21A7682E1B30258A12DB736B975E348CE434C6A2A3D0AFFF11F30424B04AA`;
+the current hashes are pinned in the table and Java descriptor above.
 
 Focused offline Maven verification for the revised portable-asset descriptor
 passes `4/4` tests. No CK3 process or target runtime was contacted.

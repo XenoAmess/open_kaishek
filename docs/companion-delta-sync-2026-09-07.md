@@ -1276,3 +1276,25 @@ above therefore remain current; this companion update is documentation-only.
 
 Focused offline Maven verification of the revised data anchors passes `4/4`;
 no broad suite or CK3 process was required.
+
+### R500 `trait_specific_interactions.0011` asset revision
+
+Root commit `0494375d74a4928573cf47672b6150a0ab894ed2` adds the
+campaign-neutral mourning-poem response contract after current round R500
+preserved a pre-selection RED. The exact-build contract binds player as
+root/recipient/subject, a distinct actor, three identity-unavailable Character
+slots, five boolean poem-theme scopes, and native options `0/1/2`; it selects
+authored2/native1 to avoid the random diplomacy duel and the rejection route's
+relationship/rivalry effects.
+
+The public inventory advances to 186 events and 286 portable blobs. Current
+source-index dataset is `210E785F...10C9`; manifest is `3660B8AC...A2B1` and
+includes R500 RED `8DF21A76...B04AA`. Root frozen production replay is `26/26`
+GREEN; focused normal/optimized tests each pass 50 tests and 147 subtests plus
+an isolated 8-test module.
+
+The four MCP tool IDs, v1 schemas, fields, runtime interfaces, native bridge,
+DLL, game files, launch configuration, and dependencies remain unchanged.
+open_kaishek updates only provider/data hashes and compatibility records; it
+does not launch or control CK3. P1 remains `8/9`, and the final-video lock
+remains active.

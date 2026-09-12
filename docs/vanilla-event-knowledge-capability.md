@@ -130,3 +130,11 @@ analysis freezes the exact-build definition and level-one stress-pool caller;
 its observation preserves the R498 pre-selection RED. The query v1 envelope,
 request fields, registry implementation, MCP server implementation, and their
 previously pinned byte hashes do not change.
+
+At root revision `0494375d74a4928573cf47672b6150a0ab894ed2`, the catalog
+advances additively to 186 contracts, analysis records, and observation
+projections. `trait_specific_interactions.0011` binds player as
+root/recipient/subject, requires a distinct actor plus the exact weak-slot,
+boolean-theme, and native `0/1/2` projection, and selects authored2/native1.
+Its exact-build definition, interaction caller, option effects, and R500 RED
+are available through the unchanged v1 read-only interfaces.
