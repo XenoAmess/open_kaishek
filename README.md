@@ -88,6 +88,7 @@ py tools/run_cli_smoke.py
 - [M1 / Phase 1 parser readiness 记录](docs/decisions/0004-m1-phase1-formal-readiness.md)
 - [许可证审计与迁移记录](docs/license-audit.md)
 - [开发流程与主线优先约定](docs/development-workflow.md)
+- [G2 Raiktor 策略 profile 兼容边界](docs/g2-raiktor-strategy-profile-compatibility.md)
 - [Stellaris 4.4.6 静态 profile 边界](docs/stellaris-4.4.6-profile.md)
 
 ## Readiness 边界
