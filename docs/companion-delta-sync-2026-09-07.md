@@ -1494,3 +1494,24 @@ focused validation passed the native projection fixture and the Python contract
 (`9 tests / 7 subtests`); this documentation-only companion sync does not repeat
 those tests or promote the still-RED live result. R526 and R527 were terminated,
 and no CK3 instance was launched by open_kaishek.
+
+### R529 scoreboard visible-entry parity correction
+
+Root commit `8cd9c1fa858709d7ca7b853cf0afe0007bce053d` corrects an internal
+semantic-canonicalization assumption using retained R529 live evidence. The
+product keeps its single HUD scoreboard entry visible beneath an open modal.
+The provider now accepts an open state only when exactly one active page and
+exactly one visible entry identify the same managed/received/system surface;
+closed still requires zero pages and exactly one entry. Missing, multiple or
+mismatched surfaces remain unavailable.
+
+This is `PROVIDER_PRIVATE_CANONICAL_SEMANTICS_CORRECTED /
+NO_PUBLIC_WIRE_SHAPE_OR_VERSION_DELTA`. The semantic byte position is unchanged;
+its research label changes from `visible_closed_entry_u8` to
+`visible_entry_u8`. Response fields, types, reasons, fingerprints, capability
+and tool names, endpoint, ACL, action semantics, dependency set and Operator MCP
+`1.1.0` remain unchanged. open_kaishek treats fingerprints and embedded state
+as target-owned data, so its Java/profile/adapter code needs no change. Focused
+upstream validation passed the native fixture and Python state/action contracts
+(`17 tests / 22 subtests`). R528 and R529 were terminated with cleanup GREEN;
+open_kaishek did not launch CK3 or repeat unrelated tests.
