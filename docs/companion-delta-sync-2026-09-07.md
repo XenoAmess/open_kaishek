@@ -1405,3 +1405,17 @@ fourth row omitted the exact game version beside its EXE SHA. Root commit
 `b1a272151ef4e313bf68dae1824ce63a6c09cc2b` adds that existing schema-3 build
 binding. This changes target activation validation only; the companion API and
 operator MCP contract remain unchanged.
+
+### R511 scoreboard-state `execute_step` conformance
+
+Root commit `5c206794e8eb73756b1dfc4eb833dc62521e9d3d` corrects the native
+`query-zhongguo-scoreboard-state-v1` mailbox parser to accept the transport it
+already advertises and receives: `type="execute_step"`. R511 proved the previous
+`type="command"` check rejected every real Python request before gameplay input;
+the neighboring scoreboard action parser already used `execute_step`.
+
+The compatibility verdict is `NO_PUBLIC_SCHEMA_OR_VERSION_DELTA /
+IMPLEMENTATION_CONFORMANCE_RESTORED`. Tool and capability names, request and
+response fields, ABI records, Operator MCP `1.1.0`, and downstream adapter APIs
+remain unchanged. open_kaishek therefore records the corrected upstream binding
+without adding consumer code or claiming the pending rebuilt-DLL live result.
