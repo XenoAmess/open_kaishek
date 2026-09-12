@@ -1455,3 +1455,22 @@ or machine binding changed, so open_kaishek needs no adapter code. The same root
 commit also limits the P2 promo scoreboard shot to one real open/visible proof;
 the complete two-surface matrix remains an independent root acceptance gate and
 does not change the companion interface.
+
+### R521 scoreboard missing-widget diagnostics
+
+Root commit `f1f6143dc099772438c2ca6db8d762030d416dfe` changes the existing
+`widget_not_instantiated` unavailable response so it retains the first-pass
+typed results for the fixed 15-widget allowlist. Located widgets keep
+`exists=true` and their read-only pointer/visibility probes; a missing identity
+returns `exists=false` with `widget_not_instantiated` on the dependent fields.
+The top-level status and reason stay unavailable, every readiness bit stays
+false, and no observation revision or action is published.
+
+This is `EXISTING_UNAVAILABLE_RESPONSE_DIAGNOSTICS_PRESERVED /
+NO_WIRE_SHAPE_OR_VERSION_DELTA`. The field set, types, enum, tool/capability
+names, endpoint, dependency set and Operator MCP `1.1.0` remain unchanged.
+open_kaishek forwards target-owned job results without normalizing the embedded
+scoreboard payload, so no Java or profile code changes are required. Focused
+upstream validation is the native missing-widget fixture plus the strict Python
+contract (`8 tests / 7 subtests`); open_kaishek does not repeat unrelated tests
+or claim the pending new-DLL live diagnosis.
