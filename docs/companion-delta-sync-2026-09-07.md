@@ -1862,3 +1862,34 @@ driver/service/MCP/live-harness tests pass normal/optimized `30/30`. Both new
 identity vectors remain `static-ready / live=false` pending one shared bounded
 paused read. This companion sync does not rerun root tests or launch CK3,
 recording, injector or desktop-input processes.
+
+### G2-M1 relationship entity-directory identity search MCP
+
+Root commit `e9670f40e75414a5b034fe62ffa62b5be7f66f41` adds the independent
+read-only MCP tool `ck3_search_entities_v1`. Its v1 request accepts the current
+public snapshot revision, one of four relationship filters, an optional
+CharacterID keyset cursor and a bounded page size. The response schema
+`xar.ck3.entity-directory/v1` discovers self, direct landed-vassal and adjacent
+external Province-holder identities from exactly one existing
+`campaign-root-context-v1` query. Component-level
+`available`/`unavailable`/`not_applicable` state keeps incomplete related-title
+and adjacent-holder liege observations explicit.
+
+This is `ROOT_PUBLIC_MCP_TOOL_ADDED /
+OPEN_KAISHEK_NO_ENTITY_DIRECTORY_CONSUMER`. Repository search confirms that
+open_kaishek has no non-documentation campaign-root/entity-directory caller and
+no closed response type for either root tool. Its separate target Operator MCP
+request/response envelopes, discovery and controls, Java profiles,
+dependencies, endpoints and version `1.1.0` remain unchanged. No runtime
+adapter or Java API change is required for callers that do not consume this
+new root-owned tool.
+
+The root entity-directory contract, service, MCP server and interface-document
+hashes are
+`3E27A64165FA5E0E993861858038A484104D85B8577F8DF4BB9ED0759E2BEC33`,
+`6FEE4193A5265CBC2F4A637BFF9CDD5FC68B6590E0D99118E2F88AE03F828C3A`,
+`8FF58414E53692B07BED0E870D6ACCF308F18AD3D124245F79372BF93E199AFB`
+and `470FD3FB635DE65FE20A2558A14B5F7C7134028175405B4E86A5D474FE1B51B5`.
+Root focused contract/service/official MCP SDK tests pass normal and optimized
+`19/19`. This compatibility sync does not repeat root tests or launch CK3,
+recording, injector or desktop-input processes.
