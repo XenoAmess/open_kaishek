@@ -1050,3 +1050,34 @@ machine path, or round identifier changed. Direct/managed R488 RED hashes are
 `50BBD120...65E3` / `06E7859B...F8EA`; cleanup is GREEN and both rounds are
 terminated. P1 remains `8/9`, and the final-video lock remains active until
 one new bounded attempt supplies `.120`.
+
+### Stage 10 target receipt v5 and calibration-tail bound
+
+Root commit `85be4c71a7aa2d0ba04cd87c385c14e15143624f` supersedes the
+45-day sufficiency claim after the sole R490 gameplay attempt. R490 passed the
+loader, exact-build native, mount, and error gates, then preserved target RED
+at its 45-game-day absolute deadline with B1 still active. Its live log proves
+that the valid common-superior bank close and pending/reopen entry occurred;
+there is no stale manager-calibration ticket, so this evidence does not
+establish a new product defect.
+
+The exact source uses `m142=1` and `m143=1`. The target now accounts for the
+authored 31-day pending watchdog and 30-day post-seal reopen, followed by the
+one-day player publication callback and five daily F tickets. The conservative
+path is B1 D+299 through Stage 10 `.120` at D+403, or 104 days. The action uses
+one 120-game-day absolute bound, leaving 16 days for scheduler granularity;
+it still does not reopen or replay the full B1 cycle and exposes no retry.
+
+The target-owned source kind is now
+`zg361_stage10_player_publication_source_v5`. It retains the v4 bindings and
+adds hash-bound R490 45-day RED evidence. Its fixed-tail object records the
+common-bank/calibration cycle days, pending and reopen delays, publication and
+F-ticket delays, the latest D+403 target, the 104-day required tail, and the
+120-day action cap. Focused root tests pass `9/9` in normal and optimized
+Python; no broad suite or CK3 rerun was used for the correction.
+
+Operator MCP remains `1.1.0`. Discovery, handoff, controls, transport, Java
+adapter, public live schema, native bridge, DLL, game files, launch settings,
+load order, endpoints, credentials, and portability requirements are
+unchanged. R489/R490 are terminated and cleanup is GREEN. P1 remains `8/9`,
+and the final-video lock remains active pending one v5-bound attempt.
