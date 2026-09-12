@@ -1738,3 +1738,28 @@ top-level field, tool/capability ID, profile, dependency, endpoint or Operator
 MCP `1.1.0` behavior changes. Root focused tests pass normal and optimized
 `27/27`; this documentation sync does not repeat them or launch CK3, recording,
 or desktop-input processes.
+
+### G2-M2 played-character gold and second material comparator
+
+Root commit `0d7ddc5761b0997101806b179a52585332720beb` adds an additive top-level
+`state_snapshot.state.played_character_gold` object with signed Q100000
+`raw/scale` fields. It reuses the exact-build player-character gold leaf already
+used by the root war-exit resource reader. The root Python driver accepts legacy
+snapshots without the field and preserves negative balances as valid debt.
+
+The existing `trait_specific.8001` analysis also gains a
+`xar.ck3.vanilla-event-choice-effect/v1` profile for native option 1:
+`add_gold = minor_gold_value`, with a strictly increasing
+`played_character_gold.raw` postcondition and an explicitly non-exact runtime
+delta. A root `ck3_auto_turn` result for that exact choice may now include
+additive `starting_played_character_gold` and `ending_played_character_gold`
+observations plus the existing material-postcondition envelope.
+
+This is `ROOT_ADDITIVE_STATE_AND_AUTO_TURN_FIELDS /
+OPEN_KAISHEK_PASS_THROUGH_COMPATIBLE`. Repository search confirms that
+open_kaishek has no closed Java state-snapshot record, does not call or parse
+root `ck3_auto_turn`, and treats event-analysis content as additive metadata.
+No Java API, profile, dependency, capability/tool ID, endpoint or Operator MCP
+`1.1.0` behavior changes. Root Release compile/link and native fixture are
+GREEN; focused Python normal/optimized tests are each `30/30`. This sync does
+not repeat those tests or launch CK3, recording, or desktop-input processes.

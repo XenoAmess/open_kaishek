@@ -151,3 +151,13 @@ non-material warning tooltip from its common-after variable write. Both use
 source-structured metadata rather than native/runtime-certified effect preview.
 The query request, top-level response fields, tool ID, registry/MCP server
 implementation hashes and Java compatibility profile remain unchanged.
+
+At root revision `0d7ddc5761b0997101806b179a52585332720beb`, the existing
+`trait_specific.8001` analysis gains a third additive
+`selected_choice_effect_profile`. Native option 1 records source-authored
+`add_gold = minor_gold_value`, marks its runtime amount non-exact because the
+value depends on monthly income, treasury and era, and publishes a strictly
+increasing played-character gold postcondition. This changes record content
+only: catalog counts, query request, top-level response fields, tool ID,
+registry/MCP server implementation hashes and Java compatibility profile stay
+unchanged.
