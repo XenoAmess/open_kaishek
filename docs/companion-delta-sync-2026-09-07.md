@@ -1306,3 +1306,21 @@ Root commit `fdf23f537d4238850154f85184f503ba63136a3d` adds the campaign-neutral
 The public inventory advances to 187 events and 290 portable blobs. Current source-index dataset is `FE3A1D84...F43DC`; manifest is `F2D15B19...039E1` and includes R502 RED `E797ABDD...A6A5A`. Root frozen production replay is `22/22` GREEN; focused normal/optimized validation and both offline byte checks are GREEN.
 
 The four MCP tool IDs, v1 schemas, fields, runtime interfaces, native bridge, DLL, game files, launch configuration, and dependencies remain unchanged. open_kaishek updates only provider/data hashes and compatibility records; it does not launch or control CK3. P1 remains `8/9`, and the final-video lock remains active.
+
+### Stage 10 same-process Python-contract resume
+
+Root commit `18647e7708622147d77852c0146f36d0c7071e45` adds
+`retry-stage10` to the target-owned Stage 10 operator. It is available only
+after a pre-selection vanilla-event RED while the same paused CK3 PID and
+bridge connection generation are retained. The repaired activation must keep
+the checkpoint, product tree, production projection, DLL, injector, game
+rules, pipes, directories, and round identity unchanged. The continuation
+retains the original interrupt ledger and absolute 120-game-day deadline; it
+does not start a new window and refuses a frame where input was attempted.
+
+Operator MCP remains `1.1.0`: controls are target-profile data, so no Java API,
+transport schema, provider pin, native bridge, dependency, endpoint, account,
+or machine path changes. The focused adapter test now discovers and forwards
+`status` / `run-stage10` / `retry-stage10` / `cleanup`, while still rejecting
+an unadvertised control; it passes `13/13`. No CK3 instance or final-video asset is touched. P1
+remains `8/9`, and the final-video lock remains active.

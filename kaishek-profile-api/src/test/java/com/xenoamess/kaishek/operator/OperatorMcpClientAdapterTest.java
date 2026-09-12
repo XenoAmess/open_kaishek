@@ -198,12 +198,13 @@ class OperatorMcpClientAdapterTest {
     }
 
     @Test
-    void stage10PlayerSubjectControlsRemainTargetProfileData() {
+    void stage10PlayerSubjectControlsIncludeBoundedContractRetry() {
         var target = OperatorMcpTarget.contractV11(
                 "endpoint-stage10", "target-stage10", "stage10-player-subject");
         var transport = new FakeTransport(target);
         transport.serverVersion = "1.1.0";
-        transport.controls = List.of("status", "run-stage10", "cleanup");
+        transport.controls = List.of(
+                "status", "run-stage10", "retry-stage10", "cleanup");
         var adapter = new OperatorMcpClientAdapter(target, transport);
 
         assertEquals(transport.controls, adapter.discoverControls());
@@ -219,10 +220,15 @@ class OperatorMcpClientAdapterTest {
                         "control_name", "run-stage10",
                         "request_id", "stage10-request-1"),
                 transport.lastControlArguments);
+        Map<String, Object> retryResponse = adapter.controlJob(
+                "job-id-fake", "retry-stage10", "stage10-request-2");
+
+        assertEquals("ACCEPTED", retryResponse.get("result"));
+        assertEquals("retry-stage10", transport.lastControlArguments.get("control_name"));
         assertThrows(
                 OperatorMcpContractException.class,
                 () -> adapter.controlJob(
-                        "job-id-fake", "retry-stage10", "stage10-request-2"));
+                        "job-id-fake", "resume-stage10", "stage10-request-3"));
     }
 
     @Test
