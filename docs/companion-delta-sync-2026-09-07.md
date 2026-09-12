@@ -1608,3 +1608,25 @@ recorded in `zg361-business-postconditions.md`. No open_kaishek code or version
 change is required, and runtime certification remains false until the root
 project obtains a live paused response. R552 is terminated; this compatibility
 sync launches no CK3 instance and touches no promotional media.
+
+### GEN-034-A measured campaign-dominance certificate v2
+
+Root commit `1d07460c91f640d222e036959c6b345a748569e4` adds the
+offline `raiktor-campaign-dominance-certificate-v2` producer. It consumes three
+unchanged paused snapshots around two consecutive existing
+`query-war-entry-assessments-v1` results and publishes only the measured
+actor/opponent power relation. The R471 evidence converts to
+`opponent_stronger` with player power `13075500000`, opponent power
+`16770900000` and native ratio `128262/100000`. The root receipt SHA-256 is
+`AB0DB5678F65631D63E5A54BA66B61A6F5956179C0A4D3970B78BEAC5E9E0569`.
+
+This is `ROOT_OFFLINE_PLANNER_ARTIFACT_SCHEMA_ADDED /
+NO_OPERATOR_MCP_OR_BRIDGE_WIRE_DELTA`. The new receipt and certificate are
+Python planner artifacts; they are not Operator MCP requests or responses and
+open_kaishek does not parse or forward them. Existing MCP tool names,
+capability IDs, native query fields, Java profiles, dependencies and Operator
+MCP `1.1.0` remain unchanged. The root three-way intake adds only an internal
+Python field retaining this certificate and keeps campaign forecast, exit
+utility, recommendation and action unavailable. No companion Java, schema,
+adapter or version change is required. Root focused tests pass normal and
+optimized `11/11`; this sync launches no CK3 process and repeats no root test.
