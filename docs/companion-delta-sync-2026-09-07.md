@@ -1474,3 +1474,23 @@ scoreboard payload, so no Java or profile code changes are required. Focused
 upstream validation is the native missing-widget fixture plus the strict Python
 contract (`8 tests / 7 subtests`); open_kaishek does not repeat unrelated tests
 or claim the pending new-DLL live diagnosis.
+
+### R527 scoreboard projection-state diagnostics
+
+Root commit `dedc8a5c0a9109de33df3cf31c9d3ec970e275e7` extends the same
+diagnostic-only treatment to `state_projection_unavailable`. When both typed
+widget passes and the ACL read succeed but the modal/page/entry relation cannot
+be projected, the unavailable response now retains those already decoded
+widget and ACL values. The top-level state remains unavailable, every readiness
+bit remains false, fingerprints and observation IDs remain unavailable, the
+revision remains zero, and no action or successful observation is published.
+
+This is `EXISTING_UNAVAILABLE_RESPONSE_DIAGNOSTICS_PRESERVED /
+NO_WIRE_SHAPE_OR_VERSION_DELTA`. The field set, types, reasons, capability and
+tool names, endpoint, dependency set and Operator MCP `1.1.0` are unchanged.
+open_kaishek already forwards the target-owned payload without interpreting
+these fields, so no Java, profile or adapter change is required. Upstream
+focused validation passed the native projection fixture and the Python contract
+(`9 tests / 7 subtests`); this documentation-only companion sync does not repeat
+those tests or promote the still-RED live result. R526 and R527 were terminated,
+and no CK3 instance was launched by open_kaishek.
