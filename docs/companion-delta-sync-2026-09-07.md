@@ -1929,6 +1929,47 @@ Root Release DLL build/link and direct reader/source-contract executables are
 GREEN; focused Python normal/optimized tests pass `35/35`. This sync launches
 no CK3, recording, injector or desktop-input process.
 
+### G2-M1 targeting-faction minimum alert extension
+
+Root commit `f39678f97d034058f43f02e49ce81bbfedd788fd` extends the existing
+`campaign-root-context-v1` response with nonnegative
+`player_targeting_faction_count`,
+`readiness.player_targeting_factions_ready`, typed failure
+`player_targeting_factions_unavailable`, and provenance
+`has_targeting_faction_trigger_rva=0x283FAE0`. The exact-build reader follows
+the stock trigger's `CCharacter+0x1B8 -> land_state+0x12C` count path,
+generation-revalidates the played Character and includes the count in the
+existing application-main double observation.
+
+The root `ck3_query_turn_bundle_v1` projects the value as
+`realm.targeting_factions.{count,threatened}` and
+`alerts.faction_threat`, with `realm_faction_alert_ready=true`. The minimum
+alert is threatened exactly when count is greater than zero. Faction identity,
+type, membership, power, discontent, demands and deadlines remain outside this
+slice; full bundle readiness remains false for health, council and partition.
+
+This is `ROOT_PUBLIC_CAMPAIGN_ROOT_V1_FIELD_AND_TURN_BUNDLE_BEHAVIOR_ADDED /
+OPEN_KAISHEK_NO_CONSUMER`. A fresh non-documentation repository search finds
+no campaign-root, entity-directory or turn-bundle caller or closed response
+type in open_kaishek. Its independent Operator MCP envelopes, target controls,
+Java profiles, dependencies, endpoints and version `1.1.0` remain unchanged,
+so no companion runtime or version edit is required.
+
+The root ABI, source contract, native header, reader, serializer, Python
+campaign-root contract, turn-bundle contract and interface-document hashes are
+`BD7AC5FCE12DA4D33627FDCF297E31421983EED488A46401E20395292A11B781`,
+`B043A8CEF0FAD0E1EFE3045547CF911A5AD96FC8DA448EA5EAD6A3BA52F587E6`,
+`89C71E85F4A3F880156602E8E92EF00493B7569EF31555EB4164234169A0F51D`,
+`57A9AF78253FDFA8243218109E4E14E515FA4858E95532F5EE56CFBD982695F3`,
+`9C3BFA72EB37D32281C0BAF00DC86CBFDD30A6F2E7D29BDB3C8AE917FA94C284`,
+`2B2DD17EC1CC904165577C7E02577CDEBC01E5943389D34D2566B2DE588CC5FF`,
+`5696D9E3A4AE1EC6A66693133C6408DCEEB44ED4CEB4AAA12BA4FD916CF6DB8F`
+and `02A2189EDEF2677FE7C8B5430769EA9861589276D5E1886AEDF11D60C64F24CE`.
+Root Release DLL build/link and direct reader/source-contract executables are
+GREEN; focused Python normal/optimized tests pass `40/40`. This companion sync
+does not repeat root tests or launch CK3, recording, injector or desktop-input
+processes.
+
 ### G2-M1 player domain capacity observation extension
 
 Root commit `9ed271f667dc78e8a654d938ef554d658c2b9465` extends
