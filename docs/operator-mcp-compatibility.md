@@ -101,9 +101,14 @@ schema or transport change is needed. Deployment profiles may add this job
 without compiling an account, machine path, CK3 round, or endpoint into the
 consumer. Root action/operator source SHA-256 values are
 `1E0052800E9941A493CBCDEFABEB9E6D0B0E4A75108AF4F0802CFE908DFC6DE8`
-and `757034BE5D2DB1E3E662524ACC6C4A6E2F4B0B5383BD54DC9A15C2C5FC627DCF`.
+and `E1A17728EA958EFBF16272ACCC532AD293A1F217A03211BA8A2CCFD7BE6673B9`.
 
 The root focused tests pass `4/4` in normal mode and `4/4` with Python `-O`.
 No companion test is repeated because the generic discovery/control consumer
 and its request/response schema are unchanged. Live source capture remains a
 root target responsibility.
+
+The first root no-launch preflight preserved a target-side lineage RED because
+the fourth row supplied an EXE SHA without the game version required by the
+existing schema-3 prefix. Root commit `b1a272151ef4e313bf68dae1824ce63a6c09cc2b`
+adds the exact version/SHA pair. Operator MCP `1.1.0` remains unchanged.

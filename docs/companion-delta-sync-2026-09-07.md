@@ -1390,7 +1390,7 @@ The root target adds a profile-owned `phase2-endgame-source` job with
 the R366 near-boundary input, stops on the first real `zg361we.356`, and reuses
 the canonical same-frame source capture and 4/4 registry builder. Action and
 operator source SHA-256 values are `1E005280...C6DE8` and
-`757034BE...27DCF`; focused root tests pass `4/4` in both normal and optimized
+`E1A17728...673B9`; focused root tests pass `4/4` in both normal and optimized
 Python.
 
 The existing operator MCP `1.1.0` compatibility layer already treats job names
@@ -1399,3 +1399,9 @@ Java API, schema, transport, native query, dependency, or version change.
 Operators on another machine can consume it through the same readiness,
 handoff, and control calls after that target's profile supplies its own paths
 and process gates. No CK3 instance was launched for this documentation sync.
+
+The first root no-launch preflight preserved a runtime-lineage RED because the
+fourth row omitted the exact game version beside its EXE SHA. Root commit
+`b1a272151ef4e313bf68dae1824ce63a6c09cc2b` adds that existing schema-3 build
+binding. This changes target activation validation only; the companion API and
+operator MCP contract remain unchanged.
