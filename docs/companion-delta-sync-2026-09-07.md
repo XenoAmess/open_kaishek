@@ -1806,3 +1806,31 @@ protocol is separate. No Java API, profile, dependency, request/response
 envelope, tool/capability ID, endpoint or Operator MCP `1.1.0` behavior changes.
 Root focused query/policy/planner tests pass normal/optimized `26/26`; this sync
 does not repeat them or launch CK3, recording, or desktop-input processes.
+
+### G2-M1 campaign-root direct landed-vassal identity extension
+
+Root commit `c602d9a78d3d3e7b5bb84ce9f6dce40119fd5447` extends the existing
+exact-build `campaign-root-context-v1` response with sorted, duplicate-free
+`direct_landed_vassal_character_ids` and the matching
+`readiness.direct_landed_vassals_ready` flag. The native reader admits only
+alive, generation-valid characters whose immediate-liege resolver points to
+the current player and whose primary title round-trips through the title
+storage. A failed observation returns the new typed reason
+`direct_landed_vassals_unavailable`; it does not publish a partial roster.
+
+This is `ROOT_PUBLIC_CAMPAIGN_ROOT_V1_FIELDS_ADDED /
+OPEN_KAISHEK_NO_CAMPAIGN_ROOT_CONSUMER`. Repository search confirms that
+open_kaishek neither invokes the root campaign-root MCP tool nor deserializes
+its response into a closed Java type. The independent Operator MCP request and
+response envelopes, target controls, Java profiles, dependencies and version
+`1.1.0` are unchanged. No Java API, runtime adapter or version edit is needed;
+clients that do not consume this separate root tool remain compatible.
+
+The root source-contract, Python contract and native reader hashes are
+`702DD120...F2F05`, `AB32B6D...CABD5` and `3AF34072...FBE2C8` respectively.
+Root Release DLL compile/link, native reader and source-contract fixtures are
+GREEN; focused Python driver/service/MCP/live-harness tests pass normal and
+optimized `30/30` each. The new vector remains `static-ready / live=false`
+because historical campaign-root artifacts predate it. This companion sync
+does not rerun root tests or launch CK3, recording, injector or desktop-input
+processes.
