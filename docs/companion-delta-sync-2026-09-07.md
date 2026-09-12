@@ -1437,3 +1437,21 @@ request/response fields, Operator MCP `1.1.0`, and open_kaishek adapter behavior
 remain unchanged. R513 remains a root-side capability RED until a fresh DLL
 returns an available paused response; open_kaishek does not promote that pending
 live result.
+
+### R515 scoreboard received-list compatibility
+
+Root commit `77fe813c48fa8ba5cc28968888bd6f22d16bf3df` aligns the existing
+`zhongguo-scoreboard-state-v1` response semantics with the product's two
+separate GUI gates. A valid `zg361_sb_r_01_char` makes the received list surface
+available; the current player is a received-self subject only when the complete
+self dossier is present and passes its existing identity/policy joins. Thus
+`surface_available=true / current_player_is_subject=false` is now a valid
+response, while subject true still requires the list surface and partial or
+inconsistent dossiers remain RED.
+
+This is `EXISTING_RESPONSE_SEMANTICS_CLARIFIED / NO_WIRE_SHAPE_OR_VERSION_DELTA`.
+No capability, MCP tool, field, enum, endpoint, dependency, Operator MCP version,
+or machine binding changed, so open_kaishek needs no adapter code. The same root
+commit also limits the P2 promo scoreboard shot to one real open/visible proof;
+the complete two-surface matrix remains an independent root acceptance gate and
+does not change the companion interface.
