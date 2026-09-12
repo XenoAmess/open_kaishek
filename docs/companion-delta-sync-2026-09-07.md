@@ -1834,3 +1834,31 @@ optimized `30/30` each. The new vector remains `static-ready / live=false`
 because historical campaign-root artifacts predate it. This companion sync
 does not rerun root tests or launch CK3, recording, injector or desktop-input
 processes.
+
+### G2-M1 campaign-root adjacent external Province-holder identity extension
+
+Root commit `0bc407df0d9e43d699cacde65c05034630647f50` extends the same exact-build
+`campaign-root-context-v1` response with sorted, duplicate-free
+`adjacent_external_province_holder_character_ids` and
+`readiness.adjacent_external_province_holders_ready`. The query scans the
+frozen Province array and native adjacency rows, resolves each Province holder,
+and excludes any holder whose native immediate-liege chain reaches the current
+player. It therefore publishes a player-subrealm boundary input without
+claiming that each row is already an independent ruler or top liege. A failed
+observation returns `adjacent_external_province_holders_unavailable`.
+
+This is `ROOT_PUBLIC_CAMPAIGN_ROOT_V1_FIELDS_ADDED /
+OPEN_KAISHEK_NO_CAMPAIGN_ROOT_CONSUMER`. Repository search reconfirms that
+open_kaishek has no non-documentation campaign-root caller or closed response
+type. Its independent Operator MCP request/response envelopes, target controls,
+Java profiles, dependencies, endpoints and version `1.1.0` remain unchanged;
+no runtime adapter or compatibility code is required.
+
+The root ABI, source-contract, native reader and Python contract hashes are
+`92C6C2BF...FC17EA`, `763EC7F7...5D880`, `05D4A703...C5A15B` and
+`7FB75696...D2FCE2` respectively. Root Release DLL compile/link and direct
+native reader/source-contract fixtures are GREEN; focused Python
+driver/service/MCP/live-harness tests pass normal/optimized `30/30`. Both new
+identity vectors remain `static-ready / live=false` pending one shared bounded
+paused read. This companion sync does not rerun root tests or launch CK3,
+recording, injector or desktop-input processes.
