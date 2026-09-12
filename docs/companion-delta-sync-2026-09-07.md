@@ -1338,5 +1338,32 @@ This narrows target-side acceptance semantics without changing the four
 advertised controls, Operator MCP `1.1.0`, Java API, schema, provider data,
 native bridge, DLL, game files, or dependencies. The prior focused adapter
 `13/13` result remains applicable; no Java test or CK3 launch is repeated for
-this documentation-only sync. P1 remains `8/9` until the retained action saves
-and acknowledges the terminal frame, and the final-video lock remains active.
+this documentation-only sync. P1 remains `8/9` until the retained action is
+converted into the formal terminal evidence item, and the final-video lock
+remains active. Event acknowledgement is explicitly not a business
+postcondition for this gate.
+
+### Stage 10 preserved-RED terminal evidence kind
+
+Root commit `15e62d88cfcbe66c32dce71842ebf9a93811f1fc` adds the
+path-independent offline extractor output kind
+`zg361_stage10_terminal_from_preserved_contract_red_v1`. It does not overwrite
+or relabel the original RED. A GREEN value is possible only when the hash-bound
+source proves a real paused `zg361mg.120` window, exact player-manager/owner
+saved scopes, the same snapshot/revision/native revision for event and provider
+queries, F `state=5 / active=false`, the retained 120-day deadline, exact CK3
+`1.19.0.6` provenance, and no target selection.
+
+The R504 output is `395FACA7...0014A` and embeds the immutable direct RED
+`28EB9B11...5F0B` plus activation `68CDC62E...3117`. Aggregate provider
+readiness remains recorded as false; the gate uses the narrower, already
+published contract fields `subject_binding_ready`, `case_identity_ready`, and
+`same_frame_ready`. This distinction prevents future distribution-lifecycle
+fields from blocking the Stage 10 F-terminal claim.
+
+The new kind is an evidence payload consumed by the existing P1 assembler. It
+does not add an MCP tool, Java endpoint, transport field, native query, DLL,
+game file, launch rule, dependency, account, or machine binding. No companion
+runtime implementation is required. R504 completed GREEN managed cleanup with
+an empty CK3 inventory; P1 assembly and the final-video lock remain under the
+root repository's authority.
