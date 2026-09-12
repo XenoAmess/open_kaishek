@@ -1367,3 +1367,18 @@ game file, launch rule, dependency, account, or machine binding. No companion
 runtime implementation is required. R504 completed GREEN managed cleanup with
 an empty CK3 inventory; P1 assembly and the final-video lock remain under the
 root repository's authority.
+
+### T0 P1 acceptance status
+
+Root commit `3d9f1f68f93d993e4ff2a672efde25db313217b1` records the
+completed P1 assembly. Final manifest `C8879E16...E1A5` passes the root
+repository's current nine-component runner gate with every check true and
+`missing=[]`; the runner gate is `309750CB...57D6` and the final status ledger
+is `08AA89BC...E0F2`. T0 P1 is therefore `GREEN / 9 of 9 / 100%`.
+
+This status transition adds no open_kaishek interface, schema, provider,
+dependency, or runtime change beyond the already synchronized preserved-RED
+evidence kind. Current round R504 and old round R503 remain terminated with an
+empty CK3 inventory. The root repository may now enter its ordered P2 sequence:
+promotion-tool version inspection, rebase/update of remote master, verification,
+then final-video creation and publication.
