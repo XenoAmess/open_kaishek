@@ -1017,3 +1017,36 @@ additive offline report field used by the target's v3 source receipt; it does
 not change Operator MCP 1.1, the native bridge, or a live query schema.
 Consumers that ignore unknown JSON fields remain compatible. R485/R486 have
 GREEN cleanup and are terminated; Stage 10 `.120` and P1 remain pending.
+
+### Stage 10 target receipt v4 and fixed-tail bound
+
+Root commit `e58c2229a12f097e2bae2a093226027ad7e6b876` preserves the
+R487/R488 30-day Stage 10 result as harness RED and replaces the unsupported
+deadline assumption. The exact checkpoint is already at player-manager B1
+D+299 with `zg361b1.102` scheduled one day later. Static product flow then
+requires `.103 +30d`, common settlement, manager publication, and the five
+F-ticket stages before `.120`; the target action therefore uses one absolute
+45-game-day bound.
+
+The target-owned source kind is now
+`zg361_stage10_player_publication_source_v4`. It retains every v3 binding and
+additionally requires the frozen R488 action evidence to prove initial
+`review_requested=false`, B1 active, and Central/PP inactive; it also binds a
+`ck3_scheduled_event_queue_offline_v1` report whose exact checkpoint, manager
+root, `zg361b1.102`, and `days_from_current=1` agree with the source. The
+receipt records the fixed-tail contract as D+299, `.102 +1d`, and maximum 45
+days. All fields remain target-side activation data validated before launch.
+
+The reusable scheduled-event inspector accepts caller-supplied save/Rakaly or
+melted-input paths, event prefix, root CharacterID, and output path. Its report
+binds source hashes, game/current/queued dates, event IDs, roots, and relative
+days; it is prelaunch-only and cannot claim live state. Focused target tests
+pass `10/10` in normal and optimized Python.
+
+Operator MCP remains `1.1.0`: discovery, handoff, `status` /
+`run-stage10` / `cleanup`, transport, and Java adapter are unchanged. No DLL,
+game file, startup setting, load order, endpoint, credential, account,
+machine path, or round identifier changed. Direct/managed R488 RED hashes are
+`50BBD120...65E3` / `06E7859B...F8EA`; cleanup is GREEN and both rounds are
+terminated. P1 remains `8/9`, and the final-video lock remains active until
+one new bounded attempt supplies `.120`.
