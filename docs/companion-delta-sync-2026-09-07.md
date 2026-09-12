@@ -1929,6 +1929,35 @@ Root Release DLL build/link and direct reader/source-contract executables are
 GREEN; focused Python normal/optimized tests pass `35/35`. This sync launches
 no CK3, recording, injector or desktop-input process.
 
+### G2-M1 same-frame turn bundle MCP
+
+Root commit `2dc2d4097fde8cdf0fbd7bd68daad72ab6dcc6cd` adds the public
+read-only MCP tool `ck3_query_turn_bundle_v1` and response schema
+`xar.ck3.turn-bundle/v1`. It combines one cached normalized state snapshot
+with exactly one existing campaign-root query only when snapshot ID,
+public/native revision, date and paused state agree. It publishes ruler, realm,
+primary-title succession, pending, war and alert domains with component-level
+`available`, `unavailable` and `not_applicable` states.
+
+The narrow alive/landless, realm-relationship and primary-title successor
+alerts are ready. Income, health, domain, council, factions and partition stay
+explicitly unavailable, so the root tool returns `status=partial` and full
+readiness false. This is `ROOT_PUBLIC_MCP_TOOL_ADDED /
+OPEN_KAISHEK_NO_TURN_BUNDLE_CONSUMER`. A non-documentation repository search
+finds no caller or closed type for the root campaign-root, entity-directory or
+turn-bundle tools. Operator MCP request/response envelopes, target controls,
+Java profiles, dependencies, endpoints and version `1.1.0` remain unchanged.
+
+The root turn-bundle contract, service, MCP server and interface-document
+hashes are
+`AD9E0F2BE74E3A5AE3881595CEFA5808D983DA5B80F034A09E9AD37BFBF586E4`,
+`DAAD1733FF0DAED35159F3D34300EE8435925BF5BE22B9575C18311A24D5C33F`,
+`5A682BEC6E94D74446B4D7B262EBEF18A4D4ECBEDC7798B247F171C98388C829`
+and `333BDDD3F82C0C984FA7206B3F437E84E81AC4C06B3E08C98E2BB576C144AD75`.
+Focused root contract/service/official MCP SDK tests pass normal/optimized
+`26/26`. This companion sync does not repeat root tests or launch CK3,
+recording, injector or desktop-input processes.
+
 ### G2-M1 primary-title succession observation extension
 
 Root commit `ec967a14f4106b159b2c5ab8cc1b7cce239dd7ce` extends
