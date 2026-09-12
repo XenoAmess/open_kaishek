@@ -1555,3 +1555,25 @@ names, request/response fields, dependency set and adapter forwarding behavior
 remain unchanged, so no companion code or version change is required. Root
 focused validation passed `74` tests plus the real v7 receipt/checkpoint hash
 check. This documentation sync does not repeat root tests or launch CK3.
+
+### R542 Phase2 source-restore process-local generation correction
+
+Root commit `67a9dad2109e850b82b920fdd28a9c134bc4a4b0` corrects the
+Python service consumer after the live R541-to-R542 canonical checkpoint
+restore. The source bytes, owner/player/date binding and replacement PID were
+all exact, while both CK3 processes validly reported connection generation
+`1` because that counter is local to each pipe-client process. The service now
+requires two positive, receipt-bound generations and uses the distinct PID
+pair as the cross-process ordering proof. Cleanup can also prove that every
+observed PID was reclaimed after choreography fails before semantic lineage is
+published; that cleanup-only result explicitly leaves restore semantics
+unproven and does not change the gameplay RED.
+
+This is `TARGET_CONSUMER_LIFECYCLE_SEMANTICS_CORRECTED /
+NO_OPERATOR_MCP_OR_BRIDGE_WIRE_DELTA`. Request and response fields, capability
+and tool names, endpoint, native DLL, dependency set and Operator MCP `1.1.0`
+remain unchanged. open_kaishek does not interpret this root-private service
+receipt or promo cleanup artifact, so no Java, profile, adapter or version
+change is required. Root focused tests passed (`5` restore tests and the promo
+capture contract), and the frozen R541-to-R542 cleanup report replays GREEN.
+open_kaishek did not launch CK3 or repeat unrelated validation.
