@@ -296,6 +296,30 @@ class OperatorMcpClientAdapterTest {
         assertThrows(OperatorMcpContractException.class, missingAdapter::getCapabilities);
     }
 
+    @Test
+    void rejectsFractionalIntegerContractFields() {
+        var target = OperatorMcpTarget.contractV11(
+                "endpoint-integer-contract", "target-integer", "job-integer");
+        var fractionalSchema = new FakeTransport(target);
+        fractionalSchema.serverVersion = "1.1.0";
+        fractionalSchema.controls = List.of("continue");
+        fractionalSchema.schemaVersion = 1.5;
+        var schemaAdapter = new OperatorMcpClientAdapter(target, fractionalSchema);
+
+        assertThrows(OperatorMcpContractException.class, schemaAdapter::getCapabilities);
+
+        var fractionalPayload = new FakeTransport(target);
+        fractionalPayload.serverVersion = "1.1.0";
+        fractionalPayload.controls = List.of("continue");
+        fractionalPayload.payloadBytes = 0.5;
+        var payloadAdapter = new OperatorMcpClientAdapter(target, fractionalPayload);
+
+        assertThrows(
+                OperatorMcpContractException.class,
+                () -> payloadAdapter.controlJob(
+                        "job-id-fake", "continue", "fractional-payload-request"));
+    }
+
     private static final class FakeTransport implements OperatorMcpTransport {
         private final OperatorMcpTarget target;
         private final List<String> tools = new ArrayList<>();
@@ -315,6 +339,8 @@ class OperatorMcpClientAdapterTest {
         private String lastEndpoint;
         private String serverInstanceId = "server-instance-fake";
         private String serverVersion = "1.0.0";
+        private Number schemaVersion = 1;
+        private Number payloadBytes = 7;
         private Map<String, Object> lastControlArguments;
 
         private FakeTransport(OperatorMcpTarget target) {
@@ -341,7 +367,7 @@ class OperatorMcpClientAdapterTest {
         private Map<String, Object> capabilities() {
             capabilitiesCalls++;
             Map<String, Object> result = new LinkedHashMap<>();
-            result.put("schema_version", 1);
+            result.put("schema_version", schemaVersion);
             result.put("server_version", serverVersion);
             result.put("server_instance_id", serverInstanceId);
             result.put("target_id", target.targetId());
@@ -366,7 +392,7 @@ class OperatorMcpClientAdapterTest {
             statusCalls++;
             assertEquals(target.targetId(), arguments.get("target_id"));
             return Map.of(
-                    "schema_version", 1,
+                    "schema_version", schemaVersion,
                     "server_instance_id", serverInstanceId,
                     "target_id", target.targetId(),
                     "identity", Map.of(
@@ -386,7 +412,7 @@ class OperatorMcpClientAdapterTest {
             assertEquals(target.jobName(), arguments.get("job_name"));
             boolean green = !forceRed && !started;
             return Map.ofEntries(
-                    Map.entry("schema_version", 1),
+                    Map.entry("schema_version", schemaVersion),
                     Map.entry("result", green ? "GREEN" : "RED"),
                     Map.entry("target_id", target.targetId()),
                     Map.entry("job_name", target.jobName()),
@@ -424,7 +450,7 @@ class OperatorMcpClientAdapterTest {
                 job.put("available_controls", controls);
             }
             return Map.of(
-                    "schema_version", 1,
+                    "schema_version", schemaVersion,
                     "result", "ACCEPTED",
                     "idempotent_replay", replay,
                     "target_id", target.targetId(),
@@ -444,7 +470,7 @@ class OperatorMcpClientAdapterTest {
                 throw new SimulatedLostResponse();
             }
             Map<String, Object> response = new LinkedHashMap<>();
-            response.put("schema_version", 1);
+            response.put("schema_version", schemaVersion);
             response.put("result", controlRed ? "RED" : "ACCEPTED");
             response.put("idempotent_replay", replay);
             response.put("target_id", target.targetId());
@@ -452,7 +478,7 @@ class OperatorMcpClientAdapterTest {
             response.put("job_id", arguments.get("job_id"));
             response.put("job_name", target.jobName());
             response.put("control_name", arguments.get("control_name"));
-            response.put("payload_bytes", 7);
+            response.put("payload_bytes", payloadBytes);
             if (controlRed) {
                 response.put("error", "BrokenPipeError: configured failure");
             }

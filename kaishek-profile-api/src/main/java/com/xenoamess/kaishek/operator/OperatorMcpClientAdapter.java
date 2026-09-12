@@ -1,5 +1,7 @@
 package com.xenoamess.kaishek.operator;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Collection;
 import java.util.List;
 import java.util.LinkedHashMap;
@@ -339,9 +341,9 @@ public final class OperatorMcpClientAdapter {
     }
 
     private static void requireSchema(Map<?, ?> response) {
-        Object version = response.get("schema_version");
-        if (!(version instanceof Number number)
-                || number.intValue() != OperatorMcpCapabilityProfile.PROFILE_SCHEMA_VERSION) {
+        BigInteger version = requireInteger(response, "schema_version");
+        if (!version.equals(BigInteger.valueOf(
+                OperatorMcpCapabilityProfile.PROFILE_SCHEMA_VERSION))) {
             throw contract("response schema_version is not 1");
         }
     }
@@ -368,9 +370,20 @@ public final class OperatorMcpClientAdapter {
     }
 
     private static void requireNonNegativeInteger(Map<?, ?> response, String field) {
-        Object value = response.get(field);
-        if (!(value instanceof Number number) || number.longValue() < 0) {
+        if (requireInteger(response, field).signum() < 0) {
             throw contract(field + " is not a non-negative integer");
+        }
+    }
+
+    private static BigInteger requireInteger(Map<?, ?> response, String field) {
+        Object value = response.get(field);
+        if (!(value instanceof Number number)) {
+            throw contract(field + " is not an integer");
+        }
+        try {
+            return new BigDecimal(number.toString()).toBigIntegerExact();
+        } catch (ArithmeticException | NumberFormatException exception) {
+            throw contract(field + " is not an integer");
         }
     }
 

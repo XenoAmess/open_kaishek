@@ -36,7 +36,16 @@ def run(root: Path, command: list[str]) -> None:
 def main() -> int:
     root = Path(__file__).resolve().parents[1]
     target = root / "kaishek-cli" / "target"
-    jars = sorted(target.glob("kaishek-cli-*.jar"))
+    # Maven Shade replaces the canonical artifact, but on Windows an
+    # incremental package can leave its intermediate ``-shaded`` JAR beside
+    # the final JAR.  Select the artifact Maven exposes for install/deploy;
+    # treating that harmless intermediate as a second candidate made the
+    # documented package -> smoke workflow fail spuriously.
+    jars = sorted(
+        jar
+        for jar in target.glob("kaishek-cli-*.jar")
+        if not jar.stem.endswith("-shaded")
+    )
     if len(jars) != 1:
         fail(f"expected exactly one packaged CLI JAR, found {len(jars)}: {jars}")
 

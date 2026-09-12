@@ -51,6 +51,14 @@ Quarkus 的 CLI。另有一条明确标注为 synthetic 的 014 纵向夹具走�
 要求 JDK 21（`--release 21`）和 Maven 3.6.3 或更高版本。所有命令都从本仓库根目录执行：
 
 ```powershell
+py tools/run_static_acceptance.py
+```
+
+这是仓库自有离线验收的推荐入口，会依次执行 metadata、Maven/JUnit、Python domain、
+standalone parser 和 packaged CLI 检查；它不启动 CK3，也不扫描外部 corpus。首次构建或本机
+尚未缓存 Maven 依赖时可用 `--online`。需要单独运行某一层时使用下面的组成命令：
+
+```powershell
 mvn -o -ntp clean test
 mvn -o -ntp -DskipTests package
 
@@ -88,6 +96,7 @@ py tools/run_cli_smoke.py
 - [M1 / Phase 1 parser readiness 记录](docs/decisions/0004-m1-phase1-formal-readiness.md)
 - [许可证审计与迁移记录](docs/license-audit.md)
 - [开发流程与主线优先约定](docs/development-workflow.md)
+- [2026-09-12 深度审计与有界优化](docs/open-kaishek-deep-audit-and-optimization-2026-09-12.md)
 - [G2 Raiktor 策略 profile 兼容边界](docs/g2-raiktor-strategy-profile-compatibility.md)
 - [Stellaris 4.4.6 静态 profile 边界](docs/stellaris-4.4.6-profile.md)
 
