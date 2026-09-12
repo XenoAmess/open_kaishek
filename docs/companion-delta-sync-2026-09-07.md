@@ -1153,8 +1153,9 @@ The first production consumer used R494's `1068.1.1` single-player autosave.
 The topology report is `3F8EA14B...0A69`, and the discovery report is
 `5F79A423...4289`: 18 B1 manager roots remain, with 11 carrying aligned
 subject, processing, and exact-tuple domains. Target manager `27181` is the
-next offline-qualified source candidate with `27181 -> 32904`, case `5/5`,
-five state-7 subjects, and five `.122` callbacks due in 30 days. Exact-build
+next offline-qualified source candidate with `27181 -> 36354`, case `5/5`,
+five state-7 subjects, seven direct landed vassals, and five `.122` callbacks
+due in 30 days. Exact-build
 zero-time player switching, campaign-root confirmation, and MCP-native save
 are still required before the target can issue a replacement receipt.
 
@@ -1165,3 +1166,36 @@ endpoints, credentials, and cleanup protocol are unchanged. Focused discovery
 tests pass `2/2` in normal and optimized Python. No CK3 process or Java suite
 was needed for the compatibility record. R493/R494 are terminated, P1 remains
 `8/9`, and the final-video lock remains active.
+
+### Managed-autosave admission for Stage 10 source capture
+
+Root commit `8ba5090e5dc913c66548793bcfd4fa8c62361730` adds an alternate,
+mutually exclusive source admission to the target-owned Stage 10 source-capture
+activation. `source_managed_autosave_provenance` replaces, rather than combines
+with, the legacy `source_live_qualification` and
+`source_checkpoint_provenance` fields for this route. Its payload kind is
+`zg361_stage10_managed_autosave_provenance_v1`; successful source evidence now
+also records `source_admission_kind` as either `managed-autosave` or
+`legacy-live-qualified-checkpoint`.
+
+The managed provenance hash-binds the autosave, its source activation, loader
+GREEN, the fail-closed scenario RED that ended the source session, a
+`ck3_character_scope_discovery_offline_v1` report, and a
+`ck3_scheduled_event_queue_offline_v1` report. Validation proves that the
+autosave is the source activation's own `state_directory/profile/last_save.ck3`,
+that exact-build and product hashes match, and that the candidate's subject and
+processing lists form one nonempty exact B1 tuple with one `.122 +30d` entry
+per subject. Passing admission does not replace the next exact-build zero-time
+player switch, campaign-root query, or MCP-native save.
+
+The real R494 input validates GREEN with source player `29037`, target manager
+`27181`, immediate liege `36354`, seven direct landed vassals, and five exact
+B1 subjects at case `5/5`. This corrects the previous section's `32904` target
+edge and its conflation of the seven-vassal topology with the five-subject B1
+roster. Focused normal and optimized source-capture tests pass `5/5`; no CK3
+process or broad suite was used for this compatibility update.
+
+Public Operator MCP remains `1.1.0`. Discovery, handoff, control names, Java
+adapter, live query schema, native bridge, DLL, game files, launch settings,
+load order, endpoint, credentials, and cleanup protocol are unchanged. P1
+remains `8/9`, and the final-video lock remains active.
