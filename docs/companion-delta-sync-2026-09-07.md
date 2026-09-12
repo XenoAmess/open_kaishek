@@ -1535,3 +1535,23 @@ the target-owned state and fingerprint without interpreting modal routing, so
 no Java/profile/adapter change is required. Focused upstream native and Python
 state/action contracts pass; R530/R531 are terminated with cleanup GREEN, and
 open_kaishek launched no CK3.
+
+### R539 Phase2 promo player-manager source route
+
+Root commit `9b38bd4060e61e64257a8e3548281286afbfaae5` replaces the final
+video capture runner's stale AI-owned B1 manager span with the already accepted
+player-manager Stage 10 route. The root-only CLI adds
+`--phase2-manager-source-receipt`; its producer context carries a normalized,
+hash-bound `zg361_stage10_player_publication_source_v7` receipt. The span
+restores the real player-manager checkpoint, runs the bounded B1 publication
+tail, verifies the immediate-superior owner/player-manager subject F case at
+`state=5 / active=false`, and retains `zg361mg.120` until the clean hold ends.
+
+This is `TARGET_CAPTURE_ORCHESTRATION_INPUT_ADDED /
+NO_OPERATOR_MCP_OR_BRIDGE_WIRE_DELTA`. The option belongs to the root Python
+acceptance process and is not an open_kaishek MCP tool, endpoint, profile,
+schema, or Java argument. The existing Operator MCP `1.1.0`, native capability
+names, request/response fields, dependency set and adapter forwarding behavior
+remain unchanged, so no companion code or version change is required. Root
+focused validation passed `74` tests plus the real v7 receipt/checkpoint hash
+check. This documentation sync does not repeat root tests or launch CK3.
