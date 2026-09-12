@@ -1382,3 +1382,20 @@ evidence kind. Current round R504 and old round R503 remain terminated with an
 empty CK3 inventory. The root repository may now enter its ordered P2 sequence:
 promotion-tool version inspection, rebase/update of remote master, verification,
 then final-video creation and publication.
+
+### P2 bounded endgame-source operator compatibility
+
+The root target adds a profile-owned `phase2-endgame-source` job with
+`status / run-source / cleanup`. Its action enforces a 30-game-day maximum from
+the R366 near-boundary input, stops on the first real `zg361we.356`, and reuses
+the canonical same-frame source capture and 4/4 registry builder. Action and
+operator source SHA-256 values are `1E005280...C6DE8` and
+`757034BE...27DCF`; focused root tests pass `4/4` in both normal and optimized
+Python.
+
+The existing operator MCP `1.1.0` compatibility layer already treats job names
+and advertised controls as target-owned data. The new job therefore needs no
+Java API, schema, transport, native query, dependency, or version change.
+Operators on another machine can consume it through the same readiness,
+handoff, and control calls after that target's profile supplies its own paths
+and process gates. No CK3 instance was launched for this documentation sync.

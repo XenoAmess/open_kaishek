@@ -83,3 +83,27 @@ target bootstrap, CK3 launch, or promotional-video action.
 - Portability literal audit found no configured operator account, R-number,
   sandbox account or Windows absolute path in the new client/profile code.
 - No CK3 process was started or attached and no companion/P2 file was changed.
+
+## Phase-2 bounded endgame-source job
+
+The root target now defines a reusable `phase2-endgame-source` job whose
+advertised controls are `status`, `run-source`, and `cleanup`. Its frozen
+activation binds the product tree, code commit, exact game build, bridge,
+near-boundary checkpoint, three-row source prefix, owner/date, and an enforced
+maximum of 30 game days. The action stops on the first real `zg361we.356` and
+then delegates same-frame save and 4/4 registry assembly to the existing source
+capture primitive.
+
+This is a new target profile job and control name, not a change to operator MCP
+contract `1.1.0`. `OperatorMcpClientAdapter` already discovers target-owned
+`job_controls` and sends only an advertised control identifier, so no Java
+schema or transport change is needed. Deployment profiles may add this job
+without compiling an account, machine path, CK3 round, or endpoint into the
+consumer. Root action/operator source SHA-256 values are
+`1E0052800E9941A493CBCDEFABEB9E6D0B0E4A75108AF4F0802CFE908DFC6DE8`
+and `757034BE5D2DB1E3E662524ACC6C4A6E2F4B0B5383BD54DC9A15C2C5FC627DCF`.
+
+The root focused tests pass `4/4` in normal mode and `4/4` with Python `-O`.
+No companion test is repeated because the generic discovery/control consumer
+and its request/response schema are unchanged. Live source capture remains a
+root target responsibility.
