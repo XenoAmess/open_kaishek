@@ -1893,3 +1893,38 @@ and `470FD3FB635DE65FE20A2558A14B5F7C7134028175405B4E86A5D474FE1B51B5`.
 Root focused contract/service/official MCP SDK tests pass normal and optimized
 `19/19`. This compatibility sync does not repeat root tests or launch CK3,
 recording, injector or desktop-input processes.
+
+### G2-M1 related-character title and realm identity extension
+
+Root commit `13d616baa7be6cadcd7b2c6fa5267d2ef6c65c01` extends the existing
+`campaign-root-context-v1` response with sorted
+`related_character_contexts` and
+`readiness.related_character_contexts_ready`. The vector exactly covers the
+union of direct landed-vassal and adjacent external Province-holder IDs. Each
+row carries its source relationship role, native primary title/tier,
+legal-null capital, immediate/top liege and independent state. Failure in any
+row returns typed `related_character_contexts_unavailable` for the whole frame.
+
+The root-owned `ck3_search_entities_v1` tool now projects those same-frame
+values, so primary-title and top-liege component completeness becomes true for
+its current relationship scope. Adjacent holders retain their boundary source
+role while native top liege supplies the canonical containing-realm identity;
+the change does not claim that every holder is an independent ruler.
+
+This is `ROOT_PUBLIC_CAMPAIGN_ROOT_V1_FIELDS_AND_ENTITY_COMPONENTS_ADDED /
+OPEN_KAISHEK_NO_CONSUMER`. A fresh non-documentation repository search finds no
+campaign-root/entity-directory caller or closed response type in open_kaishek.
+The separate Operator MCP request/response envelopes, target controls, Java
+profiles, dependencies, endpoints and version `1.1.0` remain unchanged. No
+companion runtime code or version edit is required.
+
+The root ABI, source contract, Python campaign-root contract,
+entity-directory contract and MCP server hashes are
+`1081A3C386252918133DF40AD2A31C7008B6E833D36DEA1F42D17BDA3DD83A94`,
+`5620BD34ACA871BAFFDB08E2902AFCD3D54CA119564EDFD26BC5D02BFEACCF4A`,
+`E94CFE32C91A3CF1DC62E8DD2EFF37C2C3A1659781DFE925960222B16D88D90A`,
+`70DD4A84ADC94E937D3BCE85CD4262BEC0BBC523EAB444C143EF66818C3ED9BC`
+and `8FF58414E53692B07BED0E870D6ACCF308F18AD3D124245F79372BF93E199AFB`.
+Root Release DLL build/link and direct reader/source-contract executables are
+GREEN; focused Python normal/optimized tests pass `35/35`. This sync launches
+no CK3, recording, injector or desktop-input process.
