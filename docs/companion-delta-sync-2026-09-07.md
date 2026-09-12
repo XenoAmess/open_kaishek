@@ -1784,3 +1784,25 @@ implementation hashes, Java profiles, dependencies, endpoint and Operator MCP
 normal/optimized `25/25`; stale record-count assertions were corrected and
 their six focused modules pass `45/45`. This compatibility sync launches no
 CK3, recording, or desktop-input process.
+
+### G2-M2 bounded campaign objective and ordinal utility profiles
+
+Root commit `dbd9a16b639c715dd95be999d35919477b3a3061` adds
+`xar.ck3.vanilla-event-campaign-utility/v1` metadata to the existing analyses
+for `tgp_travel_events.0030`, `trait_specific.8001`, and
+`death_management.1007`. Each profile records a bounded objective, selected
+ordinal rank, discrete utility facts and source-reviewed alternatives. The two
+multi-option events rank native option 1 first; the heir-death event is marked
+as the sole legal route. Cross-event numeric score remains null and calibration
+remains unavailable.
+
+The root registry decision may now carry additive `campaign_utility_ready` and
+`campaign_utility_profile` fields, and root `ck3_auto_turn` plans may include
+`event_campaign_utility`. This is
+`ROOT_ADDITIVE_ANALYSIS_AND_AUTO_TURN_FIELDS /
+OPEN_KAISHEK_PASS_THROUGH_COMPATIBLE`. open_kaishek neither deserializes
+analysis subfields nor calls/parses root `ck3_auto_turn`; its own target job
+protocol is separate. No Java API, profile, dependency, request/response
+envelope, tool/capability ID, endpoint or Operator MCP `1.1.0` behavior changes.
+Root focused query/policy/planner tests pass normal/optimized `26/26`; this sync
+does not repeat them or launch CK3, recording, or desktop-input processes.

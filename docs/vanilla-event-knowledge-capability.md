@@ -171,3 +171,12 @@ tooltip. The companion's exact-key direct planner consumer is internal and
 does not alter this query. Catalog counts, request and top-level response
 fields, tool ID, registry/MCP server implementation hashes and Java profile
 remain unchanged.
+
+At root revision `dbd9a16b639c715dd95be999d35919477b3a3061`, the existing
+analyses for `.0030`, `.8001`, and `.1007` gain additive
+`xar.ck3.vanilla-event-campaign-utility/v1` profiles. They expose bounded
+objectives and ordinal source-reviewed comparisons while deliberately keeping
+the cross-event numeric score null and calibration unavailable. These are
+record-content fields beneath `analysis`; catalog counts, query request and
+top-level response fields, tool ID, registry/MCP server implementation hashes
+and Java compatibility profile remain unchanged.
