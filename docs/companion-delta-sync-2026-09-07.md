@@ -1929,6 +1929,45 @@ Root Release DLL build/link and direct reader/source-contract executables are
 GREEN; focused Python normal/optimized tests pass `35/35`. This sync launches
 no CK3, recording, injector or desktop-input process.
 
+### G2-M1 player monthly-income observation extension
+
+Root commit `e16d179db49d8613ff0576d7e7b1dff4001b8e4d` extends
+`campaign-root-context-v1` with signed Q100000
+`player_monthly_gold_income` and
+`readiness.player_monthly_gold_income_ready`. It reuses the exact-build
+`0x28DBE90` complete evaluator already proven by the root war-exit observer,
+requires its caller-owned output pointer, generation-revalidates the played
+Character, and includes the value in the existing application-main double
+observation. The known lagging `CCharacter` extension cache at `+0x2B0` is not
+a readiness source. Call or identity/value drift returns whole-frame
+`player_monthly_gold_income_unavailable`.
+
+The root `ck3_query_turn_bundle_v1` now projects the income value and sets
+`ruler_resources_ready` only when the cached normalized snapshot also carries
+valid current gold. Full readiness remains false for health, domain, council,
+faction and partition. The root native-driver mirror also now carries the
+already existing ordered primary-title succession vector.
+
+This is `ROOT_PUBLIC_CAMPAIGN_ROOT_V1_FIELD_AND_TURN_BUNDLE_BEHAVIOR_ADDED /
+OPEN_KAISHEK_NO_CONSUMER`. A fresh non-documentation search finds no caller or
+closed response type for the root campaign-root, entity-directory or
+turn-bundle tools in open_kaishek. Its independent Operator MCP envelopes,
+target controls, Java profiles, dependencies, endpoints and version `1.1.0`
+remain unchanged, so no companion runtime or version edit is required.
+
+The root ABI, source contract, Python campaign-root contract, turn-bundle
+contract, service, MCP server and income-interface document hashes are
+`DAF80B47722DE7283F0E92D68B15F6070AC9D40C04259980C7C28EC31E945403`,
+`1C345CBB882E4B63DE3F4C13857845B58BC6C0B5D4AFDF5AE2B88311D20EE653`,
+`EFCBD6E608CE4F254C4DE0E90722028277DB901BD45C6216D2C8A9C102004397`,
+`741D7B8CE664C98C23E8944B24B3C41C09DEF240C02DBCD7E40C506C882DC68A`,
+`31A0A081870D4BFDF672CF291A9D25F00D8FDEE887ADD93A21EAD3B958902789`,
+`5A682BEC6E94D74446B4D7B262EBEF18A4D4ECBEDC7798B247F171C98388C829`
+and `D3D06B62A3621D30B94A9BEB22A9650A5365E7D52DEBCA4F0DDBB32567C35F8A`.
+Root Release DLL build/link, direct native executables and focused Python
+normal/optimized suites are GREEN. This sync repeats no root test and launches
+no CK3, recording, injector or desktop-input process.
+
 ### G2-M1 same-frame turn bundle MCP
 
 Root commit `2dc2d4097fde8cdf0fbd7bd68daad72ab6dcc6cd` adds the public
