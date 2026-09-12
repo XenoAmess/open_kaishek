@@ -1136,3 +1136,32 @@ load order, endpoints, credentials, and cleanup remain unchanged. Focused
 character-scope tests pass `1/1` and v6 Operator tests pass `4/4`, each in
 normal and optimized Python. P1 remains `8/9` and the final-video lock remains
 active until one v6-bound live attempt closes Stage 10.
+
+### Character-scope root discovery and R494 alternate source intake
+
+Root commit `769a5b75d5d9d7290bf30c3e6ff1d280abac5c62` adds an
+additive discovery mode to the portable character-scope inspector. Callers
+choose exactly one of `--root-character-id` and `--discover-root-variable`.
+The original point-query output remains `ck3_character_scope_offline_v1`;
+discovery emits `ck3_character_scope_discovery_offline_v1`, enumerates every
+Character root carrying the requested variable, and applies the same
+caller-selected root-variable, persistent-list, and referenced-character
+reads. Both modes remain read-only, hash-bound, prelaunch-only, and independent
+of an operator, machine, account, credential, or CK3 round.
+
+The first production consumer used R494's `1068.1.1` single-player autosave.
+The topology report is `3F8EA14B...0A69`, and the discovery report is
+`5F79A423...4289`: 18 B1 manager roots remain, with 11 carrying aligned
+subject, processing, and exact-tuple domains. Target manager `27181` is the
+next offline-qualified source candidate with `27181 -> 32904`, case `5/5`,
+five state-7 subjects, and five `.122` callbacks due in 30 days. Exact-build
+zero-time player switching, campaign-root confirmation, and MCP-native save
+are still required before the target can issue a replacement receipt.
+
+This is an additive target-side offline CLI/data-kind change. Operator MCP
+remains `1.1.0`; discovery, handoff and control commands, Java adapter, public
+live schema, native bridge, DLL, game files, launch settings, load order,
+endpoints, credentials, and cleanup protocol are unchanged. Focused discovery
+tests pass `2/2` in normal and optimized Python. No CK3 process or Java suite
+was needed for the compatibility record. R493/R494 are terminated, P1 remains
+`8/9`, and the final-video lock remains active.
