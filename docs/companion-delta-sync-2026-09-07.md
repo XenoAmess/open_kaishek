@@ -1108,3 +1108,31 @@ the repaired product tree. Focused B1 runtime tests pass `76/76` in both normal
 and optimized Python; no additional CK3 run or broad suite was used for the
 repair. R491/R492 are terminated, cleanup is GREEN, P1 remains `8/9`, and the
 final-video lock remains active.
+
+### Stage 10 target receipt v6 and reusable character-scope evidence
+
+Root commit `0b38d654f37f4e96ac77597f7ac54a1e18d603e4` publishes the
+path-neutral `ck3_character_scope_offline_v1` asset. Callers provide either a
+save plus Rakaly or an already melted save, a root CharacterID, selected root
+variables, persistent-list names, and referenced-character variables. The
+report preserves its input hash, game version, raw list items, character
+liveness, and typed variable identities. It carries no fixed account, machine
+path, target round, or credential, and remains prelaunch-only.
+
+The target now accepts only
+`zg361_stage10_player_publication_source_v6`. It separates the historical
+source product tree from the repaired launch tree and hash-binds the R492
+120-day product RED, live debug log, exact-roster report, and repair contract.
+The validator independently reconstructs the current-manager and foreign-case
+domains, checks all 40 RED observations, and confirms the seven publication
+and ten compaction-failure log anchors. The real receipt is
+`E363D5EE...ACF8`, the character-scope report is `74BF50BB...B328`, and the
+repaired product tree is `C428C42B...B5DC`.
+
+This is a target admission/data-format change only. Operator MCP remains
+`1.1.0`; discovery, handoff, `status` / `run-stage10` / `cleanup`, Java
+adapter, public live schema, native bridge, DLL, game files, launch settings,
+load order, endpoints, credentials, and cleanup remain unchanged. Focused
+character-scope tests pass `1/1` and v6 Operator tests pass `4/4`, each in
+normal and optimized Python. P1 remains `8/9` and the final-video lock remains
+active until one v6-bound live attempt closes Stage 10.
