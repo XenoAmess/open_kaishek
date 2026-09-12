@@ -1653,3 +1653,23 @@ capability IDs, Java profiles, dependencies, forwarding behavior and Operator
 MCP `1.1.0` are unchanged. No companion code, schema or version change is
 required. Root focused tests pass normal and optimized `30/30`; this sync does
 not repeat them and launches no CK3 process.
+
+### G2-M2 additive played-character stress observation
+
+Root commit `a9415fbbda3671aebf6c0f207743c89d21da7ef4` adds
+`state_snapshot.state.played_character.stress_points` to the root native
+producer. The value is a non-negative exact-build integer read from the same
+generation-checked character-extension leaf already used by war-exit resource
+observation. The root Python consumer treats the field as additive: current
+native producers emit it for an existing played character, while legacy
+fixtures that omit it remain valid.
+
+This is `ROOT_ADDITIVE_STATE_SNAPSHOT_FIELD /
+OPEN_KAISHEK_PASS_THROUGH_COMPATIBLE`. open_kaishek does not deserialize the
+generic `played_character` object into a closed Java record, and no profile or
+adapter selects fields from that object. Existing Operator MCP requests,
+responses, tool and capability IDs, forwarding behavior, dependencies and
+version `1.1.0` remain unchanged. No Java, schema or version edit is required.
+Root validation built and linked the Release DLL, ran the native game-access
+fixture GREEN, and passed normal/optimized Python field tests `2/2`; this
+companion sync does not repeat those tests or launch CK3.
