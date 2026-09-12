@@ -1324,3 +1324,19 @@ or machine path changes. The focused adapter test now discovers and forwards
 `status` / `run-stage10` / `retry-stage10` / `cleanup`, while still rejecting
 an unadvertised control; it passes `13/13`. No CK3 instance or final-video asset is touched. P1
 remains `8/9`, and the final-video lock remains active.
+
+Root follow-up `4791a3eee80b8c516d72b2fd5e08ba4ace3df0cb`
+also admits a pre-selection target-event postcondition RED. Current round R504
+reached `zg361mg.120` with the exact player-manager/owner topology and native F
+`state=5 / active=false`, but the Python action had incorrectly required the
+provider's aggregate readiness, including unrelated future distribution
+settlement. The repaired action requires only same-frame subject binding, case
+identity, and the terminal F fields. The same PID, connection generation,
+loaded-input, no-reselection, and original-deadline constraints remain intact.
+
+This narrows target-side acceptance semantics without changing the four
+advertised controls, Operator MCP `1.1.0`, Java API, schema, provider data,
+native bridge, DLL, game files, or dependencies. The prior focused adapter
+`13/13` result remains applicable; no Java test or CK3 launch is repeated for
+this documentation-only sync. P1 remains `8/9` until the retained action saves
+and acknowledges the terminal frame, and the final-video lock remains active.
