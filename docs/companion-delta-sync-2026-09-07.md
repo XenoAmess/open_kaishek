@@ -1419,3 +1419,21 @@ IMPLEMENTATION_CONFORMANCE_RESTORED`. Tool and capability names, request and
 response fields, ABI records, Operator MCP `1.1.0`, and downstream adapter APIs
 remain unchanged. open_kaishek therefore records the corrected upstream binding
 without adding consumer code or claiming the pending rebuilt-DLL live result.
+
+### R513 scoreboard GUI dispatch-context conformance
+
+Root commit `32ce260476c9c653badc87852729a1f6289f48ce` fixes the next real
+scoreboard provider RED exposed after R511 transport acceptance. The read-only
+state resolver had returned the `third+0x3D0` owner-lookup host as its GUI
+dispatch context, then incorrectly read the modal vector at that host's
+`+0x290/+0x29C`. The exact action dispatcher and frozen ABI place that vector on
+the third GUI-chain object; only top-level owner lookup follows
+`third+0x3D0 -> +0x08`.
+
+The root fix separates those identities and adds a distinct-address native
+fixture. This is `NO_PUBLIC_SCHEMA_OR_VERSION_DELTA /
+NATIVE_IMPLEMENTATION_CONFORMANCE_RESTORED`: MCP tool names, capability names,
+request/response fields, Operator MCP `1.1.0`, and open_kaishek adapter behavior
+remain unchanged. R513 remains a root-side capability RED until a fresh DLL
+returns an available paused response; open_kaishek does not promote that pending
+live result.
