@@ -1929,6 +1929,45 @@ Root Release DLL build/link and direct reader/source-contract executables are
 GREEN; focused Python normal/optimized tests pass `35/35`. This sync launches
 no CK3, recording, injector or desktop-input process.
 
+### G2-M1 player domain capacity observation extension
+
+Root commit `9ed271f667dc78e8a654d938ef554d658c2b9465` extends
+`campaign-root-context-v1` with `player_domain_size`,
+`player_domain_limit`, `readiness.player_domain_ready`, typed failure
+`player_domain_unavailable`, and provenance RVAs `0x260BA50` / `0x260BA20`.
+The exact-build reader calls the stock `Character.GetDomainSize` and
+`Character.GetDomainLimit` cores, generation-revalidates the played Character
+after both calls, and includes both integers in the existing application-main
+double observation.
+
+The root `ck3_query_turn_bundle_v1` now publishes a domain component containing
+size, limit, available capacity and over-limit count, and sets
+`realm_domain_ready=true`. Full bundle readiness remains false because health,
+council, faction and partition are still unavailable. The root package does
+not claim holding identities, buildings, construction or grace-period penalty
+state.
+
+This is `ROOT_PUBLIC_CAMPAIGN_ROOT_V1_FIELDS_AND_TURN_BUNDLE_BEHAVIOR_ADDED /
+OPEN_KAISHEK_NO_CONSUMER`. A fresh non-documentation repository search finds
+no caller or closed response type for the root campaign-root,
+entity-directory or turn-bundle tools in open_kaishek. Its independent Operator
+MCP envelopes, target controls, Java profiles, dependencies, endpoints and
+version `1.1.0` remain unchanged, so no companion runtime or version edit is
+required.
+
+The root ABI, source contract, Python campaign-root contract, turn-bundle
+contract, service, MCP server and domain-interface document hashes are
+`256E6BF7C7DF1203F5542F318FFD43544707903830C1BD917B506C9AC08B554B`,
+`9D77AF9719A0C020A0BE072E062EB660DC2D953D07B6371B8884A6DAA32189BA`,
+`FD5367A32BC0AA7282AE065326F59D873ED6F76A699082D989E35B25692B283E`,
+`2C120332B0BF55C2FD5B8BA0558300C31C42C7F020E9448E4DE042166B4499EB`,
+`4E22AD80BFF5E7649420213B5BE80A019E0DE5B5145E49766D3DE17E16F281B1`,
+`5A682BEC6E94D74446B4D7B262EBEF18A4D4ECBEDC7798B247F171C98388C829`
+and `909754CF30B8C8A3D65127742F27C354C42D47D8E4ED5480B4806938D53828FA`.
+Root Release DLL build/link, direct native executables and focused Python
+normal/optimized `39/39` suites are GREEN. This sync repeats no root test and
+launches no CK3, recording, injector or desktop-input process.
+
 ### G2-M1 player monthly-income observation extension
 
 Root commit `e16d179db49d8613ff0576d7e7b1dff4001b8e4d` extends
