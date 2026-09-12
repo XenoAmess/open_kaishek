@@ -1630,3 +1630,26 @@ Python field retaining this certificate and keeps campaign forecast, exit
 utility, recommendation and action unavailable. No companion Java, schema,
 adapter or version change is required. Root focused tests pass normal and
 optimized `11/11`; this sync launches no CK3 process and repeats no root test.
+
+### G2-M2 direct vanilla-event registry planner consumer
+
+Root commit `96ec2f501b3861c44ca94ba74214c47afdc66c51` adds a
+conservative `one-life-turn-v1` consumer for the existing exact-build
+vanilla-event knowledge registry. When the same paused current-window frame
+matches a direct contract's player root, saved-scope names/count/types,
+snapshot/rendered option counts, native order and enabled projection, the
+planner returns the registered bounded continuation. A registered mismatch or
+an extended contract remains blocked; an unknown key retains the previous
+degraded planner path. This closes the static planner gap exposed by
+`tgp_travel_events.0030`, whose reviewed route is authored option 2/native 1.
+
+This is `ROOT_INTERNAL_PLANNER_PHASE_AND_DECISION_ADDED /
+NO_OPERATOR_MCP_OR_BRIDGE_WIRE_DELTA`. The new
+`active_event_registry_choice` phase and registry-decision object live inside
+the root Python planner. open_kaishek neither parses that plan nor receives it
+as an Operator MCP request/response. The existing
+`ck3_query_vanilla_event_knowledge_v1` and current-window MCP schemas, tool and
+capability IDs, Java profiles, dependencies, forwarding behavior and Operator
+MCP `1.1.0` are unchanged. No companion code, schema or version change is
+required. Root focused tests pass normal and optimized `30/30`; this sync does
+not repeat them and launches no CK3 process.
