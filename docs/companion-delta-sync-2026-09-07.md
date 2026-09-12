@@ -1928,3 +1928,34 @@ and `8FF58414E53692B07BED0E870D6ACCF308F18AD3D124245F79372BF93E199AFB`.
 Root Release DLL build/link and direct reader/source-contract executables are
 GREEN; focused Python normal/optimized tests pass `35/35`. This sync launches
 no CK3, recording, injector or desktop-input process.
+
+### G2-M1 primary-title succession observation extension
+
+Root commit `ec967a14f4106b159b2c5ab8cc1b7cce239dd7ce` extends
+`campaign-root-context-v1` with the ordered
+`primary_title_succession_character_ids` vector and
+`readiness.primary_title_succession_ready`. It reuses the frozen
+`CLandedTitle+0x278/+0x280/+0x284` array already consumed by the root war-exit
+reader, validates every full-generation CharacterID, and binds the whole
+native-order vector to the existing application-main double observation.
+Malformed shape, duplicate/self IDs, generation mismatch or sample drift
+returns typed `primary_title_succession_unavailable`; landless or genuinely
+empty succession remains an available empty vector.
+
+This is `ROOT_PUBLIC_CAMPAIGN_ROOT_V1_FIELDS_ADDED /
+OPEN_KAISHEK_NO_CAMPAIGN_ROOT_CONSUMER`. A fresh non-documentation repository
+search still finds no campaign-root/entity-directory caller or closed response
+type in open_kaishek. Its independent Operator MCP request/response envelopes,
+target controls, Java profiles, dependencies, endpoints and version `1.1.0`
+remain unchanged, so no companion runtime code or version edit is required.
+
+The root ABI, source contract, Python campaign-root contract,
+entity-directory contract and MCP server hashes are
+`34ACD65F5A796131A746DE456C7231D2CD20AEF4A6E2D370E3E32CBAFD37FF21`,
+`CBFBF1E4BB5CADCAF5466E0D937EE64C52ABF1271175BB50A5731C08034CC48C`,
+`F0AE159606EAEC5497CF054D4661E2611E23C2689F293F614364AF49362CAABE`,
+`70DD4A84ADC94E937D3BCE85CD4262BEC0BBC523EAB444C143EF66818C3ED9BC`
+and `8FF58414E53692B07BED0E870D6ACCF308F18AD3D124245F79372BF93E199AFB`.
+Root Release DLL build/link and direct reader/source-contract executables are
+GREEN; focused Python normal/optimized tests pass `35/35`. This sync launches
+no CK3, recording, injector or desktop-input process.
