@@ -1577,3 +1577,34 @@ receipt or promo cleanup artifact, so no Java, profile, adapter or version
 change is required. Root focused tests passed (`5` restore tests and the promo
 capture contract), and the frozen R541-to-R542 cleanup report replays GREEN.
 open_kaishek did not launch CK3 or repeat unrelated validation.
+
+### R552 Phase2 promotion-provider build profile and recorder gate
+
+Root commit `471ded29cd94d108e1f955a7a82a66e4cdbc9669` closes the
+capture-orchestration RED exposed in R552. The eight-span producer already
+contained the promotion-compensation action, but its recorder preflight had
+selected only the T0 P1 critical-path capability profile. It could therefore
+start FFmpeg without
+`game.command.query-zhongguo-promotion-compensation-postcondition-v1` and fail
+only when the fourth span reached that action. The root runner now selects the
+complete existing Phase2 capability profile for `phase2_promo_capture`, so a
+missing provider or support flag fails before recording begins.
+
+The replacement Release build is bound to the same root commit and enables
+only the existing private switch
+`XAR_CK3_ENABLE_ZHONGGUO_PROMOTION_COMPENSATION_CANDIDATE_V1`; projects,
+career/workforce, G2 truce-expiry and G2 war-loss candidates remain OFF. Its
+`xar_ck3_bridge.dll` SHA-256 is
+`54D46BD8211518D74FFFA055EF9A2D8270BEC3C2300A04701ED870E9C358CE27`.
+Adapter-registry, promotion postcondition, promotion mailbox and scoreboard
+coexistence tests are GREEN. The build receipt is outside both repositories at
+`Z:\ck3_mod_rewrite\_runtime\native-builds\p2-r553-r554-promo-profile-471ded2-20260912\build-receipt.json`.
+
+This is `EXISTING_PRIVATE_CAPABILITY_ACTIVATED_FOR_BOUNDED_CAPTURE /
+NO_PUBLIC_SCHEMA_OR_VERSION_DELTA`. The capability ID, query flag, request and
+response fields, Operator MCP `1.1.0`, Java profiles and forwarding behavior
+are unchanged; the private candidate and its default-OFF boundary were already
+recorded in `zg361-business-postconditions.md`. No open_kaishek code or version
+change is required, and runtime certification remains false until the root
+project obtains a live paused response. R552 is terminated; this compatibility
+sync launches no CK3 instance and touches no promotional media.
