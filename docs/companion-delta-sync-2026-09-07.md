@@ -2273,3 +2273,12 @@ shape, endpoint, dependency or version changes. open_kaishek has no native
 mailbox implementation or consumer to modify; its Java and Operator MCP layers
 remain unchanged. Reopen this boundary if the root exposes mailbox scheduling
 metadata or changes a public command envelope.
+
+Root commit `a4e2ba0e0381420dcfcb6c920e4a6f55a634c207` supersedes the
+preceding scheduling experiment after live evidence showed that the thread
+message did not drain the cold-loaded paused ticket. The root bridge and
+mailbox source contract return to their prior behavior. The registered-event
+research runner now consumes the exact event-context receipt immediately sealed
+by its source checkpoint instead; this changes no public MCP or native ABI.
+Consequently open_kaishek has no lasting transport change to mirror and retains
+version `1.1.0` unchanged.
