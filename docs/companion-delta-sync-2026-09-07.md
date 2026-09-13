@@ -2147,3 +2147,15 @@ and `8FF58414E53692B07BED0E870D6ACCF308F18AD3D124245F79372BF93E199AFB`.
 Root Release DLL build/link and direct reader/source-contract executables are
 GREEN; focused Python normal/optimized tests pass `35/35`. This sync launches
 no CK3, recording, injector or desktop-input process.
+
+### G2-M1 held-title partition observation
+
+Root commit `6eaf0b40af541b09faf04b4d9f01f1de6a588abe` adds a per-held-title current
+first-heir vector and derived split-risk state to the existing campaign-root
+and turn-bundle tools. A non-documentation source search in open_kaishek finds
+no caller or closed response type for either tool, so the additive provider
+shape requires no adapter, profile, version or dependency change. The exact
+field list, provider hashes, live boundary and portable re-open trigger are
+recorded in
+[`ck3-held-title-partition-compatibility.md`](ck3-held-title-partition-compatibility.md).
+No CK3 process or desktop input was used.
