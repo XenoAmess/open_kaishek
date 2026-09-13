@@ -2365,3 +2365,14 @@ once; only read-only snapshots may repeat for up to five seconds.
 This is `ROOT_PRIVATE_HARNESS_RESULT_EXTENDED /
 OPEN_KAISHEK_NO_HARNESS_CONSUMER`. No public MCP/native contract, Java API,
 dependency or version changes in open_kaishek.
+
+Root commit `ed1ebb034a39a18846cc433be8ff5562add46efc` adds the private
+`xar.ck3.raiktor_checkpoint_replay_recommendation.v1` provider and lets the
+root-only action gate accept its certificate. The provider is limited to the
+already selected `continue` route and exists so the map-control command can be
+the first gameplay command after cold restore.
+
+This is `ROOT_PRIVATE_POLICY_SCHEMA_ADDED /
+OPEN_KAISHEK_NO_POLICY_CONSUMER`. open_kaishek has no consumer for this
+provider or gate and receives no MCP/Java/dependency/version change. Reopen if
+the replay certificate is exposed outside the root process.
