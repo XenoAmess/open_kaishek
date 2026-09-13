@@ -2195,3 +2195,29 @@ semantics, provider hashes, live boundary and portable reopen trigger are
 recorded in
 [`ck3-council-observation-compatibility.md`](ck3-council-observation-compatibility.md).
 No CK3 process or desktop input was used.
+
+### Frontend playable-selection route replacement
+
+Root commit `1703630b2bbf8d19187f8f334b224c4bd2d1fbed` replaces the
+unverified bookmark-card selection capability/step with the verified lobby
+action `game.command.activate-frontend-select-random-playable-v1` /
+`activate-frontend-select-random-playable-v1`. The composite custom-ruler
+route now opens the lobby first, proves the fixed random-playable control is
+visible and enabled, activates it, and separately proves the ruler-designer
+control. The removed `select-first-bookmark-character-v1` names and the old
+intermediate bookmark-selection result shape are no longer upstream API.
+
+This is `ROOT_PUBLIC_FRONTEND_MCP_ACTION_REPLACED /
+OPEN_KAISHEK_NO_FRONTEND_GUI_CONSUMER`. A fresh non-documentation search still
+finds no frontend route, custom-ruler or GUI-action caller/closed response type
+in open_kaishek. Its Operator MCP envelopes, Java profiles, endpoints,
+dependencies and version `1.1.0` remain unaffected, so no runtime adapter or
+version change is required. Reopen this compatibility boundary if the
+companion gains a frontend consumer or if root changes the replacement action
+literal/result shape.
+
+Root commit `19752710cd75d028a2311483d75823b8808502a1` only teaches an
+internal GEN-034 research runner to preserve an interrupting event through
+already-existing event-context and checkpoint tools. It adds no public MCP,
+ABI or schema change. This sync performs no root retest and starts no CK3,
+injector, recorder or desktop-input process.
