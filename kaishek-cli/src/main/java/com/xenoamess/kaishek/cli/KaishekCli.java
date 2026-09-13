@@ -6,6 +6,7 @@ import com.xenoamess.kaishek.syntax.ParseResult;
 import com.xenoamess.kaishek.syntax.SyntaxKind;
 import com.xenoamess.kaishek.validator.Validator;
 import com.xenoamess.kaishek.profile.Ck3Profile11906;
+import com.xenoamess.kaishek.profile.Eu5Profile1311;
 import com.xenoamess.kaishek.profile.KaishekProfile;
 import com.xenoamess.kaishek.profile.StellarisProfile446;
 import com.xenoamess.kaishek.zg361.OfflinePreflight;
@@ -69,13 +70,14 @@ public final class KaishekCli {
     List<String> d = new ArrayList<>(); p.diagnostics().forEach(x -> d.add(x.code()));
     // Only syntax/static-schema checks are supported here; runtime semantics remain explicit.
     boolean known = profile.equals("ck3-1.19.0.6") || profile.equals("ck3-1.19.0.6-zg361")
-        || profile.equals(StellarisProfile446.ID);
+        || profile.equals(StellarisProfile446.ID) || profile.equals(Eu5Profile1311.ID);
     if (!known) { out.println(json("status","UNSUPPORTED","reason","profile-not-registered","profile",profile)); return 4; }
     List<String> semantic = new ArrayList<>();
     List<String> semanticPaths = new ArrayList<>();
     KaishekProfile staticProfile = switch (profile) {
       case "ck3-1.19.0.6" -> new Ck3Profile11906();
       case StellarisProfile446.ID -> new StellarisProfile446();
+      case Eu5Profile1311.ID -> new Eu5Profile1311();
       default -> null;
     };
     boolean semanticSupported = staticProfile != null && inputPath != null;
@@ -396,7 +398,11 @@ public final class KaishekCli {
   private static int profile(String[] a, PrintStream out) {
     String positionalId = positional(a, 1);
     String id=option(a,"--id", positionalId == null ? "" : positionalId);
-    if (id.isEmpty()) { out.println("{\"status\":\"OK\",\"profiles\":[{\"id\":\"ck3-1.19.0.6\",\"game\":\"Crusader Kings III\",\"build\":\"1.19.0.6\",\"semantic\":\"static\"},{\"id\":\"ck3-1.19.0.6-zg361\",\"game\":\"Crusader Kings III + mod_zhongguo_style\",\"build\":\"1.19.0.6\",\"semantic\":\"schema-only\"},{\"id\":\"stellaris-4.4.6\",\"game\":\"Stellaris\",\"build\":\"4.4.6\",\"semantic\":\"static\"}]}"); return 0; }
+    if (id.isEmpty()) { out.println("{\"status\":\"OK\",\"profiles\":[{\"id\":\"ck3-1.19.0.6\",\"game\":\"Crusader Kings III\",\"build\":\"1.19.0.6\",\"semantic\":\"static\"},{\"id\":\"ck3-1.19.0.6-zg361\",\"game\":\"Crusader Kings III + mod_zhongguo_style\",\"build\":\"1.19.0.6\",\"semantic\":\"schema-only\"},{\"id\":\"eu5-1.3.11-build-24187685\",\"game\":\"Europa Universalis V\",\"build\":\"1.3.11 / 24187685\",\"semantic\":\"static\"},{\"id\":\"stellaris-4.4.6\",\"game\":\"Stellaris\",\"build\":\"4.4.6\",\"semantic\":\"static\"}]}"); return 0; }
+    if (id.equals(Eu5Profile1311.ID)) {
+      out.println("{\"status\":\"OK\",\"id\":"+q(id)+",\"game\":\"Europa Universalis V\",\"build\":\"1.3.11 / 24187685\",\"exeSha256\":"+q(Eu5Profile1311.EXE_SHA256)+",\"semantic\":\"static\",\"runtime\":\"UNSUPPORTED\"}");
+      return 0;
+    }
     if (id.equals(StellarisProfile446.ID)) {
       out.println("{\"status\":\"OK\",\"id\":"+q(id)+",\"game\":\"Stellaris\",\"build\":\"4.4.6\",\"exeSha256\":"+q(StellarisProfile446.EXE_SHA256)+",\"semantic\":\"static\",\"runtime\":\"UNSUPPORTED\"}");
       return 0;

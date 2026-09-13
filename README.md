@@ -24,7 +24,7 @@
 ## 当前状态（2026-09-01）
 
 当前提交包含可离线构建的纯 Java 基线：lossless
-parser/CST（含 Phase 1 方括号列表、内联表达式角色、scope chain 与 reader directive）、profile API、CK3 1.19.0.6 profile 与受限的 Stellaris 4.4.6 静态 profile、schema validator、strict IR
+parser/CST（含 Phase 1 方括号列表、内联表达式角色、scope chain 与 reader directive）、profile API、CK3 1.19.0.6 profile 与受限的 Stellaris 4.4.6、EU5 1.3.11 静态 profile、schema validator、strict IR
 合同、finite runtime 原语、差分 snapshot/trace 合同、361 domain schema，以及不启动
 Quarkus 的 CLI。另有一条明确标注为 synthetic 的 014 纵向夹具走通 Parser → Validator
 → IR → VM。Phase 0/M0 的离线评审证据记录在
@@ -99,6 +99,7 @@ py tools/run_cli_smoke.py
 - [2026-09-12 深度审计与有界优化](docs/open-kaishek-deep-audit-and-optimization-2026-09-12.md)
 - [G2 Raiktor 策略 profile 兼容边界](docs/g2-raiktor-strategy-profile-compatibility.md)
 - [Stellaris 4.4.6 静态 profile 边界](docs/stellaris-4.4.6-profile.md)
+- [EU5 1.3.11 / Build 24187685 静态 profile 边界](docs/eu5-1.3.11-profile.md)
 - [Stellaris 4.4.6 灰风美化静态 profile 切片](docs/stellaris-gray-wind-profile.md)
 
 ## Readiness 边界
