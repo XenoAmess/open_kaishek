@@ -72,3 +72,21 @@ or complete the comparison policy. Public/action readiness, source-specific
 attribution, decision readiness, automatic surrender, and GEN-034 remain false.
 The frozen R3 result keeps its original source/accelerator pins; today's
 metadata synchronization does not rewrite or rerun that historical attempt.
+
+## 2026-09-14 termination-ACK compatibility update
+
+Root commit `5fd4c88bf6c8bc36079561a7e6f7c29608d318f2` keeps the existing
+private capability and result envelope but widens its retained action binding:
+a successful same-connection `offer-white-peace-N` or `surrender-war-N` ACK
+for the frozen full-generation WarID may precede the exact-store cleanup read.
+The binding is still one-shot, connection-local, reset by a new terms baseline,
+and consumed after a successful cleanup response. Public surrender remains
+disabled and the native candidate remains default-OFF.
+
+This is `ROOT_PRIVATE_PROVIDER_SEMANTICS_EXTENDED /
+OPEN_KAISHEK_METADATA_COMPATIBLE`. open_kaishek has no runtime handler or
+public capability descriptor for the private query, so its Java API, MCP
+schema, profile, dependencies and version `1.1.0` do not change. Historical R3
+surrender evidence and its pinned hashes remain immutable. Reopen this boundary
+if the private candidate becomes public or the cleanup wire changes.
+
