@@ -2345,3 +2345,14 @@ This is `ROOT_PRIVATE_RESEARCH_REPORT_ADDED /
 OPEN_KAISHEK_NO_REPORT_CONSUMER`. No companion implementation, dependency or
 version change is required. Reopen this entry only if open_kaishek begins to
 consume that report schema.
+
+Root commit `9096d8747502ad5dc63c131debf931e004448405` adds a private
+managed action runner for the checkpoint-replay certificate. It performs two
+fresh root-only exit reads, zero fresh power reads, then uses the existing
+root action gate and executor. The new acceptance result schema remains a
+local research artifact and is not an MCP payload.
+
+This is `ROOT_PRIVATE_LIVE_HARNESS_ADDED /
+OPEN_KAISHEK_NO_HARNESS_CONSUMER`. No open_kaishek code, public contract,
+dependency or version changes. Reopen only if the runner or its result schema
+becomes a companion-facing surface.
