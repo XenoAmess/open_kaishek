@@ -2311,3 +2311,15 @@ OPEN_KAISHEK_NO_POLICY_CONSUMER`. open_kaishek has no parser, adapter or MCP
 surface for either provider, so its public APIs, profiles, dependencies and
 version remain unchanged. The compatibility boundary must be reopened if
 these certificates become public inputs.
+
+Root commit `90415603ca58d9d9332a431a24c8905bc9281150` advances the
+private projection/evaluator/recommendation chain again. The projection now
+carries a surrender feature observation taken from the same normalized terms
+query, so a missing derived truce child in the legacy aggregate cannot erase
+already observed surrender consequences. The aggregate remains mandatory for
+session and hash binding.
+
+This is `ROOT_PRIVATE_POLICY_INPUT_REPLACED /
+OPEN_KAISHEK_NO_POLICY_CONSUMER`. No open_kaishek runtime or schema consumes
+the private feature observation or evaluation certificates. Its public MCP,
+Java API, profile, dependencies and version remain unchanged.
