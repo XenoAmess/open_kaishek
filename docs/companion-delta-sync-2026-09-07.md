@@ -2257,3 +2257,19 @@ public capability descriptor for the private query, so its Java API, MCP
 schema, profile, dependencies and version `1.1.0` do not change. Historical R3
 surrender evidence and its pinned hashes remain immutable. Reopen this boundary
 if the private candidate becomes public or the cleanup wire changes.
+
+### Paused native mailbox wake semantics
+
+Root commit `f854cef6c20497642467454db49cd924149da702` fixes a reproduced
+paused-idle transport failure: after a fixed typed executor ticket is published,
+the bridge posts one best-effort `WM_NULL` to the already verified CK3
+application-main thread. This wakes the existing SDL/PeekMessage hook so it can
+drain a ticket even when a cold-loaded paused event has no pending input. A
+failed post still follows the existing bounded timeout and remains fail-closed.
+
+This is `ROOT_PRIVATE_TRANSPORT_SCHEDULING_CHANGED /
+OPEN_KAISHEK_METADATA_COMPATIBLE`. No MCP tool, capability ID, request/result
+shape, endpoint, dependency or version changes. open_kaishek has no native
+mailbox implementation or consumer to modify; its Java and Operator MCP layers
+remain unchanged. Reopen this boundary if the root exposes mailbox scheduling
+metadata or changes a public command envelope.
