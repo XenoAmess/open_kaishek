@@ -2335,3 +2335,13 @@ OPEN_KAISHEK_NO_POLICY_CONSUMER`. open_kaishek has no parser, adapter or MCP
 surface for either certificate. Its public MCP, Java API, profiles,
 dependencies and version `1.1.0` remain unchanged. Reopen this boundary if
 the root policy certificate is exposed through a companion endpoint.
+
+Root commit `bef0527b7577e5205c64ec65f737590e57042b55` adds the private,
+offline `xar.ck3.gen034_checkpoint_replay_recommendation.v1` composition
+report. It joins hash-bound root live artifacts without contacting CK3 and
+does not expose a new MCP endpoint or action authorization.
+
+This is `ROOT_PRIVATE_RESEARCH_REPORT_ADDED /
+OPEN_KAISHEK_NO_REPORT_CONSUMER`. No companion implementation, dependency or
+version change is required. Reopen this entry only if open_kaishek begins to
+consume that report schema.
