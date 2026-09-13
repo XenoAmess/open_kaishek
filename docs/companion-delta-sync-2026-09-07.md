@@ -2221,3 +2221,22 @@ internal GEN-034 research runner to preserve an interrupting event through
 already-existing event-context and checkpoint tools. It adds no public MCP,
 ABI or schema change. This sync performs no root retest and starts no CK3,
 injector, recorder or desktop-input process.
+
+### G2 GEN-034 post-action prestige observation
+
+Root commit `c17e3d8c0ae9c91d9c056f6f6fb0186c1bbba4fb` adds the optional
+`state_snapshot.state.played_character_prestige` object. Its closed value shape
+is signed Q100000 `{raw, scale}`, matching the existing
+`played_character_gold` fixed-point representation; the field is `null` when
+there is no played character and may be omitted by an older producer. It is a
+read-only input for comparing the player's frozen war-exit prestige delta after
+the old WarID disappears.
+
+This is `ROOT_ADDITIVE_STATE_FIELD /
+OPEN_KAISHEK_PASS_THROUGH_COMPATIBLE`. A fresh non-documentation search finds
+no closed Java state-snapshot record or field-level parser in open_kaishek, so
+no adapter, profile, dependency, capability/tool ID, endpoint or Operator MCP
+`1.1.0` change is required. Reopen the boundary if the companion adds a typed
+snapshot consumer or root changes the fixed-point shape. This compatibility
+record repeats no root test and starts, attaches to or terminates no CK3,
+injector, recorder or desktop-input process.
