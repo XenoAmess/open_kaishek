@@ -2299,3 +2299,15 @@ their contracts. No public MCP capability, Java record, profile, endpoint,
 dependency or version changes, and open_kaishek remains at `1.1.0`. Reopen
 this boundary if the private provider is exposed through MCP or a typed
 companion consumer is added.
+
+Root commit `719db7020762b54522ae1bb651cf025abb15e86c` advances the
+private immediate-exit evaluator to v2/evaluation certificate v3 and the
+private three-way recommendation provider to v2. Each immediate exit now has
+an `execution_blockers` list; native unavailability makes only that route
+ineligible while its exact-build consequences and utility remain visible.
+
+This remains `ROOT_PRIVATE_POLICY_SCHEMA_REPLACED /
+OPEN_KAISHEK_NO_POLICY_CONSUMER`. open_kaishek has no parser, adapter or MCP
+surface for either provider, so its public APIs, profiles, dependencies and
+version remain unchanged. The compatibility boundary must be reopened if
+these certificates become public inputs.
