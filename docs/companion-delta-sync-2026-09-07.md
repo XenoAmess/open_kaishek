@@ -2160,6 +2160,30 @@ recorded in
 [`ck3-held-title-partition-compatibility.md`](ck3-held-title-partition-compatibility.md).
 No CK3 process or desktop input was used.
 
+### Frontend ruler-designer MCP route
+
+Root commits `a118f8529cd080ba7ceb5c87a6cacc85608d636e` and
+`c234b3b0f239d810eb4893dc191f07052fc1bee7` add two zero-input frontend actions for selecting the first eligible
+bookmark character and opening the ruler designer, then extend the managed
+official-MCP acceptance runner across that route. The public additions are
+`ck3_activate_frontend_prepare_custom_ruler_v1` and
+`ck3_activate_frontend_ruler_designer_v1`, with their corresponding bridge
+capabilities and fixed action literals.
+
+This is `ROOT_PUBLIC_FRONTEND_MCP_TOOLS_ADDED /
+OPEN_KAISHEK_NO_FRONTEND_GUI_CONSUMER`. A fresh non-documentation search finds
+no frontend-route, ruler-designer or GUI-action consumer in open_kaishek. Its
+Operator MCP envelopes, target controls, Java profiles, dependencies,
+endpoints and version `1.1.0` remain unchanged, so no runtime adapter or
+version change is required. Root commit `63bb7144e91079cb5ac8117a8e8ba72026895473`
+only makes an existing war-options normalizer accept its own canonical
+`source=native` output; it changes no root wire or companion contract.
+
+This compatibility sync repeats no root test and starts no CK3, recording,
+injector or desktop-input process. Reopen the companion only if it later gains
+a frontend GUI consumer or the root changes one of these fixed action/result
+shapes.
+
 ### G2-M1 typed council observation
 
 Root commit `e7e99e872dbfe3d4774d000b7d9702e122ce0041` adds typed council
