@@ -2159,3 +2159,15 @@ field list, provider hashes, live boundary and portable re-open trigger are
 recorded in
 [`ck3-held-title-partition-compatibility.md`](ck3-held-title-partition-compatibility.md).
 No CK3 process or desktop input was used.
+
+### G2-M1 typed council observation
+
+Root commit `e7e99e872dbfe3d4774d000b7d9702e122ce0041` adds typed council
+position/task/target/progress state to the existing campaign-root and
+turn-bundle responses. A fresh non-documentation search finds no consumer or
+closed response type for either root tool in open_kaishek, so no adapter,
+profile, dependency or version change is required. The exact fields, readiness
+semantics, provider hashes, live boundary and portable reopen trigger are
+recorded in
+[`ck3-council-observation-compatibility.md`](ck3-council-observation-compatibility.md).
+No CK3 process or desktop input was used.
