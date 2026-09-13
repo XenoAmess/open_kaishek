@@ -2257,4 +2257,3 @@ public capability descriptor for the private query, so its Java API, MCP
 schema, profile, dependencies and version `1.1.0` do not change. Historical R3
 surrender evidence and its pinned hashes remain immutable. Reopen this boundary
 if the private candidate becomes public or the cleanup wire changes.
-
