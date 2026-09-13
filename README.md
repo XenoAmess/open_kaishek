@@ -99,6 +99,7 @@ py tools/run_cli_smoke.py
 - [2026-09-12 深度审计与有界优化](docs/open-kaishek-deep-audit-and-optimization-2026-09-12.md)
 - [G2 Raiktor 策略 profile 兼容边界](docs/g2-raiktor-strategy-profile-compatibility.md)
 - [Stellaris 4.4.6 静态 profile 边界](docs/stellaris-4.4.6-profile.md)
+- [Stellaris 4.4.6 灰风美化静态 profile 切片](docs/stellaris-gray-wind-profile.md)
 
 ## Readiness 边界
 

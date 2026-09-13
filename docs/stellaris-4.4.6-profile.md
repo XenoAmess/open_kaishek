@@ -33,6 +33,9 @@ Pegasus 4.4.6 可执行文件 SHA-256
   `triggered_planet_modifier/potential` 精确限定 `habitat` district set。profile 登记
   PLANET/SHIP scope 并保留未知拼写、错误显式 scope 的 fail-closed 诊断；它不模拟
   `district_hab_*_max_add` 的游戏运行时效果。
+- 灰风美化兼容切片：目标 Mod 自有 hidden country event 和 monthly on_action 所需的
+  受限领袖 flag、迭代、显式 event target 与 `change_leader_portrait` 形状。完整边界见
+  [`stellaris-gray-wind-profile.md`](stellaris-gray-wind-profile.md)。
 
 未登记的可执行键仍报告 `UNKNOWN_OPCODE`，未识别目录仍报告 `UNKNOWN_DIRECTORY`。
 
