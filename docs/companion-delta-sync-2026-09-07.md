@@ -2356,3 +2356,12 @@ This is `ROOT_PRIVATE_LIVE_HARNESS_ADDED /
 OPEN_KAISHEK_NO_HARNESS_CONSUMER`. No open_kaishek code, public contract,
 dependency or version changes. Reopen only if the runner or its result schema
 becomes a companion-facing surface.
+
+Root commit `6629decbf3152f2fa1b1116141caa30cff8625f9` adds a bounded
+successor-observation count to the private GEN-034 action result and replaces
+one stale shared-harness error string. The continue action is still submitted
+once; only read-only snapshots may repeat for up to five seconds.
+
+This is `ROOT_PRIVATE_HARNESS_RESULT_EXTENDED /
+OPEN_KAISHEK_NO_HARNESS_CONSUMER`. No public MCP/native contract, Java API,
+dependency or version changes in open_kaishek.
