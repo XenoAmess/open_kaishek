@@ -2282,3 +2282,20 @@ research runner now consumes the exact event-context receipt immediately sealed
 by its source checkpoint instead; this changes no public MCP or native ABI.
 Consequently open_kaishek has no lasting transport change to mirror and retains
 version `1.1.0` unchanged.
+
+### GEN-034 consequence/execution separation
+
+Root commit `58cf65c53b34aad8cfe3161e192e74389d5e39f4` advances the private
+Python projection wrapper from
+`xar.ck3.raiktor_white_peace_narrow_projection_provider.v1` to `v2`. The
+projection now preserves exact-build white-peace consequences when the native
+outbound action is explicitly unavailable, and carries same-frame white-peace
+and surrender execution state for the downstream eligibility gate.
+
+This is `ROOT_PRIVATE_PROVIDER_SCHEMA_REPLACED /
+OPEN_KAISHEK_NO_PROVIDER_CONSUMER`. A fresh repository search finds no
+open_kaishek consumer of the projection provider, immediate-exit evaluator or
+their contracts. No public MCP capability, Java record, profile, endpoint,
+dependency or version changes, and open_kaishek remains at `1.1.0`. Reopen
+this boundary if the private provider is exposed through MCP or a typed
+companion consumer is added.
