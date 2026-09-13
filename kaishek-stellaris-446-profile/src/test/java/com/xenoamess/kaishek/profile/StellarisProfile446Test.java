@@ -219,4 +219,73 @@ class StellarisProfile446Test {
                                 && d.message().contains("uses_district_set")),
                 invalidDiagnostics::toString);
     }
+
+    @Test
+    void grayWindCompatibilityEventAndMonthlyOnActionValidate() {
+        String event = "namespace = xenoamess_gray_wind\n"
+                + "country_event = {\n"
+                + "  id = xenoamess_gray_wind.100\n"
+                + "  hide_window = yes\n"
+                + "  is_triggered_only = yes\n"
+                + "  trigger = { is_ai = no OR = {\n"
+                + "    has_country_flag = gray_official_active\n"
+                + "    any_owned_leader = { has_leader_flag = gray_leader }\n"
+                + "  } }\n"
+                + "  immediate = {\n"
+                + "    every_owned_leader = { limit = { has_leader_flag = gray_leader }\n"
+                + "      change_leader_portrait = xenoamess_gray_wind_portrait }\n"
+                + "    if = { limit = { exists = event_target:gray_official }\n"
+                + "      event_target:gray_official = {\n"
+                + "        change_leader_portrait = xenoamess_gray_wind_portrait } }\n"
+                + "    if = { limit = { exists = event_target:gray_country }\n"
+                + "      event_target:gray_country = { ruler = {\n"
+                + "        change_leader_portrait = xenoamess_gray_wind_portrait } } }\n"
+                + "  }\n"
+                + "}\n";
+        var parsedEvent = Parser.parse(event.getBytes(StandardCharsets.UTF_8));
+        var eventDiagnostics = Validator.validate(parsedEvent,
+                "events/xenoamess_gray_wind_events.txt", profile);
+        assertTrue(eventDiagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                eventDiagnostics::toString);
+
+        String onAction = "on_monthly_pulse_country = {\n"
+                + "  events = { xenoamess_gray_wind.100 }\n"
+                + "}\n";
+        var parsedOnAction = Parser.parse(onAction.getBytes(StandardCharsets.UTF_8));
+        var onActionDiagnostics = Validator.validate(parsedOnAction,
+                "common/on_actions/xenoamess_gray_wind_on_actions.txt", profile);
+        assertTrue(onActionDiagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                onActionDiagnostics::toString);
+        assertEquals(OpcodeSpec.Kind.EFFECT,
+                profile.opcode("change_leader_portrait").kind());
+        assertEquals(OpcodeSpec.Kind.STRUCTURAL,
+                profile.opcode("event_target:gray_country").kind());
+    }
+
+    @Test
+    void grayWindTyposRemainFailClosed() {
+        String invalid = "country_event = { id = test.1 hide_window = yes\n"
+                + "  trigger = { has_leaders_flag = gray_leader }\n"
+                + "  immediate = { event_target:gray_countri = {\n"
+                + "    change_leader_portraits = xenoamess_gray_wind_portrait } }\n"
+                + "}\n";
+        var parsed = Parser.parse(invalid.getBytes(StandardCharsets.UTF_8));
+        var diagnostics = Validator.validate(parsed,
+                "events/xenoamess_gray_wind_events.txt", profile);
+
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("has_leaders_flag")),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("event_target:gray_countri")),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("change_leader_portraits")),
+                diagnostics::toString);
+    }
 }

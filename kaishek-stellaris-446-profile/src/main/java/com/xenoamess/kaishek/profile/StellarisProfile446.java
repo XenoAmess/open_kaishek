@@ -9,8 +9,8 @@ import java.util.TreeSet;
 /**
  * Version-pinned static schema slice for Stellaris 4.4.6.
  *
- * <p>This profile deliberately recognizes only the decision/deposit/scripted-trigger source
- * shapes needed by the initial Infinite Jobs acceptance corpus. Recognition
+ * <p>This profile deliberately recognizes only the source shapes needed by
+ * explicitly documented external Stellaris acceptance slices. Recognition
  * is not runtime certification: no opcode in this slice is executable by the
  * finite runtime and the real game remains the semantic authority.</p>
  */
@@ -40,7 +40,8 @@ public final class StellarisProfile446 implements KaishekProfile {
         TreeSet<String> keys = new TreeSet<>(KaishekProfile.DEFAULT_STRUCTURAL_KEYS);
         Collections.addAll(keys,
                 "owned_planets_only", "enactment_time", "resources", "category", "cost", "minerals",
-                "ai_weight", "is_for_colonizable", "should_swap_deposit_on_terraforming", "owner");
+                "ai_weight", "is_for_colonizable", "should_swap_deposit_on_terraforming", "owner",
+                "hide_window", "is_triggered_only", "immediate", "events");
         return Collections.unmodifiableSet(keys);
     }
 
@@ -50,6 +51,9 @@ public final class StellarisProfile446 implements KaishekProfile {
                 Set.of("PLANET", "planet", "SHIP", "ship"));
         add(result, "always", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
         add(result, "exists", OpcodeSpec.Kind.TRIGGER, 0, 0, "THIS");
+        add(result, "is_ai", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
+        add(result, "has_country_flag", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
+        add(result, "has_leader_flag", OpcodeSpec.Kind.TRIGGER, 0, 0, "LEADER");
         add(result, "is_gestalt", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
         add(result, "has_valid_civic", OpcodeSpec.Kind.TRIGGER, 0, 0, "COUNTRY");
         add(result, "has_carrier_flag", OpcodeSpec.Kind.TRIGGER, 0, 0,
@@ -63,6 +67,7 @@ public final class StellarisProfile446 implements KaishekProfile {
                 Set.of("PLANET", "planet", "SHIP", "ship"));
         add(result, "remove_carrier_flag", OpcodeSpec.Kind.EFFECT, 0, 0,
                 Set.of("PLANET", "planet", "SHIP", "ship"));
+        add(result, "change_leader_portrait", OpcodeSpec.Kind.EFFECT, 0, 0, "LEADER");
         // A scripted-trigger symbol is both a root declaration container and
         // a scalar call at use sites. Model the exact observed symbol as
         // structural so its declaration body is still checked fail-closed.
@@ -70,6 +75,16 @@ public final class StellarisProfile446 implements KaishekProfile {
                 0, Integer.MAX_VALUE, Set.of("PLANET", "planet", "SHIP", "ship"));
 
         add(result, "OR", OpcodeSpec.Kind.STRUCTURAL, 0, Integer.MAX_VALUE, "THIS");
+        add(result, "any_owned_leader", OpcodeSpec.Kind.STRUCTURAL,
+                0, Integer.MAX_VALUE, "COUNTRY");
+        add(result, "every_owned_leader", OpcodeSpec.Kind.STRUCTURAL,
+                0, Integer.MAX_VALUE, "COUNTRY");
+        add(result, "event_target:gray_official", OpcodeSpec.Kind.STRUCTURAL,
+                0, Integer.MAX_VALUE, "THIS");
+        add(result, "event_target:gray_country", OpcodeSpec.Kind.STRUCTURAL,
+                0, Integer.MAX_VALUE, "THIS");
+        add(result, "ruler", OpcodeSpec.Kind.STRUCTURAL,
+                0, Integer.MAX_VALUE, "COUNTRY");
 
         // These container shapes are intentionally opaque. Their child keys
         // are dynamic modifier identifiers, not executable script opcodes.
