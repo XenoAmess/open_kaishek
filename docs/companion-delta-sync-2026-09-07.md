@@ -2323,3 +2323,15 @@ This is `ROOT_PRIVATE_POLICY_INPUT_REPLACED /
 OPEN_KAISHEK_NO_POLICY_CONSUMER`. No open_kaishek runtime or schema consumes
 the private feature observation or evaluation certificates. Its public MCP,
 Java API, profile, dependencies and version remain unchanged.
+
+Root commit `d0db9d30d85d773824ddf9a44c230803922b5fbc` adds a private v3
+campaign-dominance certificate for immutable-checkpoint replay and advances
+the private recommendation envelope to v4. The replay form retains distinct
+source and target runtime frames and is admitted only when the checkpoint,
+pre-launch driver state and gameplay-state identity match exactly.
+
+This is `ROOT_PRIVATE_POLICY_SCHEMA_REPLACED /
+OPEN_KAISHEK_NO_POLICY_CONSUMER`. open_kaishek has no parser, adapter or MCP
+surface for either certificate. Its public MCP, Java API, profiles,
+dependencies and version `1.1.0` remain unchanged. Reopen this boundary if
+the root policy certificate is exposed through a companion endpoint.
