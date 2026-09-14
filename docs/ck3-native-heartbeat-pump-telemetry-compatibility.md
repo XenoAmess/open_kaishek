@@ -2,10 +2,11 @@
 
 Date: 2026-09-14 (Asia/Shanghai)
 
-## Upstream candidate
+## Pinned upstream change
 
-The pending G2 PUMP1 root-provider change adds five diagnostic integer fields
-to the existing native heartbeat `main_thread_query_mailbox_v1` object:
+Root provider commit `a4bb5a57cd5237f42f4e841ddd4cd1da524e4e8a`
+adds five diagnostic integer fields to the existing native heartbeat
+`main_thread_query_mailbox_v1` object:
 
 - `published_sequence`;
 - `completed_sequence`;
@@ -16,9 +17,9 @@ to the existing native heartbeat `main_thread_query_mailbox_v1` object:
 It also appends `mailbox_probe_v1` diagnostics to campaign-root failure error
 text. The change does not add these fields to a successful campaign-root or MCP
 payload, does not turn the heartbeat into an MCP capability, and does not alter
-the existing campaign-root success schema. The final upstream commit is still
-pending; this companion work package must remain recorded as `PAIRING_PENDING`
-until that commit lands.
+the existing campaign-root success schema. The observed field set matches the
+candidate audited by this companion work package, so the pairing is now
+`PINNED`.
 
 ## Consumer audit and decision
 
@@ -53,17 +54,19 @@ versions a typed diagnostic object.
 
 ## Verification and pairing
 
-The compatibility audit is source-only and starts no CK3 process. It is based
-on open_kaishek baseline
-`de7fc082b280df0f1234b56b612f5065a39da50b`. The final pairing state is:
+The compatibility audit is source-only and starts no CK3 process. The initial
+audit used open_kaishek baseline
+`de7fc082b280df0f1234b56b612f5065a39da50b`; the work branch was then rebased
+onto `dcb33d90415f0e24229b431423e3983bcfb3b7f3` before the pairing check. The
+final pairing state is:
 
 - companion branch: `wp-ok-g2-pump1-20260914`;
-- upstream provider commit: pending;
+- upstream provider commit: `a4bb5a57cd5237f42f4e841ddd4cd1da524e4e8a`;
+- pairing: `PINNED`;
 - interface adaptation: none required;
 - CK3/live readiness: unchanged.
 
-Reopen this decision when the upstream commit lands so its identity can be
-paired with this note. Reopen the implementation boundary if open_kaishek adds
-a heartbeat/campaign-root consumer, the heartbeat protocol version changes, a
-new field becomes mandatory for availability, or `mailbox_probe_v1` becomes a
-typed success-payload member.
+Reopen the implementation boundary if open_kaishek adds a
+heartbeat/campaign-root consumer, the heartbeat protocol version changes, a new
+field becomes mandatory for availability, or `mailbox_probe_v1` becomes a typed
+success-payload member.
