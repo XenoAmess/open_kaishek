@@ -68,11 +68,11 @@ certification.
 
 ## Pairing status and reopen conditions
 
-The minimum contract is frozen against upstream baseline
-`f0f10bf1863519881d9bd88c64a8ace4ec6abc41`; the final VITAL2 upstream commit
-is pending. Before integration, replace this pending statement with the landed
-upstream commit after confirming the object fields, retained legacy fields,
-and component-local readiness behavior.
+The compatibility record is paired to landed upstream main commit
+`a30e56832dcbf0b3f84f6fa726570cb22bc15634`. Its object fields, retained
+legacy health/stress fields, and component-local readiness behavior match the
+candidate reviewed above. The current pairing status is
+`paired_to_upstream_main`.
 
 Reopen this boundary if `open_kaishek` gains a typed turn-bundle consumer, the
 legacy health/stress fields are removed, the v1 field set or readiness meaning
