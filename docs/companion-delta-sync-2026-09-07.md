@@ -2421,3 +2421,21 @@ no open_kaishek consumer for the runner result, driver state, or continuation
 literal. No Java, Operator MCP, profile, dependency, endpoint or version change
 is required. The compatibility note records the new root pin and re-open
 condition.
+
+
+## 2026-09-14 celestial council scope correction
+
+Root commit `3f80e0f67fd2f3a1098da7e7048dc2870b3069e1` corrects a
+production RED in the existing campaign-root provider. R676 proved that a
+celestial ministry cannot be dereferenced through the standard five-seat
+council representation. The provider now uses its existing
+`outside_standard_landed_non_nomadic_core_scope` component result for
+`government_is_celestial`, keeping the rest of campaign-root and turn-bundle
+eligible to publish.
+
+This is `EXISTING_COMPONENT_SCOPE_CORRECTED /
+OPEN_KAISHEK_NO_ROOT_CONSUMER`. No field, enum, capability ID, endpoint,
+profile, Java type, dependency or version changes. A fresh non-documentation
+search found no root/turn-bundle consumer in open_kaishek, so the companion
+updates only its compatibility wording and provider pins. Reopen if such a
+consumer is added or celestial ministry receives its own typed schema.
