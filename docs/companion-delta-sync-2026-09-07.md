@@ -2390,3 +2390,17 @@ open_kaishek has no driver-state reader, private method caller, closed response
 type or public MCP surface for this data. Its implementation, dependencies and
 version remain unchanged. The exact boundary and provider hashes are recorded
 in [the succession-transition compatibility note](ck3-succession-transition-compatibility.md).
+
+
+## 2026-09-14 G2-M3 real-successor continuation sync
+
+Root commit `0f813a3a5749f0cdee765562c71cd95c70235c4d` adds a private
+`continue-as-reconciled-successor` planner/driver action after current-frame
+inheritance reconciliation. It changes the root one-life identity in the same
+campaign without submitting a CK3 command or restarting the process.
+
+This is `ROOT_PRIVATE_ACTION_ADDED / OPEN_KAISHEK_NO_ACTION_CONSUMER`.
+A fresh non-documentation search finds no open_kaishek driver-state reader,
+root action router, typed succession response, or public MCP surface. No Java,
+profile, dependency or version change is required; provider pins and reopen
+conditions are updated in [the compatibility note](ck3-succession-transition-compatibility.md).
