@@ -12,10 +12,10 @@ import java.util.List;
  * exact-build reader.</p>
  */
 public final class StewardDevelopCountyCandidatesCapabilityProfile {
-    public static final String UPSTREAM_BASE_COMMIT =
-            "aa39f11302e678f9bad69f423a749701cf7898d8";
+    public static final String UPSTREAM_PROVIDER_COMMIT =
+            "f0f10bf1863519881d9bd88c64a8ace4ec6abc41";
     public static final String UPSTREAM_PAIRING_STATUS =
-            "pending_upstream_candidate_commit";
+            "paired_to_upstream_main";
 
     public static final String MCP_TOOL_ID =
             "ck3_query_steward_develop_county_candidates_v1";
@@ -29,6 +29,7 @@ public final class StewardDevelopCountyCandidatesCapabilityProfile {
             "exact_build_contract_fixture_pending_live_reader";
     public static final String BACKEND_ID =
             "ck3-1.19.0.6-native-steward-develop-county-candidates-v1";
+    public static final String COMMAND_BACKEND_ID = "native-headless";
     public static final int SCHEMA_VERSION = 1;
 
     public static final List<String> REQUEST_FIELDS = List.of(
@@ -125,6 +126,7 @@ public final class StewardDevelopCountyCandidatesCapabilityProfile {
                             "available_payload_requires_complete_fields_and_two_sample_equality",
                             "production_reader_is_typed_unavailable_until_exact_build_abi_is_closed",
                             "unavailable_payload_exposes_no_partial_observations",
+                            "unavailable_observed_date_is_null_or_same_frame_date",
                             "candidate_rows_include_only_native_legal_counties",
                             "target_selection_mode_preserves_engine_random_unscored_behavior",
                             "query_does_not_authorize_council_task_or_target_mutation",

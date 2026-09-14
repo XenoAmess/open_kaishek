@@ -19,6 +19,10 @@ typed unavailable vocabulary. The contract admits an available payload only
 after complete two-sample equality on one paused native frame. Candidate rows
 contain native-legal counties; `target_selection_mode=engine_random_unscored`
 records that the original native AI task does not provide a target score.
+The command envelope uses `backend_id=native-headless`; the nested provenance
+uses the exact provider backend shown above. In an unavailable payload,
+`observed_date_raw` may be `null` or the bound paused-frame date, while all
+other observations remain null or empty.
 
 The current production reader remains fail-closed with
 `reader_not_implemented`. An offline contract fixture may exercise an
@@ -43,12 +47,10 @@ machine path, account, CK3 process, or round identifier.
 
 ## Pairing status and reopen conditions
 
-The minimum contract was frozen against upstream base commit
-`aa39f11302e678f9bad69f423a749701cf7898d8`. The final upstream candidate
-commit is still pending, so the current pairing status is
-`pending_upstream_candidate_commit`. Before integration, compare the landed
-upstream identities and exact field lists to this profile and replace the
-pending status with the candidate commit.
+The profile is paired to landed upstream main commit
+`f0f10bf1863519881d9bd88c64a8ace4ec6abc41`. Its command identity, exact field
+lists, backend split, unavailable vocabulary and date boundary match that
+provider. The current pairing status is `paired_to_upstream_main`.
 
 Reopen this boundary when the exact-build reader lands, a live paused artifact
 changes either certification flag, the public v1 field set or unavailable

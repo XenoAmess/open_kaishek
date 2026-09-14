@@ -75,6 +75,12 @@ class StewardDevelopCountyCandidatesCapabilityProfileTest {
                         "backend_id"),
                 StewardDevelopCountyCandidatesCapabilityProfile.COMMAND_ENVELOPE_FIELDS);
         assertEquals(
+                "native-headless",
+                StewardDevelopCountyCandidatesCapabilityProfile.COMMAND_BACKEND_ID);
+        assertEquals(
+                "ck3-1.19.0.6-native-steward-develop-county-candidates-v1",
+                StewardDevelopCountyCandidatesCapabilityProfile.BACKEND_ID);
+        assertEquals(
                 List.of(
                         "reader_not_implemented",
                         "unsupported_build",
@@ -99,6 +105,8 @@ class StewardDevelopCountyCandidatesCapabilityProfileTest {
         assertTrue(capability.invariants().contains(
                 "production_reader_is_typed_unavailable_until_exact_build_abi_is_closed"));
         assertTrue(capability.invariants().contains(
+                "unavailable_observed_date_is_null_or_same_frame_date"));
+        assertTrue(capability.invariants().contains(
                 "query_does_not_authorize_council_task_or_target_mutation"));
     }
 
@@ -109,10 +117,10 @@ class StewardDevelopCountyCandidatesCapabilityProfileTest {
                 "2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86",
                 Ck3Profile11906.EXE_SHA256);
         assertEquals(
-                "aa39f11302e678f9bad69f423a749701cf7898d8",
-                StewardDevelopCountyCandidatesCapabilityProfile.UPSTREAM_BASE_COMMIT);
+                "f0f10bf1863519881d9bd88c64a8ace4ec6abc41",
+                StewardDevelopCountyCandidatesCapabilityProfile.UPSTREAM_PROVIDER_COMMIT);
         assertEquals(
-                "pending_upstream_candidate_commit",
+                "paired_to_upstream_main",
                 StewardDevelopCountyCandidatesCapabilityProfile.UPSTREAM_PAIRING_STATUS);
     }
 }
