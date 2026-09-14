@@ -14,6 +14,12 @@ advertised only after the predecessor terminal is settled and a current-frame
 successor reconciliation fully matches. The action changes only root-local
 episode identity and caches; it sends no CK3 command and restarts no process.
 
+Root commit `36469f2402911ea8c81279cf9c1e4882cecc787a` teaches the
+root-owned bounded runner to execute that continuation instead of ending the
+whole campaign at the predecessor boundary. Its result gains the private
+additive `natural_succession_transitions` member. Strict `one_generation` and
+explicit `next_episode` lifecycles retain their existing stop/reseed behavior.
+
 The compatibility verdict is
 `ROOT_PRIVATE_STATE_AND_ACTION_EXTENSION / OPEN_KAISHEK_NO_CONSUMER /
 DOCUMENTATION_ONLY`. A non-documentation repository search finds no
@@ -21,7 +27,8 @@ open_kaishek reader for the root driver-state file, no caller for the private
 retention/reconciliation methods, no action-step router for either episode
 transition literal, and no closed Java type for the new schemas.
 No Java, Operator MCP, CK3 profile, endpoint, dependency or version change is
-required.
+required. A non-documentation search at this sync found no open_kaishek
+consumer of the new runner-result member.
 
 The root loader continues to accept existing v1/v2 state files without the
 new member. Same-PID root recovery validates the optional value against the
@@ -31,7 +38,7 @@ lifecycle rules; open_kaishek does not reproduce or certify them.
 
 ## Provider pins
 
-The current root inputs at `0f813a3a5749f0cdee765562c71cd95c70235c4d` are:
+The current root inputs at `36469f2402911ea8c81279cf9c1e4882cecc787a` are:
 
 | Provider input | SHA-256 |
 |---|---|
@@ -40,6 +47,7 @@ The current root inputs at `0f813a3a5749f0cdee765562c71cd95c70235c4d` are:
 | planner service | `CEFB957D83324786EFFE3147D1AF525D688C6EB8A384F00C8FB6D53DFF0B64E6` |
 | one-life strategy | `E80D23FB0578A706750D44FC3E4497AB32B64F1C3511DD138DFBAEFDD4EA1F7D` |
 | succession transition document | `C7701EB5DC4623FF360FA53E0AA90C98E3D07B796ABD82265669CD8228B215FF` |
+| bounded native runner | `026AF3090239A42FF6546388361B227C509B81AA361D3EB937D47B38C15C41BA` |
 
 These hashes are provenance only. They do not turn open_kaishek into a second
 owner of the root contract and do not certify a production CK3 inheritance

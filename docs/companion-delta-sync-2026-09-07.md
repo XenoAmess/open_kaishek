@@ -2404,3 +2404,20 @@ A fresh non-documentation search finds no open_kaishek driver-state reader,
 root action router, typed succession response, or public MCP surface. No Java,
 profile, dependency or version change is required; provider pins and reopen
 conditions are updated in [the compatibility note](ck3-succession-transition-compatibility.md).
+
+
+## 2026-09-14 G2-M3 bounded-run continuation sync
+
+Root commit `36469f2402911ea8c81279cf9c1e4882cecc787a` closes the
+production-owner gap after a natural `played_character_changed` terminal. A
+bounded root run can now reconcile the actual successor, create the successor's
+episode in the same live process, and continue its remaining turn budget. The
+private runner result gains an additive `natural_succession_transitions` list;
+strict `one_generation` and explicit `next_episode` behavior do not change.
+
+This is `ROOT_PRIVATE_RUNNER_RESULT_EXTENDED /
+OPEN_KAISHEK_NO_RUNNER_CONSUMER`. A non-documentation repository search found
+no open_kaishek consumer for the runner result, driver state, or continuation
+literal. No Java, Operator MCP, profile, dependency, endpoint or version change
+is required. The compatibility note records the new root pin and re-open
+condition.
