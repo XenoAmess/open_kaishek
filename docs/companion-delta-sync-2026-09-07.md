@@ -2439,3 +2439,24 @@ profile, Java type, dependency or version changes. A fresh non-documentation
 search found no root/turn-bundle consumer in open_kaishek, so the companion
 updates only its compatibility wording and provider pins. Reopen if such a
 consumer is added or celestial ministry receives its own typed schema.
+
+
+## 2026-09-14 campaign-root optional game-rule observation boundary
+
+Root revision `764e1c4fe0a33c670a4563c14ec98859390a091d` keeps the existing
+campaign-root envelope available when only `selected_game_rule_tokens` cannot
+be read. The response
+publishes an empty token list and zero native count together with
+`selected_game_rule_tokens_ready=false` and aggregate `ready=false`; all other
+same-frame root observations remain available. Consumers must use the component
+readiness bit to distinguish this state from a successfully observed empty rule
+selection. The celestial-government council correction remains component-level:
+the standard council is out of scope without erasing the root.
+
+This is `EXISTING_ROOT_STATUS_AND_READINESS_SEMANTICS_CHANGED /
+OPEN_KAISHEK_NO_ROOT_CONSUMER`. A fresh non-documentation search finds no root
+response caller, parser, closed Java type, validator, profile, or MCP endpoint,
+and therefore no consumer that requires aggregate `readiness.ready=true`.
+open_kaishek needs no Java, Operator MCP, profile, dependency, endpoint, or
+version change. The exact consumer rule and reopen condition are recorded in
+[the campaign-root partial-readiness compatibility note](ck3-campaign-root-partial-readiness-compatibility.md).
