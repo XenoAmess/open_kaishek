@@ -11,8 +11,9 @@ import java.util.List;
  * gameplay-action authority.</p>
  */
 public final class PlayerFactionAlertsCapabilityProfile {
-    public static final String UPSTREAM_PROVIDER_COMMIT = "PAIRING_PENDING";
-    public static final String UPSTREAM_PAIRING_STATUS = "pending_upstream_main";
+    public static final String UPSTREAM_PROVIDER_COMMIT =
+            "1957b6d0ce133f76d56552b76a3ec96f7c740135";
+    public static final String UPSTREAM_PAIRING_STATUS = "paired_to_upstream_main";
 
     public static final String MCP_TOOL_ID = "ck3_query_player_faction_alerts_v1";
     public static final String CAPABILITY_ID =

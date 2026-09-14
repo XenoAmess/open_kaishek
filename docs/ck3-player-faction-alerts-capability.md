@@ -15,9 +15,8 @@ mirrors `player_faction_alerts_ready` from
 
 `PlayerFactionAlertsCapabilityProfile` freezes the exact-build CK3 `1.19.0.6`
 request, command envelope, MCP response, nested rows, readiness fields and
-reason vocabulary. The upstream provider commit is not final, so the profile
-records `PAIRING_PENDING`; it must be replaced with the landed upstream main
-commit before integration.
+reason vocabulary. The profile is paired to landed upstream main commit
+`1957b6d0ce133f76d56552b76a3ec96f7c740135`.
 
 ## Payload and strict partial behavior
 
@@ -72,6 +71,6 @@ The compatibility package starts from open_kaishek baseline
 `wp-ok-g2-realm2-20260914`. It contains no account, machine path, process ID or
 CK3 round dependency.
 
-Reopen this document when the upstream commit lands, when rows/county become
-native-ready, when exact ultimatum timing becomes observable, or when
-open_kaishek gains a runtime caller for this MCP tool.
+Reopen this document when rows/county become native-ready, when exact ultimatum
+timing becomes observable, or when open_kaishek gains a runtime caller for this
+MCP tool.

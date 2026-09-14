@@ -125,7 +125,7 @@ class PlayerFactionAlertsCapabilityProfileTest {
     }
 
     @Test
-    void exactBuildAndPendingUpstreamPairingAreExplicit() {
+    void exactBuildAndUpstreamPairingAreExplicit() {
         assertEquals("1.19.0.6", Ck3Profile11906.GAME_VERSION);
         assertEquals(
                 "2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86",
@@ -135,10 +135,10 @@ class PlayerFactionAlertsCapabilityProfileTest {
                 "ck3-1.19.0.6-native-player-faction-alerts-v1",
                 PlayerFactionAlertsCapabilityProfile.BACKEND_ID);
         assertEquals(
-                "PAIRING_PENDING",
+                "1957b6d0ce133f76d56552b76a3ec96f7c740135",
                 PlayerFactionAlertsCapabilityProfile.UPSTREAM_PROVIDER_COMMIT);
         assertEquals(
-                "pending_upstream_main",
+                "paired_to_upstream_main",
                 PlayerFactionAlertsCapabilityProfile.UPSTREAM_PAIRING_STATUS);
     }
 }
