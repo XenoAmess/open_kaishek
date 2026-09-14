@@ -79,12 +79,12 @@ RUNTIME_CONSUMER_ABSENT`. It adds no CK3 process authority to `open_kaishek`.
 
 ## Pairing status and reopen conditions
 
-The static contract is pinned to upstream contract commit
-`b2ac42c3c42ce742e5f16ce3bcc007840f99a07c`. The DEVACT2 implementation
-commit is pending, so the current pairing status is
-`pending_upstream_devact2_commit`. Before integration, compare its public
-parameter, ACK, receipt, status, and failure-class sets to this profile and
-replace the pending status with the landed upstream main commit.
+The static contract is paired to landed upstream main commit
+`bf5a4032440eae5651dc4c5c481c24b4be27cff1`. Its formal action capability,
+fail-closed transport capability, MCP parameters, ACK, receipt, status, and
+failure-class sets match this profile. The current pairing status is
+`paired_to_upstream_main`; production remains unadvertised and the command ABI
+remains uncertified.
 
 Reopen this boundary if production advertises the capability, exact-build ABI
 or paused live evidence changes either certification flag, the ACK or receipt

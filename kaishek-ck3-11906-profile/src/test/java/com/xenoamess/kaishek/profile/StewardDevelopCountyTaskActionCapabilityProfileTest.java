@@ -111,10 +111,10 @@ class StewardDevelopCountyTaskActionCapabilityProfileTest {
                 "2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86",
                 Ck3Profile11906.EXE_SHA256);
         assertEquals(
-                "b2ac42c3c42ce742e5f16ce3bcc007840f99a07c",
-                StewardDevelopCountyTaskActionCapabilityProfile.UPSTREAM_CONTRACT_COMMIT);
+                "bf5a4032440eae5651dc4c5c481c24b4be27cff1",
+                StewardDevelopCountyTaskActionCapabilityProfile.UPSTREAM_PROVIDER_COMMIT);
         assertEquals(
-                "pending_upstream_devact2_commit",
+                "paired_to_upstream_main",
                 StewardDevelopCountyTaskActionCapabilityProfile.UPSTREAM_PAIRING_STATUS);
     }
 }

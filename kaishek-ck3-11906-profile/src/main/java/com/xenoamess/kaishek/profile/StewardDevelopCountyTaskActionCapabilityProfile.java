@@ -11,10 +11,10 @@ import java.util.List;
  * submission acknowledgement as an applied result.</p>
  */
 public final class StewardDevelopCountyTaskActionCapabilityProfile {
-    public static final String UPSTREAM_CONTRACT_COMMIT =
-            "b2ac42c3c42ce742e5f16ce3bcc007840f99a07c";
+    public static final String UPSTREAM_PROVIDER_COMMIT =
+            "bf5a4032440eae5651dc4c5c481c24b4be27cff1";
     public static final String UPSTREAM_PAIRING_STATUS =
-            "pending_upstream_devact2_commit";
+            "paired_to_upstream_main";
 
     public static final String MCP_TOOL_ID =
             "ck3_change_steward_develop_county_task_v1";
