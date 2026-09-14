@@ -20,6 +20,8 @@ public final class StewardDevelopCountyTaskActionCapabilityProfile {
             "ck3_change_steward_develop_county_task_v1";
     public static final String CAPABILITY_ID =
             "game.command.change-steward-develop-county-task-v1";
+    public static final String FAIL_CLOSED_TRANSPORT_CAPABILITY_ID =
+            "game.contract.change-steward-develop-county-task-v1-fail-closed";
     public static final String STEP_ID =
             "change-steward-develop-county-task-v1";
     public static final String PROFILE_VERSION =
@@ -100,6 +102,8 @@ public final class StewardDevelopCountyTaskActionCapabilityProfile {
                             "receipt_applied_requires_postcondition_verified_true",
                             "receipt_status_is_applied_rejected_or_postcondition_failed",
                             "failure_class_uses_the_closed_five_value_vocabulary",
+                            "fail_closed_transport_can_return_only_rejected_before_submit",
+                            "submitted_ack_from_fail_closed_transport_is_a_red_contract_violation",
                             "production_capability_is_not_advertised",
                             "fixture_does_not_certify_native_abi_or_runtime",
                             "unknown_mcp_arguments_are_rejected",

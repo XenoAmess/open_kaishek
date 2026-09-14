@@ -16,6 +16,10 @@ class StewardDevelopCountyTaskActionCapabilityProfileTest {
                 "game.command.change-steward-develop-county-task-v1",
                 StewardDevelopCountyTaskActionCapabilityProfile.CAPABILITY_ID);
         assertEquals(
+                "game.contract.change-steward-develop-county-task-v1-fail-closed",
+                StewardDevelopCountyTaskActionCapabilityProfile
+                        .FAIL_CLOSED_TRANSPORT_CAPABILITY_ID);
+        assertEquals(
                 "change-steward-develop-county-task-v1",
                 StewardDevelopCountyTaskActionCapabilityProfile.STEP_ID);
         assertEquals("task_develop_county",
@@ -90,6 +94,10 @@ class StewardDevelopCountyTaskActionCapabilityProfileTest {
                 "production_capability_is_not_advertised"));
         assertTrue(capability.invariants().contains(
                 "ack_never_proves_native_command_application"));
+        assertTrue(capability.invariants().contains(
+                "fail_closed_transport_can_return_only_rejected_before_submit"));
+        assertTrue(capability.invariants().contains(
+                "submitted_ack_from_fail_closed_transport_is_a_red_contract_violation"));
         assertTrue(capability.invariants().contains(
                 "receipt_is_derived_from_an_independent_new_paused_snapshot"));
     }

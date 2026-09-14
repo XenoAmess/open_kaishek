@@ -6,6 +6,8 @@ The G2 provider candidate adds:
 
 - MCP tool `ck3_change_steward_develop_county_task_v1`;
 - capability `game.command.change-steward-develop-county-task-v1`;
+- transitional transport capability
+  `game.contract.change-steward-develop-county-task-v1-fail-closed`;
 - native step `change-steward-develop-county-task-v1`;
 - schema version `1` on both acknowledgement and receipt records.
 
@@ -19,6 +21,13 @@ This candidate is static/fixture only. The production provider does not
 advertise it, and its exact-build action ABI has not been certified. The
 companion profile consequently marks the action stateful, nondeterministic,
 native-uncertified, and runtime-uncertified.
+
+The transitional transport capability exists only while the production action
+is uncertified and unadvertised. It lets the typed executor return
+`rejected_before_submit` through the closed ACK shape. It cannot submit the
+native command. A `submitted_verification_pending` ACK attributed to this
+transport is a RED contract violation at the service boundary; consumers must
+not reinterpret it as degraded success.
 
 ## ACK is not an outcome
 
