@@ -2376,3 +2376,17 @@ This is `ROOT_PRIVATE_POLICY_SCHEMA_ADDED /
 OPEN_KAISHEK_NO_POLICY_CONSUMER`. open_kaishek has no consumer for this
 provider or gate and receives no MCP/Java/dependency/version change. Reopen if
 the replay certificate is exposed outside the root process.
+
+
+## 2026-09-14 G2-M3 succession-transition private-state sync
+
+Root commits `9fd9bfd2171d1d19c68acb4fff952cf9abaa4d9f` and
+`9b6100f66d9253e8f7dd787309334bb06d43c784` add the private succession
+expectation/reconciliation contract and one optional additive member to the
+root Python driver's state v2 envelope.
+
+This is `ROOT_PRIVATE_STATE_EXTENSION / OPEN_KAISHEK_NO_CONSUMER`.
+open_kaishek has no driver-state reader, private method caller, closed response
+type or public MCP surface for this data. Its implementation, dependencies and
+version remain unchanged. The exact boundary and provider hashes are recorded
+in [the succession-transition compatibility note](ck3-succession-transition-compatibility.md).

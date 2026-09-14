@@ -112,3 +112,5 @@ py tools/run_cli_smoke.py
 ## 项目口号
 
 > 离线穷举我们真正拥有的业务语义，实机只验证 CK3 真正拥有的引擎语义。
+
+- [CK3 succession-transition compatibility boundary](docs/ck3-succession-transition-compatibility.md)
