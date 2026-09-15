@@ -22,7 +22,7 @@ class Eu5Profile1311Test {
         assertEquals("24187685", Eu5Profile1311.STEAM_BUILD_ID);
         assertEquals(64, profile.executableSha256().length());
         assertEquals(6, Eu5Profile1311.VANILLA_EVIDENCE_SHA256.size());
-        assertEquals(5, Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.size());
+        assertEquals(8, Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.size());
         assertTrue(Eu5Profile1311.VANILLA_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertTrue(Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.values().stream()
@@ -241,6 +241,48 @@ class Eu5Profile1311Test {
     }
 
     @Test
+    void countryCapitalRegionEffectScopeValidatesButArbitraryDottedScopeDoesNot() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.11 = {
+                  type = country_event
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.11.a
+                    c:GYT.capital = { save_scope_as = xcrt_native_capital }
+                    c:GYT.capital.region = {
+                      every_location_in_region = {
+                        limit = {
+                          is_ownable = yes
+                          NOT = { owner ?= c:GYT }
+                          owner ?= { OR = { this = root is_subject_or_below_of = root } }
+                        }
+                        add_to_list = xcrt_acceptance_extra_donors_to_isolate
+                      }
+                    }
+                    every_in_list = {
+                      list = xcrt_acceptance_extra_donors_to_isolate
+                      change_location_owner = c:XCRTI
+                    }
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                diagnostics::toString);
+
+        var invalid = Validator.validate(Parser.parse(source.replace(
+                        "c:GYT.capital.region = {", "c:GYT.capital.area = {")
+                .getBytes(StandardCharsets.UTF_8)), "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(invalid.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("c:GYT.capital.area")),
+                invalid::toString);
+    }
+
+    @Test
     void unknownInsideMixedCreationBlockStillFailsClosed() {
         String source = """
                 namespace = xcrt_acceptance
@@ -310,5 +352,15 @@ class Eu5Profile1311Test {
                 """.getBytes(StandardCharsets.UTF_8)), "in_game/events/xcrt.txt", profile);
         assertTrue(scalarScopeLink.stream().anyMatch(d ->
                 d.code().equals("SCOPE_LINK_REQUIRES_BLOCK")), scalarScopeLink::toString);
+
+        var scalarCapitalRegion = Validator.validate(Parser.parse("""
+                namespace = xcrt_acceptance
+                xcrt_acceptance.3 = {
+                  type = country_event
+                  option = { name = xcrt_acceptance.3.a c:GYT.capital.region = yes }
+                }
+                """.getBytes(StandardCharsets.UTF_8)), "in_game/events/xcrt.txt", profile);
+        assertTrue(scalarCapitalRegion.stream().anyMatch(d ->
+                d.code().equals("SCOPE_LINK_REQUIRES_BLOCK")), scalarCapitalRegion::toString);
     }
 }

@@ -46,7 +46,13 @@ public final class Eu5Profile1311 implements KaishekProfile {
             "events/rebels.txt",
             "3E7360307A62DAEAB9D2153E0BC9F2FB8DBDDE89F5C17BB0E69755B01B3EF61B",
             "events/DHE/flavor_chi.txt",
-            "105519F6B69970C866EAFB23FCD1B135F41649AE46F7C08B02F0E03A7DE837DC");
+            "105519F6B69970C866EAFB23FCD1B135F41649AE46F7C08B02F0E03A7DE837DC",
+            "events/DHE/flavor_RUS.txt",
+            "91282A9A36CFFA9276989CE77D33368758E494D5837E459CE4D7468B02EB2BDB",
+            "events/institution_events.txt",
+            "8787B67BAE64518CFF6C013C2F4A90CEB2E903913099F6A2E99A68295C9BEE3A",
+            "events/situations/hussite_wars.txt",
+            "CD1259E4143605932FA8C5004FF9C632BB93A65E0441799B510C10A7AA28EF0B");
 
     private static final Set<String> STRUCTURAL = structuralKeys();
     private static final Map<String, OpcodeSpec> OPCODES = opcodesByName();
@@ -67,7 +73,7 @@ public final class Eu5Profile1311 implements KaishekProfile {
     @Override
     public boolean isScopeLinkKey(String name) {
         return name != null && (name.matches("location:[a-z0-9_]+")
-                || name.matches("c:[A-Za-z0-9_]+"));
+                || name.matches("c:[A-Za-z0-9_]+(?:\\.capital(?:\\.region)?)?"));
     }
 
     @Override
