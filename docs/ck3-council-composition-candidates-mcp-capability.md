@@ -12,6 +12,12 @@ Companion candidate commit
 Council19 contract `xar.ck3.council-composition-candidates/v1` pinned by
 `CouncilCompositionCandidatesResultSchemaProfile`.
 
+Pre-release correction commit
+`91b2366344f96206fbac83b529617993b398a16c` extends that v1 result in place with
+the occupied incumbent's same-frame stewardship value, its readiness bit, and
+an explicit `incumbent_main_skill_unready` failure. Request and MCP envelope
+fields remain unchanged.
+
 The MCP request contains exactly `expected_snapshot_id`, `public_revision`,
 `native_revision`, `date_raw`, `owner_character_id`, and `position_key`; the
 only valid position is `councillor_steward`. The service validates the complete
@@ -33,8 +39,9 @@ existing unsupported path, and the hybrid driver never falls back to another
 backend for this pure native observation.
 
 The formal planner can request and consume a complete same-frame observation.
-When it finds a vacant steward seat, it can select a deterministic native-legal
-candidate, but it stops before mutation because
+The corrected result supplies the incumbent skill needed to compare an
+occupied seat without inventing a value. Whether assigning a vacancy or
+replacing an incumbent, it still stops before mutation because
 `game.action.assign-councillor-v1` has no semantic action implementation. This
 package therefore records:
 

@@ -5,17 +5,18 @@ import java.util.List;
 /**
  * Static exact-build projection of the Council composition candidate result.
  *
- * <p>The upstream candidate currently freezes only the native result schema.
- * It has no advertised runtime command or MCP tool, so this class deliberately
- * does not create a {@link CapabilityDescriptor}. The companion project owns
- * the native reader, future transport registration and formal strategy
- * consumption.</p>
+ * <p>This class freezes the native result schema separately from the MCP
+ * request/response capability descriptor. The companion project owns the
+ * private reader and the still-pending public runtime advertisement, native
+ * live proof and formal strategy consumption.</p>
  */
 public final class CouncilCompositionCandidatesResultSchemaProfile {
     public static final String UPSTREAM_CANDIDATE_COMMIT =
             "e0d51a2dd8fc0637dd9a07ae599333ac252b949b";
+    public static final String UPSTREAM_SCHEMA_CORRECTION_COMMIT =
+            "91b2366344f96206fbac83b529617993b398a16c";
     public static final String UPSTREAM_PAIRING_STATUS =
-            "paired_to_upstream_candidate_pending_r693_and_transport";
+            "paired_to_upstream_correction_pending_public_runtime_and_live";
 
     public static final String CAPABILITY_ID =
             "game.query.council-composition-candidates-v1";
@@ -24,7 +25,7 @@ public final class CouncilCompositionCandidatesResultSchemaProfile {
     public static final String PROFILE_VERSION =
             "ck3-1.19.0.6-council-composition-candidates-v1-candidate";
     public static final String CONTRACT_STAGE =
-            "static_result_schema_pending_private_live_and_runtime_registration";
+            "static_result_schema_private_reader_live_public_runtime_and_live_pending";
     public static final int SCHEMA_VERSION = 1;
 
     public static final String POSITION_KEY = "councillor_steward";
@@ -66,6 +67,7 @@ public final class CouncilCompositionCandidatesResultSchemaProfile {
     public static final List<String> POSITION_FIELDS = List.of(
             "position_key",
             "incumbent_character_id",
+            "incumbent_main_skill",
             "vacant",
             "action_route");
 
@@ -85,6 +87,7 @@ public final class CouncilCompositionCandidatesResultSchemaProfile {
             "identity_ready",
             "candidate_collection_ready",
             "incumbent_ready",
+            "incumbent_main_skill_ready",
             "candidate_legality_ready",
             "main_skill_ready",
             "action_route_ready",
@@ -103,6 +106,7 @@ public final class CouncilCompositionCandidatesResultSchemaProfile {
             "enrichment_unavailable",
             "same_frame_binding_mismatch",
             "incumbent_invalid",
+            "incumbent_main_skill_unready",
             "candidate_set_mismatch",
             "candidate_eligibility_unready",
             "candidate_main_skill_unready",

@@ -38,8 +38,8 @@ class CouncilCompositionCandidatesResultSchemaProfileTest {
                 CouncilCompositionCandidatesResultSchemaProfile.SNAPSHOT_FIELDS.size());
         assertEquals(
                 List.of(
-                        "position_key", "incumbent_character_id", "vacant",
-                        "action_route"),
+                        "position_key", "incumbent_character_id",
+                        "incumbent_main_skill", "vacant", "action_route"),
                 CouncilCompositionCandidatesResultSchemaProfile.POSITION_FIELDS);
         assertEquals(
                 List.of(
@@ -49,7 +49,7 @@ class CouncilCompositionCandidatesResultSchemaProfileTest {
         assertEquals(
                 List.of("key", "value"),
                 CouncilCompositionCandidatesResultSchemaProfile.MAIN_SKILL_FIELDS);
-        assertEquals(8,
+        assertEquals(9,
                 CouncilCompositionCandidatesResultSchemaProfile.READINESS_FIELDS.size());
     }
 
@@ -67,7 +67,7 @@ class CouncilCompositionCandidatesResultSchemaProfileTest {
         assertEquals(
                 List.of("native_candidate_provider_accepted"),
                 CouncilCompositionCandidatesResultSchemaProfile.ELIGIBILITY_REASONS);
-        assertEquals(8,
+        assertEquals(9,
                 CouncilCompositionCandidatesResultSchemaProfile.UNAVAILABLE_REASONS.size());
         assertEquals(18,
                 CouncilCompositionCandidatesResultSchemaProfile.SOURCE_UNAVAILABLE_REASONS.size());
@@ -80,13 +80,17 @@ class CouncilCompositionCandidatesResultSchemaProfileTest {
         assertFalse(CouncilCompositionCandidatesResultSchemaProfile.NATIVE_LIVE_READY);
         assertFalse(CouncilCompositionCandidatesResultSchemaProfile.FORMAL_STRATEGY_LIVE);
         assertEquals(
-                "static_result_schema_pending_private_live_and_runtime_registration",
+                "static_result_schema_private_reader_live_public_runtime_and_live_pending",
                 CouncilCompositionCandidatesResultSchemaProfile.CONTRACT_STAGE);
         assertEquals(
-                "paired_to_upstream_candidate_pending_r693_and_transport",
+                "paired_to_upstream_correction_pending_public_runtime_and_live",
                 CouncilCompositionCandidatesResultSchemaProfile.UPSTREAM_PAIRING_STATUS);
         assertTrue(
                 CouncilCompositionCandidatesResultSchemaProfile.UPSTREAM_CANDIDATE_COMMIT
                         .matches("[0-9a-f]{40}"));
+        assertEquals(
+                "91b2366344f96206fbac83b529617993b398a16c",
+                CouncilCompositionCandidatesResultSchemaProfile
+                        .UPSTREAM_SCHEMA_CORRECTION_COMMIT);
     }
 }

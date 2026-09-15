@@ -75,6 +75,8 @@ class CouncilCompositionCandidatesMcpCapabilityProfileTest {
         assertTrue(query.invariants().contains(
                 "bottom_native_capability_absence_remains_unsupported"));
         assertTrue(query.invariants().contains(
+                "occupied_position_requires_same_frame_incumbent_main_skill"));
+        assertTrue(query.invariants().contains(
                 "assignment_remains_blocked_without_a_semantic_action"));
     }
 
@@ -89,6 +91,10 @@ class CouncilCompositionCandidatesMcpCapabilityProfileTest {
                 "a6857514dd909caeda68a07ec2baee053c53daac",
                 CouncilCompositionCandidatesMcpCapabilityProfile
                         .UPSTREAM_MCP_CONSUMER_COMMIT);
+        assertEquals(
+                "91b2366344f96206fbac83b529617993b398a16c",
+                CouncilCompositionCandidatesMcpCapabilityProfile
+                        .UPSTREAM_RESULT_SCHEMA_CORRECTION_COMMIT);
         assertEquals(
                 "paired_to_upstream_candidate_pending_native_advertisement_and_live",
                 CouncilCompositionCandidatesMcpCapabilityProfile.UPSTREAM_PAIRING_STATUS);

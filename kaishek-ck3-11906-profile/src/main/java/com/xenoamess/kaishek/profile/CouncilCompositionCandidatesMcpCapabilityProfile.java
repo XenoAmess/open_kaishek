@@ -13,6 +13,8 @@ import java.util.List;
 public final class CouncilCompositionCandidatesMcpCapabilityProfile {
     public static final String UPSTREAM_MCP_CONSUMER_COMMIT =
             "a6857514dd909caeda68a07ec2baee053c53daac";
+    public static final String UPSTREAM_RESULT_SCHEMA_CORRECTION_COMMIT =
+            "91b2366344f96206fbac83b529617993b398a16c";
     public static final String UPSTREAM_PAIRING_STATUS =
             "paired_to_upstream_candidate_pending_native_advertisement_and_live";
 
@@ -84,6 +86,7 @@ public final class CouncilCompositionCandidatesMcpCapabilityProfile {
                             "request_date_and_character_identity_use_signed_int32_ranges",
                             "query_requires_one_unchanged_paused_exact_build_snapshot",
                             "native_result_and_python_normalization_preserve_the_v1_schema",
+                            "occupied_position_requires_same_frame_incumbent_main_skill",
                             "available_response_requires_complete_readiness_and_exact_binding",
                             "query_sequence_is_a_positive_uint64_value",
                             "bottom_native_capability_absence_remains_unsupported",

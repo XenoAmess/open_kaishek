@@ -26,12 +26,14 @@ result additionally carries:
 - one paused snapshot identity: `snapshot_id`, `public_revision`,
   `native_revision`, `date_raw`, and `paused`;
 - `owner_character_id` and the fixed `councillor_steward` position;
-- incumbent identity or `null`, `vacant`, and the corresponding `assign` or
-  `replace` action route;
+- incumbent identity or `null`; `incumbent_main_skill` is the same-frame
+  `stewardship` value when occupied and `null` when vacant; `vacant` selects the
+  corresponding `assign` or `replace` action route;
 - `candidate_collection_complete` and candidate rows containing full signed
   character identity, native collection ordinal, final native eligibility,
   `stewardship` value, and the same position action route;
-- eight readiness fields ending in `same_frame_ready` and aggregate `ready`.
+- nine readiness fields, including `incumbent_main_skill_ready`, ending in
+  `same_frame_ready` and aggregate `ready`.
 
 Candidate rows are final rows accepted by the native provider. The v1 schema
 does not reconstruct rejected rows and does not claim that
@@ -52,9 +54,17 @@ The profile is paired to companion candidate commit
 SHA-256
 `2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`.
 
-The schema is static-only. It is not evidence that the private reader passed
-the next real CK3 run, that incumbent and stewardship enrichment are live, that
-a runtime/MCP endpoint exists, or that formal strategy consumed the result.
+Pre-release schema correction commit
+`91b2366344f96206fbac83b529617993b398a16c` adds
+`position.incumbent_main_skill`, readiness bit
+`incumbent_main_skill_ready`, and unavailable reason
+`incumbent_main_skill_unready`. The incumbent skill participates in the same
+application-main transaction as incumbent identity and candidate skills.
+
+This schema projection is static-only. R693 separately proves only the private
+steward reader; it is not evidence that public incumbent/skill enrichment is
+runtime-advertised or live, that the MCP endpoint reaches the native query, or
+that formal strategy consumed the result.
 Reopen this compatibility package when the upstream candidate lands on master,
 when runtime or MCP identity is frozen, when any field or reason vocabulary
 changes, or when live/formal-strategy evidence advances.
