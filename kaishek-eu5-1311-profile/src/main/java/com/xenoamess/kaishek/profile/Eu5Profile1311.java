@@ -10,8 +10,8 @@ import java.util.TreeSet;
 /**
  * Exact-build static schema slice for EU5 1.3.11, Steam Build 24187685.
  *
- * <p>The profile intentionally covers only the country-interaction and
- * scripted-trigger shapes used by For Vivhite: Subject Territory
+ * <p>The profile covers the country-interaction, scripted-trigger and
+ * country-event fixture shapes used by For Vivhite: Subject Territory
  * Consolidation. It provides fail-closed source validation, not executable
  * EU5 runtime semantics.</p>
  */
@@ -36,6 +36,18 @@ public final class Eu5Profile1311 implements KaishekProfile {
             "subject_types/trade_company.txt",
             "5BCDC8852AF7DD5633D04BB4C2C01113CA85F3B06A2A466B23301109BC641D55");
 
+    public static final Map<String, String> VANILLA_EVENT_EVIDENCE_SHA256 = Map.of(
+            "events/readme.txt",
+            "2794AF93B213B6A03E27CA72D4B038B3AB398DEB2912B14E98141CF1A6ED668B",
+            "events/debug/qa_debug.txt",
+            "26664F3B8013C860DCF96690D5BD6E7544A3544198128FB9B56E13BEDF30976E",
+            "events/economy/banking.txt",
+            "2CA6AC2A36370FCFBDC4FBD172AFCEE8B63BB9D5DF489CC576794CE8DD06141A",
+            "events/rebels.txt",
+            "3E7360307A62DAEAB9D2153E0BC9F2FB8DBDDE89F5C17BB0E69755B01B3EF61B",
+            "events/DHE/flavor_chi.txt",
+            "105519F6B69970C866EAFB23FCD1B135F41649AE46F7C08B02F0E03A7DE837DC");
+
     private static final Set<String> STRUCTURAL = structuralKeys();
     private static final Map<String, OpcodeSpec> OPCODES = opcodesByName();
 
@@ -45,6 +57,29 @@ public final class Eu5Profile1311 implements KaishekProfile {
     @Override public OpcodeSpec opcode(String name) { return name == null ? null : OPCODES.get(name); }
     @Override public Set<String> allowedStructuralKeys() { return STRUCTURAL; }
     @Override public Map<String, OpcodeSpec> opcodes() { return OPCODES; }
+
+    @Override
+    public boolean isStructuralKey(String name) {
+        return STRUCTURAL.contains(name)
+                || isScopeLinkKey(name);
+    }
+
+    @Override
+    public boolean isScopeLinkKey(String name) {
+        return name != null && (name.matches("location:[a-z0-9_]+")
+                || name.matches("c:[A-Za-z0-9_]+"));
+    }
+
+    @Override
+    public boolean walkOpcodeBlock(String name) {
+        return "create_country_from_location".equals(name)
+                || "create_building_country_in_location".equals(name);
+    }
+
+    @Override
+    public boolean isOpaqueStructuralBlock(String name) {
+        return "reforms".equals(name);
+    }
 
     @Override
     public ScriptDomain domainForPath(String sourcePath) {
@@ -76,7 +111,9 @@ public final class Eu5Profile1311 implements KaishekProfile {
                 "xcrt_is_transferable_location",
                 "xcrt_has_at_most_transferable_locations",
                 "xcrt_recipient_respects_tusi_cap",
-                "xcrt_frozen_transfer_list_respects_tusi_cap");
+                "xcrt_frozen_transfer_list_respects_tusi_cap",
+                "namespace", "option", "outcome", "orphan", "historical_option",
+                "hidden_effect", "overlord", "subject_type", "reforms");
         return Collections.unmodifiableSet(keys);
     }
 
@@ -92,11 +129,23 @@ public final class Eu5Profile1311 implements KaishekProfile {
         add(result, "is_ownable", OpcodeSpec.Kind.TRIGGER);
         add(result, "this", OpcodeSpec.Kind.TRIGGER);
         add(result, "is_subject_or_below_of", OpcodeSpec.Kind.TRIGGER);
+        add(result, "always", OpcodeSpec.Kind.TRIGGER);
+        add(result, "tag", OpcodeSpec.Kind.TRIGGER);
+        add(result, "has_global_variable", OpcodeSpec.Kind.TRIGGER);
         result.put("list_size", new OpcodeSpec(
                 "list_size", OpcodeSpec.Kind.TRIGGER, 2, 2,
                 Set.of("THIS", "this"), GAME_VERSION, Set.of("name", "value")));
         add(result, "add_to_list", OpcodeSpec.Kind.EFFECT);
         add(result, "change_location_owner", OpcodeSpec.Kind.EFFECT);
+        add(result, "discover_location", OpcodeSpec.Kind.EFFECT);
+        add(result, "create_country_from_location", OpcodeSpec.Kind.EFFECT);
+        add(result, "create_building_country_in_location", OpcodeSpec.Kind.EFFECT);
+        add(result, "define_unique_country_tag", OpcodeSpec.Kind.EFFECT);
+        add(result, "change_country_name", OpcodeSpec.Kind.EFFECT);
+        add(result, "change_country_adjective", OpcodeSpec.Kind.EFFECT);
+        add(result, "set_global_variable", OpcodeSpec.Kind.EFFECT);
+        add(result, "set_capital", OpcodeSpec.Kind.EFFECT);
+        add(result, "make_subject_of", OpcodeSpec.Kind.EFFECT);
         return Collections.unmodifiableMap(result);
     }
 

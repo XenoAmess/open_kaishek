@@ -36,9 +36,67 @@ public final class Validator {
         ScriptDomain domain = profile.domainForPath(sourcePath);
         if (domain == ScriptDomain.UNKNOWN)
             out.add(diag("UNKNOWN_DIRECTORY", Diagnostic.Severity.ERROR, "no schema profile for directory", document.span(), sourcePath));
+        if (isEu5EventSlice(domain, profile))
+            validateEu5EventDeclarations(document, out, sourcePath);
         walk(document.children(), domain, profile, out, sourcePath, 0,
                 initialSide(domain));
         return List.copyOf(out);
+    }
+
+    private static boolean isEu5EventSlice(ScriptDomain domain, KaishekProfile profile) {
+        return domain == ScriptDomain.EVENTS
+                && "eu5-1.3.11-build-24187685".equals(profile.id());
+    }
+
+    /** The exact-build readme requires a namespace and numbered event declarations. */
+    private static void validateEu5EventDeclarations(Document document,
+                                                      List<Diagnostic> out, String path) {
+        List<EntryNode> roots = document.children().stream()
+                .filter(EntryNode.class::isInstance)
+                .map(EntryNode.class::cast)
+                .toList();
+        EntryNode namespaceEntry = roots.stream()
+                .filter(e -> "namespace".equals(e.key().text().trim()))
+                .findFirst().orElse(null);
+        if (namespaceEntry == null || namespaceEntry.value() == null) {
+            out.add(diag("EU5_EVENT_NAMESPACE_REQUIRED", Diagnostic.Severity.ERROR,
+                    "event file requires namespace = <id> before numbered declarations",
+                    document.span(), path));
+            return;
+        }
+        String namespace = namespaceEntry.value().text().trim();
+        if (!namespace.matches("[A-Za-z][A-Za-z0-9_]*")) {
+            out.add(diag("EU5_EVENT_NAMESPACE_INVALID", Diagnostic.Severity.ERROR,
+                    "event namespace must be an identifier", namespaceEntry.value().span(), path));
+            return;
+        }
+        if (!roots.isEmpty() && roots.get(0) != namespaceEntry)
+            out.add(diag("EU5_EVENT_NAMESPACE_ORDER", Diagnostic.Severity.ERROR,
+                    "event namespace must be the first declaration",
+                    namespaceEntry.key().span(), path));
+        for (EntryNode root : roots) {
+            if (root == namespaceEntry) continue;
+            String key = root.key().text().trim();
+            String prefix = namespace + ".";
+            String number = key.startsWith(prefix) ? key.substring(prefix.length()) : "";
+            boolean numbered = number.matches("[0-9]{1,4}");
+            int eventNumber = numbered ? Integer.parseInt(number) : 0;
+            if (!numbered || eventNumber < 1 || eventNumber > 9999
+                    || !(root.value() instanceof BlockNode block)) {
+                out.add(diag("EU5_EVENT_ID_INVALID", Diagnostic.Severity.ERROR,
+                        "event declaration must be " + namespace + ".<1..9999> = { ... }",
+                        root.key().span(), path + "." + key));
+                continue;
+            }
+            EntryNode type = block.entries().stream()
+                    .filter(e -> "type".equals(e.key().text().trim()))
+                    .findFirst().orElse(null);
+            if (type == null || type.value() == null
+                    || !"country_event".equals(type.value().text().trim()))
+                out.add(diag("EU5_EVENT_TYPE_OUT_OF_SLICE", Diagnostic.Severity.ERROR,
+                        "this exact-build event slice covers type = country_event only",
+                        root.key().span(), path + "." + key));
+        }
     }
     /** Profile-api entry point; keeps validator independent of concrete profile modules. */
     public static List<Diagnostic> validate(ParseResult parsed, String sourcePath, GameProfile profile) {
@@ -84,11 +142,15 @@ public final class Validator {
             if (depth == 0 && seen.putIfAbsent(key, e) != null)
                 out.add(diag("DUPLICATE_KEY", Diagnostic.Severity.ERROR, "duplicate key in the same block: " + key, e.span(), at));
             OpcodeSpec spec = profile.opcode(key);
+            if (profile.isScopeLinkKey(key) && !(e.value() instanceof BlockNode))
+                out.add(diag("SCOPE_LINK_REQUIRES_BLOCK", Diagnostic.Severity.ERROR,
+                        "left-hand scope link " + key + " must contain a script block",
+                        e.key().span(), at));
             boolean opcodePosition = depth > 0;
             boolean scalarRootOpcode = depth == 0 && !(e.value() instanceof BlockNode) &&
                     (domain == ScriptDomain.SCRIPTED_EFFECTS || domain == ScriptDomain.SCRIPTED_TRIGGERS || domain == ScriptDomain.SCRIPTED_VALUES);
             if ((opcodePosition || scalarRootOpcode) && spec == null
-                    && !profile.allowedStructuralKeys().contains(key)
+                    && !profile.isStructuralKey(key)
                     // CK3 1.19.0.6 accepts calculated-value blocks for
                     // trigger ranges.  Treat the expression as one opaque
                     // value here so its `value`/`add` terms are not reported
@@ -105,7 +167,7 @@ public final class Validator {
             // A registered opcode is unambiguous even at file root; declarations
             // (event/scripted-effect IDs) are simply absent from the registry.
             if (spec != null) {
-                validateDomain(spec, domain, e, out, at, side);
+                validateDomain(spec, domain, e, out, at, side, profile);
                 validateParameters(spec, e, out, at);
                 validateScope(spec, e, out, at);
             }
@@ -119,8 +181,10 @@ public final class Validator {
                 // an executable child sequence rather than a parameter map.
                 boolean argumentBlock = spec != null
                         && spec.kind() != OpcodeSpec.Kind.STRUCTURAL
-                        && spec.kind() != OpcodeSpec.Kind.INTERFACE;
-                if (!argumentBlock && !calculatedValueExpression) {
+                        && spec.kind() != OpcodeSpec.Kind.INTERFACE
+                        && !profile.walkOpcodeBlock(key);
+                if (!argumentBlock && !calculatedValueExpression
+                        && !profile.isOpaqueStructuralBlock(key)) {
                     walk(b.children(), domain, profile, out, at, depth + 1,
                             childSide);
                 }
@@ -152,6 +216,8 @@ public final class Validator {
         // Explicit effect branches and effect-side variable/scope blocks are
         // never reinterpreted as trigger expressions.
         if (normalized.equals("effect") || normalized.equals("effects")
+                || normalized.equals("option") || normalized.equals("immediate")
+                || normalized.equals("after") || normalized.equals("hidden_effect")
                 || normalized.equals("then") || normalized.equals("else")
                 || normalized.equals("else_if") || normalized.equals("set_variable")
                 || normalized.equals("change_variable") || normalized.equals("save_scope_as")
@@ -193,10 +259,12 @@ public final class Validator {
     }
     private enum ScriptSide { OTHER, TRIGGER, EFFECT }
     private static void validateDomain(OpcodeSpec spec, ScriptDomain domain, EntryNode e,
-                                       List<Diagnostic> out, String path, ScriptSide side) {
+                                       List<Diagnostic> out, String path, ScriptSide side,
+                                       KaishekProfile profile) {
         boolean trigger = domain == ScriptDomain.SCRIPTED_TRIGGERS;
         boolean effect = domain == ScriptDomain.SCRIPTED_EFFECTS || domain == ScriptDomain.ON_ACTION;
         boolean value = domain == ScriptDomain.SCRIPTED_VALUES;
+        boolean eu5Event = isEu5EventSlice(domain, profile);
         // Effect/on_action files legitimately embed registered trigger
         // predicates inside condition containers (`limit`, `trigger`,
         // `potential`, `allow`, or `check`).  `childSide` marks only those
@@ -207,7 +275,9 @@ public final class Validator {
                 && spec.kind() == OpcodeSpec.Kind.TRIGGER;
         if ((trigger && spec.kind() == OpcodeSpec.Kind.EFFECT)
                 || (effect && spec.kind() == OpcodeSpec.Kind.TRIGGER && !triggerInEffectCondition) ||
-            (value && spec.kind() != OpcodeSpec.Kind.VALUE && spec.kind() != OpcodeSpec.Kind.STRUCTURAL))
+            (value && spec.kind() != OpcodeSpec.Kind.VALUE && spec.kind() != OpcodeSpec.Kind.STRUCTURAL) ||
+            (eu5Event && side == ScriptSide.TRIGGER && spec.kind() == OpcodeSpec.Kind.EFFECT) ||
+            (eu5Event && side == ScriptSide.EFFECT && spec.kind() == OpcodeSpec.Kind.TRIGGER))
             out.add(diag("WRONG_DOMAIN", Diagnostic.Severity.ERROR, "opcode " + spec.name() + " is " + spec.kind() + " but file domain is " + domain, e.key().span(), path));
     }
     private static void validateParameters(OpcodeSpec spec, EntryNode e, List<Diagnostic> out, String path) {

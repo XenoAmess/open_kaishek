@@ -30,6 +30,26 @@ public interface KaishekProfile {
     Set<String> allowedStructuralKeys();
     Map<String, OpcodeSpec> opcodes();
 
+    /** Profile-specific declaration or scope-link words, not executable opcodes. */
+    default boolean isStructuralKey(String name) {
+        return allowedStructuralKeys().contains(name);
+    }
+
+    /** Recognized left-hand scope links must own a nested script block. */
+    default boolean isScopeLinkKey(String name) {
+        return false;
+    }
+
+    /** Some typed effect blocks interleave parameters and executable children. */
+    default boolean walkOpcodeBlock(String name) {
+        return false;
+    }
+
+    /** A structural argument list may contain values, rather than opcodes. */
+    default boolean isOpaqueStructuralBlock(String name) {
+        return false;
+    }
+
     /**
      * Adapt the framework-neutral profile contract for validator consumers.
      * The adapter has no dependency on a concrete game profile; directory

@@ -22,12 +22,17 @@ class Eu5Profile1311Test {
         assertEquals("24187685", Eu5Profile1311.STEAM_BUILD_ID);
         assertEquals(64, profile.executableSha256().length());
         assertEquals(6, Eu5Profile1311.VANILLA_EVIDENCE_SHA256.size());
+        assertEquals(5, Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.size());
         assertTrue(Eu5Profile1311.VANILLA_EVIDENCE_SHA256.values().stream()
+                .allMatch(hash -> hash.length() == 64));
+        assertTrue(Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertEquals(ScriptDomain.INTERACTIONS,
                 profile.domainForPath("in_game/common/country_interactions/xcrt.txt"));
         assertEquals(ScriptDomain.SCRIPTED_TRIGGERS,
                 profile.domainForPath("in_game/common/scripted_triggers/xcrt.txt"));
+        assertEquals(ScriptDomain.EVENTS,
+                profile.domainForPath("in_game/events/xcrt_acceptance.txt"));
     }
 
     @Test
@@ -172,5 +177,138 @@ class Eu5Profile1311Test {
                         d.code().equals("UNKNOWN_OPCODE")
                                 && d.message().contains("invented_eu5_operation")),
                 diagnostics::toString);
+    }
+
+    @Test
+    void countryEventOptionScopeAndMixedCreationBlocksValidate() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.10 = {
+                  type = country_event
+                  title = xcrt_acceptance.10.title
+                  desc = xcrt_acceptance.10.desc
+                  outcome = neutral
+                  orphan = yes
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.10.a
+                    trigger = { tag = LNG c:GYT = { is_subject_of = root } }
+                    location:tortuga = {
+                      discover_location = root
+                      create_country_from_location = {
+                        overlord = root
+                        subject_type = subject_type:vassal
+                        define_unique_country_tag = XCRTT
+                        change_country_name = XCRTT
+                        change_country_adjective = XCRTT
+                      }
+                    }
+                    location:lisbon = {
+                      create_building_country_in_location = {
+                        name = { name = XMBNK }
+                        reforms = { banking_country }
+                        hidden_effect = {
+                          define_unique_country_tag = XMBNK
+                          make_subject_of = { target = root type = subject_type:state_bank }
+                        }
+                      }
+                    }
+                    set_global_variable = { name = xcrt_actor value = root }
+                    set_capital = location:porto_santo
+                  }
+                  option = {
+                    name = xcrt_acceptance.10.b
+                    trigger = {
+                      c:GYT = {
+                        capital.region = {
+                          any_location_in_region = {
+                            count <= 1
+                            is_ownable = yes
+                            NOT = { owner ?= c:GYT }
+                          }
+                        }
+                      }
+                    }
+                    custom_tooltip = xcrt_acceptance.10.b.tt
+                  }
+                }
+                """;
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        var diagnostics = Validator.validate(parsed, "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                diagnostics::toString);
+    }
+
+    @Test
+    void unknownInsideMixedCreationBlockStillFailsClosed() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.20 = {
+                  type = country_event
+                  option = {
+                    name = xcrt_acceptance.20.a
+                    location:lisbon = {
+                      create_building_country_in_location = {
+                        hidden_effect = { invented_eu5_operation = yes }
+                      }
+                    }
+                  }
+                }
+                """;
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        var diagnostics = Validator.validate(parsed, "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("invented_eu5_operation")),
+                diagnostics::toString);
+    }
+
+    @Test
+    void eventTriggerAndOptionEffectSidesStayDistinct() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.11 = {
+                  type = country_event
+                  trigger = { discover_location = root }
+                  option = {
+                    name = xcrt_acceptance.11.a
+                    has_global_variable = xcrt_ready
+                  }
+                }
+                """;
+        var parsed = Parser.parse(source.getBytes(StandardCharsets.UTF_8));
+        var diagnostics = Validator.validate(parsed, "in_game/events/xcrt_acceptance.txt", profile);
+        assertEquals(2, diagnostics.stream().filter(d -> d.code().equals("WRONG_DOMAIN")).count(),
+                diagnostics::toString);
+    }
+
+    @Test
+    void eventDeclarationsRequireNamespaceBoundedIdAndCountryScope() {
+        var noNamespace = Validator.validate(
+                Parser.parse("xcrt_acceptance.1 = { type = country_event }".getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt.txt", profile);
+        assertTrue(noNamespace.stream().anyMatch(d ->
+                d.code().equals("EU5_EVENT_NAMESPACE_REQUIRED")), noNamespace::toString);
+
+        var outOfSlice = Validator.validate(Parser.parse("""
+                namespace = xcrt_acceptance
+                xcrt_acceptance.10000 = { type = country_event }
+                xcrt_acceptance.1 = { type = location_event }
+                """.getBytes(StandardCharsets.UTF_8)), "in_game/events/xcrt.txt", profile);
+        assertTrue(outOfSlice.stream().anyMatch(d ->
+                d.code().equals("EU5_EVENT_ID_INVALID")), outOfSlice::toString);
+        assertTrue(outOfSlice.stream().anyMatch(d ->
+                d.code().equals("EU5_EVENT_TYPE_OUT_OF_SLICE")), outOfSlice::toString);
+
+        var scalarScopeLink = Validator.validate(Parser.parse("""
+                namespace = xcrt_acceptance
+                xcrt_acceptance.2 = {
+                  type = country_event
+                  option = { name = xcrt_acceptance.2.a location:tortuga = yes }
+                }
+                """.getBytes(StandardCharsets.UTF_8)), "in_game/events/xcrt.txt", profile);
+        assertTrue(scalarScopeLink.stream().anyMatch(d ->
+                d.code().equals("SCOPE_LINK_REQUIRES_BLOCK")), scalarScopeLink::toString);
     }
 }
