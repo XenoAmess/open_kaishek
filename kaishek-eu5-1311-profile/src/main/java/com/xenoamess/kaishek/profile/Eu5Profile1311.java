@@ -54,6 +54,14 @@ public final class Eu5Profile1311 implements KaishekProfile {
             "events/situations/hussite_wars.txt",
             "CD1259E4143605932FA8C5004FF9C632BB93A65E0441799B510C10A7AA28EF0B");
 
+    public static final Map<String, String> VANILLA_WAR_FIXTURE_EVIDENCE_SHA256 = Map.of(
+            "events/situations/treaty_of_tordesillas.txt",
+            "31717CCF1D12D20F6EA6D7294D59AE2A32F3F89E59B11024561337D87978760A",
+            "events/debug/000_johan_debug.txt",
+            "DD0A4CE6DF80ADDD95EFDE7381DD9B600EAFBDD276AC5CA2F7FC6BC74497DC7A",
+            "common/parliament_issues/10_hre_issues.txt",
+            "A550B3CC15D43978D6FE8D48B778F7AF4A4C1124E6A04666141764DEF5D53BA7");
+
     private static final Set<String> STRUCTURAL = structuralKeys();
     private static final Map<String, OpcodeSpec> OPCODES = opcodesByName();
 
@@ -102,13 +110,14 @@ public final class Eu5Profile1311 implements KaishekProfile {
     private static Set<String> structuralKeys() {
         TreeSet<String> keys = new TreeSet<>(KaishekProfile.DEFAULT_STRUCTURAL_KEYS);
         Collections.addAll(keys,
-                "AND", "OR", "NOR", "MAX",
+                "AND", "OR", "NOR", "NAND", "MAX",
                 "category", "ai_tick", "use_enroute", "block_when_at_war",
                 "show_message", "show_message_to_target",
                 "scope:actor", "scope:recipient",
                 "any_subject", "every_subject", "any_subject_or_below",
                 "any_owned_location", "any_location_in_region", "every_location_in_region",
-                "every_in_list", "capital", "capital.region", "scope:recipient.capital.region", "owner",
+                "every_in_list", "every_current_war",
+                "capital", "capital.region", "scope:recipient.capital.region", "owner",
                 "select_trigger", "looking_for_a", "interaction_source_list",
                 "target_flag", "none_available_msg_key", "show_why_not_enabled",
                 "column", "data", "visible", "enabled", "custom_tooltip",
@@ -138,6 +147,8 @@ public final class Eu5Profile1311 implements KaishekProfile {
         add(result, "always", OpcodeSpec.Kind.TRIGGER);
         add(result, "tag", OpcodeSpec.Kind.TRIGGER);
         add(result, "has_global_variable", OpcodeSpec.Kind.TRIGGER);
+        add(result, "country_exists", OpcodeSpec.Kind.TRIGGER);
+        add(result, "any_war_participant", OpcodeSpec.Kind.TRIGGER);
         result.put("list_size", new OpcodeSpec(
                 "list_size", OpcodeSpec.Kind.TRIGGER, 2, 2,
                 Set.of("THIS", "this"), GAME_VERSION, Set.of("name", "value")));
@@ -152,6 +163,8 @@ public final class Eu5Profile1311 implements KaishekProfile {
         add(result, "set_global_variable", OpcodeSpec.Kind.EFFECT);
         add(result, "set_capital", OpcodeSpec.Kind.EFFECT);
         add(result, "make_subject_of", OpcodeSpec.Kind.EFFECT);
+        add(result, "declare_war", OpcodeSpec.Kind.EFFECT);
+        add(result, "white_peace", OpcodeSpec.Kind.EFFECT);
         return Collections.unmodifiableMap(result);
     }
 

@@ -23,9 +23,12 @@ class Eu5Profile1311Test {
         assertEquals(64, profile.executableSha256().length());
         assertEquals(6, Eu5Profile1311.VANILLA_EVIDENCE_SHA256.size());
         assertEquals(8, Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.size());
+        assertEquals(3, Eu5Profile1311.VANILLA_WAR_FIXTURE_EVIDENCE_SHA256.size());
         assertTrue(Eu5Profile1311.VANILLA_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertTrue(Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.values().stream()
+                .allMatch(hash -> hash.length() == 64));
+        assertTrue(Eu5Profile1311.VANILLA_WAR_FIXTURE_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertEquals(ScriptDomain.INTERACTIONS,
                 profile.domainForPath("in_game/common/country_interactions/xcrt.txt"));
@@ -280,6 +283,82 @@ class Eu5Profile1311Test {
                         d.code().equals("UNKNOWN_OPCODE")
                                 && d.message().contains("c:GYT.capital.area")),
                 invalid::toString);
+    }
+
+    @Test
+    void nandAndWarFixtureVocabularyValidateWithSideTransitions() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.6 = {
+                  type = country_event
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.6.a
+                    trigger = {
+                      NAND = {
+                        country_exists = c:XCRTI
+                        NOT = { country_exists = c:XCRTT }
+                      }
+                    }
+                    declare_war = c:XCRTI
+                  }
+                }
+                xcrt_acceptance.7 = {
+                  type = country_event
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.7.a
+                    every_current_war = {
+                      limit = { any_war_participant = { this = c:XCRTI } }
+                      white_peace = this
+                    }
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                diagnostics::toString);
+    }
+
+    @Test
+    void warFixtureTriggerAndEffectOpcodesRejectWrongSides() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.6 = {
+                  type = country_event
+                  trigger = { declare_war = c:XCRTI white_peace = this }
+                  option = {
+                    name = xcrt_acceptance.6.a
+                    country_exists = c:XCRTI
+                    any_war_participant = { this = c:XCRTI }
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertEquals(4, diagnostics.stream().filter(d -> d.code().equals("WRONG_DOMAIN")).count(),
+                diagnostics::toString);
+    }
+
+    @Test
+    void unknownInsideNandAndCurrentWarIteratorStillFailsClosed() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.7 = {
+                  type = country_event
+                  trigger = { NAND = { invented_nand_trigger = yes } }
+                  option = {
+                    name = xcrt_acceptance.7.a
+                    every_current_war = { invented_war_effect = yes }
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertEquals(2, diagnostics.stream().filter(d -> d.code().equals("UNKNOWN_OPCODE")).count(),
+                diagnostics::toString);
     }
 
     @Test
