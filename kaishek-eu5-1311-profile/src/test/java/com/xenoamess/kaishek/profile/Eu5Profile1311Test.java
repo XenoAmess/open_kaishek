@@ -24,11 +24,14 @@ class Eu5Profile1311Test {
         assertEquals(6, Eu5Profile1311.VANILLA_EVIDENCE_SHA256.size());
         assertEquals(8, Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.size());
         assertEquals(3, Eu5Profile1311.VANILLA_WAR_FIXTURE_EVIDENCE_SHA256.size());
+        assertEquals(2, Eu5Profile1311.VANILLA_CREATED_COUNTRY_IO_EVIDENCE_SHA256.size());
         assertTrue(Eu5Profile1311.VANILLA_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertTrue(Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertTrue(Eu5Profile1311.VANILLA_WAR_FIXTURE_EVIDENCE_SHA256.values().stream()
+                .allMatch(hash -> hash.length() == 64));
+        assertTrue(Eu5Profile1311.VANILLA_CREATED_COUNTRY_IO_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertEquals(ScriptDomain.INTERACTIONS,
                 profile.domainForPath("in_game/common/country_interactions/xcrt.txt"));
@@ -359,6 +362,88 @@ class Eu5Profile1311Test {
                 "in_game/events/xcrt_acceptance.txt", profile);
         assertEquals(2, diagnostics.stream().filter(d -> d.code().equals("UNKNOWN_OPCODE")).count(),
                 diagnostics::toString);
+    }
+
+    @Test
+    void createdCountryRankAndInternationalOrganizationVariableValidate() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.33 = {
+                  type = country_event
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.33.a
+                    location:torres_vedras = {
+                      create_country_from_location = {
+                        set_country_rank = country_rank:rank_county
+                      }
+                    }
+                  }
+                }
+                xcrt_acceptance.35 = {
+                  type = country_event
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.35.a
+                    international_organization:hre = {
+                      set_variable = {
+                        name = hre_direct_free_cities_subject
+                        value = yes
+                      }
+                    }
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                diagnostics::toString);
+    }
+
+    @Test
+    void createdCountryAndInternationalOrganizationVocabularyFailsClosed() {
+        String wrongSide = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.35 = {
+                  type = country_event
+                  trigger = {
+                    set_country_rank = country_rank:rank_county
+                    set_variable = { name = fixture_error value = yes }
+                  }
+                }
+                """;
+        var wrongSideDiagnostics = Validator.validate(
+                Parser.parse(wrongSide.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertEquals(2, wrongSideDiagnostics.stream()
+                        .filter(d -> d.code().equals("WRONG_DOMAIN")).count(),
+                wrongSideDiagnostics::toString);
+
+        String badScopes = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.36 = {
+                  type = country_event
+                  option = {
+                    name = xcrt_acceptance.36.a
+                    international_organization:hre = yes
+                    international_organization:hre.leader_country = {
+                      set_variable = fixture_error
+                    }
+                  }
+                }
+                """;
+        var badScopeDiagnostics = Validator.validate(
+                Parser.parse(badScopes.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(badScopeDiagnostics.stream().anyMatch(d ->
+                        d.code().equals("SCOPE_LINK_REQUIRES_BLOCK")
+                                && d.message().contains("international_organization:hre")),
+                badScopeDiagnostics::toString);
+        assertTrue(badScopeDiagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("international_organization:hre.leader_country")),
+                badScopeDiagnostics::toString);
     }
 
     @Test

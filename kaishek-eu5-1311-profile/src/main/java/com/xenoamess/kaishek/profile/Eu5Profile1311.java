@@ -62,6 +62,12 @@ public final class Eu5Profile1311 implements KaishekProfile {
             "common/parliament_issues/10_hre_issues.txt",
             "A550B3CC15D43978D6FE8D48B778F7AF4A4C1124E6A04666141764DEF5D53BA7");
 
+    public static final Map<String, String> VANILLA_CREATED_COUNTRY_IO_EVIDENCE_SHA256 = Map.of(
+            "events/situations/fall_of_delhi.txt",
+            "FF0D1D1D45EC8A859C2218F0F38D00471B5C3ED1FAF65CCFD7D39E86981A98B3",
+            "common/scripted_effects/international_organization_effects.txt",
+            "66DEFD13B110B76DF72772DE58E9010E0030BF0A326DD0D90E4C46D5F5523DCE");
+
     private static final Set<String> STRUCTURAL = structuralKeys();
     private static final Map<String, OpcodeSpec> OPCODES = opcodesByName();
 
@@ -81,7 +87,8 @@ public final class Eu5Profile1311 implements KaishekProfile {
     @Override
     public boolean isScopeLinkKey(String name) {
         return name != null && (name.matches("location:[a-z0-9_]+")
-                || name.matches("c:[A-Za-z0-9_]+(?:\\.capital(?:\\.region)?)?"));
+                || name.matches("c:[A-Za-z0-9_]+(?:\\.capital(?:\\.region)?)?")
+                || name.matches("international_organization:[A-Za-z0-9_]+"));
     }
 
     @Override
@@ -165,6 +172,8 @@ public final class Eu5Profile1311 implements KaishekProfile {
         add(result, "make_subject_of", OpcodeSpec.Kind.EFFECT);
         add(result, "declare_war", OpcodeSpec.Kind.EFFECT);
         add(result, "white_peace", OpcodeSpec.Kind.EFFECT);
+        add(result, "set_country_rank", OpcodeSpec.Kind.EFFECT);
+        add(result, "set_variable", OpcodeSpec.Kind.EFFECT);
         return Collections.unmodifiableMap(result);
     }
 
