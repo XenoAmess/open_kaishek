@@ -21,7 +21,7 @@ class Eu5Profile1311Test {
         assertEquals("1.3.11", profile.gameVersion());
         assertEquals("24187685", Eu5Profile1311.STEAM_BUILD_ID);
         assertEquals(64, profile.executableSha256().length());
-        assertEquals(6, Eu5Profile1311.VANILLA_EVIDENCE_SHA256.size());
+        assertEquals(7, Eu5Profile1311.VANILLA_EVIDENCE_SHA256.size());
         assertEquals(8, Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.size());
         assertEquals(3, Eu5Profile1311.VANILLA_WAR_FIXTURE_EVIDENCE_SHA256.size());
         assertEquals(2, Eu5Profile1311.VANILLA_CREATED_COUNTRY_IO_EVIDENCE_SHA256.size());
@@ -444,6 +444,58 @@ class Eu5Profile1311Test {
                         d.code().equals("UNKNOWN_OPCODE")
                                 && d.message().contains("international_organization:hre.leader_country")),
                 badScopeDiagnostics::toString);
+    }
+
+    @Test
+    void currentSubjectTypeLockValidatesAsCountryScopeEffect() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.37 = {
+                  type = country_event
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.37.a
+                    c:HAD = { lock_current_subject_type = yes }
+                    c:MEW = {
+                      lock_current_subject_type = yes
+                      make_subject_of = {
+                        target = root
+                        type = subject_type:maha_samanta
+                      }
+                    }
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                diagnostics::toString);
+    }
+
+    @Test
+    void currentSubjectTypeLockRejectsTriggerSideAndUnknownLookalike() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.37 = {
+                  type = country_event
+                  trigger = { lock_current_subject_type = yes }
+                  option = {
+                    name = xcrt_acceptance.37.a
+                    c:HAD = { lock_subject_type_without_evidence = yes }
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("WRONG_DOMAIN")
+                                && d.message().contains("lock_current_subject_type")),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("lock_subject_type_without_evidence")),
+                diagnostics::toString);
     }
 
     @Test

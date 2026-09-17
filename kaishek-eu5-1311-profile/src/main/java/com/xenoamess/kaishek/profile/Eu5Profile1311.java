@@ -34,7 +34,9 @@ public final class Eu5Profile1311 implements KaishekProfile {
             "subject_types/state_bank.txt",
             "C90271BCA606E9F3129E2EE57D169112C50F4D2E066F312F49D621863A302BAE",
             "subject_types/trade_company.txt",
-            "5BCDC8852AF7DD5633D04BB4C2C01113CA85F3B06A2A466B23301109BC641D55");
+            "5BCDC8852AF7DD5633D04BB4C2C01113CA85F3B06A2A466B23301109BC641D55",
+            "country_interactions/samanta_upgrades.txt",
+            "382F27F0672DDC89263B34374D0C509679C55D5A121F110702F5179037358020");
 
     public static final Map<String, String> VANILLA_EVENT_EVIDENCE_SHA256 = Map.of(
             "events/readme.txt",
@@ -174,6 +176,7 @@ public final class Eu5Profile1311 implements KaishekProfile {
         add(result, "white_peace", OpcodeSpec.Kind.EFFECT);
         add(result, "set_country_rank", OpcodeSpec.Kind.EFFECT);
         add(result, "set_variable", OpcodeSpec.Kind.EFFECT);
+        add(result, "lock_current_subject_type", OpcodeSpec.Kind.EFFECT);
         return Collections.unmodifiableMap(result);
     }
 
