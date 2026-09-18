@@ -6,6 +6,8 @@ and the relevant vanilla country-interaction/subject-type evidence, and
 recognizes the candidate, Region, snapshot-list, Tusi-cap and bounded
 country-event fixture shapes covered by its tests. Event-file details and
 exact-build evidence are in `docs/eu5-1.3.11-event-grammar-slice.md`.
+The read-only triggers used to diagnose a failed march fixture are bounded in
+`docs/eu5-1.3.11-march-diagnostic-triggers.md`.
 
 It does not execute EU5 effects or certify runtime behavior. Player-visible
 interaction behavior, ownership mutation, save reload and Workshop acceptance

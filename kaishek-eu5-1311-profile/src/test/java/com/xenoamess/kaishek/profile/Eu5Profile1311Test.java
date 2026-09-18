@@ -499,6 +499,57 @@ class Eu5Profile1311Test {
     }
 
     @Test
+    void marchDiagnosticTriggersValidateInCountryScope() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.39 = {
+                  type = country_event
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.39.a
+                    trigger = {
+                      c:XMSPM = {
+                        country_rank = country_rank:rank_county
+                        subject_type_is_not_locked = yes
+                      }
+                    }
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                diagnostics::toString);
+    }
+
+    @Test
+    void marchDiagnosticTriggersRejectEffectSideAndUnknownLookalike() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.39 = {
+                  type = country_event
+                  option = {
+                    name = xcrt_acceptance.39.a
+                    country_rank = country_rank:rank_county
+                    subject_type_is_not_locked = yes
+                    march_visibility_without_evidence = yes
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertEquals(2, diagnostics.stream()
+                        .filter(d -> d.code().equals("WRONG_DOMAIN"))
+                        .count(),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("march_visibility_without_evidence")),
+                diagnostics::toString);
+    }
+
+    @Test
     void unknownInsideMixedCreationBlockStillFailsClosed() {
         String source = """
                 namespace = xcrt_acceptance

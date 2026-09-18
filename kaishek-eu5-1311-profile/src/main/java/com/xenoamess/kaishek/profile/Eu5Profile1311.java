@@ -146,8 +146,10 @@ public final class Eu5Profile1311 implements KaishekProfile {
         add(result, "exists", OpcodeSpec.Kind.TRIGGER);
         add(result, "at_war", OpcodeSpec.Kind.TRIGGER);
         add(result, "country_type", OpcodeSpec.Kind.TRIGGER);
+        add(result, "country_rank", OpcodeSpec.Kind.TRIGGER);
         add(result, "is_subject_of", OpcodeSpec.Kind.TRIGGER);
         add(result, "is_subject_type", OpcodeSpec.Kind.TRIGGER);
+        add(result, "subject_type_is_not_locked", OpcodeSpec.Kind.TRIGGER);
         add(result, "num_locations", OpcodeSpec.Kind.TRIGGER);
         add(result, "region", OpcodeSpec.Kind.TRIGGER);
         add(result, "is_ownable", OpcodeSpec.Kind.TRIGGER);
