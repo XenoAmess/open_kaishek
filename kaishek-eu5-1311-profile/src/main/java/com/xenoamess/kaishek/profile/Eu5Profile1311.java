@@ -70,6 +70,16 @@ public final class Eu5Profile1311 implements KaishekProfile {
             "common/scripted_effects/international_organization_effects.txt",
             "66DEFD13B110B76DF72772DE58E9010E0030BF0A326DD0D90E4C46D5F5523DCE");
 
+    public static final Map<String, String> VANILLA_ADVANCE_EVIDENCE_SHA256 = Map.of(
+            "common/advances/4_choices_dip.txt",
+            "16123D9AFDD132035483113C404D3BC31A9D65135C94283722018F1585BD0AA7",
+            "common/scripted_effects/situation_effects.txt",
+            "D717B8047D6C7025A14CE211194C33F57D11F9987AB279D0B11453053DF26687",
+            "common/effect_localization/country_effects.txt",
+            "4F8BB45FC334F2FA61DD15ED5160F8A35DAFE892A95B066D7A0C87D550014F38",
+            "common/trigger_localization/country_triggers.txt",
+            "4D4243BFF91687975F6F7F45FB099BD7F5F7F04C447E82AA8B6DFFBFFF3258A3");
+
     private static final Set<String> STRUCTURAL = structuralKeys();
     private static final Map<String, OpcodeSpec> OPCODES = opcodesByName();
 
@@ -157,6 +167,8 @@ public final class Eu5Profile1311 implements KaishekProfile {
         add(result, "is_subject_or_below_of", OpcodeSpec.Kind.TRIGGER);
         add(result, "always", OpcodeSpec.Kind.TRIGGER);
         add(result, "tag", OpcodeSpec.Kind.TRIGGER);
+        addScalar(result, "has_advance", OpcodeSpec.Kind.TRIGGER,
+                "[A-Za-z][A-Za-z0-9_]*");
         add(result, "has_global_variable", OpcodeSpec.Kind.TRIGGER);
         add(result, "country_exists", OpcodeSpec.Kind.TRIGGER);
         add(result, "any_war_participant", OpcodeSpec.Kind.TRIGGER);
@@ -179,6 +191,8 @@ public final class Eu5Profile1311 implements KaishekProfile {
         add(result, "set_country_rank", OpcodeSpec.Kind.EFFECT);
         add(result, "set_variable", OpcodeSpec.Kind.EFFECT);
         add(result, "lock_current_subject_type", OpcodeSpec.Kind.EFFECT);
+        addScalar(result, "research_advance", OpcodeSpec.Kind.EFFECT,
+                "advance_type:[A-Za-z][A-Za-z0-9_]*");
         return Collections.unmodifiableMap(result);
     }
 
@@ -186,5 +200,12 @@ public final class Eu5Profile1311 implements KaishekProfile {
         target.put(name, new OpcodeSpec(
                 name, kind, 0, Integer.MAX_VALUE,
                 Set.of("THIS", "this"), GAME_VERSION, Set.of()));
+    }
+
+    private static void addScalar(Map<String, OpcodeSpec> target, String name,
+                                  OpcodeSpec.Kind kind, String scalarValuePattern) {
+        target.put(name, new OpcodeSpec(
+                name, kind, 0, 0, Set.of("COUNTRY"), GAME_VERSION, Set.of(),
+                scalarValuePattern));
     }
 }

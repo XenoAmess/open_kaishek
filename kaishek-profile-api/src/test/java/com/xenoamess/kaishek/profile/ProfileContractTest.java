@@ -60,4 +60,21 @@ class ProfileContractTest {
         assertEquals(OpcodeSpec.Kind.INTERFACE,
                 KaishekProfile.fromGameProfile(profile).opcode("GetPlayer").kind());
     }
+
+    @Test
+    void opcodeScalarPatternIsOptionalAndFailClosedWhenDeclared() {
+        var typed = new OpcodeSpec("research_advance", OpcodeSpec.Kind.EFFECT,
+                0, 0, Set.of("COUNTRY"), "1.3.11", Set.of(),
+                "advance_type:[A-Za-z][A-Za-z0-9_]*");
+        assertTrue(typed.acceptsScalarValue("advance_type:marcher_lords"));
+        assertFalse(typed.acceptsScalarValue("marcher_lords"));
+        assertFalse(typed.acceptsScalarValue(null));
+
+        var legacy = new OpcodeSpec("legacy", OpcodeSpec.Kind.TRIGGER,
+                0, 0, Set.of("THIS"), "1.0", Set.of());
+        assertTrue(legacy.acceptsScalarValue("any_existing_shape"));
+        assertThrows(java.util.regex.PatternSyntaxException.class,
+                () -> new OpcodeSpec("bad", OpcodeSpec.Kind.TRIGGER,
+                        0, 0, Set.of("THIS"), "1.0", Set.of(), "["));
+    }
 }

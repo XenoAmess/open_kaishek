@@ -53,6 +53,44 @@ public final class KaishekCliSmokeTest {
       check(semanticError == 1 && semanticJson.contains("\"status\":\"INVALID\"")
           && semanticJson.contains("\"semanticDiagnostics\":1"), semanticJson);
 
+      // The EU5 advance slice distinguishes the bare trigger key from the
+      // namespaced effect value and keeps wrong scalar forms fail-closed.
+      Path eu5Events = Files.createDirectories(root.resolve("eu5/in_game/events"));
+      Path advanceEvent = eu5Events.resolve("advance_fixture.txt");
+      Files.writeString(advanceEvent, "namespace = xcrt_acceptance\n"
+          + "xcrt_acceptance.33 = {\n"
+          + "  type = country_event\n"
+          + "  trigger = { always = no }\n"
+          + "  option = { name = xcrt_acceptance.33.a\n"
+          + "    trigger = { has_advance = marcher_lords }\n"
+          + "    research_advance = advance_type:marcher_lords\n"
+          + "  }\n}\n", StandardCharsets.UTF_8);
+      b.reset();
+      int eu5Advance = KaishekCli.run(new String[]{"validate", "--profile",
+          "eu5-1.3.11-build-24187685", "--file", advanceEvent.toString()},
+          new PrintStream(b), System.err);
+      String eu5AdvanceJson = b.toString(StandardCharsets.UTF_8);
+      check(eu5Advance == 0 && eu5AdvanceJson.contains("\"status\":\"VALIDATED\"")
+          && eu5AdvanceJson.contains("\"semanticDiagnostics\":0"), eu5AdvanceJson);
+
+      Files.writeString(advanceEvent, "namespace = xcrt_acceptance\n"
+          + "xcrt_acceptance.33 = {\n"
+          + "  type = country_event\n"
+          + "  option = { name = xcrt_acceptance.33.a\n"
+          + "    research_advance = marcher_lords\n"
+          + "    trigger = { has_advance = advance_type:marcher_lords }\n"
+          + "  }\n}\n", StandardCharsets.UTF_8);
+      b.reset();
+      int eu5AdvanceInvalid = KaishekCli.run(new String[]{"validate", "--profile",
+          "eu5-1.3.11-build-24187685", "--file", advanceEvent.toString()},
+          new PrintStream(b), System.err);
+      String eu5AdvanceInvalidJson = b.toString(StandardCharsets.UTF_8);
+      check(eu5AdvanceInvalid == 1
+          && eu5AdvanceInvalidJson.contains("\"status\":\"INVALID\"")
+          && eu5AdvanceInvalidJson.contains("INVALID_SCALAR_VALUE")
+          && eu5AdvanceInvalidJson.contains("\"semanticDiagnostics\":2"),
+          eu5AdvanceInvalidJson);
+
       // The Stellaris profile validates the bounded decision/deposit shapes
       // used by the first real mod acceptance corpus, while keeping unknown
       // script operations fail-closed.

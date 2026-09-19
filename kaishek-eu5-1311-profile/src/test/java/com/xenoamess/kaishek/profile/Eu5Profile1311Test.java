@@ -6,6 +6,7 @@ import com.xenoamess.kaishek.validator.Validator;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -25,6 +26,7 @@ class Eu5Profile1311Test {
         assertEquals(8, Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.size());
         assertEquals(3, Eu5Profile1311.VANILLA_WAR_FIXTURE_EVIDENCE_SHA256.size());
         assertEquals(2, Eu5Profile1311.VANILLA_CREATED_COUNTRY_IO_EVIDENCE_SHA256.size());
+        assertEquals(4, Eu5Profile1311.VANILLA_ADVANCE_EVIDENCE_SHA256.size());
         assertTrue(Eu5Profile1311.VANILLA_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertTrue(Eu5Profile1311.VANILLA_EVENT_EVIDENCE_SHA256.values().stream()
@@ -32,6 +34,8 @@ class Eu5Profile1311Test {
         assertTrue(Eu5Profile1311.VANILLA_WAR_FIXTURE_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertTrue(Eu5Profile1311.VANILLA_CREATED_COUNTRY_IO_EVIDENCE_SHA256.values().stream()
+                .allMatch(hash -> hash.length() == 64));
+        assertTrue(Eu5Profile1311.VANILLA_ADVANCE_EVIDENCE_SHA256.values().stream()
                 .allMatch(hash -> hash.length() == 64));
         assertEquals(ScriptDomain.INTERACTIONS,
                 profile.domainForPath("in_game/common/country_interactions/xcrt.txt"));
@@ -546,6 +550,79 @@ class Eu5Profile1311Test {
         assertTrue(diagnostics.stream().anyMatch(d ->
                         d.code().equals("UNKNOWN_OPCODE")
                                 && d.message().contains("march_visibility_without_evidence")),
+                diagnostics::toString);
+    }
+
+    @Test
+    void advanceTriggerAndEffectValidateWithExactScalarForms() {
+        assertEquals(OpcodeSpec.Kind.TRIGGER, profile.opcode("has_advance").kind());
+        assertEquals(OpcodeSpec.Kind.EFFECT, profile.opcode("research_advance").kind());
+        assertEquals(Set.of("COUNTRY"), profile.opcode("has_advance").allowedScopes());
+        assertEquals(Set.of("COUNTRY"), profile.opcode("research_advance").allowedScopes());
+        assertTrue(profile.opcode("has_advance").acceptsScalarValue("marcher_lords"));
+        assertTrue(profile.opcode("research_advance")
+                .acceptsScalarValue("advance_type:marcher_lords"));
+
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.33 = {
+                  type = country_event
+                  trigger = { always = no }
+                  option = {
+                    name = xcrt_acceptance.33.a
+                    trigger = { NOT = { has_advance = marcher_lords } }
+                    research_advance = advance_type:marcher_lords
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertTrue(diagnostics.stream().noneMatch(d ->
+                        d.severity() == Diagnostic.Severity.ERROR),
+                diagnostics::toString);
+    }
+
+    @Test
+    void advanceTriggerAndEffectFailClosedOnSideScopeAndScalarForm() {
+        String source = """
+                namespace = xcrt_acceptance
+                xcrt_acceptance.33 = {
+                  type = country_event
+                  option = {
+                    name = xcrt_acceptance.33.a
+                    has_advance = marcher_lords
+                    research_advance = marcher_lords
+                    research_advance = { advance = marcher_lords }
+                    location:torres_vedras = {
+                      research_advance = advance_type:marcher_lords
+                    }
+                    trigger = {
+                      research_advance = advance_type:marcher_lords
+                      has_advance = advance_type:marcher_lords
+                      has_advance = { advance = marcher_lords }
+                      location:torres_vedras = { has_advance = marcher_lords }
+                    }
+                    research_advance_without_evidence = advance_type:marcher_lords
+                  }
+                }
+                """;
+        var diagnostics = Validator.validate(Parser.parse(source.getBytes(StandardCharsets.UTF_8)),
+                "in_game/events/xcrt_acceptance.txt", profile);
+        assertEquals(2, diagnostics.stream()
+                        .filter(d -> d.code().equals("WRONG_DOMAIN"))
+                        .count(),
+                diagnostics::toString);
+        assertEquals(4, diagnostics.stream()
+                        .filter(d -> d.code().equals(Validator.INVALID_SCALAR_VALUE))
+                        .count(),
+                diagnostics::toString);
+        assertEquals(2, diagnostics.stream()
+                        .filter(d -> d.code().equals(Validator.INVALID_CURRENT_SCOPE))
+                        .count(),
+                diagnostics::toString);
+        assertTrue(diagnostics.stream().anyMatch(d ->
+                        d.code().equals("UNKNOWN_OPCODE")
+                                && d.message().contains("research_advance_without_evidence")),
                 diagnostics::toString);
     }
 

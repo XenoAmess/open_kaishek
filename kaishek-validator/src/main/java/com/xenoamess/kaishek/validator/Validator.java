@@ -16,6 +16,8 @@ public final class Validator {
      */
     public static final String CK3_TRIGGER_CALCULATED_VALUE_UNSUPPORTED =
             "CK3_TRIGGER_CALCULATED_VALUE_UNSUPPORTED";
+    public static final String INVALID_SCALAR_VALUE = "INVALID_SCALAR_VALUE";
+    public static final String INVALID_CURRENT_SCOPE = "INVALID_CURRENT_SCOPE";
 
     private static final Set<String> CALCULATED_VALUE_TERMS = Set.of(
             "value", "add", "subtract", "multiply");
@@ -39,7 +41,7 @@ public final class Validator {
         if (isEu5EventSlice(domain, profile))
             validateEu5EventDeclarations(document, out, sourcePath);
         walk(document.children(), domain, profile, out, sourcePath, 0,
-                initialSide(domain));
+                initialSide(domain), ScriptScope.UNKNOWN);
         return List.copyOf(out);
     }
 
@@ -104,7 +106,7 @@ public final class Validator {
     }
     private static void walk(List<CstNode> nodes, ScriptDomain domain, KaishekProfile profile,
                              List<Diagnostic> out, String path, int depth,
-                             ScriptSide side) {
+                             ScriptSide side, ScriptScope scope) {
         Map<String, EntryNode> seen = new HashMap<>();
         for (CstNode n : nodes) {
             if (!(n instanceof EntryNode e)) continue;
@@ -135,6 +137,7 @@ public final class Validator {
                     && isCk3Profile11906(profile)
                     && isScalarVariableComparison(e);
             ScriptSide childSide = childSide(side, key, e);
+            ScriptScope childScope = childScope(scope, key, e, domain, profile, depth);
             // A file-root block is a declaration map, where duplicate names
             // can hide an earlier definition.  Nested CK3 blocks are ordered
             // executable sequences (and may intentionally repeat an opcode),
@@ -170,6 +173,8 @@ public final class Validator {
                 validateDomain(spec, domain, e, out, at, side, profile);
                 validateParameters(spec, e, out, at);
                 validateScope(spec, e, out, at);
+                validateScalarValue(spec, e, out, at);
+                validateCurrentScope(spec, scope, e, out, at);
             }
             if (e.value() instanceof BlockNode b) {
                 // A registered non-structural opcode owns its RHS block as a
@@ -186,7 +191,7 @@ public final class Validator {
                 if (!argumentBlock && !calculatedValueExpression
                         && !profile.isOpaqueStructuralBlock(key)) {
                     walk(b.children(), domain, profile, out, at, depth + 1,
-                            childSide);
+                            childSide, childScope);
                 }
             }
         }
@@ -258,6 +263,31 @@ public final class Validator {
         };
     }
     private enum ScriptSide { OTHER, TRIGGER, EFFECT }
+    private enum ScriptScope { UNKNOWN, COUNTRY, LOCATION, INTERNATIONAL_ORGANIZATION }
+
+    private static ScriptScope childScope(ScriptScope parent, String key, EntryNode entry,
+                                          ScriptDomain domain, KaishekProfile profile,
+                                          int depth) {
+        if (!(entry.value() instanceof BlockNode block)) return parent;
+        if (isEu5EventSlice(domain, profile) && depth == 0) {
+            boolean countryEvent = block.entries().stream().anyMatch(child ->
+                    "type".equals(child.key().text().trim())
+                            && child.value() != null
+                            && "country_event".equals(child.value().text().trim()));
+            if (countryEvent) return ScriptScope.COUNTRY;
+        }
+        if (isEu5EventSlice(domain, profile)
+                && ("create_country_from_location".equals(key)
+                || "create_building_country_in_location".equals(key)))
+            return ScriptScope.COUNTRY;
+        if (!profile.isScopeLinkKey(key)) return parent;
+        String normalized = key.toLowerCase(Locale.ROOT);
+        if (normalized.startsWith("c:")) return ScriptScope.COUNTRY;
+        if (normalized.startsWith("location:")) return ScriptScope.LOCATION;
+        if (normalized.startsWith("international_organization:"))
+            return ScriptScope.INTERNATIONAL_ORGANIZATION;
+        return ScriptScope.UNKNOWN;
+    }
     private static void validateDomain(OpcodeSpec spec, ScriptDomain domain, EntryNode e,
                                        List<Diagnostic> out, String path, ScriptSide side,
                                        KaishekProfile profile) {
@@ -313,6 +343,28 @@ public final class Validator {
             String scope = child.value().text().trim();
             if (!spec.allowedScopes().contains(scope)) out.add(diag("INVALID_SCOPE", Diagnostic.Severity.ERROR, "scope " + scope + " is not valid for " + spec.name(), child.value().span(), path + ".scope"));
         }
+    }
+    private static void validateScalarValue(OpcodeSpec spec, EntryNode e,
+                                            List<Diagnostic> out, String path) {
+        if (spec.scalarValuePattern().isBlank()) return;
+        String value = e.value() instanceof BlockNode || e.value() == null
+                ? null : e.value().text().trim();
+        if (!spec.acceptsScalarValue(value))
+            out.add(diag(INVALID_SCALAR_VALUE, Diagnostic.Severity.ERROR,
+                    "opcode " + spec.name() + " requires scalar value matching "
+                            + spec.scalarValuePattern(),
+                    e.value() == null ? e.key().span() : e.value().span(), path));
+    }
+    private static void validateCurrentScope(OpcodeSpec spec, ScriptScope scope, EntryNode e,
+                                             List<Diagnostic> out, String path) {
+        if (scope == ScriptScope.UNKNOWN || spec.allowedScopes().isEmpty()
+                || spec.allowedScopes().contains("THIS")
+                || spec.allowedScopes().contains("this")) return;
+        if (!spec.allowedScopes().contains(scope.name()))
+            out.add(diag(INVALID_CURRENT_SCOPE, Diagnostic.Severity.ERROR,
+                    "opcode " + spec.name() + " requires one of " + spec.allowedScopes()
+                            + " but current scope is " + scope,
+                    e.key().span(), path));
     }
     private static Diagnostic diag(String c, Diagnostic.Severity s, String m, SourceSpan span, String p) { return new Diagnostic(c, s, m, p, span); }
 }
