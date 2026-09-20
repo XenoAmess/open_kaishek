@@ -46,6 +46,11 @@ Quarkus 的 CLI。另有一条明确标注为 synthetic 的 014 纵向夹具走�
   本仓库中。需要重建目标 corpus 时，请显式传入它们在本机的路径；不要把这些文件复制进
   发布包。
 
+## 贡献
+
+外部贡献请先阅读 [贡献指南](CONTRIBUTING.md) 和 [贡献者许可协议](CLA.md)。每个 PR 需按 Bot 提示留下签署评论，
+并在合并前通过必需状态 `CLA / signed`。
+
 ## 独立仓库构建入口
 
 要求 JDK 21（`--release 21`）和 Maven 3.6.3 或更高版本。所有命令都从本仓库根目录执行：
@@ -96,6 +101,7 @@ py tools/run_cli_smoke.py
 - [M1 / Phase 1 parser readiness 记录](docs/decisions/0004-m1-phase1-formal-readiness.md)
 - [许可证审计与迁移记录](docs/license-audit.md)
 - [开发流程与主线优先约定](docs/development-workflow.md)
+- [CLA 与轻量签署检查器](docs/cla-bot.md)
 - [2026-09-12 深度审计与有界优化](docs/open-kaishek-deep-audit-and-optimization-2026-09-12.md)
 - [G2 Raiktor 策略 profile 兼容边界](docs/g2-raiktor-strategy-profile-compatibility.md)
 - [Stellaris 4.4.6 静态 profile 边界](docs/stellaris-4.4.6-profile.md)

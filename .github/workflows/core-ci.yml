@@ -28,6 +28,9 @@ jobs:
         with:
           python-version: "3.x"
 
+      - name: Test CLA checker
+        run: python tools/test_cla_check.py
+
       - name: Verify project metadata and license
         run: python tools/check_metadata.py
 
