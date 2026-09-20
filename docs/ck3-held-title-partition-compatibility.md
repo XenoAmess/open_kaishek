@@ -53,3 +53,24 @@ Reopen this decision if open_kaishek begins consuming either root tool, if the
 provider removes or renames a field, changes field types or status semantics,
 or versions the envelope. At that point the consumer must add a typed profile
 and fixture before claiming compatibility.
+
+## 2026-09-21 held-county capital addendum
+
+Root provider commit
+`8adbf94091c80900a0efadcc6fdff7802dd7c732` additively extends each
+`campaign_root_context.held_title_partition[]` row with optional
+`capital_province_id`. Current rows publish a positive ProvinceID only when
+`title.tier_raw == 2`; higher-tier rows publish `null`. Historical v1 rows may
+omit the field, and that omission remains compatible.
+
+This addendum is assessed against open_kaishek
+`91e1d78fde7ddbd0f3b54e13696c08601bc86256`, CK3 `1.19.0.6`, and executable
+SHA-256
+`2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86`.
+A fresh non-documentation search finds no campaign-root or turn-bundle caller,
+closed response type, adapter, validator, or runtime mapping in open_kaishek.
+The existing `capital_province_id` field in the separate steward Develop
+County candidate profile does not consume this response. The compatibility
+verdict therefore remains
+`ADDITIVE_ROOT_SCHEMA / NO_OPEN_KAISHEK_CONSUMER / DOCUMENTATION_ONLY`: no code
+adaptation, capability ID, action, dependency, or version change is required.
