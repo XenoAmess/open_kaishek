@@ -117,6 +117,45 @@ public final class KaishekCliSmokeTest {
       check(stellaris451Identity == 0 && b.toString(StandardCharsets.UTF_8)
           .contains("\"runtime\":\"UNSUPPORTED\""), b);
 
+      // Stellaris 4.5.1 portraits.cpp rejects a leading UTF-8 BOM even
+      // though the general parser accepts it.  Keep the bounded portrait
+      // validation aligned with that observed loader behavior.
+      Path cetanaDirectory = Files.createDirectories(root.resolve(
+          "stellaris/gfx/portraits/portraits"));
+      Path cetanaPortrait = cetanaDirectory.resolve(
+          "21_portraits_cybernetics_synthqueen.txt");
+      StringBuilder cetanaText = new StringBuilder("portraits = {\n");
+      for (String key : new String[]{"synth_queen", "cetana_mammalian", "cetana_reptilian",
+          "cetana_aquatic", "cetana_lithoid", "cetana_plantoid", "cetana_molluscoid",
+          "cetana_avian", "cetana_empty", "cetana_robot"}) {
+        cetanaText.append(key).append(" = { texturefile = ")
+            .append("\"gfx/models/portraits/xenoamess_cetana_laoda_portrait.dds\" ")
+            .append("greeting_sound = \"tox_portrait_01\" }\n");
+      }
+      byte[] cetanaBytes = cetanaText.append("}\n").toString().getBytes(StandardCharsets.UTF_8);
+      Files.write(cetanaPortrait, cetanaBytes);
+      b.reset();
+      int cetanaClean = KaishekCli.run(new String[]{"validate", "--profile",
+          "stellaris-4.5.1", "--file", cetanaPortrait.toString()},
+          new PrintStream(b), System.err);
+      check(cetanaClean == 0 && b.toString(StandardCharsets.UTF_8)
+          .contains("\"status\":\"VALIDATED\""), b);
+      byte[] cetanaWithBom = new byte[cetanaBytes.length + 3];
+      cetanaWithBom[0] = (byte) 0xef;
+      cetanaWithBom[1] = (byte) 0xbb;
+      cetanaWithBom[2] = (byte) 0xbf;
+      System.arraycopy(cetanaBytes, 0, cetanaWithBom, 3, cetanaBytes.length);
+      Files.write(cetanaPortrait, cetanaWithBom);
+      for (String profile : new String[]{"stellaris-4.4.6", "stellaris-4.5.1"}) {
+        b.reset();
+        int cetanaBom = KaishekCli.run(new String[]{"validate", "--profile",
+            profile, "--file", cetanaPortrait.toString()}, new PrintStream(b), System.err);
+        String cetanaBomJson = b.toString(StandardCharsets.UTF_8);
+        check(cetanaBom == 1 && cetanaBomJson.contains("\"status\":\"INVALID\"")
+            && cetanaBomJson.contains("STELLARIS_PORTRAIT_UTF8_BOM")
+            && cetanaBomJson.contains("\"syntaxDiagnostics\":1"), cetanaBomJson);
+      }
+
       Path validDecision = stellarisDecisions.resolve("workplace.txt");
       Files.writeString(validDecision, "test_decision = {\n"
           + "  owned_planets_only = yes\n  enactment_time = 180\n"

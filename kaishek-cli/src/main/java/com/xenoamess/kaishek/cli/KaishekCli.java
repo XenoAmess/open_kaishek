@@ -8,6 +8,7 @@ import com.xenoamess.kaishek.validator.Validator;
 import com.xenoamess.kaishek.profile.Ck3Profile11906;
 import com.xenoamess.kaishek.profile.Eu5Profile1311;
 import com.xenoamess.kaishek.profile.KaishekProfile;
+import com.xenoamess.kaishek.profile.ScriptDomain;
 import com.xenoamess.kaishek.profile.StellarisProfile446;
 import com.xenoamess.kaishek.profile.StellarisProfile451;
 import com.xenoamess.kaishek.zg361.OfflinePreflight;
@@ -84,6 +85,13 @@ public final class KaishekCli {
       default -> null;
     };
     boolean semanticSupported = staticProfile != null && inputPath != null;
+    if (semanticSupported
+        && (profile.equals(StellarisProfile446.ID) || profile.equals(StellarisProfile451.ID))
+        && staticProfile.domainForPath(inputPath.toString()) == ScriptDomain.PORTRAITS
+        && source.length >= 3 && (source[0] & 0xff) == 0xef
+        && (source[1] & 0xff) == 0xbb && (source[2] & 0xff) == 0xbf) {
+      d.add("STELLARIS_PORTRAIT_UTF8_BOM");
+    }
     if (semanticSupported && !p.hasErrors()) {
       // The ParseResult overload intentionally includes syntax diagnostics for
       // library callers.  The CLI reports syntax and semantic counts
@@ -91,7 +99,7 @@ public final class KaishekCli {
       Validator.validate(p.document(), inputPath.toString(), staticProfile)
           .forEach(x -> { semantic.add(x.code()); semanticPaths.add(x.path()); });
     }
-    boolean invalid = p.hasErrors() || !semantic.isEmpty();
+    boolean invalid = !d.isEmpty() || !semantic.isEmpty();
     String semStatus = semanticSupported ? "VALIDATED" : "UNSUPPORTED";
     String status = invalid ? "INVALID" : (semanticSupported ? "VALIDATED" : "UNSUPPORTED");
     out.println("{\"status\":\""+status+"\",\"profile\":"+q(profile)

@@ -24,3 +24,11 @@
 - `mvn -o -ntp -pl kaishek-cli -am package` 成功；新增 `StellarisProfile451Test` 两项及既有 `StellarisProfile446Test` 十二项均通过。
 - `python tools/run_static_acceptance.py` 全仓库离线静态验收 `PASS`，包括 clean package、CLI smoke、合成夹具与元数据检查。
 - 重建 CLI 的 `profile --id stellaris-4.5.1` 回报正确 EXE 指纹和 `runtime=UNSUPPORTED`；目标 Mod 生产肖像文件用 `validate --profile stellaris-4.5.1` 返回 `VALIDATED`，`syntaxDiagnostics=0`、`semanticDiagnostics=0`。
+
+## 实机发现的 BOM 漏检及修复目标
+
+第一次 4.5.1 隔离实机检查发现目标 Mod 的生产 `21_portraits_cybernetics_synthqueen.txt` 以字节 `EF BB BF` 开头：PowerShell 旧版 `Set-Content -Encoding utf8` 写入了 BOM。CLI 曾将该文件判为 `VALIDATED`，但 Stellaris `portraits.cpp:963` 报 `Unexpected token: ﻿`，并导致 `cetana_*` 肖像键无法找到。这是该静态切片的实际漏检，必须先修工具再继续 Mod 验收。
+
+修复范围仅限 `stellaris-4.4.6`、`stellaris-4.5.1` 的精确合成女王肖像路径。CLI `validate` 在解析前检查原始字节开头的 UTF-8 BOM，返回 `INVALID`，携带独立诊断码 `STELLARIS_PORTRAIT_UTF8_BOM` 与非零语法诊断数；对无 BOM 同内容保持通过。其他 profile/目录的编码规则未在此证据中建立，不扩展判断。增加有/无 BOM 的 CLI 冒烟测试；全仓库静态验收通过后提交推送，再修 Mod 文件。
+
+修复完成：`python tools/run_static_acceptance.py` 全仓库离线静态验收再次 `PASS`，含新增的无 BOM 通过、有 BOM 对 4.4.6 和 4.5.1 均拒绝的 CLI 冒烟检查。重建 CLI 直接检查实际带 BOM 的目标 Mod 文件，返回 `INVALID`、`syntaxDiagnostics=1`、`syntaxCodes=["STELLARIS_PORTRAIT_UTF8_BOM"]`、退出码 1，准确复现了实机加载阻断。工具库变更提交并推送后再继续修 Mod。
