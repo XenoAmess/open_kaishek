@@ -106,6 +106,17 @@ public final class KaishekCliSmokeTest {
       check(stellarisTrigger == 0 && b.toString(StandardCharsets.UTF_8)
           .contains("\"status\":\"VALIDATED\""), b);
 
+      b.reset();
+      int stellaris451WrongDomain = KaishekCli.run(new String[]{"validate", "--profile",
+          "stellaris-4.5.1", "--file", validTrigger.toString()}, new PrintStream(b), System.err);
+      check(stellaris451WrongDomain == 1 && b.toString(StandardCharsets.UTF_8)
+          .contains("\"status\":\"INVALID\""), b);
+      b.reset();
+      int stellaris451Identity = KaishekCli.run(new String[]{"profile", "--id", "stellaris-4.5.1"},
+          new PrintStream(b), System.err);
+      check(stellaris451Identity == 0 && b.toString(StandardCharsets.UTF_8)
+          .contains("\"runtime\":\"UNSUPPORTED\""), b);
+
       Path validDecision = stellarisDecisions.resolve("workplace.txt");
       Files.writeString(validDecision, "test_decision = {\n"
           + "  owned_planets_only = yes\n  enactment_time = 180\n"

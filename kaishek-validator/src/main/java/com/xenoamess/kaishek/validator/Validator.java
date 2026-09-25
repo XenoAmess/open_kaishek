@@ -62,7 +62,8 @@ public final class Validator {
     private static boolean isStellarisCetanaPortraitSlice(ScriptDomain domain,
                                                            KaishekProfile profile) {
         return domain == ScriptDomain.PORTRAITS
-                && "stellaris-4.4.6".equals(profile.id());
+                && ("stellaris-4.4.6".equals(profile.id())
+                || "stellaris-4.5.1".equals(profile.id()));
     }
 
     private static void validateStellarisCetanaPortraits(Document document,
@@ -354,7 +355,7 @@ public final class Validator {
     private static void validateDomain(OpcodeSpec spec, ScriptDomain domain, EntryNode e,
                                        List<Diagnostic> out, String path, ScriptSide side,
                                        KaishekProfile profile) {
-        if ("stellaris-4.4.6".equals(profile.id())
+        if (("stellaris-4.4.6".equals(profile.id()) || "stellaris-4.5.1".equals(profile.id()))
                 && (domain == ScriptDomain.PORTRAITS)
                         != STELLARIS_CETANA_PORTRAIT_WORDS.contains(spec.name())) {
             out.add(diag("WRONG_DOMAIN", Diagnostic.Severity.ERROR,
