@@ -6,6 +6,7 @@ import com.xenoamess.kaishek.validator.Validator;
 import org.junit.jupiter.api.Test;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,6 +32,56 @@ class StellarisProfile446Test {
         assertEquals(ScriptDomain.SCRIPTED_TRIGGERS,
                 profile.domainForPath("common/scripted_triggers/vivhite_workplace_triggers.txt"));
         assertEquals(ScriptDomain.UNKNOWN, profile.domainForPath("common/unknown/x.txt"));
+        assertEquals(ScriptDomain.PORTRAITS,
+                profile.domainForPath("mod\\gfx\\portraits\\portraits\\21_portraits_cybernetics_synthqueen.txt"));
+        assertEquals(ScriptDomain.UNKNOWN,
+                profile.domainForPath("gfx/portraits/asset_selectors/room_textures.txt"));
+    }
+
+    @Test
+    void cetanaStaticPortraitShapeValidatesAndBadFieldsFailClosed() {
+        String path = "gfx/portraits/portraits/21_portraits_cybernetics_synthqueen.txt";
+        StringBuilder source = new StringBuilder("portraits = {\n");
+        for (String key : List.of("synth_queen", "cetana_mammalian", "cetana_reptilian",
+                "cetana_aquatic", "cetana_lithoid", "cetana_plantoid",
+                "cetana_molluscoid", "cetana_avian", "cetana_empty", "cetana_robot")) {
+            source.append(key).append(" = { texturefile = ")
+                    .append("\"gfx/models/portraits/xenoamess_cetana_portrait.dds\" ")
+                    .append("greeting_sound = \"tox_portrait_01\" }\n");
+        }
+        String valid = source.append("}\n").toString();
+        var accepted = Validator.validate(Parser.parse(valid.getBytes(StandardCharsets.UTF_8)),
+                path, profile);
+        assertTrue(accepted.stream().noneMatch(d -> d.severity() == Diagnostic.Severity.ERROR),
+                accepted::toString);
+
+        String invalid = valid.replace("cetana_mammalian", "cetana_mamalian")
+                .replaceFirst("texturefile", "texturfile")
+                .replace("gfx/models/portraits/xenoamess_cetana_portrait.dds\" greeting_sound",
+                        "gfx/event_pictures/not_a_portrait.dds\" greeting_sound")
+                .replace("cetana_robot = { texturefile", "cetana_robot = { greeting_sound = \"tox_portrait_01\" texturefile");
+        var rejected = Validator.validate(Parser.parse(invalid.getBytes(StandardCharsets.UTF_8)),
+                path, profile);
+        assertTrue(rejected.stream().anyMatch(d -> d.code().equals("UNKNOWN_OPCODE")
+                && d.message().contains("cetana_mamalian")), rejected::toString);
+        assertTrue(rejected.stream().anyMatch(d -> d.code().equals("UNKNOWN_OPCODE")
+                && d.message().contains("texturfile")), rejected::toString);
+        assertTrue(rejected.stream().anyMatch(d -> d.code().equals("STELLARIS_PORTRAIT_REQUIRED")),
+                rejected::toString);
+        assertTrue(rejected.stream().anyMatch(d -> d.code().equals("STELLARIS_PORTRAIT_FIELD_REQUIRED")),
+                rejected::toString);
+        assertTrue(rejected.stream().anyMatch(d -> d.code().equals("INVALID_SCALAR_VALUE")
+                && d.path().contains("texturefile")), rejected::toString);
+        String duplicate = valid.replace("synth_queen = {", "synth_queen = { greeting_sound = \"tox_portrait_01\"");
+        var duplicates = Validator.validate(Parser.parse(duplicate.getBytes(StandardCharsets.UTF_8)),
+                path, profile);
+        assertTrue(duplicates.stream().anyMatch(d -> d.code().equals("DUPLICATE_KEY")
+                && d.path().contains("synth_queen.greeting_sound")), duplicates::toString);
+
+        var wrongDomain = Validator.validate(Parser.parse(valid.getBytes(StandardCharsets.UTF_8)),
+                "common/decisions/21_portraits_cybernetics_synthqueen.txt", profile);
+        assertTrue(wrongDomain.stream().anyMatch(d -> d.code().equals("WRONG_DOMAIN")
+                && d.path().contains("portraits")), wrongDomain::toString);
     }
 
     @Test

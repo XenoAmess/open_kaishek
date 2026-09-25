@@ -33,6 +33,13 @@ public final class StellarisProfile446 implements KaishekProfile {
 
     @Override
     public ScriptDomain domainForPath(String sourcePath) {
+        if (sourcePath != null) {
+            String normalized = sourcePath.replace('\\', '/').toLowerCase(java.util.Locale.ROOT);
+            if (normalized.equals("gfx/portraits/portraits/21_portraits_cybernetics_synthqueen.txt")
+                    || normalized.endsWith("/gfx/portraits/portraits/21_portraits_cybernetics_synthqueen.txt")) {
+                return ScriptDomain.PORTRAITS;
+            }
+        }
         return ScriptDomain.fromPath(sourcePath);
     }
 
@@ -97,6 +104,24 @@ public final class StellarisProfile446 implements KaishekProfile {
         // recurse so its potential triggers are still checked fail-closed.
         add(result, "triggered_planet_modifier", OpcodeSpec.Kind.STRUCTURAL,
                 0, Integer.MAX_VALUE, "PLANET");
+
+        // The exact Synthetic Queen art-replacement slice uses static
+        // texturefile portraits. It does not recognize vanilla animated
+        // entity/character_textures declarations or arbitrary portrait IDs.
+        add(result, "portraits", OpcodeSpec.Kind.STRUCTURAL,
+                0, Integer.MAX_VALUE, "THIS");
+        for (String key : Set.of("synth_queen", "cetana_mammalian", "cetana_reptilian",
+                "cetana_aquatic", "cetana_lithoid", "cetana_plantoid",
+                "cetana_molluscoid", "cetana_avian", "cetana_empty", "cetana_robot")) {
+            result.put(key, new OpcodeSpec(key, OpcodeSpec.Kind.STRUCTURAL,
+                    2, 2, Set.of(), GAME_VERSION,
+                    Set.of("texturefile", "greeting_sound")));
+        }
+        result.put("texturefile", new OpcodeSpec("texturefile", OpcodeSpec.Kind.VALUE,
+                0, 0, Set.of(), GAME_VERSION, Set.of(),
+                "\"gfx/models/portraits/[A-Za-z0-9_./-]+\\.dds\""));
+        result.put("greeting_sound", new OpcodeSpec("greeting_sound", OpcodeSpec.Kind.VALUE,
+                0, 0, Set.of(), GAME_VERSION, Set.of(), "\"[A-Za-z0-9_]+\""));
         return Collections.unmodifiableMap(result);
     }
 

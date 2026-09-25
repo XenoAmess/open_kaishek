@@ -107,6 +107,7 @@ py tools/run_cli_smoke.py
 - [Stellaris 4.4.6 静态 profile 边界](docs/stellaris-4.4.6-profile.md)
 - [EU5 1.3.11 / Build 24187685 静态 profile 边界](docs/eu5-1.3.11-profile.md)
 - [Stellaris 4.4.6 灰风美化静态 profile 切片](docs/stellaris-gray-wind-profile.md)
+- [Stellaris 4.4.6 合成女王静态肖像 profile 切片](docs/stellaris-cetana-static-portrait-profile.md)
 
 ## Readiness 边界
 

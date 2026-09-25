@@ -21,6 +21,14 @@ public final class Validator {
 
     private static final Set<String> CALCULATED_VALUE_TERMS = Set.of(
             "value", "add", "subtract", "multiply");
+    private static final Set<String> STELLARIS_CETANA_PORTRAIT_KEYS = Set.of(
+            "synth_queen", "cetana_mammalian", "cetana_reptilian", "cetana_aquatic",
+            "cetana_lithoid", "cetana_plantoid", "cetana_molluscoid", "cetana_avian",
+            "cetana_empty", "cetana_robot");
+    private static final Set<String> STELLARIS_CETANA_PORTRAIT_WORDS = Set.of(
+            "portraits", "synth_queen", "cetana_mammalian", "cetana_reptilian",
+            "cetana_aquatic", "cetana_lithoid", "cetana_plantoid", "cetana_molluscoid",
+            "cetana_avian", "cetana_empty", "cetana_robot", "texturefile", "greeting_sound");
 
     private Validator() {}
 
@@ -40,6 +48,8 @@ public final class Validator {
             out.add(diag("UNKNOWN_DIRECTORY", Diagnostic.Severity.ERROR, "no schema profile for directory", document.span(), sourcePath));
         if (isEu5EventSlice(domain, profile))
             validateEu5EventDeclarations(document, out, sourcePath);
+        if (isStellarisCetanaPortraitSlice(domain, profile))
+            validateStellarisCetanaPortraits(document, out, sourcePath);
         walk(document.children(), domain, profile, out, sourcePath, 0,
                 initialSide(domain), ScriptScope.UNKNOWN);
         return List.copyOf(out);
@@ -48,6 +58,59 @@ public final class Validator {
     private static boolean isEu5EventSlice(ScriptDomain domain, KaishekProfile profile) {
         return domain == ScriptDomain.EVENTS
                 && "eu5-1.3.11-build-24187685".equals(profile.id());
+    }
+    private static boolean isStellarisCetanaPortraitSlice(ScriptDomain domain,
+                                                           KaishekProfile profile) {
+        return domain == ScriptDomain.PORTRAITS
+                && "stellaris-4.4.6".equals(profile.id());
+    }
+
+    private static void validateStellarisCetanaPortraits(Document document,
+                                                          List<Diagnostic> out, String path) {
+        List<EntryNode> roots = document.children().stream()
+                .filter(EntryNode.class::isInstance).map(EntryNode.class::cast).toList();
+        if (roots.size() != 1 || !"portraits".equals(roots.get(0).key().text().trim())
+                || !(roots.get(0).value() instanceof BlockNode block)) {
+            out.add(diag("STELLARIS_PORTRAITS_ROOT", Diagnostic.Severity.ERROR,
+                    "the Cetana portrait slice requires one portraits = { ... } root",
+                    document.span(), path));
+            return;
+        }
+        Map<String, EntryNode> seen = new HashMap<>();
+        for (EntryNode portrait : block.entries()) {
+            String key = portrait.key().text().trim();
+            if (!STELLARIS_CETANA_PORTRAIT_KEYS.contains(key)) continue;
+            if (seen.putIfAbsent(key, portrait) != null)
+                out.add(diag("DUPLICATE_KEY", Diagnostic.Severity.ERROR,
+                        "duplicate Cetana portrait declaration: " + key,
+                        portrait.key().span(), path + ".portraits." + key));
+            if (!(portrait.value() instanceof BlockNode body)) {
+                out.add(diag("STELLARIS_PORTRAIT_BLOCK", Diagnostic.Severity.ERROR,
+                        "Cetana portrait requires a block", portrait.span(),
+                        path + ".portraits." + key));
+                continue;
+            }
+            Set<String> fields = new HashSet<>();
+            for (EntryNode field : body.entries()) {
+                String name = field.key().text().trim();
+                if (!fields.add(name))
+                    out.add(diag("DUPLICATE_KEY", Diagnostic.Severity.ERROR,
+                            "duplicate Cetana portrait field: " + name,
+                            field.key().span(), path + ".portraits." + key + "." + name));
+            }
+            for (String required : Set.of("texturefile", "greeting_sound")) {
+                if (!fields.contains(required))
+                    out.add(diag("STELLARIS_PORTRAIT_FIELD_REQUIRED", Diagnostic.Severity.ERROR,
+                            "Cetana portrait requires " + required,
+                            portrait.key().span(), path + ".portraits." + key));
+            }
+        }
+        for (String required : STELLARIS_CETANA_PORTRAIT_KEYS) {
+            if (!seen.containsKey(required))
+                out.add(diag("STELLARIS_PORTRAIT_REQUIRED", Diagnostic.Severity.ERROR,
+                        "missing Cetana portrait " + required,
+                        document.span(), path + ".portraits"));
+        }
     }
 
     /** The exact-build readme requires a namespace and numbered event declarations. */
@@ -291,6 +354,13 @@ public final class Validator {
     private static void validateDomain(OpcodeSpec spec, ScriptDomain domain, EntryNode e,
                                        List<Diagnostic> out, String path, ScriptSide side,
                                        KaishekProfile profile) {
+        if ("stellaris-4.4.6".equals(profile.id())
+                && (domain == ScriptDomain.PORTRAITS)
+                        != STELLARIS_CETANA_PORTRAIT_WORDS.contains(spec.name())) {
+            out.add(diag("WRONG_DOMAIN", Diagnostic.Severity.ERROR,
+                    "opcode " + spec.name() + " is outside its Stellaris Cetana portrait slice",
+                    e.key().span(), path));
+        }
         boolean trigger = domain == ScriptDomain.SCRIPTED_TRIGGERS;
         boolean effect = domain == ScriptDomain.SCRIPTED_EFFECTS || domain == ScriptDomain.ON_ACTION;
         boolean value = domain == ScriptDomain.SCRIPTED_VALUES;

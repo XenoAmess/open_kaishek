@@ -4,7 +4,7 @@ package com.xenoamess.kaishek.profile;
 public enum ScriptDomain {
     EVENTS, ON_ACTION, SCRIPTED_EFFECTS, SCRIPTED_TRIGGERS, SCRIPTED_VALUES,
     DECISIONS, DEPOSITS, INTERACTIONS, ACTIVITIES, SCRIPTED_GUI, CUSTOMIZABLE_LOCALIZATION,
-    GUI_REGISTRATION, UNKNOWN;
+    GUI_REGISTRATION, PORTRAITS, UNKNOWN;
 
     /** Classify a conventional Paradox source path without a game-specific dependency. */
     public static ScriptDomain fromPath(String sourcePath) {

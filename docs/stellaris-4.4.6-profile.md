@@ -36,6 +36,9 @@ Pegasus 4.4.6 可执行文件 SHA-256
 - 灰风美化兼容切片：目标 Mod 自有 hidden country event 和 monthly on_action 所需的
   受限领袖 flag、迭代、显式 event target 与 `change_leader_portrait` 形状。完整边界见
   [`stellaris-gray-wind-profile.md`](stellaris-gray-wind-profile.md)。
+- 合成女王静态肖像切片：只在精确原版文件 `gfx/portraits/portraits/21_portraits_cybernetics_synthqueen.txt` 接受目标 Mod 的十个已确认肖像键及
+  `texturefile`/`greeting_sound` 形状。完整边界见
+  [`stellaris-cetana-static-portrait-profile.md`](stellaris-cetana-static-portrait-profile.md)。
 
 未登记的可执行键仍报告 `UNKNOWN_OPCODE`，未识别目录仍报告 `UNKNOWN_DIRECTORY`。
 
