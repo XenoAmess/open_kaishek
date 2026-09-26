@@ -88,6 +88,7 @@ def main() -> int:
             ],
         )
     run(root, [python, "tools/run_cli_smoke.py"])
+    run(root, [python, "-m", "unittest", "tools/test_accept_stellaris_mod.py", "-v"])
     print("static acceptance: PASS (repository-owned offline checks; CK3/external corpus not run)")
     return 0
 
