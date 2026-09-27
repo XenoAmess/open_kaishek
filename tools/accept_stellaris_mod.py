@@ -112,8 +112,8 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path) -> dict:
             else:
                 parsed += 1
         for asset in ASSET.findall(data.decode("utf-8")):
-            target = package / Path(asset)
-            if not target.is_file():
+            relative = Path(asset)
+            if not (package / relative).is_file() and not (game / relative).is_file():
                 errors.append({"code": "ASSET_REFERENCE_MISSING", "path": str(path), "asset": asset})
     dds = sorted(package.rglob("*.dds"))
     for path in dds:

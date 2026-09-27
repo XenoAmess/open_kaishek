@@ -58,6 +58,17 @@ class StellarisModPackageTest(unittest.TestCase):
         self.assertIn("MOD_VERSION_CONTRACT", codes)
         self.assertIn("ASSET_REFERENCE_MISSING", codes)
 
+    def test_accepts_vanilla_asset_and_rejects_missing_from_both_roots(self) -> None:
+        script = self.package / "common/traits/fixture.txt"
+        script.write_text('fixture_trait = { cost = 1 icon = "gfx/interface/vanilla.dds" }\n', encoding="utf-8")
+        vanilla = self.game / "gfx/interface/vanilla.dds"
+        vanilla.parent.mkdir(parents=True)
+        vanilla.write_bytes(b"DDS " + b"\0" * 124)
+        self.assertEqual("PASS", self.verify()["status"])
+        vanilla.unlink()
+        codes = {error["code"] for error in self.verify()["errors"]}
+        self.assertIn("ASSET_REFERENCE_MISSING", codes)
+
     def test_rejects_localization_key_and_script_bom(self) -> None:
         (self.package / "localisation/english/fixture_l_english.yml").write_text(
             '\ufeffl_english:\n another_key:0 "Another"\n', encoding="utf-8"
