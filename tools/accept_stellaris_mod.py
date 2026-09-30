@@ -21,7 +21,7 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 CLI = ROOT / "kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar"
 CYGNUS_451_SHA256 = "6fe06709f265e726722dc23f617c5fc4e5557629e2d43fe312016aba547c83e4"
-LOCALIZATION = re.compile(r'^ ([^:\s]+):\d+ "((?:[^"\\]|\\.)*)"$')
+LOCALIZATION = re.compile(r'^ ([^:\s]+):\d* "((?:[^"\\]|\\.)*)"$')
 TOKEN = re.compile(r"\$[^$\r\n]+\$|§.|\\.")
 ASSET = re.compile(r'"(gfx/[^"\r\n]+\.dds)"', re.IGNORECASE)
 VERSION = re.compile(r"\d+\.\d+\.\d+(?:-[0-9A-Za-z.-]+)?")
@@ -63,7 +63,7 @@ def read_localization(path: Path, language: str, errors: list[dict]) -> dict[str
     return entries
 
 
-def check(mod: Path, game: Path, expected_sha: str, cli: Path) -> dict:
+def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: Path | None = None) -> dict:
     errors: list[dict] = []
     package = mod / "mod" if (mod / "mod/descriptor.mod").is_file() else mod
     descriptor = package / "descriptor.mod"
@@ -72,7 +72,7 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path) -> dict:
         errors.append({"code": "GAME_EXE_IDENTITY", "path": str(exe)})
     if not cli.is_file():
         errors.append({"code": "KAISHEK_CLI_MISSING", "path": str(cli)})
-    version_file = mod / "VERSION" if (mod / "VERSION").is_file() else package / "VERSION"
+    version_file = version_source or (mod / "VERSION" if (mod / "VERSION").is_file() else package / "VERSION")
     if not version_file.is_file() or not descriptor.is_file():
         errors.append({"code": "MOD_METADATA_MISSING", "path": str(mod)})
     else:
@@ -82,6 +82,15 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path) -> dict:
         supported = re.search(r'^supported_version\s*=\s*"([^"]+)"', text, re.MULTILINE)
         if not VERSION.fullmatch(version) or not match or match.group(1) != version or not supported:
             errors.append({"code": "MOD_VERSION_CONTRACT", "path": str(descriptor)})
+        settings_file = game / "launcher-settings.json"
+        if supported and settings_file.is_file():
+            settings = json.loads(settings_file.read_text(encoding="utf-8-sig"))
+            actual = settings.get("rawVersion", "").removeprefix("v").split(".")
+            declared = supported.group(1).split(".")
+            if not actual or not all(part == "*" or (index < len(actual) and part == actual[index])
+                                     for index, part in enumerate(declared)):
+                errors.append({"code": "MOD_SUPPORTED_VERSION", "path": str(descriptor),
+                               "declared": supported.group(1), "game": settings.get("rawVersion")})
     script_files = sorted(
         path for path in package.rglob("*")
         if path.is_file() and (path.suffix.lower() in {".txt", ".gfx"} or path.name == "descriptor.mod")
@@ -123,9 +132,10 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path) -> dict:
     if not game_languages:
         errors.append({"code": "GAME_LANGUAGES_MISSING", "path": str(game / "localisation")})
     locales: dict[str, dict[str, str]] = {}
-    for language in game_languages:
-        directory = package / "localisation" / language
-        files = sorted(directory.glob(f"*_l_{language}.yml")) if directory.is_dir() else []
+    localization_root = package / "localisation"
+    has_localization = any(localization_root.rglob("*.yml"))
+    for language in game_languages if has_localization else []:
+        files = sorted(localization_root.rglob(f"*_l_{language}.yml"))
         if not files:
             errors.append({"code": "LOCALIZATION_LANGUAGE_MISSING", "language": language})
             continue
@@ -154,6 +164,7 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path) -> dict:
         "p_scripts": len(script_files), "p_parsed": parsed, "dds": len(dds),
         "languages": game_languages,
         "localization_keys": len(locales.get("simp_chinese", {})),
+        "localization_applicability": "checked" if has_localization else "not_applicable_no_localization_files",
         "semantic_scope": "syntax/package only; runtime and unregistered opcodes require Stellaris tests",
         "errors": errors,
     }
@@ -166,8 +177,10 @@ def main() -> int:
     parser.add_argument("--report", required=True, type=Path)
     parser.add_argument("--expected-exe-sha256", default=CYGNUS_451_SHA256)
     parser.add_argument("--cli", type=Path, default=CLI)
+    parser.add_argument("--version-file", type=Path, help="explicit VERSION source for a package in a multi-Mod repository")
     args = parser.parse_args()
-    result = check(args.mod.resolve(), args.game.resolve(), args.expected_exe_sha256, args.cli.resolve())
+    result = check(args.mod.resolve(), args.game.resolve(), args.expected_exe_sha256, args.cli.resolve(),
+                   args.version_file.resolve() if args.version_file else None)
     args.report.parent.mkdir(parents=True, exist_ok=True)
     args.report.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
     print(json.dumps({key: result[key] for key in ("status", "p_scripts", "p_parsed", "dds", "localization_keys")}, ensure_ascii=False))

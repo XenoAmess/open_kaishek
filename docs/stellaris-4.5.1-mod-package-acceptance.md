@@ -20,6 +20,8 @@
 
 ## 调查与结果
 
+- 2026-09-30：整包入口支持平铺本地化、没有新增文本的纯美术包、显式 `--version-file` 和 supported_version 与安装版本匹配检查；检查证据与能力边界见 [目录兼容修复](stellaris-package-layout-compatibility-2026-09-30.md)。
+
 - 2026-09-26：既有 `stellaris-4.5.1` profile 的覆盖限于 `gfx/portraits/portraits/21_portraits_cybernetics_synthqueen.txt`，对本次 Mod 的其它脚本路径返回 `UNKNOWN_DIRECTORY`。包级独立入口是实现广目录语法与资产合同的受限方案；完整 opcode 合同仍由实机错误日志和专项测试承担。
 - 工具实现：新增 `tools/accept_stellaris_mod.py`，逐文件调用 Kaishek CLI `parse`，检查 4.5.1 EXE 身份、SemVer/描述符、脚本 BOM、DDS 及引用、游戏列出的全部本地化语言与键/格式 token。`semantic_scope` 字段明确声明此处只覆盖语法和包结构。
 - 工具回归：`py -m unittest tools/test_accept_stellaris_mod.py -v` 3 项通过，包含合格包、版本/资源故障、翻译键/脚本 BOM 故障；已接入 `tools/run_static_acceptance.py`。全仓库 `py tools/run_static_acceptance.py` 返回 `static acceptance: PASS`，新测试亦在该流程中通过。
