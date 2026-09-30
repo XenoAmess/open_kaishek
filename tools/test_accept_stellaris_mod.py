@@ -115,6 +115,8 @@ class StellarisModPackageTest(unittest.TestCase):
     def test_localization_optional_revision_retains_syntax_checks(self) -> None:
         path = self.package / "localisation/english/fixture_l_english.yml"
         path.write_text(path.read_text(encoding="utf-8").replace("test_key:0", "test_key:"), encoding="utf-8")
+        with path.open("a", encoding="utf-8") as stream:
+            stream.write(" \n\t \n")
         self.assertEqual("PASS", self.verify()["status"])
         path.write_text(path.read_text(encoding="utf-8").replace("test_key:", "test_key"), encoding="utf-8")
         self.assertIn("LOCALIZATION_SYNTAX", {error["code"] for error in self.verify()["errors"]})

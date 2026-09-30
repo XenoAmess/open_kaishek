@@ -48,7 +48,7 @@ def read_localization(path: Path, language: str, errors: list[dict]) -> dict[str
         errors.append({"code": "LOCALIZATION_HEADER", "path": str(path)})
     entries: dict[str, str] = {}
     for number, line in enumerate(lines[1:], 2):
-        if not line or line.lstrip().startswith("#"):
+        if not line.strip() or line.lstrip().startswith("#"):
             continue
         match = LOCALIZATION.fullmatch(line)
         if not match:

@@ -19,3 +19,5 @@
 ## 结果
 
 最终 `py tools/run_static_acceptance.py` 为 PASS：Maven clean package、domain、parser/fuzz、CLI smoke 全部通过；包级 Python 回归共 9 项，覆盖目录、无文本、外置版本、过时兼容声明、无修订数字及其负例。工具仍只提供语法与包结构结果。
+
+生产包复检又发现无限岗位中文文件中的 9 个仅有空格的分隔行被错误标为 LOCALIZATION_SYNTAX。补充 `line.strip()` 空行判断，正例覆盖仅空格/制表符，原有语法负例保持。暂停 Mod 实机推进，先完成此工具修复、全套验收与推送。
