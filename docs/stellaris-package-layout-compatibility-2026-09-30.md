@@ -9,7 +9,7 @@
 - 本地化只在包含 `.yml` 时执行十语言完整性检查；递归按语言文件后缀寻找文件，兼容平铺、语言子目录与 replace。没有本地化时明确报告不适用，不能把有文件但缺语言当成无文本包。
 - 新增可选 `--version-file` 参数，调用者显式提供 VERSION。默认行为保持原合同，禁止向祖先目录任意搜索或忽略缺失来源。
 - 已有无限岗位本地化使用 `key: "value"`（无修订数字），且历史 Stellaris 实机报告证实可加载；语法合同同时接受该形式与 `key:0 "value"`，继续拒绝缺冒号或缺引号。
-- 以已锁定游戏 `launcher-settings.json.modsCompatibilityVersion` 检查 supported_version 是否覆盖实际游戏；拒绝旧 `4.4.*` 对当前 4.5 的声明。无 launcher-settings 的 synthetic 测试仍以指定 EXE 身份覆盖原合同。
+- 以已锁定游戏 `launcher-settings.json.rawVersion` 检查 supported_version 是否覆盖实际游戏（含补丁版本）；拒绝旧 `4.4.*` 对当前 4.5.1 的声明。无 launcher-settings 的 synthetic 测试仍以指定 EXE 身份覆盖原合同。
 - 工具仅检查语法与包结构，不扩展 opcode/runtime 语义认证。
 
 ## 验收标准
@@ -21,3 +21,5 @@
 最终 `py tools/run_static_acceptance.py` 为 PASS：Maven clean package、domain、parser/fuzz、CLI smoke 全部通过；包级 Python 回归共 9 项，覆盖目录、无文本、外置版本、过时兼容声明、无修订数字及其负例。工具仍只提供语法与包结构结果。
 
 生产包复检又发现无限岗位中文文件中的 9 个仅有空格的分隔行被错误标为 LOCALIZATION_SYNTAX。补充 `line.strip()` 空行判断，正例覆盖仅空格/制表符，原有语法负例保持。暂停 Mod 实机推进，先完成此工具修复、全套验收与推送。
+
+最终追加修复也通过完整 `run_static_acceptance.py`，9/9 包级正反测试通过；实现已提交推送为 `97b4ec8` 与 `68db949`。再次检查五个 4.5.1 生产包全部 PASS：无限岗位、灰风、两份合成女王肖像包与屎山代码。无新文本包报告本地化不适用；十语言包仍执行键、编码与格式合同；外置 VERSION 和兼容声明均严格验证。
