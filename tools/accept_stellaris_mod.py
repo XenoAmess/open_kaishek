@@ -93,7 +93,7 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
                                "declared": supported.group(1), "game": settings.get("rawVersion")})
     script_files = sorted(
         path for path in package.rglob("*")
-        if path.is_file() and (path.suffix.lower() in {".txt", ".gfx"} or path.name == "descriptor.mod")
+        if path.is_file() and (path.suffix.lower() in {".txt", ".gfx", ".gui"} or path.name == "descriptor.mod")
     )
     parsed = 0
     if not script_files:

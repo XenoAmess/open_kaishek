@@ -6,7 +6,7 @@
 
 ## 设计
 
-- `tools/accept_stellaris_mod.py --mod <path> --game <path> --report <path>`：明确传入 Mod 根和游戏安装路径；只读取两者，报告另存调用者指定位置。检查精确游戏 EXE SHA-256、`VERSION` 与描述符、脚本 UTF-8 无 BOM、每个 `.txt` 由 `kaishek-cli parse` 返回 `PARSED` 且零诊断和可往返、DDS 头、引用的本地资源存在。
+- `tools/accept_stellaris_mod.py --mod <path> --game <path> --report <path>`：明确传入 Mod 根和游戏安装路径；只读取两者，报告另存调用者指定位置。检查精确游戏 EXE SHA-256、`VERSION` 与描述符、脚本 UTF-8 无 BOM、每个 `.txt`／`.gfx`／`.gui` 及描述符由 `kaishek-cli parse` 返回 `PARSED` 且零诊断和可往返、DDS 头、引用的本地资源存在。
 - 本地化：从游戏 `localisation` 目录推导官方语言目录，要求 Mod 每种语言的 `l_<language>` 文件带 UTF-8 BOM、键集合相同且无重复/空值；保护 `$...$`、`§.`、转义序列；非中文不允许含中文占位符。生成静态报告，不声称运行时通过。
 - 未识别的资源引用只对本 Mod 显式路径检查；原版 `GFX_*` 等引用不被当成本地文件。对缺路径、解析失败、键缺失、BOM 错误提供明确诊断码。
 - 显式 `gfx/...dds` 路径按游戏资源覆盖顺序解析：先查 Mod 包内，再查已锁定版本的游戏安装目录；两处都没有才报告缺失。原版图标可被 Mod 合法复用，不能仅因 Mod 未复制本体 DDS 就报错。增加本体资源正例与双方缺失负例。
@@ -19,6 +19,8 @@
 3. 测试、全仓库静态验收通过，工具改动先在本仓库提交推送，然后原 Mod 仓库才继续最终验收。
 
 ## 调查与结果
+
+- 2026-10-07：发现包级入口静默遗漏 `.gui`，新增界面定义不得以旧发现范围宣称已解析；修复计划与有效／畸形／BOM／资源负例见 [GUI 覆盖修复](stellaris-package-gui-coverage-2026-10-07.md)。此扩展仍只认证语法／包结构。
 
 - 2026-09-30：整包入口支持平铺本地化、没有新增文本的纯美术包、显式 `--version-file` 和 supported_version 与安装版本匹配检查；检查证据与能力边界见 [目录兼容修复](stellaris-package-layout-compatibility-2026-09-30.md)。
 

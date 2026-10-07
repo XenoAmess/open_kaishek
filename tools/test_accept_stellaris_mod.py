@@ -52,6 +52,40 @@ class StellarisModPackageTest(unittest.TestCase):
         self.assertEqual("PASS", result["status"], result["errors"])
         self.assertEqual(2, result["p_parsed"])
 
+    def gui(self, content: str, suffix: str = ".gui") -> Path:
+        path = self.package / "interface" / ("fixture" + suffix)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content, encoding="utf-8")
+        return path
+
+    def test_gui_is_discovered_and_parsed_case_insensitively(self) -> None:
+        self.gui('guiTypes = { containerWindowType = { name = "fixture" size = { x = 100 y = 40 } } }\n', ".GUI")
+        result = self.verify()
+        self.assertEqual("PASS", result["status"], result["errors"])
+        self.assertEqual(3, result["p_scripts"])
+        self.assertEqual(3, result["p_parsed"])
+
+    def test_rejects_malformed_gui(self) -> None:
+        path = self.gui('guiTypes = { containerWindowType = { name = "fixture" }\n')
+        result = self.verify()
+        self.assertEqual("FAIL", result["status"])
+        self.assertTrue(any(error["code"] == "P_SCRIPT_PARSE" and error["path"] == str(path)
+                            for error in result["errors"]))
+
+    def test_rejects_gui_bom(self) -> None:
+        path = self.gui('\ufeffguiTypes = {}\n')
+        result = self.verify()
+        self.assertEqual("FAIL", result["status"])
+        self.assertTrue(any(error["code"] == "P_SCRIPT_BOM" and error["path"] == str(path)
+                            for error in result["errors"]))
+
+    def test_rejects_gui_missing_asset(self) -> None:
+        path = self.gui('guiTypes = { iconType = { name = "fixture" textureFile = "gfx/missing.dds" } }\n')
+        result = self.verify()
+        self.assertEqual("FAIL", result["status"])
+        self.assertTrue(any(error["code"] == "ASSET_REFERENCE_MISSING" and error["path"] == str(path)
+                            for error in result["errors"]))
+
     def test_rejects_metadata_and_asset_drift(self) -> None:
         (self.mod / "VERSION").write_text("0.2.0\n", encoding="utf-8")
         (self.package / "gfx/interface/fixture.dds").unlink()
