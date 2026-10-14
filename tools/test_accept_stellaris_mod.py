@@ -79,6 +79,27 @@ class StellarisModPackageTest(unittest.TestCase):
         self.assertTrue(any(error["code"] == "P_SCRIPT_BOM" and error["path"] == str(path)
                             for error in result["errors"]))
 
+    def test_asset_script_is_discovered_case_insensitively(self) -> None:
+        path = self.package / "gfx/models/fixture.ASSET"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text('entity = { name = "fixture_entity" clone = "vanilla_entity" }\n', encoding="utf-8")
+        result = self.verify()
+        self.assertEqual("PASS", result["status"], result["errors"])
+        self.assertEqual(3, result["p_scripts"])
+        self.assertEqual(3, result["p_parsed"])
+
+    def test_rejects_malformed_asset_and_asset_bom(self) -> None:
+        path = self.package / "gfx/models/fixture.asset"
+        path.parent.mkdir(parents=True, exist_ok=True)
+        for value, code in (('entity = { name = "broken"\n', "P_SCRIPT_PARSE"),
+                            ('\ufeffentity = {}\n', "P_SCRIPT_BOM")):
+            with self.subTest(code=code):
+                path.write_text(value, encoding="utf-8")
+                result = self.verify()
+                self.assertEqual("FAIL", result["status"])
+                self.assertTrue(any(error["code"] == code and error["path"] == str(path)
+                                    for error in result["errors"]))
+
     def test_rejects_gui_missing_asset(self) -> None:
         path = self.gui('guiTypes = { iconType = { name = "fixture" textureFile = "gfx/missing.dds" } }\n')
         result = self.verify()

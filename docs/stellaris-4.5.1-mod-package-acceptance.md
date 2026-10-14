@@ -21,6 +21,7 @@
 ## 调查与结果
 
 - 2026-10-15：新增明显本地化字符丢失检查，拒绝U+FFFD及四个以上连续ASCII问号，保留正常问句；目标、负例和能力边界见[字符丢失修复](stellaris-localization-character-loss-2026-10-15.md)。
+- 2026-10-15：新增原生实体.asset脚本发现／解析、UTF-8／BOM与引用覆盖，边界和测试见[实体资产脚本覆盖](stellaris-package-asset-coverage-2026-10-15.md)。
 
 - 2026-10-07：发现包级入口静默遗漏 `.gui`，新增界面定义不得以旧发现范围宣称已解析；修复计划与有效／畸形／BOM／资源负例见 [GUI 覆盖修复](stellaris-package-gui-coverage-2026-10-07.md)。此扩展仍只认证语法／包结构。
 
