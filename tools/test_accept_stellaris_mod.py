@@ -8,7 +8,7 @@ from pathlib import Path
 import tempfile
 import unittest
 
-from tools.accept_stellaris_mod import CLI, check
+from tools.accept_stellaris_mod import CLI, check, read_localization
 
 
 class StellarisModPackageTest(unittest.TestCase):
@@ -154,6 +154,28 @@ class StellarisModPackageTest(unittest.TestCase):
         self.assertEqual("PASS", self.verify()["status"])
         path.write_text(path.read_text(encoding="utf-8").replace("test_key:", "test_key"), encoding="utf-8")
         self.assertIn("LOCALIZATION_SYNTAX", {error["code"] for error in self.verify()["errors"]})
+
+    def test_rejects_encoding_character_loss_in_localization(self) -> None:
+        path = self.package / "localisation/simp_chinese/fixture_l_simp_chinese.yml"
+        for value, reason in (("?????", "consecutive_question_marks"),
+                              ("正常10????船坞", "consecutive_question_marks"),
+                              ("损坏\ufffd文本", "replacement_character")):
+            with self.subTest(value=value):
+                path.write_text(f'l_simp_chinese:\n test_key:0 "{value}"\n', encoding="utf-8-sig")
+                errors = []
+                self.assertEqual({"test_key": value}, read_localization(path, "simp_chinese", errors))
+                self.assertEqual([{"code": "LOCALIZATION_CHARACTER_LOSS", "path": str(path),
+                                   "key": "test_key", "line": 2, "reason": reason}], errors)
+
+    def test_accepts_valid_text_and_normal_question_marks(self) -> None:
+        for language, value in (("simp_chinese", "裁决级母舰"),
+                                ("english", "Ready? Really?"), ("english", "?")):
+            with self.subTest(language=language, value=value):
+                path = self.root / f"valid_l_{language}.yml"
+                path.write_text(f'l_{language}:\n test_key:0 "{value}"\n', encoding="utf-8-sig")
+                errors = []
+                self.assertEqual({"test_key": value}, read_localization(path, language, errors))
+                self.assertEqual([], errors)
 
 
 if __name__ == "__main__":

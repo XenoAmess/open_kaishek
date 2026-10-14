@@ -59,6 +59,10 @@ def read_localization(path: Path, language: str, errors: list[dict]) -> dict[str
             errors.append({"code": "LOCALIZATION_DUPLICATE_KEY", "path": str(path), "key": key})
         if not value:
             errors.append({"code": "LOCALIZATION_EMPTY_VALUE", "path": str(path), "key": key})
+        if "\ufffd" in value or re.search(r"\?{4,}", value):
+            errors.append({"code": "LOCALIZATION_CHARACTER_LOSS", "path": str(path),
+                           "key": key, "line": number,
+                           "reason": "replacement_character" if "\ufffd" in value else "consecutive_question_marks"})
         entries[key] = value
     return entries
 
