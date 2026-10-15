@@ -98,6 +98,42 @@ class PopulationScopeTest(unittest.TestCase):
         result = self.check("country_event={pop_amount > }")
         self.assertEqual("UNKNOWN", result["status"])
 
+    def test_saved_global_pop_group_type_is_inferred(self) -> None:
+        result = self.check("country_event={immediate={random_owned_pop_group={save_global_event_target_as=SavedGroup} event_target:SavedGroup={pop_group_size>0}}}")
+        self.assertEqual("PASS", result["status"], result)
+        self.assertEqual({"SavedGroup": "pop_group"}, result["saved_target_scopes"])
+
+    def test_local_and_global_targets_support_exports_and_prev(self) -> None:
+        result = self.check('country_event={immediate={save_event_target_as="saved_country" every_owned_pop_group={save_global_event_target_as=group} event_target:group={pop_group_size>0 prev={pop_amount>0}} set_variable={which=n value=event_target:group.trigger:pop_group_size} event_target:saved_country={pop_amount>0}}}')
+        self.assertEqual("PASS", result["status"], result)
+        self.assertEqual(4, result["checked"])
+
+    def test_saved_target_known_wrong_type_is_rejected(self) -> None:
+        for body in ("random_owned_pop_group={save_event_target_as=target} event_target:target={pop_amount>0}", "save_global_event_target_as=target event_target:target={pop_group_size>0}"):
+            with self.subTest(body=body):
+                self.assertEqual("FAIL", self.check(f"country_event={{immediate={{{body}}}}}")["status"])
+
+    def test_same_type_multiple_saves_are_safe(self) -> None:
+        result = self.check("country_event={immediate={random_owned_pop_group={save_global_event_target_as=group} every_owned_pop_group={save_global_event_target_as=group} event_target:group={pop_group_size>0}}}")
+        self.assertEqual("PASS", result["status"], result)
+
+    def test_conflicting_or_unknown_save_points_remain_unknown(self) -> None:
+        for extra in ("save_global_event_target_as=group", "unregistered_scope={save_global_event_target_as=group}"):
+            with self.subTest(extra=extra):
+                source=f"country_event={{immediate={{random_owned_pop_group={{save_global_event_target_as=group}} {extra} event_target:group={{pop_group_size>0}}}}}}"
+                self.assertEqual("UNKNOWN", self.check(source)["status"])
+
+    def test_dynamic_unsaved_and_fake_saved_targets_remain_unknown(self) -> None:
+        for save, name in (("save_global_event_target_as=$NAME$", "group"), ("save_global_event_target_as=group@root", "group@root"), ('desc="save_global_event_target_as=group"', "group"), ("# save_global_event_target_as=group\n", "group")):
+            with self.subTest(save=save):
+                result=self.check(f"country_event={{immediate={{random_owned_pop_group={{{save}}} event_target:{name}={{pop_group_size>0}}}}}}")
+                self.assertEqual("UNKNOWN", result["status"], result)
+
+    def test_alias_saved_target_inference_does_not_guess_fixed_points(self) -> None:
+        result = self.check("country_event={immediate={save_global_event_target_as=source event_target:source={save_global_event_target_as=derived} event_target:derived={pop_amount>0}}}")
+        self.assertEqual("UNKNOWN", result["status"], result)
+        self.assertEqual({"source": "country"}, result["saved_target_scopes"])
+
 
 class PopulationBuildBindingTest(unittest.TestCase):
     def setUp(self) -> None:
@@ -153,6 +189,13 @@ class PopulationBuildBindingTest(unittest.TestCase):
     def test_no_relevant_expressions_do_not_require_population_profile(self) -> None:
         self.source = 'fixture={desc="pop_amount > 0" always=yes}'
         self.assertEqual("NOT_APPLICABLE", self.verify()["status"])
+
+    def test_cross_file_saved_target_redefinitions_are_unknown(self) -> None:
+        self.source="country_event={immediate={random_owned_pop_group={save_global_event_target_as=group} event_target:group={pop_group_size>0}}}"
+        other=self.package/'events/another.txt'
+        with patch("tools.stellaris_scope_guard.BUILDS", {("v4.5.2",self.sha)}):
+            result=population_scope_preflight(self.package,self.game,[(self.path,self.source),(other,"country_event={immediate={save_global_event_target_as=group}}")],self.sha)
+        self.assertEqual("UNKNOWN",result["status"],result)
 
 
 class ReferencedScriptValueShapeTest(unittest.TestCase):

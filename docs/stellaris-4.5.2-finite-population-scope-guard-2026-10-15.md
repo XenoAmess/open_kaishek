@@ -70,3 +70,19 @@ python tools/accept_stellaris_mod.py `
 结果 **FAIL，退出码 1**：25/25 脚本仍由 Kaishek CLI 解析，13 DDS/268 本地化键结构检查通过，但人口预检精确拒绝 161 处 pop_group 上的 `pop_amount` 比较/导出；script value 预检拒绝 1 个被引用的普通标量定义，并记录定义和引用行列。无 UNKNOWN。结果见 [最终负例报告](evidence/stellaris-population-scope-2026-10-15/rc1-frozen-final-failure.json)；先完成的纯 scope 负例报告亦保留，首次成功拦截后已立即通知调用方可以并行修 Mod。
 
 工具只读检查了游戏安装与冻结 Mod，未启动游戏、桌面或 Steam。此任务不提供修复后 Mod 的行为验收结论；调用方需等工具提交推送完成后，用工具检查新包并继续既定实机测试。post-init 深度/初始化仍不在本有限检查中。
+
+## 后续：已保存 event target 的有限类型推断
+
+2026-10-15，生产候选 rc.2 已通过前述检查，但独立运行夹具的 `event_target:<name>={pop_group_size>0}` 被返回 UNKNOWN。该 target 在同一文件的已知 `random_owned_pop_group` 中保存为 global target，类型可以从源码复核；不能为了放行把所有 event target 猜成 country 或 pop_group。
+
+依据已有引擎 `effects.log:711-717`：`save_event_target_as` 保存当前 scope，用于不间断事件链；`save_global_event_target_as` 保存当前 scope 并全局可用直到清除。本次只增加类型推断，不证明 target 一定存在、事件已经运行或跨 Mod 命名不冲突。
+
+先记录以下方案，再改代码：扫描同一文件的静态常量 target 保存声明，记录所有可见保存点的有限 scope 类型；只有全部保存点均为同一个已知类型时才将该 target 记为已知。多类型、未知保存点、动态/带 scope 后缀名称、未声明 target 保持 UNKNOWN。支持 event target 的块切换及数值导出点链；prev 仍按实际 scope 链记录。为了防止某保存点因尚未推断的别名被漏掉或造成类型循环，不以未完成信息乐观确定类型。
+
+规则不硬编码夹具/业务 target 名称。正例应涵盖 global/local target、country/pop_group 类型、同类型多保存点、prev 链；负例涵盖已知保存类型下误用 opcode、歧义/未知/动态/跨文件未知以及注释字符串中的伪保存。实际夹具在修改前必须复现 UNKNOWN，修改后通过；冻结 rc.1 的原 162 错误继续拒绝，原正反例保留。仅改工具与此文档/证据，完成测试后提交推送再恢复调用方验收，不改夹具或 Mod。
+
+实现为人口 scope profile `v2`。同文件第一遍用空 target 环境收集所有保存点；只有一致的直接已知类型才在第二遍检查中使用。经 target 别名保存、未知保存点与循环不会被乐观固定点推断成已知；跨文件同名保存一律阻止此推断。大小写保留，普通引号常量名支持，动态/带 scope 后缀名称不猜测。此推断仅认证类型，仍不证明事件顺序、保存点已执行或 target 存在。
+
+验证结果：相关两模块共 **53 tests，退出码 0**，新增 8 项 saved-target 正反例通过。实际夹具在修改前 26/26 解析但有一个 scope UNKNOWN，修改后 **PASS（26/26，13 DDS，268 本地化键，零诊断）**。冻结 rc.1 再查仍 **FAIL，161 scope mismatch +1 scalar definition**，没有为放行正例而削弱原负例。实际夹具和故障包均只读；没有启动游戏、桌面或 Steam。
+
+证据：[修复前夹具报告](evidence/stellaris-population-scope-2026-10-15/fixture-before-target-inference.json)、[修复后夹具报告](evidence/stellaris-population-scope-2026-10-15/fixture-after-target-inference.json)、[再次拒绝 rc.1](evidence/stellaris-population-scope-2026-10-15/rc1-after-target-inference-failure.json)、[本次验证摘要](evidence/stellaris-population-scope-2026-10-15/saved-target-verification-summary.json)。仍不涉及 Java 全 Maven、完整 opcode 或 post-init 展开认证。

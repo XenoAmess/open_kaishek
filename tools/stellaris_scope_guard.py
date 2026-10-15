@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 
 
-PROFILE = "stellaris-4.5.2-population-scopes-v1"
+PROFILE = "stellaris-4.5.2-population-scopes-v2"
 VALUE_PROFILE = "stellaris-4.5.2-referenced-script-value-shapes-v1"
 BUILDS = {("v4.5.2", "400df27c82ddc845aa9dce79bd468d81f18f060d299cd263e3afa93aef4f7a83")}
 POPULATION_SCOPES = {
@@ -158,10 +158,32 @@ def targets(entries: list[Entry]) -> bool:
     return False
 
 
-def check_population_scopes(source: str, path: str) -> dict:
+def saved_target_name(value: Token | list[Entry] | None) -> str | None:
+    if isinstance(value, Token):
+        name = value.text[1:-1] if value.quoted else value.text
+        if re.fullmatch(r"[A-Za-z_]\w*", name):
+            return name
+    return None
+
+
+def declared_saved_targets(entries: list[Entry]) -> set[str]:
+    result = set()
+    for entry in entries:
+        if not entry.key.quoted and entry.key.text in {"save_event_target_as", "save_global_event_target_as"}:
+            name = saved_target_name(entry.value)
+            if name:
+                result.add(name)
+        if isinstance(entry.value, list):
+            result.update(declared_saved_targets(entry.value))
+    return result
+
+
+def check_population_scopes(source: str, path: str, blocked_targets: set[str] | None = None) -> dict:
     """Check the registered slice only; callers must establish profile identity."""
     diagnostics = []
     checked = 0
+    saved_targets: dict[str, str] = {}
+    saved_points: dict[str, set[str | None]] = {}
     try:
         document = tree(source)
     except (ValueError, RecursionError) as error:
@@ -169,6 +191,7 @@ def check_population_scopes(source: str, path: str) -> dict:
 
     def promote(parts: list[str], chain: tuple[str | None, ...], root: str | None) -> tuple[str | None, ...]:
         for part in parts:
+            original = part
             part = part.lower()
             if part == "this":
                 target = chain[-1]
@@ -177,6 +200,8 @@ def check_population_scopes(source: str, path: str) -> dict:
             elif re.fullmatch(r"(?:prev)+", part):
                 distance = len(part) // 4
                 target = chain[-1 - distance] if len(chain) > distance else None
+            elif part.startswith("event_target:"):
+                target = saved_targets.get(original.split(":", 1)[1])
             else:
                 target = SCOPES.get(part)
             chain = (*chain, target)
@@ -189,18 +214,24 @@ def check_population_scopes(source: str, path: str) -> dict:
         if actual not in POPULATION_SCOPES[opcode]:
             diagnostics.append({"code": "STELLARIS_SCOPE_UNKNOWN" if actual is None else "STELLARIS_SCOPE_MISMATCH", "path": path, "line": token.line, "column": token.column, "opcode": opcode, "scope": actual or "UNKNOWN", "allowed_scopes": sorted(POPULATION_SCOPES[opcode]), "profile": PROFILE})
 
-    def walk(entries: list[Entry], chain: tuple[str | None, ...], root: str | None, depth: int = 0) -> None:
+    def walk(entries: list[Entry], chain: tuple[str | None, ...], root: str | None, depth: int = 0, collect: bool = False) -> None:
         for entry in entries:
             key = entry.key.text
             if isinstance(entry.value, Token):
-                comparison = target_comparison(entry.key)
-                if comparison:
-                    parts, opcode = comparison
-                    inspect(entry.key, opcode, promote(parts, chain, root))
-                for parts, opcode in target_exports(entry.value):
-                    inspect(entry.value, opcode, promote(parts, chain, root))
+                if collect:
+                    if not entry.key.quoted and key in {"save_event_target_as", "save_global_event_target_as"}:
+                        name = saved_target_name(entry.value)
+                        if name:
+                            saved_points.setdefault(name, set()).add(chain[-1])
+                else:
+                    comparison = target_comparison(entry.key)
+                    if comparison:
+                        parts, opcode = comparison
+                        inspect(entry.key, opcode, promote(parts, chain, root))
+                    for parts, opcode in target_exports(entry.value):
+                        inspect(entry.value, opcode, promote(parts, chain, root))
             elif isinstance(entry.value, list):
-                if not targets(entry.value):
+                if not collect and not targets(entry.value):
                     continue
                 if entry.key.quoted:
                     next_chain, next_root = (*chain, None), root
@@ -209,28 +240,36 @@ def check_population_scopes(source: str, path: str) -> dict:
                     next_chain = (next_root,)
                 elif key in ITERATORS:
                     next_chain, next_root = (*chain, ITERATORS[key]), root
-                elif key.lower() in {"root", "this"} or re.fullmatch(r"(?:prev)+", key.lower()) or key.lower() in SCOPES:
+                elif key.lower() in {"root", "this"} or re.fullmatch(r"(?:prev)+", key.lower()) or key.lower() in SCOPES or (key.startswith("event_target:") and "." not in key):
                     next_chain, next_root = promote([key], chain, root), root
-                elif "." in key and all(part.lower() in SCOPES or part.lower() in {"this", "root"} or re.fullmatch(r"(?:prev)+", part.lower()) for part in key.split(".")):
+                elif "." in key and all(part.lower() in SCOPES or part.lower() in {"this", "root"} or part.startswith("event_target:") or re.fullmatch(r"(?:prev)+", part.lower()) for part in key.split(".")):
                     next_chain, next_root = promote(key.split("."), chain, root), root
                 elif key in TRANSPARENT or (chain[-1] is not None and re.fullmatch(r"\d+(?:\.\d+)?", key)):
                     next_chain, next_root = chain, root
                 else:
                     # Unknown containers/scope changes cannot inherit certainty.
                     next_chain, next_root = (*chain, None), root
-                walk(entry.value, next_chain, next_root, depth + 1)
+                walk(entry.value, next_chain, next_root, depth + 1, collect)
 
+    # Collect with an empty target environment. Unknown/alias/cyclic save points
+    # remain unknown; a later known save must not silently erase them.
+    walk(document, (None,), None, collect=True)
+    saved_targets.update({name: next(iter(types)) for name, types in saved_points.items() if len(types) == 1 and None not in types and name not in (blocked_targets or set())})
     walk(document, (None,), None)
     status = "FAIL" if any(item["code"] == "STELLARIS_SCOPE_MISMATCH" for item in diagnostics) else "UNKNOWN" if diagnostics else "PASS" if checked else "NOT_APPLICABLE"
-    return {"status": status, "checked": checked, "diagnostics": diagnostics}
+    return {"status": status, "checked": checked, "saved_target_scopes": saved_targets, "diagnostics": diagnostics}
 
 
 def population_scope_preflight(package: Path, game: Path, scripts: list[tuple[Path, str]], game_sha: str | None) -> dict:
     """Bind the finite rules to the installed build and untouched alias."""
     relevant = []
+    declaration_paths: dict[str, set[Path]] = {}
     for path, source in scripts:
         try:
-            needed = targets(tree(source))
+            document = tree(source)
+            needed = targets(document)
+            for name in declared_saved_targets(document):
+                declaration_paths.setdefault(name, set()).add(path)
         except (ValueError, RecursionError):
             # The main parser diagnoses syntax; the finite layer is conservative.
             needed = True
@@ -274,12 +313,13 @@ def population_scope_preflight(package: Path, game: Path, scripts: list[tuple[Pa
             if overridden or path.relative_to(package) == alias_relative:
                 reason = "Mod overrides the registered pop_amount alias or its source file"
     diagnostics, checked = [], 0
+    blocked_targets = {name for name, paths in declaration_paths.items() if len(paths) > 1}
     for path, source in relevant:
         relative = path.relative_to(package).as_posix()
         if reason:
             diagnostics.append({"code": "STELLARIS_SCOPE_UNKNOWN", "path": str(path), "reason": reason, "profile": PROFILE})
         else:
-            result = check_population_scopes(source, relative)
+            result = check_population_scopes(source, relative, blocked_targets)
             checked += result["checked"]
             diagnostics.extend({**item, "path": str(path)} for item in result["diagnostics"])
     status = "FAIL" if any(item["code"] == "STELLARIS_SCOPE_MISMATCH" for item in diagnostics) else "UNKNOWN" if diagnostics else "PASS"

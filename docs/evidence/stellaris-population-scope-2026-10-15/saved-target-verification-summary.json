@@ -1,0 +1,25 @@
+{
+  "command": "python -m unittest tools.test_stellaris_scope_guard tools.test_accept_stellaris_mod -v",
+  "tests": 53,
+  "new_saved_target_tests": 8,
+  "exit_code": 0,
+  "fixture_before": "FAIL / one STELLARIS_SCOPE_UNKNOWN",
+  "fixture_after": "PASS / 26 of 26 scripts parsed / no diagnostics",
+  "negative_rc1_codes": {
+    "STELLARIS_SCOPE_MISMATCH": 161,
+    "STELLARIS_SCRIPT_VALUE_SCALAR_DEFINITION": 1
+  },
+  "frozen_rc1_files_unchanged": 90,
+  "source_sha256": {
+    "tools/stellaris_scope_guard.py": "bcded70a654dd6b34bb6c0f6d0f8262017e2cb20f3eb51cd4107a8c7ce436467",
+    "tools/test_stellaris_scope_guard.py": "b7d3933c4f1e365fd6b330c37a66ee06e96a5c0d61423b399891e143651dacc7"
+  },
+  "not_run": [
+    "game",
+    "desktop",
+    "Steam",
+    "Java full Maven",
+    "native event target existence/order/lifetime",
+    "post-init expansion"
+  ]
+}
