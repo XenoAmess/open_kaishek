@@ -17,6 +17,11 @@ import re
 import subprocess
 import sys
 
+if __package__:
+    from tools.stellaris_scope_guard import population_scope_preflight, script_value_shape_preflight
+else:
+    from stellaris_scope_guard import population_scope_preflight, script_value_shape_preflight
+
 
 ROOT = Path(__file__).resolve().parents[1]
 CLI = ROOT / "kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar"
@@ -72,7 +77,8 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
     package = mod / "mod" if (mod / "mod/descriptor.mod").is_file() else mod
     descriptor = package / "descriptor.mod"
     exe = game / "stellaris.exe"
-    if not exe.is_file() or sha256(exe).lower() != expected_sha.lower():
+    game_sha = sha256(exe) if exe.is_file() else None
+    if game_sha is None or game_sha.lower() != expected_sha.lower():
         errors.append({"code": "GAME_EXE_IDENTITY", "path": str(exe)})
     if not cli.is_file():
         errors.append({"code": "KAISHEK_CLI_MISSING", "path": str(cli)})
@@ -100,6 +106,7 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
         if path.is_file() and (path.suffix.lower() in {".txt", ".gfx", ".gui", ".asset"} or path.name == "descriptor.mod")
     )
     parsed = 0
+    scope_sources: list[tuple[Path, str]] = []
     if not script_files:
         errors.append({"code": "NO_P_SCRIPTS", "path": str(package)})
     for path in script_files:
@@ -108,10 +115,11 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
             errors.append({"code": "P_SCRIPT_BOM", "path": str(path)})
             continue
         try:
-            data.decode("utf-8")
+            source = data.decode("utf-8")
         except UnicodeDecodeError:
             errors.append({"code": "P_SCRIPT_ENCODING", "path": str(path)})
             continue
+        scope_sources.append((path, source))
         if cli.is_file():
             command = ["java", "-jar", str(cli), "parse", "--file", str(path)]
             result = subprocess.run(command, capture_output=True, text=True, encoding="utf-8", timeout=60)
@@ -124,10 +132,14 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
                 errors.append({"code": "P_SCRIPT_PARSE", "path": str(path), "diagnostics": payload.get("diagnostics", [])})
             else:
                 parsed += 1
-        for asset in ASSET.findall(data.decode("utf-8")):
+        for asset in ASSET.findall(source):
             relative = Path(asset)
             if not (package / relative).is_file() and not (game / relative).is_file():
                 errors.append({"code": "ASSET_REFERENCE_MISSING", "path": str(path), "asset": asset})
+    finite_scope = population_scope_preflight(package, game, scope_sources, game_sha)
+    errors.extend(finite_scope["diagnostics"])
+    finite_values = script_value_shape_preflight(package, game, scope_sources, game_sha)
+    errors.extend(finite_values["diagnostics"])
     dds = sorted(package.rglob("*.dds"))
     for path in dds:
         if len(path.read_bytes()) < 128 or not path.read_bytes().startswith(b"DDS "):
@@ -164,12 +176,14 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
                     errors.append({"code": "LOCALIZATION_CHINESE_PLACEHOLDER", "language": language, "key": key})
     return {
         "status": "PASS" if not errors else "FAIL",
-        "game_exe_sha256": sha256(exe) if exe.is_file() else None,
+        "game_exe_sha256": game_sha,
         "p_scripts": len(script_files), "p_parsed": parsed, "dds": len(dds),
         "languages": game_languages,
         "localization_keys": len(locales.get("simp_chinese", {})),
         "localization_applicability": "checked" if has_localization else "not_applicable_no_localization_files",
-        "semantic_scope": "syntax/package only; runtime and unregistered opcodes require Stellaris tests",
+        "finite_scope_preflight": finite_scope,
+        "finite_script_value_preflight": finite_values,
+        "semantic_scope": "syntax/package plus explicitly registered finite population scopes and referenced script-value shapes only; runtime, recursive expansion and other opcodes require Stellaris tests",
         "errors": errors,
     }
 

@@ -1,0 +1,5828 @@
+{
+  "status": "FAIL",
+  "game_exe_sha256": "400df27c82ddc845aa9dce79bd468d81f18f060d299cd263e3afa93aef4f7a83",
+  "p_scripts": 25,
+  "p_parsed": 25,
+  "dds": 13,
+  "languages": [
+    "braz_por",
+    "english",
+    "french",
+    "german",
+    "japanese",
+    "korean",
+    "polish",
+    "russian",
+    "simp_chinese",
+    "spanish"
+  ],
+  "localization_keys": 268,
+  "localization_applicability": "checked",
+  "finite_scope_preflight": {
+    "status": "FAIL",
+    "profile": "stellaris-4.5.2-population-scopes-v1",
+    "checked": 161,
+    "relevant_files": 3,
+    "diagnostics": [
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+        "line": 63,
+        "column": 5,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+        "line": 71,
+        "column": 80,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+        "line": 118,
+        "column": 4,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+        "line": 195,
+        "column": 7,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+        "line": 222,
+        "column": 7,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 336,
+        "column": 171,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 349,
+        "column": 169,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 362,
+        "column": 174,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 375,
+        "column": 179,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 388,
+        "column": 172,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 401,
+        "column": 175,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 414,
+        "column": 236,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 427,
+        "column": 174,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 440,
+        "column": 208,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 453,
+        "column": 207,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 466,
+        "column": 222,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 479,
+        "column": 208,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 492,
+        "column": 201,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 505,
+        "column": 178,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 518,
+        "column": 219,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 531,
+        "column": 177,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 544,
+        "column": 179,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 557,
+        "column": 180,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 570,
+        "column": 182,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 583,
+        "column": 178,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 596,
+        "column": 203,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 609,
+        "column": 205,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 622,
+        "column": 209,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 635,
+        "column": 313,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 648,
+        "column": 246,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 661,
+        "column": 472,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 674,
+        "column": 530,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 687,
+        "column": 472,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 700,
+        "column": 270,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 713,
+        "column": 282,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 726,
+        "column": 239,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 739,
+        "column": 224,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 752,
+        "column": 328,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 765,
+        "column": 328,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 778,
+        "column": 283,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 791,
+        "column": 290,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 804,
+        "column": 263,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 817,
+        "column": 241,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 830,
+        "column": 270,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 990,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 991,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 999,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1000,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1008,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1009,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1017,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1018,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1026,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1027,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1035,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1036,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1044,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1045,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1053,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1054,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1062,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1063,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1071,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1072,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1080,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1081,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1089,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1090,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1098,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1099,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1107,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1108,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1116,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1117,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1125,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1126,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1134,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1135,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1143,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1144,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1152,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1153,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1161,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1162,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1170,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1171,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1179,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1180,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1188,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1189,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1197,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1198,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1206,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1207,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1215,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1216,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1224,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1225,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1233,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1234,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1242,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1243,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1251,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1252,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1260,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1261,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1269,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1270,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1278,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1279,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1287,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1288,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1296,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1297,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1305,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1306,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1314,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1315,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1323,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1324,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1332,
+        "column": 60,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+        "line": 1333,
+        "column": 78,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 3,
+        "column": 195,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 5,
+        "column": 193,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 7,
+        "column": 198,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 9,
+        "column": 203,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 11,
+        "column": 196,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 13,
+        "column": 199,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 15,
+        "column": 260,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 17,
+        "column": 198,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 19,
+        "column": 232,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 21,
+        "column": 231,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 23,
+        "column": 246,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 25,
+        "column": 232,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 27,
+        "column": 225,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 29,
+        "column": 202,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 31,
+        "column": 243,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 33,
+        "column": 201,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 35,
+        "column": 203,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 37,
+        "column": 204,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 39,
+        "column": 206,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 41,
+        "column": 202,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 43,
+        "column": 227,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 45,
+        "column": 229,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 47,
+        "column": 233,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 49,
+        "column": 337,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 51,
+        "column": 270,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 53,
+        "column": 496,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 55,
+        "column": 554,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 57,
+        "column": 496,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 59,
+        "column": 294,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 61,
+        "column": 306,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 63,
+        "column": 263,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 65,
+        "column": 248,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 67,
+        "column": 352,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 69,
+        "column": 352,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 71,
+        "column": 307,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 73,
+        "column": 314,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 75,
+        "column": 287,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 77,
+        "column": 265,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      },
+      {
+        "code": "STELLARIS_SCOPE_MISMATCH",
+        "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+        "line": 79,
+        "column": 294,
+        "opcode": "pop_amount",
+        "scope": "pop_group",
+        "allowed_scopes": [
+          "colony",
+          "country",
+          "galactic_object",
+          "planet",
+          "pop_faction",
+          "sector",
+          "ship"
+        ],
+        "profile": "stellaris-4.5.2-population-scopes-v1"
+      }
+    ]
+  },
+  "semantic_scope": "syntax/package plus explicitly registered finite population scopes only; runtime, recursive expansion and other opcodes require Stellaris tests",
+  "errors": [
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+      "line": 63,
+      "column": 5,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+      "line": 71,
+      "column": 80,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+      "line": 118,
+      "column": 4,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+      "line": 195,
+      "column": 7,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_architecture_effects.txt",
+      "line": 222,
+      "column": 7,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 336,
+      "column": 171,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 349,
+      "column": 169,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 362,
+      "column": 174,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 375,
+      "column": 179,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 388,
+      "column": 172,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 401,
+      "column": 175,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 414,
+      "column": 236,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 427,
+      "column": 174,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 440,
+      "column": 208,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 453,
+      "column": 207,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 466,
+      "column": 222,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 479,
+      "column": 208,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 492,
+      "column": 201,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 505,
+      "column": 178,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 518,
+      "column": 219,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 531,
+      "column": 177,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 544,
+      "column": 179,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 557,
+      "column": 180,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 570,
+      "column": 182,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 583,
+      "column": 178,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 596,
+      "column": 203,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 609,
+      "column": 205,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 622,
+      "column": 209,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 635,
+      "column": 313,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 648,
+      "column": 246,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 661,
+      "column": 472,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 674,
+      "column": 530,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 687,
+      "column": 472,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 700,
+      "column": 270,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 713,
+      "column": 282,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 726,
+      "column": 239,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 739,
+      "column": 224,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 752,
+      "column": 328,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 765,
+      "column": 328,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 778,
+      "column": 283,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 791,
+      "column": 290,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 804,
+      "column": 263,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 817,
+      "column": 241,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 830,
+      "column": 270,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 990,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 991,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 999,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1000,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1008,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1009,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1017,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1018,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1026,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1027,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1035,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1036,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1044,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1045,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1053,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1054,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1062,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1063,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1071,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1072,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1080,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1081,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1089,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1090,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1098,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1099,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1107,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1108,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1116,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1117,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1125,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1126,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1134,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1135,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1143,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1144,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1152,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1153,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1161,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1162,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1170,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1171,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1179,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1180,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1188,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1189,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1197,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1198,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1206,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1207,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1215,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1216,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1224,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1225,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1233,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1234,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1242,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1243,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1251,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1252,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1260,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1261,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1269,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1270,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1278,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1279,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1287,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1288,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1296,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1297,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1305,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1306,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1314,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1315,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1323,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1324,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1332,
+      "column": 60,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_effects\\shishan_code_rewards.txt",
+      "line": 1333,
+      "column": 78,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 3,
+      "column": 195,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 5,
+      "column": 193,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 7,
+      "column": 198,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 9,
+      "column": 203,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 11,
+      "column": 196,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 13,
+      "column": 199,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 15,
+      "column": 260,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 17,
+      "column": 198,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 19,
+      "column": 232,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 21,
+      "column": 231,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 23,
+      "column": 246,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 25,
+      "column": 232,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 27,
+      "column": 225,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 29,
+      "column": 202,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 31,
+      "column": 243,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 33,
+      "column": 201,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 35,
+      "column": 203,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 37,
+      "column": 204,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 39,
+      "column": 206,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 41,
+      "column": 202,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 43,
+      "column": 227,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 45,
+      "column": 229,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 47,
+      "column": 233,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 49,
+      "column": 337,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 51,
+      "column": 270,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 53,
+      "column": 496,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 55,
+      "column": 554,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 57,
+      "column": 496,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 59,
+      "column": 294,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 61,
+      "column": 306,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 63,
+      "column": 263,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 65,
+      "column": 248,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 67,
+      "column": 352,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 69,
+      "column": 352,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 71,
+      "column": 307,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 73,
+      "column": 314,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 75,
+      "column": 287,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 77,
+      "column": 265,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    },
+    {
+      "code": "STELLARIS_SCOPE_MISMATCH",
+      "path": "C:\\Users\\Administrator\\AppData\\Local\\xenoamess_stellaries_dev\\runs\\20261015T064353Z\\mod\\shishan-feedback-local\\common\\scripted_triggers\\shishan_code_rewards.txt",
+      "line": 79,
+      "column": 294,
+      "opcode": "pop_amount",
+      "scope": "pop_group",
+      "allowed_scopes": [
+        "colony",
+        "country",
+        "galactic_object",
+        "planet",
+        "pop_faction",
+        "sector",
+        "ship"
+      ],
+      "profile": "stellaris-4.5.2-population-scopes-v1"
+    }
+  ]
+}

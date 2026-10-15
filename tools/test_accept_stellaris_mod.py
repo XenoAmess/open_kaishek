@@ -7,6 +7,7 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from tools.accept_stellaris_mod import CLI, check, read_localization
 
@@ -197,6 +198,49 @@ class StellarisModPackageTest(unittest.TestCase):
                 errors = []
                 self.assertEqual({"test_key": value}, read_localization(path, language, errors))
                 self.assertEqual([], errors)
+
+    def test_finite_population_scope_unknown_blocks_package_pass(self) -> None:
+        path = self.package / "events/fixture.txt"
+        path.parent.mkdir()
+        path.write_text("country_event={immediate={every_owned_pop_group={pop_group_size>0}}}", encoding="utf-8")
+        result = self.verify()
+        self.assertEqual("FAIL", result["status"])
+        self.assertEqual("UNKNOWN", result["finite_scope_preflight"]["status"])
+        self.assertIn("STELLARIS_SCOPE_UNKNOWN", {error["code"] for error in result["errors"]})
+
+    def test_finite_population_scope_valid_and_invalid_package(self) -> None:
+        (self.game / "launcher-settings.json").write_text(json.dumps({"rawVersion": "v4.5.2"}), encoding="utf-8")
+        alias = self.game / "common/scripted_triggers/00_scripted_triggers_pop.txt"
+        alias.parent.mkdir(parents=True)
+        alias.write_text("pop_amount={count_owned_pop_amount={}}", encoding="utf-8")
+        path = self.package / "events/fixture.txt"
+        path.parent.mkdir()
+        path.write_text("country_event={trigger={pop_amount>0} immediate={every_owned_pop_group={pop_group_size>0 prev={pop_amount>0}}}}", encoding="utf-8")
+        with patch("tools.stellaris_scope_guard.BUILDS", {("v4.5.2", self.hash)}):
+            result = self.verify()
+            self.assertEqual("PASS", result["status"], result["errors"])
+            self.assertEqual(3, result["finite_scope_preflight"]["checked"])
+            path.write_text(path.read_text(encoding="utf-8").replace("pop_group_size", "pop_amount"), encoding="utf-8")
+            result = self.verify()
+            self.assertEqual("FAIL", result["status"])
+            self.assertEqual("FAIL", result["finite_scope_preflight"]["status"])
+            self.assertIn("STELLARIS_SCOPE_MISMATCH", {error["code"] for error in result["errors"]})
+
+    def test_referenced_script_value_shape_reaches_package_report(self) -> None:
+        (self.game / "launcher-settings.json").write_text(json.dumps({"rawVersion": "v4.5.2"}), encoding="utf-8")
+        definition = self.package / "common/script_values/fixture.txt"
+        definition.parent.mkdir()
+        definition.write_text("coefficient=.05", encoding="utf-8")
+        use = self.package / "events/fixture.txt"
+        use.parent.mkdir()
+        use.write_text("country_event={immediate={set_variable={which=n value=value:coefficient}}}", encoding="utf-8")
+        with patch("tools.stellaris_scope_guard.BUILDS", {("v4.5.2", self.hash)}):
+            result = self.verify()
+            self.assertEqual("FAIL", result["status"])
+            self.assertEqual("FAIL", result["finite_script_value_preflight"]["status"])
+            self.assertIn("STELLARIS_SCRIPT_VALUE_SCALAR_DEFINITION", {error["code"] for error in result["errors"]})
+            definition.write_text("@fixed=.05 coefficient={base=@fixed}", encoding="utf-8")
+            self.assertEqual("PASS", self.verify()["status"])
 
 
 if __name__ == "__main__":

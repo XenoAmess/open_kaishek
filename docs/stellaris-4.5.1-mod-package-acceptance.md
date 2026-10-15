@@ -25,6 +25,8 @@
 
 - 2026-10-07：发现包级入口静默遗漏 `.gui`，新增界面定义不得以旧发现范围宣称已解析；修复计划与有效／畸形／BOM／资源负例见 [GUI 覆盖修复](stellaris-package-gui-coverage-2026-10-07.md)。此扩展仍只认证语法／包结构。
 
+- 2026-10-15：针对已确认的 4.5.2 人口 scope 与普通命名 script value 标量定义缺口，入口新增构建绑定的有限预检。它明确区分已知错误与 UNKNOWN，不代替完整 opcode 或 post-init 展开认证；规则、正反例与冻结故障包证据见 [4.5.2 有限人口 scope 预检](stellaris-4.5.2-finite-population-scope-guard-2026-10-15.md)。
+
 - 2026-09-30：整包入口支持平铺本地化、没有新增文本的纯美术包、显式 `--version-file` 和 supported_version 与安装版本匹配检查；检查证据与能力边界见 [目录兼容修复](stellaris-package-layout-compatibility-2026-09-30.md)。
 
 - 2026-09-26：既有 `stellaris-4.5.1` profile 的覆盖限于 `gfx/portraits/portraits/21_portraits_cybernetics_synthqueen.txt`，对本次 Mod 的其它脚本路径返回 `UNKNOWN_DIRECTORY`。包级独立入口是实现广目录语法与资产合同的受限方案；完整 opcode 合同仍由实机错误日志和专项测试承担。

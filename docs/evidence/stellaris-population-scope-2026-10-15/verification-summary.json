@@ -1,0 +1,27 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-m",
+    "unittest",
+    "tools.test_stellaris_scope_guard",
+    "tools.test_accept_stellaris_mod",
+    "-v"
+  ],
+  "exit_code": 0,
+  "tests": 45,
+  "result": "PASS",
+  "integration_base": "721bc27",
+  "source_sha256": {
+    "tools/accept_stellaris_mod.py": "4a9e5787000b3bd6e4bc4ac4a267e7c923f270666ce0f3474cb147c1d7efda21",
+    "tools/stellaris_scope_guard.py": "92d01f65e0bae05c7eadb30d3f7e88851d85930d024b68269a7353c8bda7e18c",
+    "tools/test_accept_stellaris_mod.py": "fdf1ea086e2466e10dffdcbe8f755c9fb8ec0222259d21a6417e770c514140a0",
+    "tools/test_stellaris_scope_guard.py": "f079ddc3b6dbb090eb02aa2276793f8cfa76d443b9bf89165bfd92d1fe3e362e"
+  },
+  "not_run": [
+    "Java full Maven acceptance (out of task scope; Java unchanged)",
+    "game startup",
+    "desktop interaction",
+    "Steam operations",
+    "native scope/value/post-init runtime"
+  ]
+}
