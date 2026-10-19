@@ -20,6 +20,10 @@
 
 ## 调查与结果
 
+- 2026-10-19：增加 `common/component_templates/*.csv` 原生武器统计表的格式、
+  数值和字面量武器键关联检查；无 CSV 历史包保持不适用。证据、适用性字段与
+  inline 展开边界见[武器 CSV 包级合同](stellaris-weapon-csv-package-contract-2026-10-19.md)。
+
 - 2026-10-15：新增明显本地化字符丢失检查，拒绝U+FFFD及四个以上连续ASCII问号，保留正常问句；目标、负例和能力边界见[字符丢失修复](stellaris-localization-character-loss-2026-10-15.md)。
 - 2026-10-15：新增原生实体.asset脚本发现／解析、UTF-8／BOM与引用覆盖，边界和测试见[实体资产脚本覆盖](stellaris-package-asset-coverage-2026-10-15.md)。
 

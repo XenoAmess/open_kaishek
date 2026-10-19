@@ -1,0 +1,10 @@
+command: py tools/run_static_acceptance.py
+process exit_code: 0
+full_log_sha256: 90c7f1f1639143e338eba4ae42e22f79e1c634f6bcce84607b73d6dfd38f5cc8
+metadata: PASS (GPL-3.0-only, repository URL, and canonical license hash)
+[INFO] BUILD SUCCESS
+Ran 8 tests in 0.052s
+cli smoke: PASS (kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar)
+Ran 33 tests in 17.567s
+Ran 33 tests in 0.122s
+static acceptance: PASS (repository-owned offline checks; CK3/external corpus not run)
