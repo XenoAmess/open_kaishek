@@ -17,7 +17,7 @@
       "snapshot_files": 60,
       "exit_code": 1,
       "report": "candidate-rc3-package-report.json",
-      "report_sha256": "136876c8fa8fa4b2ae50519ebecdd8fcfe3619fe43aa1668c60beebe4ac96d3b",
+      "report_sha256": "1fec5a5ed5468e793d8ecde256eab84a109d5aced760e3836d0ff0a683ba37e0",
       "status": "FAIL",
       "planet_killer_numeric_components": 1,
       "planet_killer_numeric_resolved": 0,
@@ -73,7 +73,7 @@
       "snapshot_files": 59,
       "exit_code": 0,
       "report": "candidate-rc4-package-report.json",
-      "report_sha256": "2e249c08bb39a4e30ff9d2f3eea0983a5684b328bc5018b069002df38315f20d",
+      "report_sha256": "7c0c4ffcc48206d205083e6c52ad9fdd9d4bc1ca45e291c43dbd6f57c23113b1",
       "status": "PASS",
       "planet_killer_numeric_components": 1,
       "planet_killer_numeric_resolved": 1,
@@ -83,5 +83,6 @@
     }
   ],
   "runtime_executed": false,
-  "scope": "Post-push read-only complete package static regressions; old unsupported CSV rejected and complete inline TXT resolved; no runtime phase timing claim"
+  "scope": "Post-push read-only complete package static regressions; old unsupported CSV rejected and complete inline TXT resolved; no runtime phase timing claim",
+  "report_serialization": "UTF-8 JSON with LF; report_sha256 matches stored Git blob bytes"
 }
