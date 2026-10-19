@@ -20,6 +20,10 @@
 
 ## 调查与结果
 
+- 2026-10-19：实机下令暴露原生 planet_killer 隐式 queued 回调遗漏；增加完成／queued／
+  unqueued 三入口的受限存在性检查，独立于武器 CSV。旧 CSV PASS 不证明这些入口完整，
+  设计与回归见[原生巨像派生回调合同](stellaris-planet-killer-callback-contract-2026-10-19.md)。
+
 - 2026-10-19：增加 `common/component_templates/*.csv` 原生武器统计表的格式、
   数值和字面量武器键关联检查；无 CSV 历史包保持不适用。证据、适用性字段与
   inline 展开边界见[武器 CSV 包级合同](stellaris-weapon-csv-package-contract-2026-10-19.md)。

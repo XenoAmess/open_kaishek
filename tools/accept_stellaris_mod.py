@@ -124,7 +124,7 @@ def read_weapon_csv(path: Path, errors: list[dict], *, native: bool = False) -> 
     return keys
 
 
-def weapon_component_keys(path: Path, errors: list[dict]) -> list[tuple[str, int]]:
+def weapon_component_keys(path: Path, errors: list[dict], *, type_filter: str | None = None) -> list[tuple[str, int]]:
     """Project direct literal keys from root weapon_component_template blocks."""
     try:
         text = path.read_text(encoding="utf-8-sig")
@@ -138,17 +138,22 @@ def weapon_component_keys(path: Path, errors: list[dict]) -> list[tuple[str, int
     depth = 0
     active = False
     keys: list[str | None] = []
+    types: list[str | None] = []
     block_line = 1
     for index, token in enumerate(tokens):
         if token == "{":
             if depth == 0 and tokens[max(0, index - 2):index] == ["weapon_component_template", "="]:
                 active = True
                 keys = []
+                types = []
                 block_line = text.count("\n", 0, matches[index].start()) + 1
             depth += 1
         elif token == "}":
             depth -= 1
             if depth == 0 and active:
+                if type_filter is not None and type_filter not in types:
+                    active = False
+                    continue
                 if len(keys) != 1 or keys[0] is None:
                     errors.append({"code": "WEAPON_COMPONENT_KEY_UNSUPPORTED", "path": str(path),
                                    "line": block_line,
@@ -156,14 +161,74 @@ def weapon_component_keys(path: Path, errors: list[dict]) -> list[tuple[str, int
                 else:
                     result.append((keys[0], block_line))
                 active = False
-        elif active and depth == 1 and token == "key" and tokens[index + 1:index + 2] == ["="]:
+        elif active and depth == 1 and token in {"key", "type"} and tokens[index + 1:index + 2] == ["="]:
             value = tokens[index + 2] if index + 2 < len(tokens) else ""
             if value.startswith('"') and value.endswith('"') and "\\" not in value:
                 value = value[1:-1]
             elif '"' in value or value.startswith("@") or value in {"{", "}", "="}:
                 value = ""
-            keys.append(value or None)
+            (keys if token == "key" else types).append(value or None)
     return result
+
+
+def on_action_block_names(path: Path, errors: list[dict]) -> set[str]:
+    """Project root block names only; comments, strings and nested names are not callbacks."""
+    try:
+        text = path.read_text(encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        errors.append({"code": "PLANET_KILLER_CALLBACK_ENCODING", "path": str(path)})
+        return set()
+    tokens = [match[0] for match in COMPONENT_TOKEN.finditer(text) if not match[0].startswith("#")]
+    names: set[str] = set()
+    depth = 0
+    for index, token in enumerate(tokens):
+        if token == "{":
+            if depth == 0 and index >= 2 and tokens[index - 1] == "=":
+                name = tokens[index - 2]
+                if name.startswith('"') and name.endswith('"') and "\\" not in name:
+                    name = name[1:-1]
+                names.add(name)
+            depth += 1
+        elif token == "}":
+            depth -= 1
+    return names
+
+
+def check_planet_killer_callbacks(package: Path, game: Path, errors: list[dict]) -> dict:
+    """Require only the three observed native callbacks for literal planet-killer keys."""
+    components: dict[str, dict] = {}
+    for path in sorted((package / "common/component_templates").rglob("*")):
+        if path.is_file() and path.suffix.lower() == ".txt":
+            for key, line in weapon_component_keys(path, errors, type_filter="planet_killer"):
+                components[key] = {"path": str(path), "line": line}
+    summary = {
+        "planet_killer_callback_contract": "native_completed_queued_unqueued_v1",
+        "planet_killer_components": len(components),
+        "planet_killer_callbacks_required": len(components) * 3,
+        "planet_killer_callbacks_resolved": 0,
+        "planet_killer_callback_applicability": "checked" if components else "not_applicable_no_planet_killer_components",
+    }
+    if not components:
+        return summary
+    action_root = Path("common/on_actions")
+    mod_files = sorted(path for path in (package / action_root).rglob("*")
+                       if path.is_file() and path.suffix.lower() == ".txt")
+    hidden = {path.relative_to(package).as_posix().casefold() for path in mod_files}
+    native_files = sorted(path for path in (game / action_root).rglob("*")
+                          if path.is_file() and path.suffix.lower() == ".txt"
+                          and path.relative_to(game).as_posix().casefold() not in hidden)
+    defined: set[str] = set()
+    for path in [*mod_files, *native_files]:
+        defined.update(on_action_block_names(path, errors))
+    for key, location in sorted(components.items()):
+        for suffix in ("", "_queued", "_unqueued"):
+            callback = f"on_destroy_planet_with_{key}{suffix}"
+            if callback in defined:
+                summary["planet_killer_callbacks_resolved"] += 1
+            else:
+                errors.append({"code": "PLANET_KILLER_CALLBACK_MISSING", **location,
+                               "key": key, "callback": callback})
+    return summary
 
 
 def check_weapon_csv(package: Path, game: Path, errors: list[dict]) -> dict:
@@ -320,6 +385,7 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
                 if language != "simp_chinese" and values[key] == reference[key] and re.search(r"[\u4e00-\u9fff]", values[key]):
                     errors.append({"code": "LOCALIZATION_CHINESE_PLACEHOLDER", "language": language, "key": key})
     weapon_csv = check_weapon_csv(package, game, errors)
+    planet_killer_callbacks = check_planet_killer_callbacks(package, game, errors)
     return {
         "status": "PASS" if not errors else "FAIL",
         "game_exe_sha256": game_sha,
@@ -328,9 +394,10 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
         "localization_keys": len(locales.get("simp_chinese", {})),
         "localization_applicability": "checked" if has_localization else "not_applicable_no_localization_files",
         **weapon_csv,
+        **planet_killer_callbacks,
         "finite_scope_preflight": finite_scope,
         "finite_script_value_preflight": finite_values,
-        "semantic_scope": "syntax/package including weapon CSV literal-key associations plus explicitly registered finite population scopes and referenced script-value shapes only; runtime, recursive expansion and other opcodes require Stellaris tests",
+        "semantic_scope": "syntax/package including weapon CSV literal-key associations and literal planet-killer callback existence plus explicitly registered finite population scopes and referenced script-value shapes only; runtime, recursive expansion and other opcodes require Stellaris tests",
         "errors": errors,
     }
 

@@ -9,7 +9,9 @@ import tempfile
 import unittest
 from unittest.mock import patch
 
-from tools.accept_stellaris_mod import CLI, WEAPON_COLUMNS, check, check_weapon_csv, read_localization
+from tools.accept_stellaris_mod import (
+    CLI, WEAPON_COLUMNS, check, check_planet_killer_callbacks, check_weapon_csv, read_localization,
+)
 
 
 class StellarisModPackageTest(unittest.TestCase):
@@ -53,6 +55,32 @@ class StellarisModPackageTest(unittest.TestCase):
         self.assertEqual("PASS", result["status"], result["errors"])
         self.assertEqual(2, result["p_parsed"])
         self.assertEqual("not_applicable_no_weapon_csv_files", result["weapon_csv_applicability"])
+        self.assertEqual("not_applicable_no_planet_killer_components", result["planet_killer_callback_applicability"])
+
+    def test_planet_killer_callbacks_reach_package_report_without_csv(self) -> None:
+        root = self.package / "common/component_templates"
+        root.mkdir(parents=True)
+        (root / "fixture.txt").write_text(
+            'weapon_component_template = { key = "PK_FIXTURE" type = planet_killer }\n', encoding="utf-8")
+        actions = self.package / "common/on_actions/fixture.txt"
+        actions.parent.mkdir(parents=True)
+        actions.write_text('on_destroy_planet_with_PK_FIXTURE = {}\n', encoding="utf-8")
+        result = self.verify()
+        self.assertEqual("FAIL", result["status"])
+        self.assertEqual(0, result["weapon_csv_files"])
+        self.assertEqual("native_completed_queued_unqueued_v1", result["planet_killer_callback_contract"])
+        self.assertEqual(1, result["planet_killer_components"])
+        self.assertEqual(3, result["planet_killer_callbacks_required"])
+        self.assertEqual(1, result["planet_killer_callbacks_resolved"])
+        self.assertEqual({"on_destroy_planet_with_PK_FIXTURE_queued", "on_destroy_planet_with_PK_FIXTURE_unqueued"},
+                         {error["callback"] for error in result["errors"]
+                          if error["code"] == "PLANET_KILLER_CALLBACK_MISSING"})
+        with actions.open("a", encoding="utf-8") as stream:
+            stream.write('on_destroy_planet_with_PK_FIXTURE_queued = {}\n'
+                         'on_destroy_planet_with_PK_FIXTURE_unqueued = {}\n')
+        result = self.verify()
+        self.assertEqual("PASS", result["status"], result["errors"])
+        self.assertEqual(3, result["planet_killer_callbacks_resolved"])
 
     def test_weapon_csv_is_included_in_package_acceptance(self) -> None:
         root = self.package / "common/component_templates"
@@ -259,6 +287,105 @@ class StellarisModPackageTest(unittest.TestCase):
             self.assertIn("STELLARIS_SCRIPT_VALUE_SCALAR_DEFINITION", {error["code"] for error in result["errors"]})
             definition.write_text("@fixed=.05 coefficient={base=@fixed}", encoding="utf-8")
             self.assertEqual("PASS", self.verify()["status"])
+
+
+class PlanetKillerCallbackContractTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        root = Path(self.temp.name)
+        self.mod, self.game = root / "mod", root / "game"
+        self.component = self.write(self.mod, "common/component_templates/fixture.txt",
+                                    'weapon_component_template = { key = "PK_FIXTURE" type = planet_killer }\n')
+        self.callbacks = [f"on_destroy_planet_with_PK_FIXTURE{suffix}" for suffix in ("", "_queued", "_unqueued")]
+
+    def write(self, root: Path, relative: str, text: str) -> Path:
+        path = root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def actions(self, root: Path, names: list[str] | None = None, name: str = "fixture.txt") -> Path:
+        return self.write(root, "common/on_actions/" + name,
+                          "\n".join(callback + " = {}" for callback in (self.callbacks if names is None else names)))
+
+    def verify(self) -> tuple[dict, list[dict]]:
+        errors: list[dict] = []
+        return check_planet_killer_callbacks(self.mod, self.game, errors), errors
+
+    def test_accepts_all_three_empty_native_callbacks(self) -> None:
+        self.actions(self.mod)
+        summary, errors = self.verify()
+        self.assertEqual([], errors)
+        self.assertEqual(1, summary["planet_killer_components"])
+        self.assertEqual(3, summary["planet_killer_callbacks_required"])
+        self.assertEqual(3, summary["planet_killer_callbacks_resolved"])
+        self.assertEqual("checked", summary["planet_killer_callback_applicability"])
+
+    def test_each_missing_callback_fails_with_component_location(self) -> None:
+        for missing in self.callbacks:
+            with self.subTest(missing=missing):
+                self.actions(self.mod, [name for name in self.callbacks if name != missing])
+                _, errors = self.verify()
+                self.assertEqual([{"code": "PLANET_KILLER_CALLBACK_MISSING", "path": str(self.component),
+                                   "line": 1, "key": "PK_FIXTURE", "callback": missing}], errors)
+
+    def test_native_fallback_and_mod_native_split_are_allowed(self) -> None:
+        self.actions(self.game, name="native.txt")
+        self.assertEqual([], self.verify()[1])
+        self.actions(self.game, self.callbacks[:1], name="native.txt")
+        self.actions(self.mod, self.callbacks[1:])
+        self.assertEqual([], self.verify()[1])
+
+    def test_mod_same_path_hides_native_callbacks(self) -> None:
+        self.actions(self.game)
+        self.actions(self.mod, self.callbacks[:1])
+        summary, errors = self.verify()
+        self.assertEqual(1, summary["planet_killer_callbacks_resolved"])
+        self.assertEqual(set(self.callbacks[1:]), {error["callback"] for error in errors})
+
+    def test_comments_strings_nested_and_scalar_names_are_not_callback_blocks(self) -> None:
+        for fake in ("# {name} = {{}}", 'text = "{name} = {{}}"',
+                     "wrapper = {{ {name} = {{}} }}", "{name} = yes"):
+            with self.subTest(fake=fake):
+                self.write(self.mod, "common/on_actions/fixture.txt", "\n".join(fake.format(name=name) for name in self.callbacks))
+                _, errors = self.verify()
+                self.assertEqual(set(self.callbacks), {error["callback"] for error in errors})
+
+    def test_quoted_keys_types_and_case_insensitive_file_extensions(self) -> None:
+        self.component.unlink()
+        self.write(self.mod, "common/component_templates/fixture.TXT",
+                   'weapon_component_template = { key = PK_FIXTURE type = "planet_killer" }')
+        self.actions(self.mod, name="fixture.TXT")
+        self.assertEqual([], self.verify()[1])
+
+    def test_non_planet_killers_and_nested_type_fields_are_not_applicable(self) -> None:
+        for content in ('weapon_component_template = { key = "ORDINARY" type = instant }',
+                        'weapon_component_template = { key = @unknown type = instant }',
+                        'weapon_component_template = { key = "ORDINARY" nested = { type = planet_killer } }',
+                        '# weapon_component_template = { key = "PK_FIXTURE" type = planet_killer }\n',
+                        'outer = { weapon_component_template = { key = "PK_FIXTURE" type = planet_killer } }'):
+            with self.subTest(content=content):
+                self.component.write_text(content, encoding="utf-8")
+                summary, errors = self.verify()
+                self.assertEqual([], errors)
+                self.assertEqual(0, summary["planet_killer_components"])
+                self.assertEqual("not_applicable_no_planet_killer_components", summary["planet_killer_callback_applicability"])
+
+    def test_literal_planet_killer_requires_a_literal_component_key(self) -> None:
+        self.component.write_text('weapon_component_template = { key = @unknown type = planet_killer }', encoding="utf-8")
+        self.assertIn("WEAPON_COMPONENT_KEY_UNSUPPORTED", {error["code"] for error in self.verify()[1]})
+
+    def test_all_planet_killers_are_checked_and_unrelated_callbacks_do_not_match(self) -> None:
+        with self.component.open("a", encoding="utf-8") as stream:
+            stream.write('weapon_component_template = { key = "PK_SECOND" type = planet_killer }')
+        self.actions(self.mod)
+        summary, errors = self.verify()
+        self.assertEqual(2, summary["planet_killer_components"])
+        self.assertEqual(6, summary["planet_killer_callbacks_required"])
+        self.assertEqual(3, summary["planet_killer_callbacks_resolved"])
+        self.assertTrue(all(error["key"] == "PK_SECOND" for error in errors))
+        self.assertEqual(3, len(errors))
 
 
 class WeaponCsvContractTest(unittest.TestCase):
