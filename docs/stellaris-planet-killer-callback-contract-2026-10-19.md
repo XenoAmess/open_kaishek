@@ -78,4 +78,23 @@ P 语法、CSV 统计与武器键，却未检查由 `type=planet_killer` 隐式�
   `not_applicable_no_planet_killer_components`。
 
 目标专用巨像应为 1 组件／3 所需／3 已找到且 `checked`。调用方不能沿用没有这些
-字段的旧报告。工具提交推送后，再对旧缺陷冻结包与当前修复包记录只读静态结果。
+字段的旧报告。
+
+工具实现 `bec0c47` 已推送 `origin/main` 后，使用精确游戏指纹，只读检查两包：
+
+| 包 | 整包状态／退出码 | P | 回调所需／已找到 | 诊断 |
+| --- | --- | --- | --- | --- |
+| immutable prototype-rc1b | FAIL／1 | 34/34 | 3／1 | 仅缺 queued、unqueued 两项 |
+| 当前生产修复包 | PASS／0 | 35/35 | 3／3 | errors=[]，113 本地化键 |
+
+旧包精确输出两个 `PLANET_KILLER_CALLBACK_MISSING`，均指向组件定义第 1 行，
+证明 P 和 CSV 通过不能代替派生回调存在性。新包空的 queued／unqueued 块满足
+当前受限合同。报告分别为[旧冻结包失败](evidence/stellaris-pk-callback-2026-10-19/old-rc1b-missing-callbacks.json)
+与[修复工作包静态通过](evidence/stellaris-pk-callback-2026-10-19/repaired-devourer-working-package.json)，
+关键输入与工具提交见[指纹记录](evidence/stellaris-pk-callback-2026-10-19/callback-input-fingerprints.json)。
+修复包 on_actions SHA-256 为
+`f37870ca1050ca976cbee80312a8862a698ca4596bae55a7b9e9fdfec897db8e`。
+
+上述是检查时工作包的静态校验通过，原型冻结目录没有被修改。最终候选必须重新冻结并
+重跑新工具；下令、取消、发射与结算需简体中文实机，非中文运行时不在范围内。
+本次没有操作桌面或启动游戏，也没有把回调业务内容的正确性写成已认证。

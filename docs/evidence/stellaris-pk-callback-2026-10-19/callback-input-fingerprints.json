@@ -1,0 +1,26 @@
+{
+  "tool_commit": "bec0c47b9d6ffdbe0d8515c1bf27737f5f4fa891",
+  "scope": "Read-only package checks after tool push; final caller package and runtime require separate validation",
+  "inputs": {
+    "old_rc1b": {
+      "root": "C:\\Users\\1\\AppData\\Local\\xenoamess_stellaries_dev\\artifacts\\1019-implementation\\prototype-rc1b",
+      "sha256": {
+        "VERSION": "340fbb7c554568660a31facf56a3babc91122270899b004cbece419c73adb4ea",
+        "mod/descriptor.mod": "8dda6aeaa85bf0b7cc9cb4e54b89cecb785c0353b22c6d3a331ca318f87149c0",
+        "mod/common/component_templates/eep_planet_killer.txt": "1e7d1f65e38c7bcfe370315b301ffbe680dad7571646c1a1e54f35cb96200cd0",
+        "mod/common/component_templates/eep_weapon_components.csv": "f00d024a4714fd283629a94a401a3956e5317aa7e0693f03aacd7ed902140428",
+        "mod/common/on_actions/eep_on_actions.txt": "24070c608b8e61db95a6bfc03b791a3f8f707dc6e63d0fc26736d9a69f57c556"
+      }
+    },
+    "repaired_working_package": {
+      "root": "D:\\workspace\\xenoamess_stellaries_dev\\eat_everything_origin",
+      "sha256": {
+        "VERSION": "9cf43ab58459ac405d39d725f82321d127bf5e9cd6dfc9c5373bd3d7c6cef4e3",
+        "mod/descriptor.mod": "6ad0da59dbf2766e1f8a63eca8d6248396fb7c8520bf6c87b4c94ab7d3077907",
+        "mod/common/component_templates/eep_planet_killer.txt": "1e7d1f65e38c7bcfe370315b301ffbe680dad7571646c1a1e54f35cb96200cd0",
+        "mod/common/component_templates/eep_weapon_components.csv": "f00d024a4714fd283629a94a401a3956e5317aa7e0693f03aacd7ed902140428",
+        "mod/common/on_actions/eep_on_actions.txt": "f37870ca1050ca976cbee80312a8862a698ca4596bae55a7b9e9fdfec897db8e"
+      }
+    }
+  }
+}
