@@ -1,0 +1,9 @@
+{
+  "mod/common/component_templates/eep_weapon_components.csv": "f00d024a4714fd283629a94a401a3956e5317aa7e0693f03aacd7ed902140428",
+  "mod/common/component_templates/eep_planet_killer.txt": "1e7d1f65e38c7bcfe370315b301ffbe680dad7571646c1a1e54f35cb96200cd0",
+  "VERSION": "340fbb7c554568660a31facf56a3babc91122270899b004cbece419c73adb4ea",
+  "mod/descriptor.mod": "8dda6aeaa85bf0b7cc9cb4e54b89cecb785c0353b22c6d3a331ca318f87149c0",
+  "tool_commit": "d5e61a9",
+  "game_exe_sha256": "400df27c82ddc845aa9dce79bd468d81f18f060d299cd263e3afa93aef4f7a83",
+  "scope": "read-only working package at inspection; final package requires caller rerun"
+}

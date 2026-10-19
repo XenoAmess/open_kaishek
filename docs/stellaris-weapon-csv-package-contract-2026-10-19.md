@@ -83,4 +83,14 @@ metadata、Maven clean/package、domain、parser/fuzz、packaged CLI smoke、33 
 报告字段为 `weapon_csv_files`、`weapon_csv_keys`、`weapon_csv_applicability`；有 CSV 时
 还报告 `weapon_csv_native_unexpanded_templates`。调用方必须识别这些字段，修复前的
 旧 PASS 不能作为武器 CSV 验收证据。当前 Mod 的独立表只读专项检查为 1 文件、1 键、
-`checked` 且零错误；工具推送后再记录调用方整包静态检查结果。
+`checked` 且零错误。
+
+工具修复提交 `d5e61a9` 已推送 `origin/main` 后，用当前调用方
+`eat_everything_origin` 只读重跑整包入口：`PASS`、退出码 0、34/34 P 文件、12 DDS、
+114 个本地化键；`weapon_csv_files=1`、`weapon_csv_keys=1`、
+`weapon_csv_applicability=checked`、未展开原生模板 36、`errors=[]`。记录见
+[整包静态报告](evidence/stellaris-weapon-csv-2026-10-19/devourer-package-report.json)及
+[关键输入指纹](evidence/stellaris-weapon-csv-2026-10-19/devourer-input-manifest.json)。
+独立表 SHA-256 为 `f00d024a4714fd283629a94a401a3956e5317aa7e0693f03aacd7ed902140428`。
+这是工作中快照的静态校验通过，非中文运行时不在范围内；未启动任何游戏，调用方
+仍须对最终包重跑工具，并另行完成简体中文实机验收。
