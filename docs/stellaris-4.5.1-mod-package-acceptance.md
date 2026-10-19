@@ -2,6 +2,10 @@
 
 ## 目标与边界
 
+2026-10-20补充：原生巨像通知会按组件key派生MESSAGE_DESC_FOR_<key>；包级入口
+现检查每个官方语言的Mod/原版回退解析，并拒绝空值和原始键正文。实际UI缺陷、
+正反测试与真实旧包FAIL见[巨像通知本地化合同](stellaris-planet-killer-message-localization-2026-10-20.md)。
+
 `xenoamess_stellaries_dev/shishan_code_origin` 使用起源、局势、特殊项目、事件、脚本值、物种特质、建筑与本地化。现有 `stellaris-4.5.1` profile 只验证合成女王静态肖像，无法覆盖此 Mod。增加可复用的包级检查入口，使用本仓库 CLI 的 P 语言解析器检查 Mod 中全部脚本，叠加文件、版本、资源路径和十语言本地化的结构合同。它不给未注册 opcode 冒充语义认证；游戏行为仍须在 Stellaris 实机验证。
 
 ## 设计

@@ -11,6 +11,7 @@ from unittest.mock import patch
 
 from tools.accept_stellaris_mod import (
     CLI, WEAPON_COLUMNS, check, check_planet_killer_callbacks, check_planet_killer_numeric, check_weapon_csv, read_localization,
+    check_planet_killer_message_localization,
 )
 
 
@@ -28,6 +29,8 @@ class StellarisModPackageTest(unittest.TestCase):
         self.hash = hashlib.sha256(b"fixture game").hexdigest()
         for language in ("simp_chinese", "english"):
             (self.game / "localisation" / language).mkdir(parents=True)
+            (self.game / "localisation" / language / "messages.yml").write_text(
+                f'l_{language}:\n MESSAGE_DESC_FOR_PK_FIXTURE:0 "native fixture description"\n', encoding="utf-8")
             target = self.package / "localisation" / language
             target.mkdir(parents=True)
             value = "测试 $NAME$ §G一§!" if language == "simp_chinese" else "Test $NAME$ §Gone§!"
@@ -59,6 +62,51 @@ class StellarisModPackageTest(unittest.TestCase):
         self.assertEqual("native_csv_or_literal_txt_v1", result["planet_killer_numeric_contract"])
         self.assertEqual(0, result["planet_killer_numeric_resolved"])
         self.assertEqual("native_fixed_paths_v1", result["weapon_csv_loader_contract"])
+
+    def test_generated_destroy_description_is_required_per_language(self) -> None:
+        root = self.package / "common/component_templates"
+        root.mkdir(parents=True)
+        (root / "localized.txt").write_text(
+            'weapon_component_template={key=PK_LOCALIZED type=planet_killer}', encoding="utf-8")
+        name = "MESSAGE_DESC_FOR_PK_LOCALIZED"
+        errors = []
+        report = check_planet_killer_message_localization(
+            self.package, self.game, {"simp_chinese": {name: "正文"}, "english": {}},
+            ["simp_chinese", "english"], errors)
+        self.assertEqual(2, report["planet_killer_message_localization_required"])
+        self.assertEqual(1, report["planet_killer_message_localization_resolved"])
+        self.assertEqual(["english"], [row["language"] for row in errors])
+        self.assertEqual("PLANET_KILLER_MESSAGE_LOCALIZATION_MISSING", errors[0]["code"])
+        errors = []
+        report = check_planet_killer_message_localization(
+            self.package, self.game, {"simp_chinese": {name: "正文"}, "english": {name: "description"}},
+            ["simp_chinese", "english"], errors)
+        self.assertEqual([], errors)
+        self.assertEqual(2, report["planet_killer_message_localization_resolved"])
+
+    def test_generated_description_native_fallback_and_invalid_mod_override(self) -> None:
+        root = self.package / "common/component_templates"
+        root.mkdir(parents=True)
+        (root / "native.txt").write_text(
+            'weapon_component_template={key=PK_FIXTURE type=planet_killer}', encoding="utf-8")
+        name = "MESSAGE_DESC_FOR_PK_FIXTURE"
+        errors = []
+        report = check_planet_killer_message_localization(self.package, self.game, {}, ["english"], errors)
+        self.assertEqual([], errors)
+        self.assertEqual("native", report["planet_killer_message_localization_sources"][0]["source"])
+        for value in ("", " ", name, "$" + name + "$"):
+            with self.subTest(value=value):
+                errors = []
+                check_planet_killer_message_localization(self.package, self.game,
+                                                        {"english": {name: value}}, ["english"], errors)
+                self.assertEqual("PLANET_KILLER_MESSAGE_LOCALIZATION_INVALID", errors[0]["code"])
+
+    def test_no_planet_killer_has_no_generated_description_requirement(self) -> None:
+        errors = []
+        report = check_planet_killer_message_localization(self.package, self.game, {}, ["english"], errors)
+        self.assertEqual([], errors)
+        self.assertEqual(0, report["planet_killer_message_localization_required"])
+        self.assertEqual("not_applicable_no_planet_killer_components", report["planet_killer_message_localization_applicability"])
 
     def test_planet_killer_callbacks_reach_package_report_without_csv(self) -> None:
         root = self.package / "common/component_templates"

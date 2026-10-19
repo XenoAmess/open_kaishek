@@ -378,6 +378,49 @@ def check_planet_killer_callbacks(package: Path, game: Path, errors: list[dict])
     return summary
 
 
+def check_planet_killer_message_localization(package: Path, game: Path, locales: dict,
+                                             languages: list[str], errors: list[dict]) -> dict:
+    """Resolve the observed native destruction-description key, not message execution."""
+    components = {}
+    for path in sorted((package / "common/component_templates").rglob("*")):
+        if not path.is_file() or path.suffix.lower() != ".txt":
+            continue
+        for key, line in weapon_component_keys(path, errors, type_filter="planet_killer"):
+            components[key] = {"path": str(path), "line": line}
+    resolved = []
+    for language in languages:
+        values = locales.get(language, {})
+        needed = {"MESSAGE_DESC_FOR_" + key for key in components} - set(values)
+        native = {}
+        for path in sorted((game / "localisation" / language).rglob("*.yml")) if needed else []:
+            text = path.read_text(encoding="utf-8-sig")
+            for name in list(needed):
+                match = re.search(r'^\s*' + re.escape(name) + r':\d*\s+"((?:[^"\\]|\\.)*)"', text, re.M)
+                if match:
+                    native[name] = (match[1], str(path))
+                    needed.remove(name)
+            if not needed:
+                break
+        for key, location in sorted(components.items()):
+            name = "MESSAGE_DESC_FOR_" + key
+            value = values.get(name) if name in values else native.get(name, (None, None))[0]
+            if value is None:
+                errors.append({"code": "PLANET_KILLER_MESSAGE_LOCALIZATION_MISSING", **location,
+                               "key": key, "localization_key": name, "language": language})
+            elif not value.strip() or value.strip() in {name, "$" + name + "$"}:
+                errors.append({"code": "PLANET_KILLER_MESSAGE_LOCALIZATION_INVALID", **location,
+                               "key": key, "localization_key": name, "language": language})
+            else:
+                resolved.append({"key": key, "localization_key": name, "language": language,
+                                 "source": "mod" if name in values else "native",
+                                 **({"native_path": native[name][1]} if name not in values else {})})
+    return {"planet_killer_message_localization_contract": "native_destroy_description_v1",
+            "planet_killer_message_localization_applicability": "checked" if components else "not_applicable_no_planet_killer_components",
+            "planet_killer_message_localization_required": len(components) * len(languages),
+            "planet_killer_message_localization_resolved": len(resolved),
+            "planet_killer_message_localization_sources": resolved}
+
+
 def check_weapon_csv(package: Path, game: Path, errors: list[dict], *, literal_stat_keys: set[str] | None = None) -> dict:
     """Check Mod tables and literal key associations; do not execute weapon semantics."""
     component_root = Path("common/component_templates")
@@ -541,6 +584,7 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
                          if source["kind"] == "literal_component_txt"}
     weapon_csv = check_weapon_csv(package, game, errors, literal_stat_keys=literal_stat_keys)
     planet_killer_callbacks = check_planet_killer_callbacks(package, game, errors)
+    planet_killer_messages = check_planet_killer_message_localization(package, game, locales, game_languages, errors)
     return {
         "status": "PASS" if not errors else "FAIL",
         "game_exe_sha256": game_sha,
@@ -550,10 +594,11 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
         "localization_applicability": "checked" if has_localization else "not_applicable_no_localization_files",
         **weapon_csv,
         **planet_killer_callbacks,
+        **planet_killer_messages,
         **planet_killer_numeric,
         "finite_scope_preflight": finite_scope,
         "finite_script_value_preflight": finite_values,
-        "semantic_scope": "syntax/package including supported fixed weapon CSV paths, literal planet-killer numeric sources and callback existence plus explicitly registered finite population scopes and referenced script-value shapes only; native loading, phase timing, runtime, recursive expansion and other opcodes require Stellaris tests",
+        "semantic_scope": "syntax/package including supported fixed weapon CSV paths, literal planet-killer numeric sources, callback existence and derived destruction-description localization plus explicitly registered finite population scopes and referenced script-value shapes only; native loading, phase timing, runtime, recursive expansion and other opcodes require Stellaris tests",
         "errors": errors,
     }
 
