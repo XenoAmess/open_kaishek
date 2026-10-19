@@ -100,4 +100,25 @@ FAIL，最终生产修复包只读重跑取得新合同证据；旧报告保持�
 metadata、Maven clean/package 与 JUnit、domain、parser/fuzz、packaged CLI smoke、
 56 项整包回归和 33 项 scope guard 均通过；未启动游戏或扫描外部 corpus。
 完整输出见 [static-acceptance.txt](evidence/stellaris-pk-numeric-source-2026-10-19/static-acceptance.txt)。
-提交后实际候选报告待补。
+实现提交 `2c8f8a9fe7e8a9d27c910a4c21adcfef840c76f2` 已推送 origin/main 后，
+对调用方两份 immutable 包执行完整静态入口，并逐项核对 source-copy 清单的
+60／59 个文件字节与 SHA，未修改其目录或旧报告：
+
+| 包 | 结果 | P／本地化 | 数值合同 | CSV 路径 |
+| --- | --- | --- | --- | --- |
+| candidate-rc3 | FAIL，退出码 1 | 36/36 P，131 keys | 1 组件、0 resolved；四字段缺来源 | 1 文件、1 unsupported |
+| candidate-rc4 | PASS，退出码 0 | 36/36 P，131 keys | 1 组件、1 resolved | 0 CSV、0 unsupported |
+
+RC3 精确保留 `WEAPON_CSV_UNSUPPORTED_PATH` 和四项
+`PLANET_KILLER_NUMERIC_FIELD` 错误；三回调仍全部解析，不能因为回调通过而忽略
+时序来源失败。RC4 来源为 `literal_component_txt`，文件 SHA
+`0bf1314f69f410ffcbf14875680d2689453295ee317b16d47ae219920b62dd92`，
+values 为 min 90、max 90、total_fire_time 30、power 0，三回调 3/3，errors 为空。
+checker 源码 SHA 为
+`5c98b4692a6731aee88348893e6d97ee56d852baa210348cc1684aae4e80db3f`。
+
+证据：[RC3 缺陷包报告](evidence/stellaris-pk-numeric-source-2026-10-19/candidate-rc3-package-report.json)、
+[RC4 静态报告](evidence/stellaris-pk-numeric-source-2026-10-19/candidate-rc4-package-report.json)、
+[输入与工具指纹](evidence/stellaris-pk-numeric-source-2026-10-19/candidate-input-manifest.json)。
+这些结果仅为工具修复后的静态校验，调用方仍须重新冻结正式候选、执行自己的门禁，
+并实际验证中文 UI 的充能／发射日期和收益恰一次；本次未运行游戏。

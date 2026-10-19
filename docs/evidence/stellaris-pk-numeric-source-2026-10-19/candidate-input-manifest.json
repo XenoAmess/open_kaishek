@@ -1,0 +1,87 @@
+{
+  "schema": "kaishek.stellaris-pk-numeric-source-regression.v1",
+  "status": "PASS_TOOL_REGRESSION_ONLY",
+  "created_utc": "2026-10-19T11:27:59.324836+00:00",
+  "implementation_commit": "2c8f8a9fe7e8a9d27c910a4c21adcfef840c76f2",
+  "checker_sha256": "5c98b4692a6731aee88348893e6d97ee56d852baa210348cc1684aae4e80db3f",
+  "cli_sha256": "6ac143ebf03f3e1a041dff01b2d808e60de8e289d18cebf9855682f0a80b6d82",
+  "game_exe_sha256": "400df27c82ddc845aa9dce79bd468d81f18f060d299cd263e3afa93aef4f7a83",
+  "candidates": [
+    {
+      "candidate": "candidate-rc3",
+      "mod": "C:\\Users\\1\\AppData\\Local\\xenoamess_stellaries_dev\\artifacts\\1019-implementation\\candidate-rc3\\mod",
+      "version": "0.4.0-rc.3",
+      "recorded_tree_sha256": "178d3021fa53dd999b5537e1e58f7b59c7138232e7a7fe4fe53327b3dff8e116",
+      "source_copy_sha256": "d1a2b49e2f31c7ebaf54e2a99a89ab594f570ec1c675e4d2af2db30247ba6fd4",
+      "all_snapshot_files_verified": true,
+      "snapshot_files": 60,
+      "exit_code": 1,
+      "report": "candidate-rc3-package-report.json",
+      "report_sha256": "136876c8fa8fa4b2ae50519ebecdd8fcfe3619fe43aa1668c60beebe4ac96d3b",
+      "status": "FAIL",
+      "planet_killer_numeric_components": 1,
+      "planet_killer_numeric_resolved": 0,
+      "weapon_csv_files": 1,
+      "weapon_csv_unsupported_files": 1,
+      "errors": [
+        {
+          "code": "PLANET_KILLER_NUMERIC_FIELD",
+          "key": "EEP_PLANET_KILLER_DEVOURER",
+          "field": "windup_min",
+          "path": "C:\\Users\\1\\AppData\\Local\\xenoamess_stellaries_dev\\artifacts\\1019-implementation\\candidate-rc3\\mod\\common\\component_templates\\eep_planet_killer.txt",
+          "line": 1,
+          "reason": "requires one finite direct decimal; timing values must be nonnegative"
+        },
+        {
+          "code": "PLANET_KILLER_NUMERIC_FIELD",
+          "key": "EEP_PLANET_KILLER_DEVOURER",
+          "field": "windup_max",
+          "path": "C:\\Users\\1\\AppData\\Local\\xenoamess_stellaries_dev\\artifacts\\1019-implementation\\candidate-rc3\\mod\\common\\component_templates\\eep_planet_killer.txt",
+          "line": 1,
+          "reason": "requires one finite direct decimal; timing values must be nonnegative"
+        },
+        {
+          "code": "PLANET_KILLER_NUMERIC_FIELD",
+          "key": "EEP_PLANET_KILLER_DEVOURER",
+          "field": "total_fire_time",
+          "path": "C:\\Users\\1\\AppData\\Local\\xenoamess_stellaries_dev\\artifacts\\1019-implementation\\candidate-rc3\\mod\\common\\component_templates\\eep_planet_killer.txt",
+          "line": 1,
+          "reason": "requires one finite direct decimal; timing values must be nonnegative"
+        },
+        {
+          "code": "PLANET_KILLER_NUMERIC_FIELD",
+          "key": "EEP_PLANET_KILLER_DEVOURER",
+          "field": "power",
+          "path": "C:\\Users\\1\\AppData\\Local\\xenoamess_stellaries_dev\\artifacts\\1019-implementation\\candidate-rc3\\mod\\common\\component_templates\\eep_planet_killer.txt",
+          "line": 1,
+          "reason": "requires one finite direct decimal; timing values must be nonnegative"
+        },
+        {
+          "code": "WEAPON_CSV_UNSUPPORTED_PATH",
+          "path": "C:\\Users\\1\\AppData\\Local\\xenoamess_stellaries_dev\\artifacts\\1019-implementation\\candidate-rc3\\mod\\common\\component_templates\\eep_weapon_components.csv",
+          "reason": "only the two fixed native weapon CSV paths are supported; syntax is still checked"
+        }
+      ]
+    },
+    {
+      "candidate": "candidate-rc4",
+      "mod": "C:\\Users\\1\\AppData\\Local\\xenoamess_stellaries_dev\\artifacts\\1019-implementation\\candidate-rc4\\mod",
+      "version": "0.4.0-rc.4",
+      "recorded_tree_sha256": "06485dc540a88b30cef15c27c323ff21cd88f04ad57b79e4f5bc0590937ef468",
+      "source_copy_sha256": "4d948c9782197108c2703b89a4e65d3fc1e4636a322a9497a5ba88ca408b6a2d",
+      "all_snapshot_files_verified": true,
+      "snapshot_files": 59,
+      "exit_code": 0,
+      "report": "candidate-rc4-package-report.json",
+      "report_sha256": "2e249c08bb39a4e30ff9d2f3eea0983a5684b328bc5018b069002df38315f20d",
+      "status": "PASS",
+      "planet_killer_numeric_components": 1,
+      "planet_killer_numeric_resolved": 1,
+      "weapon_csv_files": 0,
+      "weapon_csv_unsupported_files": 0,
+      "errors": []
+    }
+  ],
+  "runtime_executed": false,
+  "scope": "Post-push read-only complete package static regressions; old unsupported CSV rejected and complete inline TXT resolved; no runtime phase timing claim"
+}
