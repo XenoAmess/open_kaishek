@@ -1,0 +1,723 @@
++ 'C:\Users\1\AppData\Local\Python\pythoncore-3.14-64\python.exe' tools/check_metadata.py
+metadata: PASS (GPL-3.0-only, repository URL, and canonical license hash)
++ 'D:\apache-maven-3.9.16\bin\mvn.CMD' -o -ntp clean package
+[INFO] Scanning for projects...
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Build Order:
+[INFO] 
+[INFO] open_kaishek                                                       [pom]
+[INFO] Kaishek Syntax                                                     [jar]
+[INFO] Kaishek Profile API                                                [jar]
+[INFO] Kaishek CK3 1.19.0.6 Profile                                       [jar]
+[INFO] Kaishek Validator                                                  [jar]
+[INFO] Kaishek Stellaris 4.4.6 Profile                                    [jar]
+[INFO] Kaishek EU5 1.3.11 Build 24187685 Profile                          [jar]
+[INFO] Kaishek Strict IR                                                  [jar]
+[INFO] Kaishek Runtime Kernel                                             [jar]
+[INFO] Kaishek Differential Contract                                      [jar]
+[INFO] Kaishek Zhongguo 361 Profile                                       [jar]
+[INFO] Kaishek CLI                                                        [jar]
+[INFO] Kaishek Quarkus Service Adapter                                    [jar]
+[INFO] 
+[INFO] -----------------< com.xenoamess.kaishek:open-kaishek >-----------------
+[INFO] Building open_kaishek 0.1.0-SNAPSHOT                              [1/13]
+[INFO]   from pom.xml
+[INFO] --------------------------------[ pom ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ open-kaishek ---
+[INFO] 
+[INFO] ----------------< com.xenoamess.kaishek:kaishek-syntax >----------------
+[INFO] Building Kaishek Syntax 0.1.0-SNAPSHOT                            [2/13]
+[INFO]   from kaishek-syntax\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-syntax ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-syntax\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-syntax ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-syntax\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-syntax ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 19 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-syntax ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-syntax\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-syntax ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-syntax ---
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-syntax ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-syntax\target\kaishek-syntax-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -------------< com.xenoamess.kaishek:kaishek-profile-api >--------------
+[INFO] Building Kaishek Profile API 0.1.0-SNAPSHOT                       [3/13]
+[INFO]   from kaishek-profile-api\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-profile-api ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-profile-api\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-profile-api ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-profile-api\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-profile-api ---
+[INFO] Recompiling the module because of changed source code.
+[INFO] Compiling 23 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-profile-api ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-profile-api\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-profile-api ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 4 source files with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-profile-api ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.operator.OperatorMcpCapabilityProfileTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.090 s -- in com.xenoamess.kaishek.operator.OperatorMcpCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.operator.OperatorMcpClientAdapterTest
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.094 s -- in com.xenoamess.kaishek.operator.OperatorMcpClientAdapterTest
+[INFO] Running com.xenoamess.kaishek.profile.CapabilityDescriptorTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.xenoamess.kaishek.profile.CapabilityDescriptorTest
+[INFO] Running com.xenoamess.kaishek.profile.ProfileContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.041 s -- in com.xenoamess.kaishek.profile.ProfileContractTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 24, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-profile-api ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-profile-api\target\kaishek-profile-api-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ----------< com.xenoamess.kaishek:kaishek-ck3-11906-profile >-----------
+[INFO] Building Kaishek CK3 1.19.0.6 Profile 0.1.0-SNAPSHOT              [4/13]
+[INFO]   from kaishek-ck3-11906-profile\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-ck3-11906-profile ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-ck3-11906-profile\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-ck3-11906-profile ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-ck3-11906-profile\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-ck3-11906-profile ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 11 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-ck3-11906-profile ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-ck3-11906-profile\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-ck3-11906-profile ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 11 source files with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-ck3-11906-profile ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.profile.ActiveWarStrategicPowerCapabilityProfileTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.082 s -- in com.xenoamess.kaishek.profile.ActiveWarStrategicPowerCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.Ck3Profile11906Test
+[INFO] Tests run: 20, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.072 s -- in com.xenoamess.kaishek.profile.Ck3Profile11906Test
+[INFO] Running com.xenoamess.kaishek.profile.CoatOfArmsSourceProbeCapabilityProfileTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.009 s -- in com.xenoamess.kaishek.profile.CoatOfArmsSourceProbeCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.CouncilAssignCouncillorActionCapabilityProfileTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.xenoamess.kaishek.profile.CouncilAssignCouncillorActionCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.CouncilCompositionCandidatesMcpCapabilityProfileTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.xenoamess.kaishek.profile.CouncilCompositionCandidatesMcpCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.CouncilCompositionCandidatesResultSchemaProfileTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.xenoamess.kaishek.profile.CouncilCompositionCandidatesResultSchemaProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.PlayerFactionAlertsCapabilityProfileTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.xenoamess.kaishek.profile.PlayerFactionAlertsCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.StewardDevelopCountyCandidatesCapabilityProfileTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.xenoamess.kaishek.profile.StewardDevelopCountyCandidatesCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.StewardDevelopCountyTaskActionCapabilityProfileTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.xenoamess.kaishek.profile.StewardDevelopCountyTaskActionCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.VanillaEventKnowledgeCapabilityProfileTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.xenoamess.kaishek.profile.VanillaEventKnowledgeCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.profile.VanillaEventPortableAssetCapabilityProfileTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.010 s -- in com.xenoamess.kaishek.profile.VanillaEventPortableAssetCapabilityProfileTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 63, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-ck3-11906-profile ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-ck3-11906-profile\target\kaishek-ck3-11906-profile-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --------------< com.xenoamess.kaishek:kaishek-validator >---------------
+[INFO] Building Kaishek Validator 0.1.0-SNAPSHOT                         [5/13]
+[INFO]   from kaishek-validator\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-validator ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-validator\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-validator ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-validator\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-validator ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-validator ---
+[INFO] Copying 9 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-validator ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-validator ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.validator.ValidatorTest
+[INFO] Tests run: 33, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.381 s -- in com.xenoamess.kaishek.validator.ValidatorTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 33, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-validator ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-validator\target\kaishek-validator-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --------< com.xenoamess.kaishek:kaishek-stellaris-446-profile >---------
+[INFO] Building Kaishek Stellaris 4.4.6 Profile 0.1.0-SNAPSHOT           [6/13]
+[INFO]   from kaishek-stellaris-446-profile\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-stellaris-446-profile ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-stellaris-446-profile\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-stellaris-446-profile ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-stellaris-446-profile\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-stellaris-446-profile ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-stellaris-446-profile ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-stellaris-446-profile\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-stellaris-446-profile ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-stellaris-446-profile ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.profile.StellarisProfile446Test
+[INFO] Tests run: 12, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.168 s -- in com.xenoamess.kaishek.profile.StellarisProfile446Test
+[INFO] Running com.xenoamess.kaishek.profile.StellarisProfile451Test
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.019 s -- in com.xenoamess.kaishek.profile.StellarisProfile451Test
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 14, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-stellaris-446-profile ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-stellaris-446-profile\target\kaishek-stellaris-446-profile-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -----------< com.xenoamess.kaishek:kaishek-eu5-1311-profile >-----------
+[INFO] Building Kaishek EU5 1.3.11 Build 24187685 Profile 0.1.0-SNAPSHOT [7/13]
+[INFO]   from kaishek-eu5-1311-profile\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-eu5-1311-profile ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-eu5-1311-profile\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-eu5-1311-profile ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-eu5-1311-profile\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-eu5-1311-profile ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-eu5-1311-profile ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-eu5-1311-profile\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-eu5-1311-profile ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-eu5-1311-profile ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.profile.Eu5Profile1311Test
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.196 s -- in com.xenoamess.kaishek.profile.Eu5Profile1311Test
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 21, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-eu5-1311-profile ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-eu5-1311-profile\target\kaishek-eu5-1311-profile-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ------------------< com.xenoamess.kaishek:kaishek-ir >------------------
+[INFO] Building Kaishek Strict IR 0.1.0-SNAPSHOT                         [8/13]
+[INFO]   from kaishek-ir\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-ir ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-ir\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-ir ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-ir\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-ir ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 8 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-ir ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-ir\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-ir ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 2 source files with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-ir ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.ir.IrContractTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.079 s -- in com.xenoamess.kaishek.ir.IrContractTest
+[INFO] Running com.xenoamess.kaishek.ir.StrictIrCompilerTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.072 s -- in com.xenoamess.kaishek.ir.StrictIrCompilerTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 7, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-ir ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-ir\target\kaishek-ir-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ---------------< com.xenoamess.kaishek:kaishek-runtime >----------------
+[INFO] Building Kaishek Runtime Kernel 0.1.0-SNAPSHOT                    [9/13]
+[INFO]   from kaishek-runtime\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-runtime ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-runtime\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-runtime ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-runtime\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-runtime ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 24 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-runtime ---
+[INFO] Copying 2 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-runtime ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 5 source files with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-runtime ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.runtime.DrawTapeContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.088 s -- in com.xenoamess.kaishek.runtime.DrawTapeContractTest
+[INFO] Running com.xenoamess.kaishek.runtime.RuntimeKernelTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.095 s -- in com.xenoamess.kaishek.runtime.RuntimeKernelTest
+[INFO] Running com.xenoamess.kaishek.runtime.RuntimePropertyContractTest
+[INFO] Tests run: 10, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.032 s -- in com.xenoamess.kaishek.runtime.RuntimePropertyContractTest
+[INFO] Running com.xenoamess.kaishek.runtime.ScopeContextChainContractTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.011 s -- in com.xenoamess.kaishek.runtime.ScopeContextChainContractTest
+[INFO] Running com.xenoamess.kaishek.runtime.ScopedVariableStoreContractTest
+[INFO] Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.045 s -- in com.xenoamess.kaishek.runtime.ScopedVariableStoreContractTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 27, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-runtime ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-runtime\target\kaishek-runtime-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ------------< com.xenoamess.kaishek:kaishek-diff-contract >-------------
+[INFO] Building Kaishek Differential Contract 0.1.0-SNAPSHOT            [10/13]
+[INFO]   from kaishek-diff-contract\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-diff-contract ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-diff-contract\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-diff-contract ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-diff-contract\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-diff-contract ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 12 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-diff-contract ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-diff-contract\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-diff-contract ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-diff-contract ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.diff.DiffContractTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.087 s -- in com.xenoamess.kaishek.diff.DiffContractTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-diff-contract ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-diff-contract\target\kaishek-diff-contract-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] ------------< com.xenoamess.kaishek:kaishek-zg361-profile >-------------
+[INFO] Building Kaishek Zhongguo 361 Profile 0.1.0-SNAPSHOT             [11/13]
+[INFO]   from kaishek-zg361-profile\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-zg361-profile ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-zg361-profile\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-zg361-profile ---
+[INFO] Copying 1 resource from src\main\resources to target\classes
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-zg361-profile ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 31 source files with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-zg361-profile ---
+[INFO] Copying 2 resources from src\test\resources to target\test-classes
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-zg361-profile ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 21 source files with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-zg361-profile ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] Running com.xenoamess.kaishek.zg361.Appeal014ReplayTest
+[INFO] Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.173 s -- in com.xenoamess.kaishek.zg361.Appeal014ReplayTest
+[INFO] Running com.xenoamess.kaishek.zg361.Ck3CanBeAcclaimedFixtureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.029 s -- in com.xenoamess.kaishek.zg361.Ck3CanBeAcclaimedFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.Ck3HasCulturalParameterFixtureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.xenoamess.kaishek.zg361.Ck3HasCulturalParameterFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.Ck3HasCulturalPillarFixtureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.xenoamess.kaishek.zg361.Ck3HasCulturalPillarFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.Ck3HasCulturalTraditionFixtureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.xenoamess.kaishek.zg361.Ck3HasCulturalTraditionFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.Ck3HasInnovationFixtureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.xenoamess.kaishek.zg361.Ck3HasInnovationFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.Ck3IsAcclaimedFixtureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.xenoamess.kaishek.zg361.Ck3IsAcclaimedFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.Ck3WarDaysFixtureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.xenoamess.kaishek.zg361.Ck3WarDaysFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.G2ActivityTypeSchemaRedFixtureTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.008 s -- in com.xenoamess.kaishek.zg361.G2ActivityTypeSchemaRedFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.G2ActualTruceExpiryCandidateMetadataTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.xenoamess.kaishek.zg361.G2ActualTruceExpiryCandidateMetadataTest
+[INFO] Running com.xenoamess.kaishek.zg361.G2PostwarCleanupExpiryAdapterMetadataTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.007 s -- in com.xenoamess.kaishek.zg361.G2PostwarCleanupExpiryAdapterMetadataTest
+[INFO] Running com.xenoamess.kaishek.zg361.G2TruceEvaluatorCapabilityProfileTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.xenoamess.kaishek.zg361.G2TruceEvaluatorCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.zg361.G2WarBoundLossCandidateMetadataTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.xenoamess.kaishek.zg361.G2WarBoundLossCandidateMetadataTest
+[INFO] Running com.xenoamess.kaishek.zg361.Synthetic361PipelineTest
+[INFO] Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.113 s -- in com.xenoamess.kaishek.zg361.Synthetic361PipelineTest
+[INFO] Running com.xenoamess.kaishek.zg361.ZhongguoB1CycleSnapshotCapabilityProfileTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.006 s -- in com.xenoamess.kaishek.zg361.ZhongguoB1CycleSnapshotCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.zg361.ZhongguoBusinessPostconditionFixtureTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.018 s -- in com.xenoamess.kaishek.zg361.ZhongguoBusinessPostconditionFixtureTest
+[INFO] Running com.xenoamess.kaishek.zg361.ZhongguoBusinessPostconditionProfileTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.xenoamess.kaishek.zg361.ZhongguoBusinessPostconditionProfileTest
+[INFO] Running com.xenoamess.kaishek.zg361.ZhongguoCareerHcWorkforceCapabilityProfileTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.xenoamess.kaishek.zg361.ZhongguoCareerHcWorkforceCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.zg361.ZhongguoManagerGovernanceCapabilityProfileTest
+[INFO] Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.003 s -- in com.xenoamess.kaishek.zg361.ZhongguoManagerGovernanceCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.zg361.ZhongguoManagerSubordinateSelectorCapabilityProfileTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.xenoamess.kaishek.zg361.ZhongguoManagerSubordinateSelectorCapabilityProfileTest
+[INFO] Running com.xenoamess.kaishek.zg361.ZhongguoPromotionSourceTransportCapabilityProfileTest
+[INFO] Tests run: 3, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.005 s -- in com.xenoamess.kaishek.zg361.ZhongguoPromotionSourceTransportCapabilityProfileTest
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 56, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-zg361-profile ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-zg361-profile\target\kaishek-zg361-profile-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] -----------------< com.xenoamess.kaishek:kaishek-cli >------------------
+[INFO] Building Kaishek CLI 0.1.0-SNAPSHOT                              [12/13]
+[INFO]   from kaishek-cli\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-cli ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-cli\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-cli ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-cli\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-cli ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [forked debug parameters release 21] to target\classes
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-cli ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-cli\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-cli ---
+[INFO] Recompiling the module because of changed dependency.
+[INFO] Compiling 1 source file with javac [forked debug parameters release 21] to target\test-classes
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-cli ---
+[INFO] Using configured provider org.apache.maven.surefire.junitplatform.JUnitPlatformProvider
+[INFO] 
+[INFO] -------------------------------------------------------
+[INFO]  T E S T S
+[INFO] -------------------------------------------------------
+[INFO] 
+[INFO] Results:
+[INFO] 
+[INFO] Tests run: 0, Failures: 0, Errors: 0, Skipped: 0
+[INFO] 
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-cli ---
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-cli\target\kaishek-cli-0.1.0-SNAPSHOT.jar
+[INFO] 
+[INFO] --- shade:3.5.2:shade (default) @ kaishek-cli ---
+[INFO] Including com.xenoamess.kaishek:kaishek-syntax:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-validator:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-profile-api:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-runtime:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-ir:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-diff-contract:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-ck3-11906-profile:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-stellaris-446-profile:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-eu5-1311-profile:jar:0.1.0-SNAPSHOT in the shaded jar.
+[INFO] Including com.xenoamess.kaishek:kaishek-zg361-profile:jar:0.1.0-SNAPSHOT in the shaded jar.
+[WARNING] kaishek-ck3-11906-profile-0.1.0-SNAPSHOT.jar, kaishek-cli-0.1.0-SNAPSHOT.jar, kaishek-diff-contract-0.1.0-SNAPSHOT.jar, kaishek-eu5-1311-profile-0.1.0-SNAPSHOT.jar, kaishek-ir-0.1.0-SNAPSHOT.jar, kaishek-profile-api-0.1.0-SNAPSHOT.jar, kaishek-runtime-0.1.0-SNAPSHOT.jar, kaishek-stellaris-446-profile-0.1.0-SNAPSHOT.jar, kaishek-syntax-0.1.0-SNAPSHOT.jar, kaishek-validator-0.1.0-SNAPSHOT.jar, kaishek-zg361-profile-0.1.0-SNAPSHOT.jar define 1 overlapping resource: 
+[WARNING]   - META-INF/MANIFEST.MF
+[WARNING] maven-shade-plugin has detected that some files are
+[WARNING] present in two or more JARs. When this happens, only one
+[WARNING] single version of the file is copied to the uber jar.
+[WARNING] Usually this is not harmful and you can skip these warnings,
+[WARNING] otherwise try to manually exclude artifacts based on
+[WARNING] mvn dependency:tree -Ddetail=true and the above output.
+[WARNING] See https://maven.apache.org/plugins/maven-shade-plugin/
+[INFO] Replacing original artifact with shaded artifact.
+[INFO] Replacing D:\workspace\open_kaishek\kaishek-cli\target\kaishek-cli-0.1.0-SNAPSHOT.jar with D:\workspace\open_kaishek\kaishek-cli\target\kaishek-cli-0.1.0-SNAPSHOT-shaded.jar
+[INFO] 
+[INFO] -----------< com.xenoamess.kaishek:kaishek-service-quarkus >------------
+[INFO] Building Kaishek Quarkus Service Adapter 0.1.0-SNAPSHOT          [13/13]
+[INFO]   from kaishek-service-quarkus\pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] --- clean:3.2.0:clean (default-clean) @ kaishek-service-quarkus ---
+[INFO] Deleting D:\workspace\open_kaishek\kaishek-service-quarkus\target
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ kaishek-service-quarkus ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-service-quarkus\src\main\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:compile (default-compile) @ kaishek-service-quarkus ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- resources:3.3.1:testResources (default-testResources) @ kaishek-service-quarkus ---
+[INFO] skip non existing resourceDirectory D:\workspace\open_kaishek\kaishek-service-quarkus\src\test\resources
+[INFO] 
+[INFO] --- compiler:3.13.0:testCompile (default-testCompile) @ kaishek-service-quarkus ---
+[INFO] No sources to compile
+[INFO] 
+[INFO] --- surefire:3.5.4:test (default-test) @ kaishek-service-quarkus ---
+[INFO] No tests to run.
+[INFO] 
+[INFO] --- jar:3.4.2:jar (default-jar) @ kaishek-service-quarkus ---
+[WARNING] JAR will be empty - no content was marked for inclusion!
+[INFO] Building jar: D:\workspace\open_kaishek\kaishek-service-quarkus\target\kaishek-service-quarkus-0.1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] Reactor Summary for open_kaishek 0.1.0-SNAPSHOT:
+[INFO] 
+[INFO] open_kaishek ....................................... SUCCESS [  0.464 s]
+[INFO] Kaishek Syntax ..................................... SUCCESS [  8.018 s]
+[INFO] Kaishek Profile API ................................ SUCCESS [  6.048 s]
+[INFO] Kaishek CK3 1.19.0.6 Profile ....................... SUCCESS [  5.110 s]
+[INFO] Kaishek Validator .................................. SUCCESS [  5.221 s]
+[INFO] Kaishek Stellaris 4.4.6 Profile .................... SUCCESS [  4.479 s]
+[INFO] Kaishek EU5 1.3.11 Build 24187685 Profile .......... SUCCESS [  4.070 s]
+[INFO] Kaishek Strict IR .................................. SUCCESS [  4.650 s]
+[INFO] Kaishek Runtime Kernel ............................. SUCCESS [  6.385 s]
+[INFO] Kaishek Differential Contract ...................... SUCCESS [  4.379 s]
+[INFO] Kaishek Zhongguo 361 Profile ....................... SUCCESS [  8.034 s]
+[INFO] Kaishek CLI ........................................ SUCCESS [  5.190 s]
+[INFO] Kaishek Quarkus Service Adapter .................... SUCCESS [  0.041 s]
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time:  01:02 min
+[INFO] Finished at: 2026-10-19T19:23:48+08:00
+[INFO] ------------------------------------------------------------------------
++ 'C:\Users\1\AppData\Local\Python\pythoncore-3.14-64\python.exe' -m unittest discover -s kaishek-zg361-profile/tests -v
+test_all_38_domains_and_361_ids_are_covered (test_domains.DomainCatalogueTests.test_all_38_domains_and_361_ids_are_covered) ... ok
+test_capacity_and_stale_guard_are_mandatory (test_domains.DomainCatalogueTests.test_capacity_and_stale_guard_are_mandatory) ... ok
+test_fervor_entry_is_rejected (test_domains.DomainCatalogueTests.test_fervor_entry_is_rejected) ... ok
+test_gap_or_overlap_is_rejected (test_domains.DomainCatalogueTests.test_gap_or_overlap_is_rejected) ... ok
+test_malformed_object_fields_are_reported_not_raised (test_domains.DomainCatalogueTests.test_malformed_object_fields_are_reported_not_raised) ... ok
+test_phase0_catalogue_is_complete_but_schema_only (test_domains.DomainCatalogueTests.test_phase0_catalogue_is_complete_but_schema_only) ... ok
+test_religion_entry_and_weak_acl_are_rejected (test_domains.DomainCatalogueTests.test_religion_entry_and_weak_acl_are_rejected) ... ok
+test_terminal_outgoing_transition_is_rejected (test_domains.DomainCatalogueTests.test_terminal_outgoing_transition_is_rejected) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.068s
+
+OK
++ 'C:\Users\1\AppData\Local\Python\pythoncore-3.14-64\python.exe' kaishek-zg361-profile/tools/validate_domains.py
+zg361 domains: PASS (schema-only; runtime not implemented)
++ 'D:\graalvm-community-25.3.4.1+1.1\bin\java.exe' -ea -cp 'D:\workspace\open_kaishek\kaishek-syntax\target\classes;D:\workspace\open_kaishek\kaishek-syntax\target\test-classes' com.xenoamess.kaishek.syntax.ParserSelfTest
+ParserSelfTest: OK
++ 'D:\graalvm-community-25.3.4.1+1.1\bin\java.exe' -ea -cp 'D:\workspace\open_kaishek\kaishek-syntax\target\classes;D:\workspace\open_kaishek\kaishek-syntax\target\test-classes' com.xenoamess.kaishek.syntax.DuplicateKeyRoundTripSelfTest
+DuplicateKeyRoundTripSelfTest: OK
++ 'D:\graalvm-community-25.3.4.1+1.1\bin\java.exe' -ea -cp 'D:\workspace\open_kaishek\kaishek-syntax\target\classes;D:\workspace\open_kaishek\kaishek-syntax\target\test-classes' com.xenoamess.kaishek.syntax.Phase1SyntaxSelfTest
+Phase1SyntaxSelfTest: OK
++ 'D:\graalvm-community-25.3.4.1+1.1\bin\java.exe' -ea -cp 'D:\workspace\open_kaishek\kaishek-syntax\target\classes;D:\workspace\open_kaishek\kaishek-syntax\target\test-classes' com.xenoamess.kaishek.syntax.ParserPropertyFuzzSelfTest
+ParserPropertyFuzzSelfTest: OK seed=0x4b41495348454b31 cases=760 validUtf8=199 invalidUtf8=561 diagnostics=47470 maxBytes=384
++ 'C:\Users\1\AppData\Local\Python\pythoncore-3.14-64\python.exe' tools/run_cli_smoke.py
++ 'D:\graalvm-community-25.3.4.1+1.1\bin\java.exe' -ea -cp 'D:\workspace\open_kaishek\kaishek-cli\target\test-classes;D:\workspace\open_kaishek\kaishek-cli\target\kaishek-cli-0.1.0-SNAPSHOT.jar' com.xenoamess.kaishek.cli.KaishekCliSmokeTest
++ 'D:\graalvm-community-25.3.4.1+1.1\bin\java.exe' -ea -jar 'D:\workspace\open_kaishek\kaishek-cli\target\kaishek-cli-0.1.0-SNAPSHOT.jar' preflight --fixture synthetic-361-014
+{"schema":"open_kaishek.preflight.v1","status":"GREEN","tool_version":"0.1.0-cli","profile_id":"ck3-1.19.0.6-zg361","build_fingerprint":{"game_id":"ck3","version":"1.19.0.6","exe_sha256":"2D00FF3101EF70B566F2FCBAE292F09263199C80E9DC8F139B82D7D96F83DB86"},"fixture_id":"synthetic-361-014","parser":{"status":"GREEN","files":1,"bytes":225,"diagnostics":0,"sha256":"dcf770c6563896e165af20efd504f546559935eb5d614fe81dbfcb5051ee17bd","samples":[]},"validator":{"status":"GREEN","files":1,"bytes":225,"diagnostics":0,"sha256":"dcf770c6563896e165af20efd504f546559935eb5d614fe81dbfcb5051ee17bd","samples":[]},"ir":{"status":"GREEN","files":1,"bytes":225,"diagnostics":0,"sha256":"dcf770c6563896e165af20efd504f546559935eb5d614fe81dbfcb5051ee17bd","samples":[]},"runtime":{"status":"GREEN","files":1,"bytes":225,"diagnostics":0,"sha256":"dcf770c6563896e165af20efd504f546559935eb5d614fe81dbfcb5051ee17bd","samples":["execution=SUCCESS"]},"root_scan":{"parser":{"status":"SKIPPED","files":0,"bytes":0,"diagnostics":0,"reason":"root-not-supplied","samples":[]},"validator":{"status":"SKIPPED","files":0,"bytes":0,"diagnostics":0,"reason":"root-not-supplied","samples":[]}},"provenance":{"ck3_started":"false","fixture_scope":"synthetic-only","mode":"offline","network_used":"false","root":"","root_sha256":"","save_mutated":"false","source":"open_kaishek"}}
+cli smoke: PASS (kaishek-cli/target/kaishek-cli-0.1.0-SNAPSHOT.jar)
++ 'C:\Users\1\AppData\Local\Python\pythoncore-3.14-64\python.exe' -m unittest tools/test_accept_stellaris_mod.py -v
+test_accepts_all_three_empty_native_callbacks (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_accepts_all_three_empty_native_callbacks) ... ok
+test_all_planet_killers_are_checked_and_unrelated_callbacks_do_not_match (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_all_planet_killers_are_checked_and_unrelated_callbacks_do_not_match) ... ok
+test_comments_strings_nested_and_scalar_names_are_not_callback_blocks (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_comments_strings_nested_and_scalar_names_are_not_callback_blocks) ... ok
+test_each_missing_callback_fails_with_component_location (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_each_missing_callback_fails_with_component_location) ... ok
+test_literal_planet_killer_requires_a_literal_component_key (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_literal_planet_killer_requires_a_literal_component_key) ... ok
+test_mod_same_path_hides_native_callbacks (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_mod_same_path_hides_native_callbacks) ... ok
+test_native_fallback_and_mod_native_split_are_allowed (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_native_fallback_and_mod_native_split_are_allowed) ... ok
+test_non_planet_killers_and_nested_type_fields_are_not_applicable (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_non_planet_killers_and_nested_type_fields_are_not_applicable) ... ok
+test_quoted_keys_types_and_case_insensitive_file_extensions (tools.test_accept_stellaris_mod.PlanetKillerCallbackContractTest.test_quoted_keys_types_and_case_insensitive_file_extensions) ... ok
+test_all_components_are_counted_and_duplicate_keys_fail (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_all_components_are_counted_and_duplicate_keys_fail) ... ok
+test_arbitrary_old_csv_path_never_resolves_missing_inline_numbers (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_arbitrary_old_csv_path_never_resolves_missing_inline_numbers) ... ok
+test_complete_inline_txt_without_csv_and_native_90_zero_sentinel (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_complete_inline_txt_without_csv_and_native_90_zero_sentinel) ... ok
+test_csv_overrides_inline_and_empty_required_csv_cell_does_not_fallback (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_csv_overrides_inline_and_empty_required_csv_cell_does_not_fallback) ... ok
+test_fixed_mod_and_native_csv_are_valid_sources (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_fixed_mod_and_native_csv_are_valid_sources) ... ok
+test_inline_pk_and_ordinary_csv_can_coexist (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_inline_pk_and_ordinary_csv_can_coexist) ... ok
+test_missing_and_duplicate_direct_fields_fail (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_missing_and_duplicate_direct_fields_fail) ... ok
+test_nested_comment_string_and_bare_windup_values_do_not_satisfy_contract (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_nested_comment_string_and_bare_windup_values_do_not_satisfy_contract) ... ok
+test_no_pk_is_not_applicable_and_nested_or_string_templates_are_ignored (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_no_pk_is_not_applicable_and_nested_or_string_templates_are_ignored) ... ok
+test_same_path_mod_table_hides_native_row_and_two_tables_same_key_are_ambiguous (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_same_path_mod_table_hides_native_row_and_two_tables_same_key_are_ambiguous) ... ok
+test_unsupported_paths_still_fail_with_valid_inline_and_check_csv_syntax (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_unsupported_paths_still_fail_with_valid_inline_and_check_csv_syntax) ... ok
+test_variables_quoted_nonfinite_overflow_and_negative_timing_fail (tools.test_accept_stellaris_mod.PlanetKillerNumericContractTest.test_variables_quoted_nonfinite_overflow_and_negative_timing_fail) ... ok
+test_accepts_art_only_package_without_localization (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_accepts_art_only_package_without_localization) ... ok
+test_accepts_flat_localization_and_rejects_missing_language (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_accepts_flat_localization_and_rejects_missing_language) ... ok
+test_accepts_valid_text_and_normal_question_marks (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_accepts_valid_text_and_normal_question_marks) ... ok
+test_accepts_vanilla_asset_and_rejects_missing_from_both_roots (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_accepts_vanilla_asset_and_rejects_missing_from_both_roots) ... ok
+test_asset_script_is_discovered_case_insensitively (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_asset_script_is_discovered_case_insensitively) ... ok
+test_explicit_version_source_is_required_and_validated (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_explicit_version_source_is_required_and_validated) ... ok
+test_finite_population_scope_unknown_blocks_package_pass (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_finite_population_scope_unknown_blocks_package_pass) ... ok
+test_finite_population_scope_valid_and_invalid_package (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_finite_population_scope_valid_and_invalid_package) ... ok
+test_gui_is_discovered_and_parsed_case_insensitively (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_gui_is_discovered_and_parsed_case_insensitively) ... ok
+test_localization_optional_revision_retains_syntax_checks (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_localization_optional_revision_retains_syntax_checks) ... ok
+test_old_arbitrary_pk_csv_fails_and_complete_inline_replacement_passes (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_old_arbitrary_pk_csv_fails_and_complete_inline_replacement_passes) ... ok
+test_planet_killer_callbacks_reach_package_report_without_csv (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_planet_killer_callbacks_reach_package_report_without_csv) ... ok
+test_referenced_script_value_shape_reaches_package_report (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_referenced_script_value_shape_reaches_package_report) ... ok
+test_rejects_encoding_character_loss_in_localization (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_rejects_encoding_character_loss_in_localization) ... ok
+test_rejects_gui_bom (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_rejects_gui_bom) ... ok
+test_rejects_gui_missing_asset (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_rejects_gui_missing_asset) ... ok
+test_rejects_localization_key_and_script_bom (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_rejects_localization_key_and_script_bom) ... ok
+test_rejects_malformed_asset_and_asset_bom (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_rejects_malformed_asset_and_asset_bom) ... ok
+test_rejects_malformed_gui (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_rejects_malformed_gui) ... ok
+test_rejects_metadata_and_asset_drift (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_rejects_metadata_and_asset_drift) ... ok
+test_rejects_outdated_supported_version (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_rejects_outdated_supported_version) ... ok
+test_valid_package (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_valid_package) ... ok
+test_weapon_csv_is_included_in_package_acceptance (tools.test_accept_stellaris_mod.StellarisModPackageTest.test_weapon_csv_is_included_in_package_acceptance) ... ok
+test_accepts_native_comments_empty_numeric_cells_and_negative_power (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_accepts_native_comments_empty_numeric_cells_and_negative_power) ... ok
+test_accepts_native_definition_and_native_statistics_without_copying_keys (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_accepts_native_definition_and_native_statistics_without_copying_keys) ... ok
+test_ignores_comment_nested_and_quoted_fake_definitions (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_ignores_comment_nested_and_quoted_fake_definitions) ... ok
+test_native_same_path_sources_are_hidden_by_mod_files (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_native_same_path_sources_are_hidden_by_mod_files) ... ok
+test_no_csv_is_not_applicable_and_other_directories_are_ignored (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_no_csv_is_not_applicable_and_other_directories_are_ignored) ... ok
+test_rejects_duplicate_keys_within_and_across_mod_tables (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_rejects_duplicate_keys_within_and_across_mod_tables) ... ok
+test_rejects_invalid_headers_columns_keys_and_end (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_rejects_invalid_headers_columns_keys_and_end) ... ok
+test_rejects_invalid_utf8_and_bom (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_rejects_invalid_utf8_and_bom) ... ok
+test_rejects_missing_definition_and_missing_statistics (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_rejects_missing_definition_and_missing_statistics) ... ok
+test_rejects_nonfinite_nonnumeric_and_unsupported_numeric_notation (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_rejects_nonfinite_nonnumeric_and_unsupported_numeric_notation) ... ok
+test_rejects_unresolved_or_ambiguous_mod_component_keys (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_rejects_unresolved_or_ambiguous_mod_component_keys) ... ok
+test_unrelated_native_inline_templates_do_not_fail_literal_associations (tools.test_accept_stellaris_mod.WeaponCsvContractTest.test_unrelated_native_inline_templates_do_not_fail_literal_associations) ... ok
+
+----------------------------------------------------------------------
+Ran 56 tests in 22.243s
+
+OK
++ 'C:\Users\1\AppData\Local\Python\pythoncore-3.14-64\python.exe' -m unittest tools/test_stellaris_scope_guard.py -v
+test_changed_or_missing_alias_is_unknown (tools.test_stellaris_scope_guard.PopulationBuildBindingTest.test_changed_or_missing_alias_is_unknown) ... ok
+test_cross_file_saved_target_redefinitions_are_unknown (tools.test_stellaris_scope_guard.PopulationBuildBindingTest.test_cross_file_saved_target_redefinitions_are_unknown) ... ok
+test_mod_alias_override_is_unknown (tools.test_stellaris_scope_guard.PopulationBuildBindingTest.test_mod_alias_override_is_unknown) ... ok
+test_mod_replace_path_cannot_bypass_alias_binding (tools.test_stellaris_scope_guard.PopulationBuildBindingTest.test_mod_replace_path_cannot_bypass_alias_binding) ... ok
+test_no_relevant_expressions_do_not_require_population_profile (tools.test_stellaris_scope_guard.PopulationBuildBindingTest.test_no_relevant_expressions_do_not_require_population_profile) ... ok
+test_registered_fixture_rule_checks_alias_and_reports_error (tools.test_stellaris_scope_guard.PopulationBuildBindingTest.test_registered_fixture_rule_checks_alias_and_reports_error) ... ok
+test_unregistered_build_is_unknown (tools.test_stellaris_scope_guard.PopulationBuildBindingTest.test_unregistered_build_is_unknown) ... ok
+test_alias_saved_target_inference_does_not_guess_fixed_points (tools.test_stellaris_scope_guard.PopulationScopeTest.test_alias_saved_target_inference_does_not_guess_fixed_points) ... ok
+test_comments_strings_and_variable_names_are_not_opcodes (tools.test_stellaris_scope_guard.PopulationScopeTest.test_comments_strings_and_variable_names_are_not_opcodes) ... ok
+test_conflicting_or_unknown_save_points_remain_unknown (tools.test_stellaris_scope_guard.PopulationScopeTest.test_conflicting_or_unknown_save_points_remain_unknown) ... ok
+test_country_and_planet_population_are_legal (tools.test_stellaris_scope_guard.PopulationScopeTest.test_country_and_planet_population_are_legal) ... ok
+test_dynamic_unsaved_and_fake_saved_targets_remain_unknown (tools.test_stellaris_scope_guard.PopulationScopeTest.test_dynamic_unsaved_and_fake_saved_targets_remain_unknown) ... ok
+test_known_iterator_detects_error_inside_polymorphic_effect (tools.test_stellaris_scope_guard.PopulationScopeTest.test_known_iterator_detects_error_inside_polymorphic_effect) ... ok
+test_local_and_global_targets_support_exports_and_prev (tools.test_stellaris_scope_guard.PopulationScopeTest.test_local_and_global_targets_support_exports_and_prev) ... ok
+test_pop_group_size_comparison_and_export (tools.test_stellaris_scope_guard.PopulationScopeTest.test_pop_group_size_comparison_and_export) ... ok
+test_prefixed_comparisons_and_dot_scope_blocks (tools.test_stellaris_scope_guard.PopulationScopeTest.test_prefixed_comparisons_and_dot_scope_blocks) ... ok
+test_prefixed_export_uses_its_referenced_scope (tools.test_stellaris_scope_guard.PopulationScopeTest.test_prefixed_export_uses_its_referenced_scope) ... ok
+test_prev_and_nested_prev_preserve_scope_history (tools.test_stellaris_scope_guard.PopulationScopeTest.test_prev_and_nested_prev_preserve_scope_history) ... ok
+test_rejects_each_pop_group_iterator (tools.test_stellaris_scope_guard.PopulationScopeTest.test_rejects_each_pop_group_iterator) ... ok
+test_rejects_group_export_in_variable_arithmetic (tools.test_stellaris_scope_guard.PopulationScopeTest.test_rejects_group_export_in_variable_arithmetic) ... ok
+test_same_type_multiple_saves_are_safe (tools.test_stellaris_scope_guard.PopulationScopeTest.test_same_type_multiple_saves_are_safe) ... ok
+test_saved_global_pop_group_type_is_inferred (tools.test_stellaris_scope_guard.PopulationScopeTest.test_saved_global_pop_group_type_is_inferred) ... ok
+test_saved_target_known_wrong_type_is_rejected (tools.test_stellaris_scope_guard.PopulationScopeTest.test_saved_target_known_wrong_type_is_rejected) ... ok
+test_scope_chain_does_not_follow_brace_count (tools.test_stellaris_scope_guard.PopulationScopeTest.test_scope_chain_does_not_follow_brace_count) ... ok
+test_unknown_root_prev_and_opaque_containers_are_explicit (tools.test_stellaris_scope_guard.PopulationScopeTest.test_unknown_root_prev_and_opaque_containers_are_explicit) ... ok
+test_unsupported_reader_input_does_not_pass (tools.test_stellaris_scope_guard.PopulationScopeTest.test_unsupported_reader_input_does_not_pass) ... ok
+test_wrong_scope_for_group_size_is_rejected (tools.test_stellaris_scope_guard.PopulationScopeTest.test_wrong_scope_for_group_size_is_rejected) ... ok
+test_block_and_at_constant_are_not_rejected (tools.test_stellaris_scope_guard.ReferencedScriptValueShapeTest.test_block_and_at_constant_are_not_rejected) ... ok
+test_referenced_numeric_scalar_definition_is_rejected (tools.test_stellaris_scope_guard.ReferencedScriptValueShapeTest.test_referenced_numeric_scalar_definition_is_rejected) ... ok
+test_signed_decimal_exponent_and_scoped_parameterized_reference (tools.test_stellaris_scope_guard.ReferencedScriptValueShapeTest.test_signed_decimal_exponent_and_scoped_parameterized_reference) ... ok
+test_strings_comments_unused_literals_and_other_directories_are_ignored (tools.test_stellaris_scope_guard.ReferencedScriptValueShapeTest.test_strings_comments_unused_literals_and_other_directories_are_ignored) ... ok
+test_unknown_build_symbolic_form_and_duplicate_definitions_are_explicit (tools.test_stellaris_scope_guard.ReferencedScriptValueShapeTest.test_unknown_build_symbolic_form_and_duplicate_definitions_are_explicit) ... ok
+test_unresolved_external_name_is_not_claimed_as_certified (tools.test_stellaris_scope_guard.ReferencedScriptValueShapeTest.test_unresolved_external_name_is_not_claimed_as_certified) ... ok
+
+----------------------------------------------------------------------
+Ran 33 tests in 0.095s
+
+OK
+static acceptance: PASS (repository-owned offline checks; CK3/external corpus not run)

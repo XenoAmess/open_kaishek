@@ -1,5 +1,11 @@
 # Stellaris 武器 CSV 包级静态合同
 
+后续修订：本页实施结果是旧格式／关联合同的历史证据。原生时长负例证明它不能
+验证任意 CSV 路径被载入；当前通过还必须满足
+[巨像数值来源与固定 CSV 路径合同](stellaris-planet-killer-numeric-source-contract-2026-10-19.md)。
+未知 CSV 路径现在明确失败，完整 TXT 数值可不使用 CSV。下列旧报告不重写，
+也不能替代新增合同字段或实际充能／发射验收。
+
 ## 目标与范围（实施前）
 
 调用方吞噬之心为 `EEP_PLANET_KILLER_DEVOURER` 新增独立武器统计 CSV，

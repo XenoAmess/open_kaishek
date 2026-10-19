@@ -10,7 +10,7 @@ import unittest
 from unittest.mock import patch
 
 from tools.accept_stellaris_mod import (
-    CLI, WEAPON_COLUMNS, check, check_planet_killer_callbacks, check_weapon_csv, read_localization,
+    CLI, WEAPON_COLUMNS, check, check_planet_killer_callbacks, check_planet_killer_numeric, check_weapon_csv, read_localization,
 )
 
 
@@ -56,12 +56,16 @@ class StellarisModPackageTest(unittest.TestCase):
         self.assertEqual(2, result["p_parsed"])
         self.assertEqual("not_applicable_no_weapon_csv_files", result["weapon_csv_applicability"])
         self.assertEqual("not_applicable_no_planet_killer_components", result["planet_killer_callback_applicability"])
+        self.assertEqual("native_csv_or_literal_txt_v1", result["planet_killer_numeric_contract"])
+        self.assertEqual(0, result["planet_killer_numeric_resolved"])
+        self.assertEqual("native_fixed_paths_v1", result["weapon_csv_loader_contract"])
 
     def test_planet_killer_callbacks_reach_package_report_without_csv(self) -> None:
         root = self.package / "common/component_templates"
         root.mkdir(parents=True)
         (root / "fixture.txt").write_text(
-            'weapon_component_template = { key = "PK_FIXTURE" type = planet_killer }\n', encoding="utf-8")
+            'weapon_component_template = { key = "PK_FIXTURE" type = planet_killer '
+            'windup = { min = 90 max = 0 } total_fire_time = 30 power = 0 }\n', encoding="utf-8")
         actions = self.package / "common/on_actions/fixture.txt"
         actions.parent.mkdir(parents=True)
         actions.write_text('on_destroy_planet_with_PK_FIXTURE = {}\n', encoding="utf-8")
@@ -81,13 +85,15 @@ class StellarisModPackageTest(unittest.TestCase):
         result = self.verify()
         self.assertEqual("PASS", result["status"], result["errors"])
         self.assertEqual(3, result["planet_killer_callbacks_resolved"])
+        self.assertEqual(1, result["planet_killer_numeric_resolved"])
+        self.assertEqual("literal_component_txt", result["planet_killer_numeric_sources"][0]["kind"])
 
     def test_weapon_csv_is_included_in_package_acceptance(self) -> None:
         root = self.package / "common/component_templates"
         root.mkdir(parents=True)
         (root / "fixture.txt").write_text(
             'weapon_component_template = { key = "FIXTURE_WEAPON" size = planet_killer }\n', encoding="utf-8")
-        table = root / "fixture_weapon.CSV"
+        table = root / "weapon_components.CSV"
         table.write_text(";".join(WEAPON_COLUMNS) + "\n" +
                          ";".join(["FIXTURE_WEAPON", *(["0.00"] * 23), ""]) + "\n", encoding="utf-8")
         result = self.verify()
@@ -98,6 +104,32 @@ class StellarisModPackageTest(unittest.TestCase):
         result = self.verify()
         self.assertEqual("FAIL", result["status"])
         self.assertIn("WEAPON_CSV_NUMBER", {error["code"] for error in result["errors"]})
+
+    def test_old_arbitrary_pk_csv_fails_and_complete_inline_replacement_passes(self) -> None:
+        root = self.package / "common/component_templates"
+        root.mkdir(parents=True)
+        component = root / "fixture.txt"
+        component.write_text('weapon_component_template={key=PK_FIXTURE type=planet_killer}', encoding="utf-8")
+        table = root / "eep_weapon_components.csv"
+        row = dict.fromkeys(WEAPON_COLUMNS, "0")
+        row.update(key="PK_FIXTURE", end="", min_windup="90", max_windup="0", cooldown="30")
+        table.write_text(";".join(WEAPON_COLUMNS) + "\n" + ";".join(row[c] for c in WEAPON_COLUMNS) + "\n", encoding="utf-8")
+        actions = self.package / "common/on_actions/fixture.txt"
+        actions.parent.mkdir(parents=True)
+        actions.write_text("\n".join("on_destroy_planet_with_PK_FIXTURE" + suffix + "={}" for suffix in ("", "_queued", "_unqueued")), encoding="utf-8")
+        report = self.verify()
+        self.assertEqual("FAIL", report["status"])
+        self.assertEqual(1, report["weapon_csv_unsupported_files"])
+        self.assertEqual(0, report["planet_killer_numeric_resolved"])
+        self.assertIn("WEAPON_CSV_UNSUPPORTED_PATH", {e["code"] for e in report["errors"]})
+        table.unlink()
+        component.write_text('weapon_component_template={key=PK_FIXTURE type=planet_killer '
+                             'windup={min=90 max=90} total_fire_time=30 power=0}', encoding="utf-8")
+        report = self.verify()
+        self.assertEqual("PASS", report["status"], report["errors"])
+        self.assertEqual(0, report["weapon_csv_files"])
+        self.assertEqual(1, report["planet_killer_numeric_components"])
+        self.assertEqual(1, report["planet_killer_numeric_resolved"])
 
     def gui(self, content: str, suffix: str = ".gui") -> Path:
         path = self.package / "interface" / ("fixture" + suffix)
@@ -388,6 +420,171 @@ class PlanetKillerCallbackContractTest(unittest.TestCase):
         self.assertEqual(3, len(errors))
 
 
+class PlanetKillerNumericContractTest(unittest.TestCase):
+    """Synthetic source-shape checks; no claim of native timing execution."""
+    def setUp(self) -> None:
+        self.temp = tempfile.TemporaryDirectory()
+        self.addCleanup(self.temp.cleanup)
+        root = Path(self.temp.name)
+        self.mod, self.game = root / "mod", root / "game"
+        self.component = self.script(self.mod)
+
+    def write(self, root: Path, relative: str, text: str) -> Path:
+        path = root / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(text, encoding="utf-8")
+        return path
+
+    def script(self, root: Path, fields: str = "windup={min=90 max=0} total_fire_time=30 power=0",
+               key: str = "PK_FIXTURE", name: str = "fixture.txt") -> Path:
+        return self.write(root, "common/component_templates/" + name,
+                          'weapon_component_template={key="' + key + '" type=planet_killer ' + fields + '}')
+
+    def table(self, root: Path, name: str = "weapon_components.csv", key: str = "PK_FIXTURE", **overrides) -> Path:
+        row = dict.fromkeys(WEAPON_COLUMNS, "0")
+        row.update(key=key, end="", min_windup="90", max_windup="0", cooldown="30")
+        row.update(overrides)
+        return self.write(root, "common/component_templates/" + name,
+                          ";".join(WEAPON_COLUMNS) + "\n" + ";".join(row[c] for c in WEAPON_COLUMNS) + "\n")
+
+    def verify(self, csv: bool = False) -> tuple[dict, list[dict]]:
+        errors: list[dict] = []
+        report = check_planet_killer_numeric(self.mod, self.game, errors)
+        if csv:
+            literals = {s["key"] for s in report["planet_killer_numeric_sources"] if s["kind"] == "literal_component_txt"}
+            report.update(check_weapon_csv(self.mod, self.game, errors, literal_stat_keys=literals))
+        return report, errors
+
+    def test_complete_inline_txt_without_csv_and_native_90_zero_sentinel(self) -> None:
+        report, errors = self.verify(csv=True)
+        self.assertEqual([], errors)
+        self.assertEqual(0, report["weapon_csv_files"])
+        self.assertEqual(1, report["planet_killer_numeric_resolved"])
+        source = report["planet_killer_numeric_sources"][0]
+        self.assertEqual("literal_component_txt", source["kind"])
+        self.assertEqual({"windup_min": 90, "windup_max": 0, "total_fire_time": 30, "power": 0}, source["values"])
+        self.assertEqual(str(self.component.resolve()), source["path"])
+        self.assertEqual(hashlib.sha256(self.component.read_bytes()).hexdigest(), source["sha256"])
+
+    def test_fixed_mod_and_native_csv_are_valid_sources(self) -> None:
+        self.script(self.mod, fields="")
+        path = self.table(self.game)
+        report, errors = self.verify()
+        self.assertEqual([], errors)
+        self.assertEqual("native_fixed_csv", report["planet_killer_numeric_sources"][0]["kind"])
+        self.assertEqual(str(path.resolve()), report["planet_killer_numeric_sources"][0]["path"])
+        self.table(self.mod, min_windup="91")
+        report, errors = self.verify()
+        self.assertEqual([], errors)
+        self.assertEqual("mod_fixed_csv", report["planet_killer_numeric_sources"][0]["kind"])
+        self.assertEqual(91, report["planet_killer_numeric_sources"][0]["values"]["windup_min"])
+
+    def test_csv_overrides_inline_and_empty_required_csv_cell_does_not_fallback(self) -> None:
+        self.table(self.game, min_windup="12", max_windup="12", cooldown="20", power="-100")
+        report, errors = self.verify()
+        self.assertEqual([], errors)
+        self.assertEqual({"windup_min": 12, "windup_max": 12, "total_fire_time": 20, "power": -100},
+                         report["planet_killer_numeric_sources"][0]["values"])
+        self.table(self.game, power="")
+        report, errors = self.verify()
+        self.assertEqual(0, report["planet_killer_numeric_resolved"])
+        self.assertTrue(any(e["code"] == "PLANET_KILLER_NUMERIC_FIELD" and e["field"] == "power" for e in errors))
+
+    def test_arbitrary_old_csv_path_never_resolves_missing_inline_numbers(self) -> None:
+        self.script(self.mod, fields="")
+        self.table(self.mod, name="eep_weapon_components.csv")
+        report, errors = self.verify(csv=True)
+        self.assertEqual(0, report["planet_killer_numeric_resolved"])
+        self.assertEqual(1, report["weapon_csv_unsupported_files"])
+        self.assertIn("WEAPON_CSV_UNSUPPORTED_PATH", {e["code"] for e in errors})
+        self.assertEqual({"windup_min", "windup_max", "total_fire_time", "power"},
+                         {e["field"] for e in errors if e["code"] == "PLANET_KILLER_NUMERIC_FIELD"})
+
+    def test_unsupported_paths_still_fail_with_valid_inline_and_check_csv_syntax(self) -> None:
+        for name in ("eep_weapon_components.csv", "nested/weapon_components.csv"):
+            path = self.table(self.mod, name=name, min_windup="NaN")
+            with self.subTest(name=name):
+                report, errors = self.verify(csv=True)
+                self.assertEqual(1, report["planet_killer_numeric_resolved"])
+                self.assertEqual(1, report["weapon_csv_unsupported_files"])
+                self.assertTrue({"WEAPON_CSV_UNSUPPORTED_PATH", "WEAPON_CSV_NUMBER"}.issubset({e["code"] for e in errors}))
+            path.unlink()
+
+    def test_inline_pk_and_ordinary_csv_can_coexist(self) -> None:
+        self.write(self.mod, "common/component_templates/ordinary.txt", 'weapon_component_template={key=ORDINARY type=instant}')
+        self.table(self.mod, key="ORDINARY")
+        self.assertEqual([], self.verify(csv=True)[1])
+
+    def test_missing_and_duplicate_direct_fields_fail(self) -> None:
+        for fields in ("power=0 total_fire_time=30", "windup={min=90} power=0 total_fire_time=30",
+                       "windup={min=90 max=0} total_fire_time=30", "windup={min=90 max=0} power=0",
+                       "windup={min=90 max=0} power=0 power=0 total_fire_time=30",
+                       "windup={min=90 max=0} windup={min=90 max=0} power=0 total_fire_time=30",
+                       "windup={min=90 max=0} power=0 total_fire_time=30 total_fire_time=30",
+                       "windup={min=90 max=0 min=90} power=0 total_fire_time=30"):
+            with self.subTest(fields=fields):
+                self.script(self.mod, fields)
+                report, errors = self.verify()
+                self.assertEqual(0, report["planet_killer_numeric_resolved"])
+                self.assertIn("PLANET_KILLER_NUMERIC_FIELD", {e["code"] for e in errors})
+
+    def test_nested_comment_string_and_bare_windup_values_do_not_satisfy_contract(self) -> None:
+        for fields in ('nested={windup={min=90 max=0} power=0 total_fire_time=30}',
+                       '# windup={min=90 max=0} power=0 total_fire_time=30\n',
+                       'text="windup={min=90 max=0} power=0 total_fire_time=30"',
+                       'windup=90 power=0 total_fire_time=30',
+                       'windup={min=90 max=0 extra} power=0 total_fire_time=30',
+                       'windup={min=90 max=0 extra=0} power=0 total_fire_time=30'):
+            with self.subTest(fields=fields):
+                self.script(self.mod, fields)
+                self.assertEqual(0, self.verify()[0]["planet_killer_numeric_resolved"])
+
+    def test_variables_quoted_nonfinite_overflow_and_negative_timing_fail(self) -> None:
+        for value in ("@days", '"90"', "value:days", "NaN", "Infinity", "1e3", "9" * 400, "-1"):
+            with self.subTest(value=value):
+                self.script(self.mod, "windup={min=" + value + " max=0} total_fire_time=30 power=0")
+                report, errors = self.verify()
+                self.assertEqual(0, report["planet_killer_numeric_resolved"])
+                self.assertTrue(any(e.get("field") == "windup_min" for e in errors))
+        self.script(self.mod, "windup={min=90 max=90} total_fire_time=30 power=-500")
+        self.assertEqual([], self.verify()[1])
+
+    def test_same_path_mod_table_hides_native_row_and_two_tables_same_key_are_ambiguous(self) -> None:
+        self.script(self.mod, fields="")
+        self.table(self.game)
+        mod_table = self.table(self.mod, key="OTHER")
+        self.assertEqual(0, self.verify()[0]["planet_killer_numeric_resolved"])
+        mod_table.unlink()
+        self.table(self.game, name="mutation_weapon_components.csv")
+        report, errors = self.verify()
+        self.assertEqual(0, report["planet_killer_numeric_resolved"])
+        self.assertIn("PLANET_KILLER_NUMERIC_AMBIGUOUS", {e["code"] for e in errors})
+
+    def test_all_components_are_counted_and_duplicate_keys_fail(self) -> None:
+        self.script(self.mod, fields="", key="PK_SECOND", name="second.txt")
+        report, errors = self.verify()
+        self.assertEqual(2, report["planet_killer_numeric_components"])
+        self.assertEqual(1, report["planet_killer_numeric_resolved"])
+        self.assertTrue(all(e["key"] == "PK_SECOND" for e in errors))
+        self.script(self.mod, key="PK_SECOND", name="second.txt")
+        report, errors = self.verify()
+        self.assertEqual([], errors)
+        self.assertEqual(2, report["planet_killer_numeric_resolved"])
+        self.script(self.mod, key="PK_FIXTURE", name="second.txt")
+        report, errors = self.verify()
+        self.assertEqual(0, report["planet_killer_numeric_resolved"])
+        self.assertIn("PLANET_KILLER_NUMERIC_DUPLICATE_KEY", {e["code"] for e in errors})
+
+    def test_no_pk_is_not_applicable_and_nested_or_string_templates_are_ignored(self) -> None:
+        self.component.write_text('outer={weapon_component_template={key=FAKE type=planet_killer}}\n'
+                                  'text="weapon_component_template={key=FAKE type=planet_killer}"\n'
+                                  'weapon_component_template={key=ORDINARY type=instant nested={type=planet_killer}}', encoding="utf-8")
+        report, errors = self.verify()
+        self.assertEqual([], errors)
+        self.assertEqual(0, report["planet_killer_numeric_components"])
+        self.assertEqual("not_applicable_no_planet_killer_components", report["planet_killer_numeric_applicability"])
+
+
 class WeaponCsvContractTest(unittest.TestCase):
     """Isolated CSV association tests do not need the Java CLI or native game."""
 
@@ -414,7 +611,7 @@ class WeaponCsvContractTest(unittest.TestCase):
         row.update(values)
         return ";".join(row[column] for column in WEAPON_COLUMNS)
 
-    def table(self, root: Path, rows: str | None = None, name: str = "fixture_weapon.csv") -> Path:
+    def table(self, root: Path, rows: str | None = None, name: str = "weapon_components.csv") -> Path:
         path = root / self.component / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(self.header + "\n" + (self.row() if rows is None else rows) + "\n", encoding="utf-8")
@@ -441,7 +638,7 @@ class WeaponCsvContractTest(unittest.TestCase):
                  (self.header + "\n" + self.row(key=""), "WEAPON_CSV_KEY"),
                  (self.header + "\n" + self.row(key='"MOD_WEAPON"'), "WEAPON_CSV_KEY"),
                  (self.header + "\n" + self.row(end="0"), "WEAPON_CSV_END"))
-        path = self.mod / self.component / "fixture_weapon.csv"
+        path = self.mod / self.component / "weapon_components.csv"
         for text, code in cases:
             with self.subTest(code=code, text=text[:40]):
                 path.write_text(text, encoding="utf-8")
@@ -458,7 +655,7 @@ class WeaponCsvContractTest(unittest.TestCase):
                                "key": "MOD_WEAPON", "column": "min_windup", "value": value}, errors)
 
     def test_rejects_invalid_utf8_and_bom(self) -> None:
-        path = self.mod / self.component / "fixture_weapon.csv"
+        path = self.mod / self.component / "weapon_components.csv"
         valid = path.read_bytes()
         for data, code in ((b"\xef\xbb\xbf" + valid, "WEAPON_CSV_BOM"),
                            (valid + b"\xff", "WEAPON_CSV_ENCODING")):
@@ -472,10 +669,11 @@ class WeaponCsvContractTest(unittest.TestCase):
         _, errors = self.verify()
         self.assertIn("WEAPON_CSV_DUPLICATE_KEY", {error["code"] for error in errors})
         self.table(self.mod)
-        second = self.table(self.mod, name="other_weapon.csv")
+        second = self.table(self.mod, name="mutation_weapon_components.csv")
         _, errors = self.verify()
         self.assertTrue(any(error["code"] == "WEAPON_CSV_DUPLICATE_KEY" and
-                            error["path"] == str(second) and "first_path" in error for error in errors))
+                            "first_path" in error and {error["path"], error["first_path"]} ==
+                            {str(second), str(self.mod / self.component / "weapon_components.csv")} for error in errors))
 
     def test_rejects_missing_definition_and_missing_statistics(self) -> None:
         self.table(self.mod, self.row("WRONG_KEY"))
@@ -485,7 +683,7 @@ class WeaponCsvContractTest(unittest.TestCase):
 
     def test_accepts_native_definition_and_native_statistics_without_copying_keys(self) -> None:
         self.script(self.game, 'weapon_component_template = { key = "NATIVE_WEAPON" }', "native.txt")
-        self.table(self.game, self.row("NATIVE_WEAPON"), "native_weapon.csv")
+        self.table(self.game, self.row("NATIVE_WEAPON"), "mutation_weapon_components.csv")
         # Mod overrides native statistics without needing to copy the native definition.
         self.table(self.mod, self.row() + "\n" + self.row("NATIVE_WEAPON"))
         self.assertEqual([], self.verify()[1])
@@ -531,7 +729,7 @@ class WeaponCsvContractTest(unittest.TestCase):
         self.assertEqual(1, summary["weapon_csv_native_unexpanded_templates"])
 
     def test_no_csv_is_not_applicable_and_other_directories_are_ignored(self) -> None:
-        (self.mod / self.component / "fixture_weapon.csv").unlink()
+        (self.mod / self.component / "weapon_components.csv").unlink()
         self.script(self.mod, 'weapon_component_template = { key = "NO_STATS" }')
         (self.mod / "other.csv").write_bytes(b"not a weapon table")
         summary, errors = self.verify()

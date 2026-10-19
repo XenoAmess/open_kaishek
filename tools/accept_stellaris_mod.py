@@ -40,6 +40,8 @@ WEAPON_COLUMNS = tuple((
 WEAPON_NUMBER = re.compile(r"[+-]?(?:[0-9]+(?:\.[0-9]*)?|\.[0-9]+)")
 # This is a declaration projection, not a second P parser. Kaishek still parses P.
 COMPONENT_TOKEN = re.compile(r'#[^\r\n]*|"(?:\\.|[^"\\])*"|[{}=]|[^\s{}="#]+')
+WEAPON_CSV_PATHS = frozenset("common/component_templates/" + name for name in (
+    "weapon_components.csv", "mutation_weapon_components.csv"))
 
 
 def sha256(path: Path) -> str:
@@ -82,7 +84,8 @@ def read_localization(path: Path, language: str, errors: list[dict]) -> dict[str
     return entries
 
 
-def read_weapon_csv(path: Path, errors: list[dict], *, native: bool = False) -> dict[str, int]:
+def read_weapon_csv(path: Path, errors: list[dict], *, native: bool = False,
+                    records: dict | None = None) -> dict[str, int]:
     """Read the observed unquoted, semicolon-delimited native weapon table."""
     data = path.read_bytes()
     if not native and data.startswith(b"\xef\xbb\xbf"):
@@ -113,6 +116,8 @@ def read_weapon_csv(path: Path, errors: list[dict], *, native: bool = False) -> 
             errors.append({"code": "WEAPON_CSV_DUPLICATE_KEY", **location,
                            "key": key, "first_line": keys[key]})
         keys[key] = number
+        if records is not None:
+            records[key] = {"line": number, "values": dict(zip(WEAPON_COLUMNS, row))}
         if row[-1]:
             errors.append({"code": "WEAPON_CSV_END", **location, "key": key})
         if native:
@@ -169,6 +174,148 @@ def weapon_component_keys(path: Path, errors: list[dict], *, type_filter: str | 
                 value = ""
             (keys if token == "key" else types).append(value or None)
     return result
+
+
+def direct_component_fields(tokens: list[str]) -> dict[str, list[list[str]]]:
+    """Retain direct field values, skipping each nested value as a whole."""
+    fields: dict[str, list[list[str]]] = {}
+    index = 0
+    while index < len(tokens):
+        if index + 2 >= len(tokens) or tokens[index + 1] != "=":
+            index += 1
+            continue
+        name, start = tokens[index], index + 2
+        end = start + 1
+        if tokens[start] == "{":
+            depth = 1
+            while end < len(tokens) and depth:
+                depth += (tokens[end] == "{") - (tokens[end] == "}")
+                end += 1
+        fields.setdefault(name, []).append(tokens[start:end])
+        index = end
+    return fields
+
+
+def planet_killer_numeric_declarations(path: Path, errors: list[dict]) -> list[dict]:
+    """Project literal PK declarations and direct values; no variables or expansion."""
+    try:
+        text = path.read_text(encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        errors.append({"code": "PLANET_KILLER_NUMERIC_ENCODING", "path": str(path)})
+        return []
+    matches = [m for m in COMPONENT_TOKEN.finditer(text) if not m[0].startswith("#")]
+    tokens = [m[0] for m in matches]
+    depth, start = 0, None
+    records = []
+    for index, token in enumerate(tokens):
+        if token == "{":
+            if depth == 0 and tokens[max(0, index - 2):index] == ["weapon_component_template", "="]:
+                start = index
+            depth += 1
+        elif token == "}":
+            depth -= 1
+            if depth == 0 and start is not None:
+                fields = direct_component_fields(tokens[start + 1:index])
+                types = fields.get("type", [])
+                if any(value in (["planet_killer"], ['"planet_killer"']) for value in types):
+                    keys = fields.get("key", [])
+                    key = keys[0][0] if len(keys) == 1 and len(keys[0]) == 1 else ""
+                    if key.startswith('"') and key.endswith('"') and "\\" not in key:
+                        key = key[1:-1]
+                    location = {"path": str(path.resolve()), "line": text.count("\n", 0, matches[start].start()) + 1}
+                    if not key or key.startswith("@") or any(c in key for c in '\\"{}=') or len(types) != 1:
+                        errors.append({"code": "PLANET_KILLER_NUMERIC_DECLARATION", **location,
+                                       "reason": "requires one literal key and one direct planet_killer type"})
+                    else:
+                        records.append({"key": key, **location, "fields": fields})
+                start = None
+    return records
+
+
+def check_planet_killer_numeric(package: Path, game: Path, errors: list[dict]) -> dict:
+    """Resolve only four literal PK values from supported static source shapes."""
+    components: dict[str, dict] = {}
+    duplicates: set[str] = set()
+    for path in sorted((package / "common/component_templates").rglob("*")):
+        if path.is_file() and path.suffix.lower() == ".txt":
+            for record in planet_killer_numeric_declarations(path, errors):
+                key = record["key"]
+                if key in components:
+                    duplicates.add(key)
+                    errors.append({"code": "PLANET_KILLER_NUMERIC_DUPLICATE_KEY", "key": key,
+                                   "path": record["path"], "line": record["line"]})
+                components[key] = record
+    summary = {"planet_killer_numeric_contract": "native_csv_or_literal_txt_v1",
+               "planet_killer_numeric_components": len(components), "planet_killer_numeric_resolved": 0,
+               "planet_killer_numeric_applicability": "checked" if components else "not_applicable_no_planet_killer_components",
+               "planet_killer_numeric_sources": []}
+    if not components:
+        return summary
+    tables: dict[str, list[dict]] = {}
+    mod_tables = {p.relative_to(package).as_posix().casefold(): p
+                  for p in (package / "common/component_templates").rglob("*") if p.is_file() and p.suffix.lower() == ".csv"}
+    native_tables = {p.relative_to(game).as_posix().casefold(): p
+                     for p in (game / "common/component_templates").rglob("*") if p.is_file() and p.suffix.lower() == ".csv"}
+    for relative in sorted(WEAPON_CSV_PATHS):
+        path = mod_tables.get(relative, native_tables.get(relative))
+        if path is None:
+            continue
+        kind = "mod_fixed_csv" if relative in mod_tables else "native_fixed_csv"
+        rows: dict = {}
+        reference_errors: list[dict] = []
+        read_weapon_csv(path, reference_errors, native=kind == "native_fixed_csv", records=rows)
+        if reference_errors:
+            for error in reference_errors:
+                errors.append({**error, "code": "PLANET_KILLER_NUMERIC_CSV_REFERENCE", "cause": error["code"]})
+            continue
+        for key, row in rows.items():
+            if key in components:
+                tables.setdefault(key, []).append({"kind": kind, "path": str(path.resolve()),
+                                                   "line": row["line"], "values": row["values"]})
+    def number(value: list[str]) -> float | None:
+        if len(value) != 1 or not WEAPON_NUMBER.fullmatch(value[0]):
+            return None
+        parsed = float(value[0])
+        return parsed if math.isfinite(parsed) else None
+    for key, component in sorted(components.items()):
+        if key in duplicates:
+            continue
+        sources = tables.get(key, [])
+        if len(sources) > 1:
+            errors.append({"code": "PLANET_KILLER_NUMERIC_AMBIGUOUS", "key": key,
+                           "paths": [source["path"] for source in sources]})
+            continue
+        if sources:
+            source = sources[0]
+            cells = source["values"]
+            values = {name: number([cells[column]]) for name, column in (
+                ("windup_min", "min_windup"), ("windup_max", "max_windup"),
+                ("total_fire_time", "cooldown"), ("power", "power"))}
+        else:
+            source = {name: component[name] for name in ("path", "line")}
+            source["kind"] = "literal_component_txt"
+            fields = component["fields"]
+            windups = fields.get("windup", [])
+            windup = windups[0] if len(windups) == 1 else []
+            bounds = direct_component_fields(windup[1:-1]) if windup[:1] == ["{"] and windup[-1:] == ["}"] else {}
+            values = {}
+            for name, candidates in (("windup_min", bounds.get("min", [])), ("windup_max", bounds.get("max", [])),
+                                     ("total_fire_time", fields.get("total_fire_time", [])), ("power", fields.get("power", []))):
+                values[name] = number(candidates[0]) if len(candidates) == 1 else None
+            if set(bounds) != {"min", "max"} or len(windup) != 8:
+                values["windup_min"] = values["windup_max"] = None
+        invalid = False
+        for field, value in values.items():
+            if value is None or (field != "power" and value < 0):
+                errors.append({"code": "PLANET_KILLER_NUMERIC_FIELD", "key": key, "field": field,
+                               "path": source["path"], "line": source["line"],
+                               "reason": "requires one finite direct decimal; timing values must be nonnegative"})
+                invalid = True
+        if not invalid:
+            summary["planet_killer_numeric_sources"].append({"key": key, "kind": source["kind"],
+                "path": source["path"], "line": source["line"], "sha256": sha256(Path(source["path"])), "values": values})
+    summary["planet_killer_numeric_resolved"] = len(summary["planet_killer_numeric_sources"])
+    return summary
 
 
 def on_action_block_names(path: Path, errors: list[dict]) -> set[str]:
@@ -231,7 +378,7 @@ def check_planet_killer_callbacks(package: Path, game: Path, errors: list[dict])
     return summary
 
 
-def check_weapon_csv(package: Path, game: Path, errors: list[dict]) -> dict:
+def check_weapon_csv(package: Path, game: Path, errors: list[dict], *, literal_stat_keys: set[str] | None = None) -> dict:
     """Check Mod tables and literal key associations; do not execute weapon semantics."""
     component_root = Path("common/component_templates")
     def files(root: Path, suffix: str) -> list[Path]:
@@ -240,11 +387,16 @@ def check_weapon_csv(package: Path, game: Path, errors: list[dict]) -> dict:
 
     tables = files(package, ".csv")
     summary = {"weapon_csv_files": len(tables), "weapon_csv_keys": 0,
-               "weapon_csv_applicability": "checked" if tables else "not_applicable_no_weapon_csv_files"}
+               "weapon_csv_applicability": "checked" if tables else "not_applicable_no_weapon_csv_files",
+               "weapon_csv_loader_contract": "native_fixed_paths_v1", "weapon_csv_unsupported_files": 0}
     if not tables:
         return summary
     mod_keys: dict[str, dict] = {}
     for path in tables:
+        if path.relative_to(package).as_posix().casefold() not in WEAPON_CSV_PATHS:
+            summary["weapon_csv_unsupported_files"] += 1
+            errors.append({"code": "WEAPON_CSV_UNSUPPORTED_PATH", "path": str(path),
+                           "reason": "only the two fixed native weapon CSV paths are supported; syntax is still checked"})
         for key, line in read_weapon_csv(path, errors).items():
             location = {"path": str(path), "line": line}
             if key in mod_keys:
@@ -258,7 +410,7 @@ def check_weapon_csv(package: Path, game: Path, errors: list[dict]) -> dict:
     native_definitions: set[str] = set()
     native_errors: list[dict] = []
     for path in files(game, ".csv"):
-        if path.relative_to(game).as_posix().casefold() not in hidden:
+        if path.relative_to(game).as_posix().casefold() in WEAPON_CSV_PATHS and path.relative_to(game).as_posix().casefold() not in hidden:
             native_keys.update(read_weapon_csv(path, native_errors, native=True))
     for path in files(game, ".txt"):
         if path.relative_to(game).as_posix().casefold() not in hidden:
@@ -277,7 +429,7 @@ def check_weapon_csv(package: Path, game: Path, errors: list[dict]) -> dict:
             mod_definitions[key] = location
     for key in sorted(mod_keys.keys() - mod_definitions.keys() - native_definitions):
         errors.append({"code": "WEAPON_CSV_COMPONENT_MISSING", **mod_keys[key], "key": key})
-    for key in sorted(mod_definitions.keys() - mod_keys.keys() - native_keys):
+    for key in sorted(mod_definitions.keys() - mod_keys.keys() - native_keys - (literal_stat_keys or set())):
         errors.append({"code": "WEAPON_COMPONENT_STATS_MISSING", **mod_definitions[key], "key": key})
     return summary
 
@@ -384,7 +536,10 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
                     errors.append({"code": "LOCALIZATION_TOKEN_DRIFT", "language": language, "key": key})
                 if language != "simp_chinese" and values[key] == reference[key] and re.search(r"[\u4e00-\u9fff]", values[key]):
                     errors.append({"code": "LOCALIZATION_CHINESE_PLACEHOLDER", "language": language, "key": key})
-    weapon_csv = check_weapon_csv(package, game, errors)
+    planet_killer_numeric = check_planet_killer_numeric(package, game, errors)
+    literal_stat_keys = {source["key"] for source in planet_killer_numeric["planet_killer_numeric_sources"]
+                         if source["kind"] == "literal_component_txt"}
+    weapon_csv = check_weapon_csv(package, game, errors, literal_stat_keys=literal_stat_keys)
     planet_killer_callbacks = check_planet_killer_callbacks(package, game, errors)
     return {
         "status": "PASS" if not errors else "FAIL",
@@ -395,9 +550,10 @@ def check(mod: Path, game: Path, expected_sha: str, cli: Path, version_source: P
         "localization_applicability": "checked" if has_localization else "not_applicable_no_localization_files",
         **weapon_csv,
         **planet_killer_callbacks,
+        **planet_killer_numeric,
         "finite_scope_preflight": finite_scope,
         "finite_script_value_preflight": finite_values,
-        "semantic_scope": "syntax/package including weapon CSV literal-key associations and literal planet-killer callback existence plus explicitly registered finite population scopes and referenced script-value shapes only; runtime, recursive expansion and other opcodes require Stellaris tests",
+        "semantic_scope": "syntax/package including supported fixed weapon CSV paths, literal planet-killer numeric sources and callback existence plus explicitly registered finite population scopes and referenced script-value shapes only; native loading, phase timing, runtime, recursive expansion and other opcodes require Stellaris tests",
         "errors": errors,
     }
 
